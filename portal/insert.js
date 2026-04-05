@@ -1,0 +1,72 @@
+const { createClient } = require("@supabase/supabase-js");
+
+const supabaseUrl = "https://cfqwufidvchaybqknuar.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmcXd1ZmlkdmNoYXlicWtudWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMjgwNDgsImV4cCI6MjA5MDkwNDA0OH0.qch5v_Gy1iGXf5N0GqopfXgK9ty-PpInyRnCtWZ-Il4";
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+async function main() {
+  const title = "Adeus à Rede Elétrica: Como o vidro solar pode transformar cada prédio em uma usina de energia";
+
+  // Deleta o anterior para não duplicar
+  await supabase.from("posts").delete().eq("titulo", title);
+
+  const { data, error } = await supabase.from("posts").insert([
+    {
+      titulo: title,
+      conteudo_markdown: `![Capa: A Cidade-Usina e os Vidros Solares](https://images.unsplash.com/photo-1769697714514-d8151d1bc94a?fm=jpg&q=80&w=2000&auto=format&fit=crop)
+*Legenda: Fotografia real (Unsplash) de uma fachada de edifício moderno com células fotovoltaicas integradas.*
+
+A transição energética global acaba de ganhar um novo e reluzente aliado que promete mudar para sempre a silhueta das nossas metrópoles. Imagine caminhar pelo centro de São Paulo, Nova York ou Tóquio e saber que cada janela de vidro dos titânicos arranha-céus ao seu redor não está apenas oferecendo uma vista, mas sim captando silenciosamente a luz solar para alimentar todo o ecossistema interno do edifício. Esta não é mais uma cena de ficção científica ciberpunk, mas a realidade da tecnologia de **BIPV** (Building-Integrated Photovoltaics), ou Fotovoltaicos Integrados a Edifícios.
+
+O conceito é simples, mas a execução técnica é uma obra-prima da engenharia moderna. A revolução dos "vidros inteligentes" ou "janelas solares" está prestes a transformar o setor de construção civil no principal motor da independência energética urbana.
+
+### O Que São e Como Funcionam as Janelas Solares?
+
+Diferente dos painéis solares tradicionais de silício azulado que vemos nos telhados, as janelas solares são projetadas para serem transparentes ou semitransparentes. O grande desafio tecnológico sempre foi: como captar luz para gerar energia sem bloquear a visão de quem está dentro?
+
+A resposta veio através de filmes finos de materiais orgânicos ou células de **Perovskita**. Estes materiais são capazes de absorver comprimentos de onda invisíveis ao olho humano, como o ultravioleta e o infravermelho próximo, permitindo que a luz visível passe quase sem obstáculos. O resultado é um vidro que parece comum, mas que contém uma "usina invisível" em sua estrutura.
+
+### A \"Cidade-Usina\" e a Independência da Rede
+
+Atualmente, edifícios comerciais são responsáveis por cerca de 40% do consumo global de energia, em grande parte devido à iluminação e, principalmente, ao ar-condicionado. Em cidades tropicais como as brasileiras, o sol que atinge as janelas de vidro aumenta a temperatura interna, exigindo que os sistemas de refrigeração trabalhem no limite.
+
+Aqui entra o \"pulo do gato\" da tecnologia: as janelas solares não apenas geram eletricidade, mas também funcionam como um filtro térmico de alta eficiência. Ao absorver a radiação infravermelha para gerar energia, elas impedem que o calor entre no edifício. Estima-se que a instalação desses vidros possa reduzir o uso de ar-condicionado em até 30% e gerar energia suficiente para cobrir toda a demanda de iluminação e sistemas básicos de um prédio de médio porte.
+
+Quando escalamos isso para um centro financeiro inteiro, deixamos de ter consumidores passivos de energia (que dependem de hidrelétricas ou termelétricas distantes) e passamos a ter **prosumidores** (produtores e consumidores simultâneos). No limite, as janelas solares podem tornar os prédios 100% autossuficientes, dizendo \"adeus\" definitivo à rede elétrica convencional.
+
+### Casos Reais: A Tecnologia Já Está Entre Nós
+
+A empresa australiana **ClearVue PV** e a americana **Ubiquitous Energy** já não falam mais em protótipos, mas em implementações comerciais. O projeto *Enex100* em Perth, na Austrália, é um dos exemplos mais emblemáticos: um shopping center no coração da cidade que utiliza claraboias solares para gerar energia limpa.
+
+![Projeto Real: Implementação da ClearVue na Austrália](https://www.clearvuepv.com/wp-content/uploads/2025/08/Enex-featured.png)
+*Legenda: Registro fotográfico oficial (ClearVue) de uma instalação real de vidros solares em um edifício comercial em Perth.*
+
+No Brasil, o potencial é ainda maior. Com altos índices de irradiação solar durante todo o ano, a substituição de fachadas de vidro fumê por vidros solares transparentes poderia transformar grandes centros como a Avenida Paulista em corredores de energia renovável.
+
+### O Futuro: Muito Além da Transparência
+
+As próximas gerações dessa tecnologia prometem integração total com o ecossistema de casas inteligentes. Imagine janelas que mudam de cor sozinhas para aumentar a captação de energia em horários de pico ou que se tornam opacas por comando de voz para garantir privacidade, tudo isso enquanto carregam seu carro elétrico na garagem do subsolo.
+
+A \"Guerra das Células\" continua nos laboratórios. Enquanto o silício domina o mercado atual, a Perovskita promete ser mais barata e flexível, podendo ser aplicada até em janelas de aviões ou telas de smartphones. 
+
+### Conclusão: A Física como Solução Urbana
+
+A revolução dos vidros inteligentes prova que a solução para a crise energética não está necessariamente em construir mais usinas gigantescas no meio da natureza, mas em aproveitar a infraestrutura que já temos. Ao transformar a pele de vidro de nossos edifícios em órgãos de captação de energia, damos o passo definitivo para cidades mais verdes, resilientes e verdadeiramente inteligentes. O futuro é transparente, e ele está gerando energia agora mesmo.
+
+***`,
+      categoria: "Cidades Inteligentes",
+      autor: "Squad Tech News Writer",
+      imagem_url: "https://images.unsplash.com/photo-1769697714514-d8151d1bc94a?fm=jpg&q=80&w=2000&auto=format&fit=crop",
+      publicado_em: new Date().toISOString(),
+    }
+  ]).select();
+  
+  if (error) {
+    console.error("Erro ao inserir: ", error.message);
+  } else {
+    console.log("Sucesso! Notícia Revisada (V1) Inserida com Link Estável.");
+  }
+}
+
+main();
