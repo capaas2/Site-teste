@@ -9,13 +9,16 @@ import { Shield, TrendingUp, Zap, Smartphone, ChevronRight, ArrowRight } from "l
 export const revalidate = 60;
 
 export default async function HomePage() {
-  // 1. Destaques do Dia (Mais lidas das últimas 48h para garantir volume)
-  const dailyTop = await getTopPosts(2, 6);
+  // 1. Destaques do Dia (Mais lidas das últimas 48h)
+  const dailyTop = await getTopPosts(2, 3);
   
-  // 2. Ranking da Semana (Top 3 histórico da semana)
+  // 2. Últimas Notícias para a Sidebar do Hero
+  const latestPosts = await getLatestPosts(6);
+  
+  // 3. Ranking da Semana (Top 3 histórico)
   const weeklyTop = await getTopPosts(7, 3);
 
-  // 3. Atalhos Rápidos (Seção Visual)
+  // 4. Atalhos Rápidos (Seção Visual)
   const shortcuts = [
     { label: "Segurança", icon: Shield, color: "bg-indigo-600", slug: "ciberseguranca" },
     { label: "Mercado", icon: TrendingUp, color: "bg-emerald-600", slug: "mercado" },
@@ -25,7 +28,7 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-16">
-      {/* 1. Hero Grid — As Mais Lidas do Dia */}
+      {/* 1. Hero Grid — Banner Destaque Dia + Sidebar Últimas */}
       <section id="hero">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600 italic">
@@ -35,7 +38,7 @@ export default async function HomePage() {
             Ver Ranking Completo <ChevronRight className="w-3 h-3" />
           </Link>
         </div>
-        <HeroGrid featuredPosts={dailyTop.slice(0, 3)} latestPosts={dailyTop} />
+        <HeroGrid featuredPosts={dailyTop} latestPosts={latestPosts} />
       </section>
 
       {/* 2. Atalhos Rápidos */}

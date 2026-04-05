@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Post } from "@/types/post";
-import { TrendingUp } from "lucide-react";
+import { Clock } from "lucide-react";
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80";
 
@@ -70,12 +70,12 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
         ))}
       </div>
 
-      {/* Sidebar — Mais Lidas */}
+      {/* Sidebar — Últimas */}
       <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
         <div className="flex items-center gap-2 mb-5 pb-3 border-b border-slate-100 dark:border-slate-800">
-           <TrendingUp className="w-4 h-4 text-blue-600 animate-pulse" />
+           <Clock className="w-4 h-4 text-blue-600" />
            <h3 className="text-xs font-black uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
-             Bombando Hoje
+             Últimas Notícias
            </h3>
         </div>
         <div className="space-y-4">

@@ -1,18 +1,21 @@
 import { supabase } from "./supabase";
 import { Post } from "@/types/post";
 
-export async function getLatestPosts(limit = 20): Promise<Post[]> {
-  const { data, error } = await supabase
+export async function getLatestPosts(page = 1, pageSize = 12): Promise<{ posts: Post[], count: number }> {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data, count, error } = await supabase
     .from("posts")
-    .select("*")
+    .select("*", { count: "exact" })
     .order("publicado_em", { ascending: false })
-    .limit(limit);
+    .range(from, to);
 
   if (error) {
     console.error("Error fetching latest posts:", error.message);
-    return [];
+    return { posts: [], count: 0 };
   }
-  return data as Post[];
+  return { posts: data as Post[], count: count || 0 };
 }
 
 export async function getTopPosts(days = 7, limit = 10): Promise<Post[]> {
@@ -45,17 +48,20 @@ export async function getTopPosts(days = 7, limit = 10): Promise<Post[]> {
   return data as Post[];
 }
 
-export async function getPostsByCategory(categorySlug: string, limit = 20): Promise<Post[]> {
-  const { data, error } = await supabase
+export async function getPostsByCategory(categorySlug: string, page = 1, pageSize = 12): Promise<{ posts: Post[], count: number }> {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data, count, error } = await supabase
     .from("posts")
-    .select("*")
-    .eq("categoria", categorySlug)
+    .select("*", { count: "exact" })
+    .ilike("categoria", `%${categorySlug}%`)
     .order("publicado_em", { ascending: false })
-    .limit(limit);
+    .range(from, to);
 
   if (error) {
     console.error(`Error fetching posts for category ${categorySlug}:`, error.message);
-    return [];
+    return { posts: [], count: 0 };
   }
-  return data as Post[];
+  return { posts: data as Post[], count: count || 0 };
 }
