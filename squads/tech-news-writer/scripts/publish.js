@@ -40,6 +40,13 @@ async function publishNews() {
     }
   }
 
+  // Validação do Título (10 a 100 caracteres)
+  const tituloLength = payload.titulo.length;
+  if (tituloLength < 10 || tituloLength > 100) {
+    console.error(`❌ Erro: O título deve ter entre 10 e 100 caracteres. (Atual: ${tituloLength})`);
+    process.exit(1);
+  }
+
   try {
     console.log("🚀 Iniciando injeção direta no Banco de Dados (Bypass do Dashboard)...");
 
@@ -83,16 +90,13 @@ async function publishNews() {
     // 2. Montar Objeto da Notícia e Enviar
     console.log("📑 Escrevendo o arquivo final na base de dados principal...");
     
-    // Converte os "\n" que vêm do markdown em breaks de verdade se necessário 
-    // ou mantem do jeito que está para o app parsear.
     const noticiaRecord = {
         titulo: payload.titulo,
         autor: payload.autor || "Redação Tech",
         categoria: payload.categoria,
-        conteudo: payload.conteudo_markdown,
+        conteudo_markdown: payload.conteudo_markdown, // Corrigido para conteudo_markdown
         imagem_url: imageUrl || "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1470&auto=format&fit=crop",
-        engajamento: 0,
-        published: true
+        views: 0 // Corrigido de engajamento para views
     };
 
     const dbRes = await fetch(`${SUPABASE_URL}/rest/v1/posts`, {
