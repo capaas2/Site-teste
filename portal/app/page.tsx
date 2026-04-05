@@ -13,7 +13,7 @@ export default async function HomePage() {
   const dailyTop = await getTopPosts(2, 3);
   
   // 2. Últimas Notícias para a Sidebar do Hero
-  const latestPosts = await getLatestPosts(6);
+  const { posts: latestPosts } = await getLatestPosts(1, 6);
   
   // 3. Ranking da Semana (Top 3 histórico)
   const weeklyTop = await getTopPosts(7, 3);
