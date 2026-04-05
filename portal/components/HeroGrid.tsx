@@ -5,13 +5,14 @@ import { Post } from "@/types/post";
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80";
 
 interface HeroGridProps {
-  posts: Post[];
+  featuredPosts: Post[];
+  latestPosts: Post[];
 }
 
-export function HeroGrid({ posts }: HeroGridProps) {
-  if (posts.length === 0) return null;
+export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
+  if (featuredPosts.length === 0) return null;
 
-  const [main, second, third, ...rest] = posts;
+  const [main, second, third] = featuredPosts;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 min-h-[420px]">
@@ -74,7 +75,7 @@ export function HeroGrid({ posts }: HeroGridProps) {
           Últimas Notícias
         </h3>
         <div className="space-y-4">
-          {posts.slice(0, 6).map((post) => (
+          {latestPosts.slice(0, 6).map((post) => (
             <Link key={post.id} href={`/post/${post.id}`} className="flex items-start gap-2 group">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0 mt-2" />
               <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 leading-snug">

@@ -10,8 +10,7 @@ async function getPosts(): Promise<Post[]> {
   const { data, error } = await supabase
     .from("posts")
     .select("*")
-    .order("views", { ascending: false }) // Prioriza as mais lidas
-    .order("publicado_em", { ascending: false }); // Empate? Usa a data
+    .order("publicado_em", { ascending: false });
 
   if (error) {
     console.error("Supabase fetch error:", error.message);
@@ -22,14 +21,21 @@ async function getPosts(): Promise<Post[]> {
 
 export default async function HomePage() {
   const posts = await getPosts();
-  const heroPosts = posts.slice(0, 9);
-  const feedPosts = posts.slice(9);
+  
+  // Destaques: Top 3 Mais Lidas (em memória)
+  const featuredPosts = [...posts].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 3);
+  
+  // Últimas Notícias: Já vem por data do SQL
+  const latestPosts = posts.slice(0, 6);
+
+  // Feed Geral: O restante
+  const feedPosts = posts.slice(6);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
-      {/* Hero Grid — destaque assimétrico */}
+      {/* Hero Grid — Destaques e Últimas Notícias */}
       <section>
-        <HeroGrid posts={heroPosts} />
+        <HeroGrid featuredPosts={featuredPosts} latestPosts={latestPosts} />
       </section>
 
       {/* Carrossel de Categorias */}

@@ -27,8 +27,8 @@ async function getPost(id: string): Promise<Post | null> {
 async function getSidebarPosts(): Promise<Post[]> {
   const { data } = await supabase
     .from("posts")
-    .select("id, titulo, categoria, publicado_em, imagem_url, autor")
-    .order("publicado_em", { ascending: false })
+    .select("id, titulo, categoria, publicado_em, imagem_url, autor, views")
+    .order("views", { ascending: false }) // News page sidebar shows Most Read
     .limit(5);
 
   return (data as Post[]) || [];
