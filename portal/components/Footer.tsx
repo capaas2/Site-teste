@@ -17,7 +17,6 @@ export function Footer() {
   const quickLinks = [
     { label: "Início", href: "/" },
     { label: "Sobre Nós", href: "/sobre" },
-    { label: "Anuncie", href: "/anuncie" },
     { label: "Contato", href: "/contato" },
     { label: "Política de Privacidade", href: "/privacidade" },
   ];

@@ -1,4 +1,6 @@
 const { createClient } = require('@supabase/supabase-js');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../portal/.env.local') });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -37,7 +39,7 @@ Fiel à filosofia "Simply Clever", a Škoda não economizou em soluções inteli
 
 O carregamento rápido também foi aprimorado. Em um posto DC de alta potência, o Peaq pode carregar de **10% a 80% em menos de 28 minutos**, garantindo que as paradas em viagens longas sejam curtas e produtivas.
 
-### Conclusão: O Novo Rei do Custo-Benefício High-Tech?
+### Conclusão: O Novo Rei do Cuso-Benefício High-Tech?
 O Škoda Peaq chega em um momento crucial. Enquanto o mercado se satura de modelos subcompactos ou hiper-luxuosos, o Peaq ataca o "sweet spot": o SUV grande, familiar e com autonomia de estrada de verdade. Se a Škoda mantiver a promessa de um preço competitivo, o Peaq não será apenas mais um elétrico; ele será o veículo que finalmente levará a mobilidade sustentável de 7 lugares para fora do nicho de elite.`,
         categoria: "Mobilidade",
         autor: "Redação Tech",

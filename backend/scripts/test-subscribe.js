@@ -1,9 +1,14 @@
 const { createClient } = require('@supabase/supabase-js');
-// Native Node.js env support for v24
-// The user is on Windows, so we use the CWD from the command
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../portal/.env.local') });
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error("Erro: Variáveis de ambiente NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY são obrigatórias.");
+  process.exit(1);
+}
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 

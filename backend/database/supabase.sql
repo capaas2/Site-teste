@@ -58,4 +58,3 @@ CREATE POLICY "Permitir leitura pública capas" ON storage.objects
 
 -- (Opcional) Se a tabela posts já existia sem a coluna imagem_url, adicione-a:
 ALTER TABLE public.posts ADD COLUMN IF NOT EXISTS imagem_url text;
-
