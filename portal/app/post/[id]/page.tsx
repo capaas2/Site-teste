@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { Post } from "@/types/post";
 import { Sidebar } from "@/components/Sidebar";
 import { ShareButtons } from "@/components/ShareButtons";
+import { ViewCounter } from "@/components/ViewCounter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Calendar, User, Tag } from "lucide-react";
@@ -54,6 +55,9 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* === Coluna Principal (70%) === */}
         <article className="lg:col-span-2">
+          {/* Contador de Views (Silencioso) */}
+          <ViewCounter postId={post.id} />
+          
           {/* Badge + Título */}
           <div className="mb-6">
             <span className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold px-3 py-1.5 rounded-full mb-4">

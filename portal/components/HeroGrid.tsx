@@ -74,7 +74,7 @@ export function HeroGrid({ posts }: HeroGridProps) {
           Últimas Notícias
         </h3>
         <div className="space-y-4">
-          {rest.slice(0, 6).map((post) => (
+          {posts.slice(0, 6).map((post) => (
             <Link key={post.id} href={`/post/${post.id}`} className="flex items-start gap-2 group">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0 mt-2" />
               <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 leading-snug">

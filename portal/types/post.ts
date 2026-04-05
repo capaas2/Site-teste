@@ -6,4 +6,5 @@ export interface Post {
   autor: string;
   imagem_url: string | null;
   publicado_em: string;
+  views: number;
 }

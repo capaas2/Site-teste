@@ -104,7 +104,7 @@ function renderEmailTemplate(post: any, type: string) {
       <div style="font-size: 16px; line-height: 1.6;">
         ${post.conteudo_markdown.slice(0, 500)}...
       </div>
-      <a href="https://site-teste-gustavo.vercel.app/post/${post.id}" 
+      <a href="https://site-teste-ne4f.vercel.app/post/${post.id}" 
          style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px;">
          LER MATÉRIA COMPLETA
       </a>
@@ -117,7 +117,7 @@ function renderEmailTemplate(post: any, type: string) {
 function renderRecapTemplate(posts: any[]) {
   const postsHtml = posts.map(p => `
     <li style="margin-bottom: 15px;">
-      <a href="https://site-teste-gustavo.vercel.app/post/${p.id}" style="color: #2563eb; font-weight: bold; font-size: 16px;">
+      <a href="https://site-teste-ne4f.vercel.app/post/${p.id}" style="color: #2563eb; font-weight: bold; font-size: 16px;">
         ${p.titulo}
       </a>
       <p style="margin: 5px 0; font-size: 14px; color: #64748b;">${p.categoria}</p>
@@ -131,7 +131,7 @@ function renderRecapTemplate(posts: any[]) {
       <ul style="list-style: none; padding: 0;">
         ${postsHtml}
       </ul>
-      <a href="https://site-teste-gustavo.vercel.app" 
+      <a href="https://site-teste-ne4f.vercel.app" 
          style="display: inline-block; background: #0f172a; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px;">
          ACESSAR PORTAL
       </a>

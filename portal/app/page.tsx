@@ -10,7 +10,8 @@ async function getPosts(): Promise<Post[]> {
   const { data, error } = await supabase
     .from("posts")
     .select("*")
-    .order("publicado_em", { ascending: false });
+    .order("views", { ascending: false }) // Prioriza as mais lidas
+    .order("publicado_em", { ascending: false }); // Empate? Usa a data
 
   if (error) {
     console.error("Supabase fetch error:", error.message);
