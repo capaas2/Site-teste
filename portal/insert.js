@@ -1,72 +1,56 @@
-const { createClient } = require("@supabase/supabase-js");
+const { createClient } = require('@supabase/supabase-js');
 
-const supabaseUrl = "https://cfqwufidvchaybqknuar.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmcXd1ZmlkdmNoYXlicWtudWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMjgwNDgsImV4cCI6MjA5MDkwNDA0OH0.qch5v_Gy1iGXf5N0GqopfXgK9ty-PpInyRnCtWZ-Il4";
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+async function insertPost() {
+  const { data, error } = await supabase
+    .from('posts')
+    .insert([
+      {
+        titulo: "Adeus à Elite: O novo Škoda Peaq promete 600km de autonomia e 7 lugares por um preço arrebatador",
+        conteudo_markdown: `Por muito tempo, o mercado de SUVs elétricos de sete lugares foi um reduto exclusivo para bolsos profundos. Se você precisava de espaço para a família toda e queria abandonar a dependência dos combustíveis fósseis, suas opções orbitavam em torno de modelos de luxo como o Tesla Model X, o Kia EV9 ou o Mercedes-Benz EQS SUV — todos com etiquetas de preço que superam facilmente a barreira dos 80 mil euros. No entanto, o cenário acaba de mudar drasticamente com a confirmação oficial do **Škoda Peaq**, o SUV elétrico que promete ser o "carro do povo" na era da eletrificação total e utilidade extrema.
 
-async function main() {
-  const title = "Adeus à Rede Elétrica: Como o vidro solar pode transformar cada prédio em uma usina de energia";
+Baseado na onipresente plataforma MEB (Modular Electrification Toolkit) do Grupo Volkswagen, o Škoda Peaq não é apenas mais um veículo elétrico no portfólio da marca tcheca; ele é a materialização física da nova linguagem estratégica "Modern Solid". Com aproximadamente 4,9 metros de comprimento e uma distância entre eixos monumental de 2.965 mm, o Peaq foi desenhado de dentro para fora para maximizar a utilidade sem sacrificar a aerodinâmica.
 
-  // Deleta o anterior para não duplicar
-  await supabase.from("posts").delete().eq("titulo", title);
+### Engenharia de Ponta: O Coração da Autonomia de 600km
+A grande estrela técnica do Škoda Peaq é o seu conjunto de baterias de última geração. Enquanto a versão de entrada (conhecida internamente como "60") utiliza uma bateria de 63 kWh, as versões de alta performance "90" e "90x" vêm equipadas com uma unidade massiva de **91 kWh brutos** (89 kWh líquidos). 
 
-  const { data, error } = await supabase.from("posts").insert([
-    {
-      titulo: title,
-      conteudo_markdown: `![Capa: A Cidade-Usina e os Vidros Solares](https://images.unsplash.com/photo-1769697714514-d8151d1bc94a?fm=jpg&q=80&w=2000&auto=format&fit=crop)
-*Legenda: Fotografia real (Unsplash) de uma fachada de edifício moderno com células fotovoltaicas integradas.*
+É este componente que permite ao SUV atingir a marca psicológica dos **600 quilômetros de autonomia no ciclo WLTP**, superando muitos rivais alemães e americanos que custam o dobro do preço. A eficiência não vem apenas da bateria, mas do gerenciamento térmico inteligente e do baixo coeficiente de arrasto, otimizado por rodas aerodinâmicas de 21 polegadas e uma silhueta que corta o ar com precisão milimétrica.
 
-A transição energética global acaba de ganhar um novo e reluzente aliado que promete mudar para sempre a silhueta das nossas metrópoles. Imagine caminhar pelo centro de São Paulo, Nova York ou Tóquio e saber que cada janela de vidro dos titânicos arranha-céus ao seu redor não está apenas oferecendo uma vista, mas sim captando silenciosamente a luz solar para alimentar todo o ecossistema interno do edifício. Esta não é mais uma cena de ficção científica ciberpunk, mas a realidade da tecnologia de **BIPV** (Building-Integrated Photovoltaics), ou Fotovoltaicos Integrados a Edifícios.
+A performance também foi escalonada para diferentes perfis de usuários. A variante **90x** utiliza uma configuração de motor duplo para tração integral (AWD), entregando uma potência combinada de **220 kW (299 cv)**. Isso permite que esse gigante familiar de quase 5 metros acelere de 0 a 100 km/h em apenas 6,7 segundos, garantindo ultrapassagens seguras mesmo com o veículo carregado com sete passageiros e bagagens.
 
-O conceito é simples, mas a execução técnica é uma obra-prima da engenharia moderna. A revolução dos "vidros inteligentes" ou "janelas solares" está prestes a transformar o setor de construção civil no principal motor da independência energética urbana.
+### Design "Modern Solid" e a Identidade Tech-Deck Face
+Abandonando as linhas excessivamente complexas e agressivas de alguns rivais asiáticos, a Škoda introduziu no Peaq a linguagem **Modern Solid**. O destaque frontal é a "Tech-Deck Face", uma reinterpretação da grade tradicional tcheca. Em vez de entradas de ar desnecessárias, temos uma superfície lisa e escura que abriga de forma invisível os sensores de radar, LiDAR e câmeras para o sistema de assistência de nível 2.5.
 
-### O Que São e Como Funcionam as Janelas Solares?
+A assinatura luminosa em formato de "T" e o capô esculpido conferem ao veículo uma presença de estrada robusta, mas sofisticada. Os puxadores de porta embutidos e os espelhos retrovisores digitais opcionais reforçam o foco na eficiência energética e no minimalismo funcional.
 
-Diferente dos painéis solares tradicionais de silício azulado que vemos nos telhados, as janelas solares são projetadas para serem transparentes ou semitransparentes. O grande desafio tecnológico sempre foi: como captar luz para gerar energia sem bloquear a visão de quem está dentro?
+### O Interior: O Fator "7 Lugares" e a Revolução do Espaço
+A verdadeira disrupção do Peaq está no aproveitamento da cabine. Ao contrário de SUVs a combustão convertidos, onde a terceira fileira é frequentemente um "puxadinho" para crianças, o Peaq aproveita o assoalho perfeitamente plano da plataforma MEB para oferecer conforto real. Na configuração de 7 assentos, a modularidade é a palavra de ordem: os bancos podem ser rebatidos para criar uma superfície de carga plana e cavernométrica.
 
-A resposta veio através de filmes finos de materiais orgânicos ou células de **Perovskita**. Estes materiais são capazes de absorver comprimentos de onda invisíveis ao olho humano, como o ultravioleta e o infravermelho próximo, permitindo que a luz visível passe quase sem obstáculos. O resultado é um vidro que parece comum, mas que contém uma "usina invisível" em sua estrutura.
+Na configuração de 5 lugares, o porta-malas ostenta impressionantes **1.010 litros de capacidade**, estabelecendo um novo padrão para a categoria. A Škoda também incluiu o "Relax Package": com o apertar de um botão, os bancos dianteiros giram ligeiramente para dentro e o volante se desloca para frente, transformando o cockpit em uma área de descanso enquanto o veículo carrega.
 
-### A \"Cidade-Usina\" e a Independência da Rede
+### Tecnologia e Conectividade "Simply Clever"
+Fiel à filosofia "Simply Clever", a Škoda não economizou em soluções inteligentes. O infoentretenimento é comandado por uma tela flutuante de 13,6 polegadas com interface Android Automotive nativa, permitindo que o Google Maps e o Spotify funcionem de forma ultra-fluida. Como novidade para 2026, o Peaq é o primeiro modelo da marca a oferecer o sistema de som premium da Sonos, projetado especificamente para a acústica da cabine acústica do SUV.
 
-Atualmente, edifícios comerciais são responsáveis por cerca de 40% do consumo global de energia, em grande parte devido à iluminação e, principalmente, ao ar-condicionado. Em cidades tropicais como as brasileiras, o sol que atinge as janelas de vidro aumenta a temperatura interna, exigindo que os sistemas de refrigeração trabalhem no limite.
+O carregamento rápido também foi aprimorado. Em um posto DC de alta potência, o Peaq pode carregar de **10% a 80% em menos de 28 minutos**, garantindo que as paradas em viagens longas sejam curtas e produtivas.
 
-Aqui entra o \"pulo do gato\" da tecnologia: as janelas solares não apenas geram eletricidade, mas também funcionam como um filtro térmico de alta eficiência. Ao absorver a radiação infravermelha para gerar energia, elas impedem que o calor entre no edifício. Estima-se que a instalação desses vidros possa reduzir o uso de ar-condicionado em até 30% e gerar energia suficiente para cobrir toda a demanda de iluminação e sistemas básicos de um prédio de médio porte.
+### Conclusão: O Novo Rei do Custo-Benefício High-Tech?
+O Škoda Peaq chega em um momento crucial. Enquanto o mercado se satura de modelos subcompactos ou hiper-luxuosos, o Peaq ataca o "sweet spot": o SUV grande, familiar e com autonomia de estrada de verdade. Se a Škoda mantiver a promessa de um preço competitivo, o Peaq não será apenas mais um elétrico; ele será o veículo que finalmente levará a mobilidade sustentável de 7 lugares para fora do nicho de elite.`,
+        categoria: "Mobilidade",
+        autor: "Redação Tech",
+        imagem_url: "https://cdn.motor1.com/images/mgl/qkY6Jq/s3/2027-skoda-peaq-teaser.jpg",
+        publicado_em: new Date()
+      }
+    ]);
 
-Quando escalamos isso para um centro financeiro inteiro, deixamos de ter consumidores passivos de energia (que dependem de hidrelétricas ou termelétricas distantes) e passamos a ter **prosumidores** (produtores e consumidores simultâneos). No limite, as janelas solares podem tornar os prédios 100% autossuficientes, dizendo \"adeus\" definitivo à rede elétrica convencional.
-
-### Casos Reais: A Tecnologia Já Está Entre Nós
-
-A empresa australiana **ClearVue PV** e a americana **Ubiquitous Energy** já não falam mais em protótipos, mas em implementações comerciais. O projeto *Enex100* em Perth, na Austrália, é um dos exemplos mais emblemáticos: um shopping center no coração da cidade que utiliza claraboias solares para gerar energia limpa.
-
-![Projeto Real: Implementação da ClearVue na Austrália](https://www.clearvuepv.com/wp-content/uploads/2025/08/Enex-featured.png)
-*Legenda: Registro fotográfico oficial (ClearVue) de uma instalação real de vidros solares em um edifício comercial em Perth.*
-
-No Brasil, o potencial é ainda maior. Com altos índices de irradiação solar durante todo o ano, a substituição de fachadas de vidro fumê por vidros solares transparentes poderia transformar grandes centros como a Avenida Paulista em corredores de energia renovável.
-
-### O Futuro: Muito Além da Transparência
-
-As próximas gerações dessa tecnologia prometem integração total com o ecossistema de casas inteligentes. Imagine janelas que mudam de cor sozinhas para aumentar a captação de energia em horários de pico ou que se tornam opacas por comando de voz para garantir privacidade, tudo isso enquanto carregam seu carro elétrico na garagem do subsolo.
-
-A \"Guerra das Células\" continua nos laboratórios. Enquanto o silício domina o mercado atual, a Perovskita promete ser mais barata e flexível, podendo ser aplicada até em janelas de aviões ou telas de smartphones. 
-
-### Conclusão: A Física como Solução Urbana
-
-A revolução dos vidros inteligentes prova que a solução para a crise energética não está necessariamente em construir mais usinas gigantescas no meio da natureza, mas em aproveitar a infraestrutura que já temos. Ao transformar a pele de vidro de nossos edifícios em órgãos de captação de energia, damos o passo definitivo para cidades mais verdes, resilientes e verdadeiramente inteligentes. O futuro é transparente, e ele está gerando energia agora mesmo.
-
-***`,
-      categoria: "Cidades Inteligentes",
-      autor: "Squad Tech News Writer",
-      imagem_url: "https://images.unsplash.com/photo-1769697714514-d8151d1bc94a?fm=jpg&q=80&w=2000&auto=format&fit=crop",
-      publicado_em: new Date().toISOString(),
-    }
-  ]).select();
-  
   if (error) {
-    console.error("Erro ao inserir: ", error.message);
+    console.error('Erro ao inserir:', error);
   } else {
-    console.log("Sucesso! Notícia Revisada (V1) Inserida com Link Estável.");
+    console.log('Notícia publicada com sucesso!', data);
   }
 }
 
-main();
+insertPost();

@@ -13,6 +13,21 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.skoda-storyboard.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.motor1.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "/**",
+      },
     ],
   },
 };
