@@ -1,29 +1,23 @@
 checkpoints:
-  - step-03-aprovacao-pauta
-  - step-06-aprovacao-angulo
-  - step-08-aprovacao-titulo
-  - step-eduardo-editorchefe # Pode ser um step invisível ou checkpoint
-  - step-11-aprovacao-materia
-  - step-15-entrega-final
-  - step-16-publicacao
+  - step-beto-busca
+  - step-ivan-ideia
+  - step-tina-titulo
+  - step-rebeca-revisao
+  - step-eduardo-editorchefe
+  - step-pedro-pagina
 steps:
-  - step-01-pesquisa.md
-  - step-02-trends.md
-  - step-03-aprovacao-pauta.md
-  - step-04-fato.md
+  - step-teo-tendencia.md
+  - step-beto-busca.md
+  - step-fabio-fatos.md
   - step-caio-concorrencia.md
-  - step-05-angulos.md
-  - step-06-aprovacao-angulo.md
-  - step-07-titulo.md
-  - step-08-aprovacao-titulo.md
-  - step-09-redacao.md
-  - step-lucas-linkador.md
-  - step-eduardo-editorchefe.md
-  - step-10-revisao.md
-  - step-11-aprovacao-materia.md
-  - step-12-foto.md
+  - step-ivan-ideia.md
+  - step-tina-titulo.md
+  - step-carlos-copy.md
+  - step-rebeca-revisao.md
+  - step-felipe-foto.md
   - step-gabriel-gerador.md
   - step-edgar-edicao.md
-  - step-13-pagina.md
-  - step-15-entrega-final.md
-  - step-16-publicacao.md
+  - step-lucas-linkador.md
+  - step-nico-newsletter.md
+  - step-eduardo-editorchefe.md
+  - step-pedro-pagina.md

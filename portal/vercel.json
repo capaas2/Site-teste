@@ -1,0 +1,16 @@
+{
+  "crons": [
+    {
+      "path": "/api/newsletter/dispatch?secret=site_teste_secret_9988",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/newsletter/dispatch?secret=site_teste_secret_9988",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/newsletter/dispatch?secret=site_teste_secret_9988",
+      "schedule": "0 20 * * *"
+    }
+  ]
+}
