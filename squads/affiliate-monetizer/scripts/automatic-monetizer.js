@@ -74,22 +74,22 @@ async function runAutonomousMonetization() {
     "Apple iPhone 17 Pro": { 
       price: "7.499,00", 
       store: "Amazon",
-      image: "https://m.media-amazon.com/images/I/71v2jVh6nIL._AC_UF1000,1000_QL80_.jpg"
+      image: "https://m.media-amazon.com/images/I/71v2jVh6nIL._AC_SX679_.jpg"
     },
     "Motorola Edge 70 Fusion": { 
       price: "3.299,00", 
       store: "Mercado Livre",
-      image: "https://m.media-amazon.com/images/I/61GjXkYUXaL._AC_SL1500_.jpg"
+      image: "https://m.media-amazon.com/images/I/71RbtfT-+pL._AC_SX679_.jpg"
     },
     "Ray-Ban Meta Smart Glasses": { 
       price: "3.199,00", 
       store: "Amazon",
-      image: "https://m.media-amazon.com/images/I/51wXhN6yIUL._AC_SL1200_.jpg"
+      image: "https://m.media-amazon.com/images/I/51wXhN6yIUL._AC_SX679_.jpg"
     },
     "Plaud NotePin AI Voice Recorder": { 
       price: "1.450,00", 
       store: "Amazon",
-      image: "https://m.media-amazon.com/images/I/61Nl0kO5oIL._AC_SL1500_.jpg"
+      image: "https://m.media-amazon.com/images/I/61Nl0kO5oIL._AC_SX679_.jpg"
     }
   };
 
