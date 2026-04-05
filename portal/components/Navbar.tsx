@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 
 const mainNavItems = [
-  { label: "Últimas", href: "/" },
-  { label: "Mais Lidas", href: "#ranking" },
+  { label: "Últimas", href: "/ultimas" },
+  { label: "Mais Lidas", href: "/mais-lidas" },
   { label: "Eletrificação", slug: "eletrificacao" },
   { label: "Mobilidade", slug: "mobilidade" },
   { label: "IA & Software", slug: "ia-software" },

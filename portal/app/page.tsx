@@ -1,40 +1,21 @@
-import { supabase } from "@/lib/supabase";
+import { getTopPosts, getLatestPosts } from "@/lib/posts";
 import { HeroGrid } from "@/components/HeroGrid";
 import { CategoryCarousel } from "@/components/CategoryCarousel";
-import { PostFeed } from "@/components/PostFeed";
 import { FeaturedRanking } from "@/components/FeaturedRanking";
 import { AdBanner } from "@/components/AdBanner";
-import { Post } from "@/types/post";
 import Link from "next/link";
-import { Shield, TrendingUp, Zap, Smartphone, ChevronRight } from "lucide-react";
+import { Shield, TrendingUp, Zap, Smartphone, ChevronRight, ArrowRight } from "lucide-react";
 
 export const revalidate = 60;
 
-async function getPosts(): Promise<Post[]> {
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .order("publicado_em", { ascending: false });
-
-  if (error) {
-    console.error("Supabase fetch error:", error.message);
-    return [];
-  }
-  return data as Post[];
-}
-
 export default async function HomePage() {
-  const posts = await getPosts();
+  // 1. Destaques do Dia (Mais lidas das últimas 48h para garantir volume)
+  const dailyTop = await getTopPosts(2, 6);
   
-  // Destaques: Top 3 Mais Lidas (em memória)
-  const featuredPosts = [...posts].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 3);
-  
-  // Últimas Notícias: Já vem por data do SQL
-  const latestPosts = posts.slice(0, 6);
+  // 2. Ranking da Semana (Top 3 histórico da semana)
+  const weeklyTop = await getTopPosts(7, 3);
 
-  // Feed Geral: O restante
-  const feedPosts = posts.slice(6);
-
+  // 3. Atalhos Rápidos (Seção Visual)
   const shortcuts = [
     { label: "Segurança", icon: Shield, color: "bg-indigo-600", slug: "ciberseguranca" },
     { label: "Mercado", icon: TrendingUp, color: "bg-emerald-600", slug: "mercado" },
@@ -44,12 +25,20 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-16">
-      {/* 1. Hero Grid — Destaques e Últimas Notícias */}
+      {/* 1. Hero Grid — As Mais Lidas do Dia */}
       <section id="hero">
-        <HeroGrid featuredPosts={featuredPosts} latestPosts={latestPosts} />
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600 italic">
+            Bombando Hoje
+          </h2>
+          <Link href="/mais-lidas" className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 flex items-center gap-1 transition-colors">
+            Ver Ranking Completo <ChevronRight className="w-3 h-3" />
+          </Link>
+        </div>
+        <HeroGrid featuredPosts={dailyTop.slice(0, 3)} latestPosts={dailyTop} />
       </section>
 
-      {/* 2. Atalhos Rápidos (Estilo TecMundo, mas c/ Design Redação Tech) */}
+      {/* 2. Atalhos Rápidos */}
       <section id="shortcuts" className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {shortcuts.map((s) => (
           <Link
@@ -70,31 +59,45 @@ export default async function HomePage() {
         ))}
       </section>
 
-      {/* 3. Ranking Artístico das Mais Lidas */}
-      <section id="ranking" className="pt-8">
-        <FeaturedRanking posts={featuredPosts} />
+      {/* 3. Ranking Artístico — Sucesso da Semana */}
+      <section id="ranking" className="pt-8 bg-slate-100/50 dark:bg-slate-900/30 -mx-4 px-4 py-16 rounded-[3rem]">
+        <div className="max-w-7xl mx-auto">
+           <FeaturedRanking posts={weeklyTop} />
+        </div>
       </section>
 
-      {/* 3.1 Banner de Anúncio Central */}
+      {/* 4. Banner de Anúncio Central */}
       <AdBanner className="mt-4" />
 
-      {/* 4. Carrossel de Categorias Adicional */}
-      <CategoryCarousel />
+      {/* 5. Carrossel de Categorias e Feed de Exploração */}
+      <section className="space-y-10">
+        <CategoryCarousel />
 
-      {/* 5. Divisor Visual */}
-      <div className="relative py-4">
-        <div className="absolute inset-0 flex items-center" aria-hidden="true">
-          <div className="w-full border-t border-slate-200 dark:border-slate-800"></div>
+        <div className="flex flex-col items-center justify-center py-12 px-6 bg-blue-600 rounded-[2rem] text-white text-center space-y-6 shadow-2xl shadow-blue-500/20 overflow-hidden relative group">
+           {/* Efeito Visual de Fundo */}
+           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl group-hover:scale-150 transition-transform duration-700" />
+           
+           <h3 className="text-2xl md:text-3xl font-black italic tracking-tight relative z-10">
+             QUER VER TODAS AS <span className="text-blue-200">ÚLTIMAS NOTÍCIAS?</span>
+           </h3>
+           <p className="text-blue-100 max-w-md text-sm font-medium relative z-10">
+             Não perca nada do que acontece no mundo da tecnologia. Acesse nosso feed completo e atualizado em tempo real.
+           </p>
+           <Link 
+             href="/ultimas"
+             className="relative z-10 inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full font-black uppercase tracking-widest text-xs hover:scale-105 hover:shadow-xl transition-all active:scale-95"
+           >
+             Acessar Feed Completo <ArrowRight className="w-4 h-4" />
+           </Link>
         </div>
-        <div className="relative flex justify-center">
-          <span className="bg-slate-50 dark:bg-slate-950 px-4 text-xs font-black uppercase tracking-[0.3em] text-slate-400">
-            Mais Conteúdo
+      </section>
+
+      {/* 6. Divisor Visual Minimalista no final */}
+      <div className="text-center">
+          <span className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 opacity-30">
+            Fim do Destaques
           </span>
-        </div>
       </div>
-
-      {/* 6. Feed Geral de Notícias */}
-      <PostFeed posts={feedPosts.length > 0 ? feedPosts : posts} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AtSign, ExternalLink, Rss, Mail, MapPin, Phone } from "lucide-react";
+import { NewsLetter } from "./NewsLetter";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,10 +16,10 @@ export function Footer() {
 
   const quickLinks = [
     { label: "Início", href: "/" },
-    { label: "Sobre Nós", href: "#" },
-    { label: "Anuncie", href: "#" },
-    { label: "Contato", href: "#" },
-    { label: "Política de Privacidade", href: "#" },
+    { label: "Sobre Nós", href: "/sobre" },
+    { label: "Anuncie", href: "/anuncie" },
+    { label: "Contato", href: "/contato" },
+    { label: "Política de Privacidade", href: "/privacidade" },
   ];
 
   return (
@@ -88,10 +89,7 @@ export function Footer() {
               <span>São Paulo, SP · Brasil</span>
             </li>
             <li className="mt-8">
-               <div className="bg-slate-800 p-4 rounded-2xl border border-slate-700">
-                  <p className="text-xs font-bold text-white mb-2 uppercase tracking-widest text-center">Newsletter</p>
-                  <p className="text-[10px] text-slate-500 text-center mb-0">Inscreva-se na barra lateral da Home para receber nossos resumos diários.</p>
-               </div>
+               <NewsLetter />
             </li>
           </ul>
         </div>
