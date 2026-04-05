@@ -36,7 +36,8 @@ export function Sidebar({ posts }: SidebarProps) {
         setEmail("");
       } else {
         setStatus("error");
-        setMessage(data.error || "Algo deu errado.");
+        const detailMessage = data.details ? ` (${data.details})` : "";
+        setMessage((data.error || "Algo deu errado.") + detailMessage);
       }
     } catch (err) {
       setStatus("error");
