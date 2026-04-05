@@ -101,14 +101,31 @@ async function publishNews() {
             "apikey": SUPABASE_ANON_KEY,
             "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
             "Content-Type": "application/json",
-            "Prefer": "return=minimal" // não precisamos receber os dados de volta
+            "Prefer": "return=representation" // Agora pedimos os dados de volta para pegar o ID
         },
         body: JSON.stringify(noticiaRecord)
     });
 
     if (dbRes.ok) {
-      console.log("✅ Matéria lançada com sucesso direto no seu SITE (Portal)!");
+      const insertedData = await dbRes.json();
+      const newPostId = insertedData[0]?.id;
+
+      console.log(`✅ Matéria lançada com sucesso! ID: ${newPostId}`);
       console.log(`🌐 A URL da imagem ficou: ${imageUrl}`);
+
+      // GATILHO PARA FASE 2: MONETIZAÇÃO
+      if (newPostId) {
+        console.log("🔗 Ativando Affiliate Squad (Fase 2) para monetização automática...");
+        try {
+          const { execSync } = require("child_process");
+          const triggerScript = path.join(__dirname, "trigger-phase2.js");
+          // Executa o gatilho passando o ID e o caminho do JSON original para contexto
+          execSync(`node "${triggerScript}" ${newPostId} "${resolvedPath}"`, { stdio: "inherit" });
+        } catch (triggerErr) {
+          console.error("⚠️ Aviso: Falha ao disparar o Affiliate Squad:", triggerErr.message);
+        }
+      }
+
       process.exit(0);
     } else {
       const errText = await dbRes.text();

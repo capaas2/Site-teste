@@ -6,9 +6,12 @@ import { Sidebar } from "@/components/Sidebar";
 import { ShareButtons } from "@/components/ShareButtons";
 import { ViewCounter } from "@/components/ViewCounter";
 import { AdBanner } from "@/components/AdBanner";
+import { ReadingProgress } from "@/components/ReadingProgress";
+import { StoryStream } from "@/components/StoryStream";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Calendar, User, Tag } from "lucide-react";
+import DOMPurify from "isomorphic-dompurify";
+import { Calendar, User, Tag, Clock } from "lucide-react";
 
 export const revalidate = 120;
 
@@ -35,15 +38,29 @@ async function getSidebarPosts(): Promise<Post[]> {
   return (data as Post[]) || [];
 }
 
+async function getLatestPlantao(): Promise<Post[]> {
+  const { data } = await supabase
+    .from("posts")
+    .select("id, titulo, publicado_em")
+    .order("publicado_em", { ascending: false })
+    .limit(6);
+  return (data as Post[]) || [];
+}
+
 export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  const [post, sidebarPosts] = await Promise.all([
+  const [post, sidebarPosts, latestPlantao] = await Promise.all([
     getPost(id),
     getSidebarPosts(),
+    getLatestPlantao(),
   ]);
 
   if (!post) notFound();
+
+  // Calcular Tempo de Leitura (aprox. 200 palavras por minuto)
+  const wordCount = post.conteudo_markdown.split(/\s+/).length;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   const formattedDate = new Date(post.publicado_em).toLocaleDateString("pt-BR", {
     day: "2-digit",
@@ -52,7 +69,9 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="max-w-7xl mx-auto px-4 py-10 relative">
+      <ReadingProgress />
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* === Coluna Principal (70%) === */}
         <article className="lg:col-span-2">
@@ -65,15 +84,25 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
               <Tag className="w-3 h-3" />
               {post.categoria}
             </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-2">
               {post.titulo}
             </h1>
           </div>
 
           {/* Meta */}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400 mb-6 pb-6 border-b border-slate-200 dark:border-slate-800">
-            <span className="flex items-center gap-1.5"><User className="w-4 h-4" /> {post.autor}</span>
-            <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {formattedDate}</span>
+          <div className="flex flex-wrap items-center gap-6 text-sm text-slate-500 dark:text-slate-400 mb-6 pb-6 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center">
+                 <User className="w-4 h-4 text-blue-600" />
+              </div>
+              <span className="font-bold">{post.autor}</span>
+            </div>
+            <span className="flex items-center gap-1.5 animate-in fade-in slide-in-from-left duration-500">
+              <Calendar className="w-4 h-4" /> {formattedDate}
+            </span>
+            <span className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 font-bold bg-blue-50 dark:bg-blue-950/20 px-3 py-1 rounded-full text-xs">
+              <Clock className="w-3.5 h-3.5" /> {readingTime} min de leitura
+            </span>
           </div>
 
           {/* Share Buttons */}
@@ -82,12 +111,12 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           </div>
 
           {/* Imagem de Capa */}
-          <div className="relative w-full h-72 sm:h-96 rounded-xl overflow-hidden mb-10">
+          <div className="relative w-full h-72 sm:h-96 rounded-[2rem] overflow-hidden mb-12 shadow-2xl shadow-blue-500/10 border border-slate-200 dark:border-slate-800">
             <Image
               src={post.imagem_url || PLACEHOLDER}
               alt={post.titulo}
               fill
-              className="object-cover"
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
               priority
             />
           </div>
@@ -96,24 +125,28 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           <div className="prose prose-blue dark:prose-invert lg:prose-lg max-w-none
             prose-headings:font-extrabold prose-headings:tracking-tight
             prose-a:text-blue-600 dark:prose-a:text-blue-400
-            prose-img:rounded-xl prose-code:text-blue-600 dark:prose-code:text-blue-400
-            prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-950/30 prose-blockquote:rounded-r-lg prose-blockquote:p-4">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {post.conteudo_markdown}
-            </ReactMarkdown>
+            prose-img:rounded-3xl prose-img:shadow-xl
+            prose-code:text-blue-600 dark:prose-code:text-blue-400
+            prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-950/30 prose-blockquote:rounded-r-2xl prose-blockquote:p-6 prose-blockquote:italic">
+            <div 
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.conteudo_markdown) }}
+              className="prose-content"
+            />
 
             {/* Banner de Anúncio Pós-Matéria */}
             <AdBanner className="mt-8" format="fluid" />
           </div>
 
           {/* Share bottom */}
-          <div className="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800">
-            <ShareButtons titulo={post.titulo} />
+          <div className="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+             <span className="text-xs font-black uppercase tracking-widest text-slate-400">Gostou? Compartilhe:</span>
+             <ShareButtons titulo={post.titulo} />
           </div>
         </article>
 
         {/* === Sidebar (30%) === */}
-        <div className="lg:sticky lg:top-24 lg:self-start space-y-8">
+        <div className="lg:sticky lg:top-24 lg:self-start space-y-10">
+          <StoryStream posts={latestPlantao} />
           <Sidebar posts={sidebarPosts} />
           
           {/* Banner de Anúncio Lateral */}

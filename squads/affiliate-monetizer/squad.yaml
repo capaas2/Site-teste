@@ -1,0 +1,10 @@
+name: "Monetizador de Afiliados"
+description: "Esquadrão especializado em extração de intenção de compra, busca de preços e injeção de links de afiliados inteligentes."
+skills:
+  - web_search
+  - web_fetch
+  - browser
+data:
+  - pipeline/data/affiliate-rules.md
+  - pipeline/data/product-patterns.md
+  - ids/current_post.json
