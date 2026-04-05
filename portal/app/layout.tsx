@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/Navbar";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <footer className="border-t border-slate-200 dark:border-slate-800 mt-16 py-10 text-center text-sm text-slate-400">
             © {new Date().getFullYear()} Redação Tech · Todos os direitos reservados
           </footer>
+          <Analytics />
         </Providers>
       </body>
     </html>
