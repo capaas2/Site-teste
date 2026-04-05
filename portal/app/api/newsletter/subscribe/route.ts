@@ -40,11 +40,7 @@ export async function POST(request: Request) {
   } catch (err: any) {
     console.error("Erro fatal na inscrição:", err);
     return NextResponse.json(
-      { 
-        error: "Erro de execução.", 
-        details: err.message || "Erro desconhecido",
-        supabaseError: err.status || "N/A"
-      },
+      { error: "Erro interno ao processar inscrição." },
       { status: 500 }
     );
   }

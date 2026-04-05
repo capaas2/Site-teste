@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     if (!postError && newPost) {
       // ENVIAR NOTÍCIA NOVA
       await resend.emails.send({
-        from: "Redação Tech <news@updates.redacaotech.com.br>", // Altere para seu domínio verificado
+        from: "Redação Tech <onboarding@resend.dev>",
         to: emails,
         subject: `🚨 NOVO: ${newPost.titulo}`,
         html: renderEmailTemplate(newPost, "NOVA_NOTICIA"),
@@ -75,7 +75,7 @@ export async function GET(request: Request) {
 
     if (recentPosts && recentPosts.length > 0) {
       await resend.emails.send({
-        from: "Redação Tech <news@updates.redacaotech.com.br>",
+        from: "Redação Tech <onboarding@resend.dev>",
         to: emails,
         subject: `🗞️ Resumo: O que você perdeu nas últimas horas`,
         html: renderRecapTemplate(recentPosts),
