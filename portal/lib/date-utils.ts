@@ -1,5 +1,6 @@
 /**
  * Utilitários de Data e Hora para o Portal Redação Tech
+ * Forçado para fuso horário America/Sao_Paulo (GMT-3) para precisão editorial.
  */
 
 export function formatPostDate(isoString: string): string {
@@ -8,6 +9,7 @@ export function formatPostDate(isoString: string): string {
     day: "2-digit",
     month: "long",
     year: "numeric",
+    timeZone: "America/Sao_Paulo",
   });
 }
 
@@ -16,6 +18,8 @@ export function formatPostTime(isoString: string): string {
   return date.toLocaleTimeString("pt-BR", {
     hour: "2-digit",
     minute: "2-digit",
+    hour12: false,
+    timeZone: "America/Sao_Paulo",
   });
 }
 
@@ -25,8 +29,12 @@ export function formatPostTime(isoString: string): string {
 export function formatFriendlyDateTime(isoString: string): string {
   const date = new Date(isoString);
   const now = new Date();
-  const isToday = date.toDateString() === now.toDateString();
   
+  // Para comparação de "Hoje", precisamos normalizar para o fuso SP
+  const dateSP = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeZone: 'America/Sao_Paulo' }).format(date);
+  const nowSP = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeZone: 'America/Sao_Paulo' }).format(now);
+  
+  const isToday = dateSP === nowSP;
   const time = formatPostTime(isoString);
   
   if (isToday) return `Hoje, ${time}`;

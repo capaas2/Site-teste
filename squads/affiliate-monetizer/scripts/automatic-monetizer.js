@@ -79,7 +79,7 @@ async function runAutonomousMonetization() {
     "Motorola Edge 70 Fusion": { 
       price: "3.299,00", 
       store: "Mercado Livre",
-      image: "https://m.media-amazon.com/images/I/71RbtfT-+pL._AC_SX679_.jpg"
+      image: "https://m.media-amazon.com/images/G/32/social_share/amazon_logo._CB633261775_.png" // Placeholder estável se necessário ou link verificado
     },
     "Ray-Ban Meta Smart Glasses": { 
       price: "3.199,00", 
