@@ -1,0 +1,15 @@
+agent,path
+beto-busca,./agents/beto-busca.agent.md
+teo-tendencia,./agents/teo-tendencia.agent.md
+fabio-fato,./agents/fabio-fato.agent.md
+caio-concorrencia,./agents/caio-concorrencia.agent.md
+ivan-ideia,./agents/ivan-ideia.agent.md
+tina-titulo,./agents/tina-titulo.agent.md
+carlos-copy,./agents/carlos-copy.agent.md
+lucas-linkador,./agents/lucas-linkador.agent.md
+eduardo-editorchefe,./agents/eduardo-editorchefe.agent.md
+rebeca-revisao,./agents/rebeca-revisao.agent.md
+felipe-foto,./agents/felipe-foto.agent.md
+gabriel-gerador,./agents/gabriel-gerador.agent.md
+edgar-edicao,./agents/edgar-edicao.agent.md
+pedro-pagina,./agents/pedro-pagina.agent.md

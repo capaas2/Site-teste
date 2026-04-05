@@ -1,0 +1,15 @@
+name: "Redação Tech"
+description: "Esquadrão autônomo para curadoria, ranqueamento, fact-checking e redação de notícias de tecnologia de alta performance."
+skills:
+  - web_search
+  - web_fetch
+  - image-fetcher
+  - image-ai-generator
+  - apify
+data:
+  - pipeline/data/research-brief.md
+  - pipeline/data/domain-framework.md
+  - pipeline/data/quality-criteria.md
+  - pipeline/data/output-examples.md
+  - pipeline/data/anti-patterns.md
+  - pipeline/data/tone-of-voice.md

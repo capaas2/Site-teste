@@ -1,0 +1,157 @@
+squad:
+  code: "tech-news-writer"
+  name: "Redação Tech"
+  description: "Esquadrão autônomo para curadoria, ranqueamento, fact-checking e redação de notícias de tecnologia de alta performance."
+
+agents:
+  - id: "beto-busca"
+    name: "Beto Busca"
+    title: "Farejador de Notícias"
+    icon: "🕵️‍♂️"
+    execution: "subagent"
+    role_summary: "Vasculha a web atrás de notícias quentes."
+    tasks:
+      - name: "encontrar-noticias"
+        file: "tasks/encontrar-noticias.md"
+        description: "Busca e agrega notícias sobre tecnologia."
+  - id: "teo-tendencia"
+    name: "Téo Tendência"
+    title: "Analista de Tráfego"
+    icon: "📈"
+    execution: "subagent"
+    role_summary: "Avalia a viralidade, relevância e potencial de clique (CTR)."
+    tasks:
+      - name: "filtrar-relevancia"
+        file: "tasks/filtrar-relevancia.md"
+        description: "Classifica e prioriza notícias baseadas em busca e social."
+  - id: "fabio-fato"
+    name: "Fábio Fato"
+    title: "Checador de Fatos"
+    icon: "⚖️"
+    execution: "subagent"
+    role_summary: "Confirma veracidade, dados científicos/técnicos e combate fake news."
+    tasks:
+      - name: "validar-fatos"
+        file: "tasks/validar-fatos.md"
+        description: "Checa as fontes primárias e classifica a confiabilidade."
+  - id: "ivan-ideia"
+    name: "Ivan Ideia"
+    title: "Estrategista de Pauta"
+    icon: "💡"
+    execution: "inline"
+    role_summary: "Define os ângulos narrativos para a notícia selecionada."
+    tasks:
+      - name: "gerar-angulos"
+        file: "tasks/gerar-angulos.md"
+        description: "Gera abordagens jornalísticas (angulações) distintas."
+  - id: "tina-titulo"
+    name: "Tina Título"
+    title: "Cientista de Cliques"
+    icon: "🎯"
+    execution: "inline"
+    role_summary: "Gera diversas variações de títulos maximizando curiosidade e SEO."
+    tasks:
+      - name: "criar-manchetes"
+        file: "tasks/criar-manchetes.md"
+        description: "Elabora headlines irresistíveis e direcionamento visual p/ thumbnail."
+  - id: "carlos-copy"
+    name: "Carlos Copy"
+    title: "Redator Técnico"
+    icon: "✍️"
+    execution: "inline"
+    role_summary: "Escreve a notícia com base no padrão investigado e no ângulo aprovado."
+    tasks:
+      - name: "redigir-blog-post"
+        file: "tasks/redigir-blog-post.md"
+        description: "Cria o artigo no formato adequado focado no engajamento."
+  - id: "rebeca-revisao"
+    name: "Rebeca Revisão"
+    title: "Editora-Chefe"
+    icon: "🔍"
+    execution: "inline"
+    role_summary: "Certifica a fluidez, polimento de texto e garantia do tom de voz profissional."
+    tasks:
+      - name: "revisar-conteudo"
+        file: "tasks/revisar-conteudo.md"
+        description: "Faz um quality assurance (QA) no texto final."
+  - id: "felipe-foto"
+    name: "Felipe Foto"
+    title: "Caçador de Imagens"
+    icon: "🖼️"
+    execution: "inline"
+    role_summary: "Busca imagens online sem marca d'água ou as gera via IA visando o thumbnail."
+    tasks:
+      - name: "preparar-imagens"
+        file: "tasks/preparar-imagens.md"
+        description: "Providencia a mídia visual para o post."
+  - id: "pedro-pagina"
+    name: "Pedro Página"
+    title: "Publicador"
+    icon: "🖥️"
+    execution: "inline"
+    role_summary: "Prepara a estrutura HTML/Tags final da matéria para publicação."
+    tasks:
+      - name: "montar-estrutura-pagina"
+        file: "tasks/montar-estrutura-pagina.md"
+        description: "Empacota texto e imagem em formato ideal de portal web."
+
+pipeline:
+  - step: 1
+    name: "Pesquisa Bruta"
+    type: "agent"
+    agent: "beto-busca"
+  - step: 2
+    name: "Filtragem Trends"
+    type: "agent"
+    agent: "teo-tendencia"
+  - step: 3
+    name: "Aprovação de Pauta"
+    type: "checkpoint"
+  - step: 4
+    name: "Fact-Checking"
+    type: "agent"
+    agent: "fabio-fato"
+  - step: 5
+    name: "Geração de Ângulos"
+    type: "agent"
+    agent: "ivan-ideia"
+  - step: 6
+    name: "Aprovação do Ângulo"
+    type: "checkpoint"
+  - step: 7
+    name: "Criação de Títulos"
+    type: "agent"
+    agent: "tina-titulo"
+  - step: 8
+    name: "Aprovação do Título"
+    type: "checkpoint"
+  - step: 9
+    name: "Redação do Conteúdo"
+    type: "agent"
+    agent: "carlos-copy"
+  - step: 10
+    name: "Revisão e Edição"
+    type: "agent"
+    agent: "rebeca-revisao"
+  - step: 11
+    name: "Aprovação da Matéria"
+    type: "checkpoint"
+  - step: 12
+    name: "Finalização de Imagem"
+    type: "agent"
+    agent: "felipe-foto"
+  - step: 13
+    name: "Montagem da Página"
+    type: "agent"
+    agent: "pedro-pagina"
+  - step: 14
+    name: "Entrega Final"
+    type: "checkpoint"
+
+investigation:
+  enriched: true
+  dir: "squads/tech-news-writer/_investigations"
+
+formats_selected:
+  - "blog-post"
+  - "blog-seo"

@@ -1,0 +1,34 @@
+squad_code: "tech-news-writer"
+purpose: "Um esquadrão para pesquisar notícias de tecnologia, estruturar as ideias, redigir artigos, buscar imagens na internet (com preferência para opções sem marca d'água) ou gerar via IA caso necessário, revisar o texto e preparar a estrutura de publicação para um site de tecnologia."
+domain: "content"
+
+company:
+  name: "Teste Site"
+  tone: "Direto, neutro e focado em testes"
+  products: "Projeto genérico em ambiente de testes ou desenvolvimento"
+
+language: "Português do Brasil"
+
+context:
+  audience: "Público geral e entusiastas de tecnologia"
+  platforms: "Site de tecnologia"
+  tone: "Mistura de profissional e direto com abordagem educativa e analítica"
+  sources: "Internet em geral"
+  output_format: "Artigos"
+  frequency: "Diário / Sob demanda"
+
+tools_needed:
+  - "image-fetcher"
+  - "image-ai-generator"
+  - "apify"
+
+investigation:
+  enabled: true
+  profiles:
+    - url: "https://www.instagram.com/tecmundo/"
+      platform: "instagram"
+      investigation_mode: "profile_3"
+
+target_formats:
+  - "blog-post"
+  - "blog-seo"

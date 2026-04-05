@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O Imposto Invisível que Está Sabotando a IA no Brasil | Redação Tech</title>
+  <meta name="description" content="O governo zerou tarifa de mil produtos de tech. Mas deixou a GPU de fora — e esse detalhe pode custar a corrida de IA do Brasil." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d0d;
+      color: #e8e8e8;
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.7;
+    }
+
+    /* Header */
+    .site-header {
+      border-bottom: 1px solid #1e1e1e;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #111;
+    }
+    .site-logo { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+    .site-logo span { color: #4caf50; }
+    .site-tag { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; border-left: 1px solid #333; padding-left: 12px; }
+
+    /* Hero */
+    .hero {
+      max-width: 860px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+    }
+    .category-pill {
+      display: inline-block;
+      background: #1a2e1a;
+      color: #4caf50;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 5px 12px;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    h1 em { font-style: normal; color: #4caf50; }
+    .lead {
+      font-size: 19px;
+      color: #aaa;
+      line-height: 1.6;
+      border-left: 3px solid #4caf50;
+      padding-left: 20px;
+      margin-bottom: 32px;
+    }
+    .meta {
+      font-size: 13px;
+      color: #555;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .meta strong { color: #888; }
+
+    /* Hero Image */
+    .hero-image {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .hero-image img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+    }
+    .image-caption {
+      font-size: 12px;
+      color: #555;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* Content */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin: 48px 0 16px;
+      letter-spacing: -0.3px;
+    }
+    .content p {
+      font-size: 17px;
+      color: #ccc;
+      margin-bottom: 20px;
+      line-height: 1.75;
+    }
+    .content strong { color: #fff; }
+
+    /* Highlight Box */
+    .highlight {
+      background: #111;
+      border: 1px solid #222;
+      border-left: 4px solid #4caf50;
+      padding: 20px 24px;
+      border-radius: 4px;
+      margin: 32px 0;
+      font-size: 17px;
+      color: #bbb;
+      line-height: 1.65;
+    }
+
+    /* Inline Image */
+    .inline-image {
+      margin: 40px 0;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #1e1e1e;
+    }
+    .inline-image img { width: 100%; display: block; }
+    .inline-image figcaption {
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #555;
+      background: #111;
+    }
+
+    /* Final */
+    .final-question {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #111 0%, #0d1f0d 100%);
+      border: 1px solid #2e7d32;
+      border-radius: 8px;
+      padding: 32px;
+      margin: 48px 0;
+      line-height: 1.4;
+    }
+    .final-question em { font-style: normal; color: #4caf50; }
+
+    footer {
+      border-top: 1px solid #1e1e1e;
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-logo">Redação<span>Tech</span></div>
+  <div class="site-tag">Opensquad · Pipeline Automatizado</div>
+</header>
+
+<article>
+  <div class="hero">
+    <div class="category-pill">Política de Tecnologia</div>
+
+    <h1>O Imposto Invisível que Está <em>Sabotando</em> a IA no Brasil</h1>
+
+    <p class="lead">O governo zerou tarifa de mil produtos tech. Celebração geral. Mas deixou a GPU de fora da lista — e esse detalhe silencioso pode custar a corrida de Inteligência Artificial do país pelos próximos 10 anos.</p>
+
+    <div class="meta">
+      <span>Por <strong>Carlos Copy</strong></span>
+      <span>4 de abril de 2026</span>
+      <span>Categoria: <strong>Política de Tecnologia</strong></span>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="C:\Users\super\.gemini\antigravity\brain\2900e93c-b479-4eaf-8468-2e6068367cbb\gpu_data_center_brasil_1775339703052.png" alt="Placa GPU de alto desempenho em rack de servidor de data center" />
+    <p class="image-caption">GPU em servidor de data center: peça central para IA que o Brasil manteve tributada. | Imagem: Redação Tech</p>
+  </div>
+
+  <div class="content">
+
+    <p>O Governo Federal bateu bumbo e anunciou isenção de tarifas para quase mil produtos de tecnologia e informática. A medida foi celebrada por associações do setor como um avanço histórico para a competitividade digital do país. Só que tem um detalhe enterrado nas entrelinhas da Resolução Gecex nº 852/2026: <strong>a GPU não está na lista</strong>.</p>
+
+    <p>Sim. O componente que alimenta praticamente 100% dos sistemas de Inteligência Artificial modernos — das grandes linguagens como ChatGPT ao reconhecimento de imagem em hospitais — continua tributado pelo governo brasileiro enquanto o mundo inteiro corre para montar data centers.</p>
+
+    <h2>A Arma que o Brasil Recusou Isentar</h2>
+
+    <p>Uma GPU de alto desempenho (como as séries H100 ou B200 da NVIDIA, padrão de mercado para IA empresarial) já custa entre US$ 25.000 e US$ 40.000 por unidade nos EUA. No Brasil, essa mesma placa chega com alíquota de importação na cabeça, e o preço final pode ser 40% a 60% mais salgado dependendo da estrutura tributária da operação.</p>
+
+    <div class="highlight">
+      Para montar um cluster básico de IA capaz de treinar modelos de médio porte, você precisa de <strong>dezenas dessas placas</strong>. Um data center competitivo de verdade usa centenas. A conta fica absurda rapidamente — e o investidor vai embora antes do cafezinho.
+    </div>
+
+    <p>O resultado prático é direto: investidores internacionais em infraestrutura de IA olham o custo de capital no Brasil e redirecionam os bilhões para o México, Colômbia ou até o Chile, que têm políticas mais agressivas de atração de data centers e tributação mais enxuta sobre hardware.</p>
+
+    <h2>O Redata Sozinho Não Salva</h2>
+
+    <p>O Congresso aprovou o <strong>Redata</strong> — Regime Especial de Tributação para Serviços de Data Center — com a promessa de suspender impostos como PIS/Cofins e até o Imposto de Importação <em>para produtos sem similar nacional</em>. No papel, parece o atalho perfeito.</p>
+
+    <p>Na prática, a GPU H100 da NVIDIA pode ser enquadrada como produto "com similar nacional" dependendo da interpretação da Suframa e da Camex, o que bloqueia a isenção automática. É o labirinto burocrático de sempre — uma janela que abre pela esquerda enquanto fecha pela direita.</p>
+
+    <p>Enquanto isso, o Finep recebeu R$ 3,5 bilhões em abril para financiar inovação nacional — um número que parece grande até você calcular que um único data center de IA em grande escala custa da mesma ordem de grandeza, e o Brasil precisaria de dezenas deles para competir com o que os EUA e China já têm.</p>
+
+    <h2>O Que Está em Jogo</h2>
+
+    <p>Não é exagero dizer que a política de GPUs vai determinar onde o Brasil se posicionará na corrida de IA nos próximos 10 anos. Países que hoje estão construindo infraestrutura de processamento são os que vão treinar modelos locais, criar <strong>soberania de dados</strong> e reter o talento de engenharia que hoje emigra para o Vale do Silício.</p>
+
+    <p>O Brasil escolheu isentar o notebook de entrada e o roteador doméstico. Decisão correta para democratizar o acesso à internet do cidadão comum. Mas deixou de fora a infraestrutura de IA — e essa omissão vai custar caro quando o inventário de modelos globais estiver consolidado e o país tentar entrar no jogo sem os processadores para jogar.</p>
+
+    <div class="final-question">
+      A questão que fica é simples e direta: <em>quando o governo vai tratar GPU como bem estratégico — e não como produto de luxo?</em>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  Redação Tech · Produzido pelo Pipeline Opensquad · 4 de abril de 2026
+</footer>
+
+</body>
+</html>
