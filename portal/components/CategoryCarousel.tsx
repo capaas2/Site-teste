@@ -1,15 +1,14 @@
 import Link from "next/link";
-import { Cpu, Shield, TrendingUp, Smartphone, Rocket, Globe, FlaskConical, Gamepad2 } from "lucide-react";
+import { BatteryCharging, Car, Cpu, TrendingUp, Palette, Code, Leaf } from "lucide-react";
 
 const categories = [
-  { label: "IA", slug: "ia", icon: Cpu },
-  { label: "Cibersegurança", slug: "cibersegurança", icon: Shield },
+  { label: "Eletrificação", slug: "eletrificacao", icon: BatteryCharging },
+  { label: "Mobilidade", slug: "mobilidade", icon: Car },
+  { label: "IA & Software", slug: "ia-software", icon: Code },
   { label: "Mercado", slug: "mercado", icon: TrendingUp },
-  { label: "Gadgets", slug: "gadgets", icon: Smartphone },
-  { label: "Espaço", slug: "espaço", icon: Rocket },
-  { label: "Internet", slug: "internet", icon: Globe },
-  { label: "Ciência", slug: "ciência", icon: FlaskConical },
-  { label: "Games", slug: "games", icon: Gamepad2 },
+  { label: "Design", slug: "design", icon: Palette },
+  { label: "Tecnologia", slug: "tecnologia", icon: Cpu },
+  { label: "Sustentabilidade", slug: "sustentabilidade", icon: Leaf },
 ];
 
 export function CategoryCarousel() {
