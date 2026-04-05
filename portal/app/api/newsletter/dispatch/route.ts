@@ -2,9 +2,10 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   // Verificação de segurança para o Cron
   const { searchParams } = new URL(request.url);
   const secret = searchParams.get("secret");

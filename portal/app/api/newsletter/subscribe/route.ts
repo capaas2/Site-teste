@@ -20,6 +20,7 @@ export async function POST(request: Request) {
       .select();
 
     if (error) {
+      console.error("Erro do Supabase na inscrição:", error);
       // Caso já exista o e-mail, Supabase retorna erro de unicidade (code: 23505)
       if (error.code === "23505") {
         return NextResponse.json(
@@ -35,9 +36,9 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (err: any) {
-    console.error("Erro na inscrição:", err.message);
+    console.error("Erro fatal na inscrição:", err);
     return NextResponse.json(
-      { error: "Erro interno ao processar inscrição." },
+      { error: "Erro ao processar inscrição. Verifique os logs do servidor." },
       { status: 500 }
     );
   }
