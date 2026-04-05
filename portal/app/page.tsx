@@ -20,10 +20,10 @@ export default async function HomePage() {
 
   // 4. Atalhos Rápidos (Seção Visual)
   const shortcuts = [
-    { label: "Segurança", icon: Shield, color: "bg-indigo-600", slug: "ciberseguranca" },
-    { label: "Mercado", icon: TrendingUp, color: "bg-emerald-600", slug: "mercado" },
-    { label: "Elétricos", icon: Zap, color: "bg-amber-500", slug: "eletrificacao" },
-    { label: "Reviews", icon: Smartphone, color: "bg-rose-600", slug: "produtos" },
+    { label: "Segurança", icon: Shield, color: "bg-indigo-600", slug: "Segurança" },
+    { label: "Mercado", icon: TrendingUp, color: "bg-emerald-600", slug: "Mercado" },
+    { label: "Elétricos", icon: Zap, color: "bg-amber-500", slug: "Elétricos" },
+    { label: "Reviews", icon: Smartphone, color: "bg-rose-600", slug: "Reviews" },
   ];
 
   return (

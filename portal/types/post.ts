@@ -9,3 +9,12 @@ export interface Post {
   views: number;
   affiliate_data?: any; // Dados de ofertas injetados pela IA
 }
+
+export interface AffiliateData {
+  productName: string;
+  price: string;
+  store: string;
+  affiliateUrl: string;
+  productImage?: string;
+  isBestChoice?: boolean;
+}

@@ -36,16 +36,24 @@ async function triggerAffiliateSquad() {
   fs.writeFileSync(squadDataPath, JSON.stringify(context, null, 2));
   console.log(`📂 Contexto de postagem salvo em: ${squadDataPath}`);
 
-  // 2. Disparar a execução do Squad de Afiliados
-  // Nota: O comando abaixo assume que a CLI do OpenSquad está no PATH
+  // 2. Disparar a execução do Motor Autônomo de Monetização
   try {
-    console.log("⚡ Executando: opensquad run affiliate-monetizer");
-    // Em um ambiente real, o comando iniciaria o novo squad passando o contexto.
-    // Como estamos em simulação, deixamos o log de instrução.
-    console.log("✅ Registro de Gatilho Completo. O Esquadrão de Afiliados agora processará a monetização.");
+    const monetizerScript = path.resolve(__dirname, "../../affiliate-monetizer/scripts/automatic-monetizer.js");
+    console.log(`⚡ Executando Motor Autônomo: node "${monetizerScript}"`);
+    
+    // Execução assíncrona (não bloqueia a resposta do Pedro Página)
+    const { spawn } = require("child_process");
+    const child = spawn("node", [monetizerScript], {
+      detached: true,
+      stdio: "inherit"
+    });
+
+    child.unref(); // Deixa o processo rodando em segundo plano
+
+    console.log("✅ Registro de Gatilho Completo. O Motor de Afiliados está processando os dados.");
     
   } catch (error) {
-    console.error("❌ Falha ao executar o comando opensquad:", error.message);
+    console.error("❌ Falha ao executar o Motor Autônomo:", error.message);
   }
 }
 
