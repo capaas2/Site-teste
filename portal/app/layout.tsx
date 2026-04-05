@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
@@ -34,9 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Navbar />
           <main>{children}</main>
-          <footer className="border-t border-slate-200 dark:border-slate-800 mt-16 py-10 text-center text-sm text-slate-400">
-            © {new Date().getFullYear()} Redação Tech · Todos os direitos reservados
-          </footer>
+          <Footer />
           <Analytics />
         </Providers>
       </body>

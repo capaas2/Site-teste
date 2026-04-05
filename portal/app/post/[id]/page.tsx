@@ -5,6 +5,7 @@ import { Post } from "@/types/post";
 import { Sidebar } from "@/components/Sidebar";
 import { ShareButtons } from "@/components/ShareButtons";
 import { ViewCounter } from "@/components/ViewCounter";
+import { AdBanner } from "@/components/AdBanner";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Calendar, User, Tag } from "lucide-react";
@@ -100,6 +101,9 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {post.conteudo_markdown}
             </ReactMarkdown>
+
+            {/* Banner de Anúncio Pós-Matéria */}
+            <AdBanner className="mt-8" format="fluid" />
           </div>
 
           {/* Share bottom */}
@@ -109,8 +113,11 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
         </article>
 
         {/* === Sidebar (30%) === */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div className="lg:sticky lg:top-24 lg:self-start space-y-8">
           <Sidebar posts={sidebarPosts} />
+          
+          {/* Banner de Anúncio Lateral */}
+          <AdBanner className="my-0" format="rectangle" />
         </div>
       </div>
     </div>
