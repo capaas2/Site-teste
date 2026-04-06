@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { Post } from "@/types/post";
 import { Sidebar } from "@/components/Sidebar";
