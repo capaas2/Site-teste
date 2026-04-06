@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import { 
   Search, Sun, Moon, ExternalLink, AtSign, Rss, 
   Menu, X, ChevronRight, 
   Globe, Shield, TrendingUp, Smartphone, Rocket, Zap, 
-  Car, Code, Palette, Leaf, Cpu, Mail
+  Car, Code, Palette, Leaf, Cpu, Mail, Loader2
 } from "lucide-react";
 
 const mainNavItems = [
@@ -29,8 +30,50 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<{ posts: any[]; categories: string[] }>({ posts: [], categories: [] });
+  const [isSearching, setIsSearching] = useState(false);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   useEffect(() => setMounted(true), []);
+
+  // Busca Preditiva Live v2.9.5
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (query.length >= 2) {
+        setIsSearching(true);
+        try {
+          // Busca Posts
+          const { data: posts } = await supabase
+            .from("posts")
+            .select("id, titulo, categoria")
+            .ilike("titulo", `%${query}%`)
+            .limit(3);
+
+          // Busca Categorias (Baseado em posts existentes)
+          const { data: categoriesData } = await supabase
+            .from("posts")
+            .select("categoria")
+            .ilike("categoria", `%${query}%`)
+            .limit(10);
+
+          const uniqueCategories = Array.from(new Set(categoriesData?.map(c => c.categoria))).slice(0, 2);
+
+          setSuggestions({ 
+            posts: posts || [], 
+            categories: uniqueCategories as string[] 
+          });
+        } catch (error) {
+          console.error("Search error:", error);
+        } finally {
+          setIsSearching(false);
+        }
+      } else {
+        setSuggestions({ posts: [], categories: [] });
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [query]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,15 +103,89 @@ export function Navbar() {
           </Link>
 
           {/* Search (Desktop) */}
-          <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-lg mx-auto relative group">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-500 w-4 h-4 transition-colors" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar no portal..."
-              className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-800/50 text-white placeholder:text-slate-500 border border-slate-800 focus:border-blue-500/50 focus:outline-none focus:ring-0 text-sm transition-all"
-            />
-          </form>
+          <div className="hidden md:block flex-1 max-w-lg mx-auto relative group">
+            <form onSubmit={handleSearch} className="relative">
+              {isSearching ? (
+                <Loader2 className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 w-4 h-4 animate-spin" />
+              ) : (
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-500 w-4 h-4 transition-colors" />
+              )}
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+                placeholder="Buscar no portal..."
+                className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-800/50 text-white placeholder:text-slate-500 border border-slate-800 focus:border-blue-500/50 focus:outline-none focus:ring-0 text-sm transition-all"
+              />
+            </form>
+
+            {/* Dropdown de Resultados v2.9.5 */}
+            {isSearchFocused && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-slate-900/95 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                {query.length < 2 ? (
+                  <div className="p-4">
+                    <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 px-2">Tópicos em Alta</div>
+                    <div className="flex flex-wrap gap-2">
+                      {["IA", "Mercado", "Cibersegurança", "Reviews", "Eletrificação"].map((topic) => (
+                        <Link
+                          key={topic}
+                          href={`/categoria/${topic.toLowerCase()}`}
+                          className="px-3 py-1.5 rounded-lg bg-slate-800/50 hover:bg-blue-500/20 hover:text-blue-400 text-xs font-bold text-slate-400 transition-all border border-slate-800"
+                        >
+                          {topic}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="py-2">
+                    {/* Exibe Categorias Encontradas */}
+                    {suggestions.categories.length > 0 && (
+                      <div className="px-2 mb-2">
+                        <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest px-3 mb-1">Categorias</div>
+                        {suggestions.categories.map((cat) => (
+                          <Link
+                            key={cat}
+                            href={`/categoria/${cat.toLowerCase().trim()}`}
+                            className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 transition-colors group"
+                          >
+                            <div className="bg-slate-800 p-1.5 rounded-lg group-hover:bg-blue-500/20 group-hover:text-blue-500 transition-colors">
+                              <ChevronRight className="w-3 h-3" />
+                            </div>
+                            <span className="text-xs font-bold text-slate-200">{cat}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Exibe Posts Encontrados */}
+                    {suggestions.posts.length > 0 ? (
+                      <div className="px-2">
+                        <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest px-3 mb-1">Notícias</div>
+                        {suggestions.posts.map((post) => (
+                          <Link
+                            key={post.id}
+                            href={`/post/${post.id}`}
+                            className="flex flex-col px-3 py-2.5 rounded-xl hover:bg-slate-800 transition-colors group"
+                          >
+                            <span className="text-xs font-bold text-slate-200 group-hover:text-blue-500 transition-colors line-clamp-1">{post.titulo}</span>
+                            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-tight mt-0.5">{post.categoria}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      !isSearching && (
+                        <div className="p-6 text-center text-slate-500 text-xs">
+                          Nenhum resultado para "<span className="text-slate-300 italic">{query}</span>"
+                        </div>
+                      )
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           {/* Social Icons & Theme (Desktop) */}
           <div className="flex items-center gap-4 text-slate-400">

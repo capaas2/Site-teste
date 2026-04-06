@@ -101,18 +101,18 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
        }
 
         return `<figure class="my-16 group">
-          <div class="relative w-full overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-800 border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-all duration-700">
+          <div class="relative w-full aspect-video md:aspect-[21/9] overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-2xl transition-all duration-700">
             <img 
               src="${imageUrl}" 
               alt="${caption}" 
-              class="w-full h-auto block" 
+              class="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700" 
               loading="lazy"
               onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=60'"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none"></div>
           </div>
           <figcaption class="mt-4 text-center px-6">
-            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 tracking-tight italic">
+            <span class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest italic">
               — ${caption}
             </span>
           </figcaption>
