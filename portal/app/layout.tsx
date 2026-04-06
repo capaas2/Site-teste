@@ -20,9 +20,7 @@ export const metadata: Metadata = {
   description: "As melhores notícias de tecnologia, IA, gadgets e mercado digital.",
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const allCategories = await getAllCategories();
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className={inter.variable}>
       <head>
@@ -37,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
       >
         <Providers>
-          <Navbar allCategories={allCategories} />
+          <Navbar />
           <main>{children}</main>
           <Footer />
           <Analytics />

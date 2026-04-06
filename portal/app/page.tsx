@@ -18,10 +18,7 @@ export default async function HomePage() {
   // 3. Ranking da Semana (Top 3 histórico)
   const weeklyTop = await getTopPosts(7, 3);
 
-  // 4. Todas as Categorias Ativas v2.9
-  const allCategories = await getAllCategories();
-
-  // 5. Atalhos Rápidos (Seção Visual)
+  // 4. Atalhos Rápidos (Seção Visual)
   const shortcuts = [
     { label: "Segurança", icon: Shield, color: "bg-indigo-600", slug: "Segurança" },
     { label: "Mercado", icon: TrendingUp, color: "bg-emerald-600", slug: "Mercado" },
@@ -75,10 +72,8 @@ export default async function HomePage() {
       {/* 4. Banner de Anúncio Central */}
       <AdBanner className="mt-4" />
 
-      {/* 5. Carrossel de Categorias e Feed de Exploração */}
+      {/* 5. Feed de Exploração */}
       <section className="space-y-10">
-        <CategoryCarousel categories={allCategories} />
-
         <div className="flex flex-col items-center justify-center py-12 px-6 bg-blue-600 rounded-[2rem] text-white text-center space-y-6 shadow-2xl shadow-blue-500/20 overflow-hidden relative group">
            {/* Efeito Visual de Fundo */}
            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl group-hover:scale-150 transition-transform duration-700" />

@@ -49,6 +49,17 @@ async function getLatestPlantao(): Promise<Post[]> {
   return (data as Post[]) || [];
 }
 
+async function getRelatedPosts(category: string, currentId: string): Promise<Post[]> {
+  const { data } = await supabase
+    .from("posts")
+    .select("id, titulo, categoria, publicado_em, imagem_url, views")
+    .ilike("categoria", `%${category.trim()}%`)
+    .neq("id", currentId)
+    .order("publicado_em", { ascending: false })
+    .limit(3);
+  return (data as Post[]) || [];
+}
+
 export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -59,6 +70,10 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   ]);
 
   if (!post) notFound();
+
+  const relatedPosts = await getRelatedPosts(post.categoria, post.id);
+  
+  // ... (reading time logic)
 
   // Calcular Tempo de Leitura
   const wordCount = post.conteudo_markdown.split(/\s+/).length;
@@ -161,10 +176,13 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           
           <div className="mb-6">
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter">
+              <Link 
+                href={`/categoria/${post.categoria.toLowerCase().trim()}`}
+                className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+              >
                 <Tag className="w-3 h-3" />
                 {post.categoria}
-              </span>
+              </Link>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-2 italic">
               {post.titulo}
@@ -219,6 +237,33 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             >
               {processedMarkdown}
             </ReactMarkdown>
+
+            {/* Seção Mais em [Categoria] v2.9.3 */}
+            {relatedPosts.length > 0 && (
+              <div className="mt-16 pt-10 border-t border-slate-100 dark:border-slate-800/50">
+                <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-8">
+                  Mais em <span className="text-blue-600 italic">{post.categoria}</span>
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                  {relatedPosts.map((p) => (
+                    <Link key={p.id} href={`/post/${p.id}`} className="group flex flex-col gap-4">
+                      <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800">
+                        <Image 
+                          src={p.imagem_url || PLACEHOLDER} 
+                          alt={p.titulo} 
+                          fill 
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          unoptimized
+                        />
+                      </div>
+                      <h5 className="text-sm font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-600 transition-colors line-clamp-2">
+                        {p.titulo}
+                      </h5>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <AdBanner className="mt-8" format="fluid" />
           </div>

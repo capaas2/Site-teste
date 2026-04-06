@@ -52,25 +52,33 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
-  // Dicionário de Mapeamento de Categoria v2.8.1
-  // Mapeia o SLUG da URL para a PALAVRA-CHAVE no banco de dados
-  const categoryMap: Record<string, string> = {
-    "ia-software": "IA",
-    "ia": "IA",
-    "mobilidade": "Mobilid",
-    "eletrificacao": "Elétri",
-    "cibersegurança": "Segurança",
-    "produtos": "Produto",
-    "sustentabilidade": "Sustentab",
-    "mercado": "Mercado"
+  // Slugs fixos que usam mapeamento amplo (v2.8)
+  const categoryMap: Record<string, { term: string; exact: boolean }> = {
+    "ia-software": { term: "IA", exact: false },
+    "ia": { term: "IA", exact: false },
+    "mobilidade": { term: "Mobilid", exact: false },
+    "eletrificacao": { term: "Elétri", exact: false },
+    "cibersegurança": { term: "Segurança", exact: false },
+    "produtos": { term: "Produto", exact: false },
+    "sustentabilidade": { term: "Sustentab", exact: false },
+    "mercado": { term: "Mercado", exact: false }
   };
 
-  let searchTerm = categoryMap[categorySlug.toLowerCase()] || categorySlug.replace(/-/g, ' ');
+  const mapping = categoryMap[categorySlug.toLowerCase()];
+  const searchTerm = mapping ? mapping.term : categorySlug.replace(/-/g, ' ');
+  const isExact = mapping ? mapping.exact : true; // Tags da nuvem/contexto usam exact match
 
-  const { data, count, error } = await supabase
+  const query = supabase
     .from("posts")
-    .select("*", { count: "exact" })
-    .ilike("categoria", `%${searchTerm}%`)
+    .select("*", { count: "exact" });
+
+  if (isExact) {
+    query.eq("categoria", searchTerm);
+  } else {
+    query.ilike("categoria", `%${searchTerm}%`);
+  }
+
+  const { data, count, error } = await query
     .order("publicado_em", { ascending: false })
     .range(from, to);
 

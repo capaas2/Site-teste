@@ -23,11 +23,7 @@ const mainNavItems = [
   { label: "Sustentabilidade", slug: "sustentabilidade" },
 ];
 
-interface NavbarProps {
-  allCategories?: { name: string; count: number }[];
-}
-
-export function Navbar({ allCategories = [] }: NavbarProps) {
+export function Navbar() {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
@@ -155,25 +151,6 @@ export function Navbar({ allCategories = [] }: NavbarProps) {
                 </div>
               </div>
 
-              {/* Seção Dinâmica v2.9 */}
-              {allCategories.length > 0 && (
-                <div>
-                  <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2 mb-4 border-l-2 border-emerald-500 pl-4">Todos os Tópicos</div>
-                  <div className="grid grid-cols-2 gap-2">
-                    {allCategories.slice(0, 16).map((cat) => (
-                      <Link
-                        key={cat.name}
-                        href={`/categoria/${cat.name.toLowerCase()}`}
-                        onClick={() => setIsSidebarOpen(false)}
-                        className="flex flex-col p-3 rounded-xl bg-slate-800/30 hover:bg-slate-800 border border-slate-800/50 transition-all group"
-                      >
-                        <span className="text-slate-300 text-[10px] font-bold truncate group-hover:text-emerald-400">{cat.name}</span>
-                        <span className="text-[9px] text-slate-600 font-black mt-1 uppercase tracking-tighter">{cat.count} matérias</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* Social */}
               <div>
