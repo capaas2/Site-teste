@@ -13,6 +13,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Calendar, User, Tag, Clock, Newspaper } from "lucide-react";
 import { formatPostDate, formatPostTime } from "@/lib/date-utils";
+import rehypeRaw from "rehype-raw";
 
 export const revalidate = 60;
 
@@ -93,23 +94,33 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
       const trimmed = rawText.trim();
 
       if (trimmed.startsWith('[DEAL:') && trimmed.endsWith(']')) {
-        const dealIndex = parseInt(trimmed.match(/\d+/)?.[0] || "0");
-        const deals = typeof post.affiliate_data === 'string' 
-          ? JSON.parse(post.affiliate_data) 
-          : post.affiliate_data;
-        const dealData = deals && deals[dealIndex];
-        
-        if (dealData) {
-          return (
-            <AffiliateWidget 
-              productName={dealData.productName}
-              price={dealData.price}
-              store={dealData.store}
-              affiliateUrl={dealData.affiliateUrl}
-              productImage={dealData.productImage}
-              isBestChoice={dealData.isBestChoice}
-            />
-          );
+        try {
+          const dealIndex = parseInt(trimmed.match(/\d+/)?.[0] || "0");
+          const affiliateData = post.affiliate_data;
+          
+          if (!affiliateData) return null;
+
+          const deals = typeof affiliateData === 'string' 
+            ? JSON.parse(affiliateData) 
+            : affiliateData;
+            
+          const dealData = Array.isArray(deals) ? deals[dealIndex] : null;
+          
+          if (dealData) {
+            return (
+              <AffiliateWidget 
+                productName={dealData.productName}
+                price={dealData.price}
+                store={dealData.store}
+                affiliateUrl={dealData.affiliateUrl}
+                productImage={dealData.productImage}
+                isBestChoice={dealData.isBestChoice}
+              />
+            );
+          }
+        } catch (e) {
+          console.error("Erro ao renderizar AffiliateWidget:", e);
+          return null;
         }
       }
       return <p className="mb-8 leading-relaxed text-slate-700 dark:text-slate-300 text-lg">{children}</p>;
@@ -172,7 +183,11 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             prose-a:text-blue-600 dark:prose-a:text-blue-400
             prose-img:rounded-3xl prose-img:shadow-xl
             prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-950/30 prose-blockquote:rounded-r-2xl prose-blockquote:p-6 prose-blockquote:italic">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={renderers} rehypePlugins={[[require("rehype-raw")]]}>
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]} 
+              components={renderers} 
+              rehypePlugins={[rehypeRaw]}
+            >
               {processedMarkdown}
             </ReactMarkdown>
 
