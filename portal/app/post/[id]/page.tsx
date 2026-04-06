@@ -16,7 +16,7 @@ import { Calendar, User, Tag, Clock, Newspaper } from "lucide-react";
 import { formatPostDate, formatPostTime } from "@/lib/date-utils";
 import rehypeRaw from "rehype-raw";
 
-export const revalidate = 60;
+export const revalidate = 120;
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80";
 
@@ -220,9 +220,9 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
               src={optimizedFeaturedImage}
               alt={post.titulo}
               fill
-              className="object-cover"
               priority
-              unoptimized={true}
+              sizes="(max-width: 768px) 100vw, 1200px"
+              className="object-cover"
             />
           </div>
 
@@ -254,7 +254,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
                           alt={p.titulo} 
                           fill 
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          unoptimized
+                          sizes="(max-width: 768px) 33vw, 300px"
                         />
                       </div>
                       <h5 className="text-sm font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-600 transition-colors line-clamp-2">

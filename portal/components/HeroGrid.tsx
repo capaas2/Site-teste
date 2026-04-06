@@ -30,6 +30,7 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-700"
             priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-8 space-y-4">
@@ -64,6 +65,7 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
               alt={post.titulo}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 768px) 100vw, 400px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent" />
             <div className="absolute bottom-0 p-6 space-y-2">

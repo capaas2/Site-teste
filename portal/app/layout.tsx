@@ -7,10 +7,11 @@ import { Footer } from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getAllCategories } from "@/lib/posts";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "700", "900"],
   variable: "--font-inter",
   display: "swap",
 });
@@ -23,13 +24,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className={inter.variable}>
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8490210284834886"
-          crossOrigin="anonymous"
-        ></script>
-      </head>
+      <head />
       <body
         className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen"
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
@@ -40,6 +35,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <Analytics />
           <SpeedInsights />
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8490210284834886"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
         </Providers>
       </body>
     </html>

@@ -6,7 +6,7 @@ import { AdBanner } from "@/components/AdBanner";
 import Link from "next/link";
 import { Shield, TrendingUp, Zap, Smartphone, ChevronRight, ArrowRight } from "lucide-react";
 
-export const revalidate = 60;
+export const revalidate = 120;
 
 export default async function HomePage() {
   // 1. Destaques do Dia (Mais lidas das últimas 48h)
