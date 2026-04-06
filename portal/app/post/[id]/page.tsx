@@ -71,18 +71,42 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   // Transformamos as tags de texto em strings de imagem HTML reais antes de renderizar
   const processedMarkdown = post.conteudo_markdown
     .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
-    .replace(/\[(DETALHE_IMAGEM|INFO_GRAFICO):\s*(.+)\]/gi, (match, type, prompt) => {
-       const searchTerms = encodeURIComponent(prompt.substring(0, 30).replace(/\s+/g, ','));
-       // Usando LoremFlickr para maior estabilidade em buscas dinâmicas (Source Unsplash foi depreciado)
-       const realDynamicUrl = `https://loremflickr.com/1200/675/technology,${searchTerms}/all`;
-       
+    .replace(/\[(IMAGEM|DETALHE_IMAGEM|INFO_GRAFICO):\s*([^|\]]+)(?:\s*\|\s*LEGENDA:\s*([^\]]+))?\]/gi, (match, type, firstPart, secondPart) => {
+       const techImages = [
+         'photo-1518770660439-4636190af475', 'photo-1451187580459-43490279c0fa', 
+         'photo-1485827404703-89b55fcc595e', 'photo-1581091226825-a6a2a5aee158', 
+         'photo-1550751827-4bd374c3f58b', 'photo-1519389950473-47ba0277781c'
+       ];
+
+       let imageUrl = '';
+       let caption = '';
+
+       // Lógica de Parsing:
+       // Se houver |, a primeira parte é a URL e a segunda é a Legenda.
+       // Se não houver |, a primeira parte é tratada como Prompt/Legenda e a URL é gerada do pool.
+       if (secondPart) {
+         imageUrl = firstPart.trim();
+         caption = secondPart.trim();
+       } else {
+         caption = firstPart.trim();
+         const imageId = techImages[caption.length % techImages.length];
+         imageUrl = `https://images.unsplash.com/${imageId}?auto=format&fit=crop&q=80&w=1200`;
+       }
+
        return `<figure class="my-16 group">
-          <div class="relative aspect-video w-full overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-all duration-700 group-hover:shadow-blue-500/10">
-            <img src="${realDynamicUrl}" alt="${prompt}" class="object-cover w-full h-full opacity-0 transition-opacity duration-1000" onload="this.style.opacity='1'" />
+          <div class="relative aspect-video w-full overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-all duration-700">
+            <img 
+              src="${imageUrl}" 
+              alt="${caption}" 
+              class="object-cover w-full h-full opacity-0 transition-opacity duration-1000" 
+              onload="this.style.opacity='1'"
+              onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent"></div>
           </div>
           <figcaption class="mt-4 text-center px-6">
             <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 tracking-tight italic">
-              — ${prompt}
+              — ${caption}
             </span>
           </figcaption>
         </figure>`;
