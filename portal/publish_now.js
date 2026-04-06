@@ -5,7 +5,7 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const post = {
-  id: "fd65900f-3f32-464c-a789-e313b4e0n7u1", // UUID HEXADECIMAL VÁLIDO PARA NEURALINK
+  id: "fd65900f-3f32-464c-a789-e313b4e0c002", // UUID HEXADECIMAL VÁLIDO (0-9, a-f)
   titulo: "Neuralink em Humanos: Primeiro Paciente Já Controla Mouse com o Pensamento",
   conteudo_markdown: `# Neuralink em Humanos: Primeiro Paciente Já Controla Mouse com o Pensamento
 

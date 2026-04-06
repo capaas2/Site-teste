@@ -16,5 +16,6 @@
 - NUNCA use imagens genéricas ou quebradas (links 404).
 
 ## Técnico (específico do squad)
+- [2026-04-05] UUID: Todo ID de post DEVE ser hexadecimal (apenas 0-9 e a-f). NUNCA use letras como 'n', 'u', 't', etc.
 - [2026-04-05] Lucas Linkador: Autorizado a sugerir pautas transversais (Economia, Sociedade, Sci-Fi) se houver conexão lógica.
 - [2026-04-05] Image Search: Gabriel e Rebeca devem validar URLs reais antes da entrega.

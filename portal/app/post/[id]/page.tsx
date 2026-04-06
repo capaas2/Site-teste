@@ -93,14 +93,14 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
          imageUrl = `https://images.unsplash.com/${imageId}?auto=format&fit=crop&q=80&w=1200`;
        }
 
-       return `<figure class="my-16 group">
-          <div class="relative aspect-video w-full overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-all duration-700">
+        return `<figure class="my-16 group">
+          <div class="relative aspect-video w-full overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-800 border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-all duration-700">
             <img 
               src="${imageUrl}" 
               alt="${caption}" 
-              class="object-cover w-full h-full opacity-0 transition-opacity duration-1000" 
-              onload="this.style.opacity='1'"
-              onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200'"
+              class="object-cover w-full h-full" 
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=60'"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent"></div>
           </div>
