@@ -22,7 +22,7 @@ export default async function MostReadPage() {
             <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase italic">
               Mais <span className="text-red-600">Lidas</span>
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Os hits da semana na Redação Tech</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Os hits da semana na FolhaByte</p>
           </div>
         </div>
         

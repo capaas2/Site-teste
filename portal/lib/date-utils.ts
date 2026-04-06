@@ -1,5 +1,5 @@
 /**
- * Utilitários de Data e Hora para o Portal Redação Tech
+ * Utilitários de Data e Hora para o Portal FolhaByte
  * Forçado para fuso horário America/Sao_Paulo (GMT-3) para precisão editorial.
  */
 

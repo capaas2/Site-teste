@@ -28,6 +28,7 @@ export function Navbar() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<{ posts: any[]; categories: string[] }>({ posts: [], categories: [] });
   const [isSearching, setIsSearching] = useState(false);
@@ -98,7 +99,7 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 text-white font-black text-2xl tracking-tighter">
-            Redação<span className="text-blue-500">Tech</span>
+            Folha<span className="text-blue-500">Byte</span>
           </Link>
 
           {/* Search (Desktop) */}
@@ -204,9 +205,13 @@ export function Navbar() {
               </button>
             )}
             
-            {/* Search (Mobile Toggle - Hidden for now as input is better) */}
-            <button className="md:hidden hover:text-white">
-              <Search className="w-5 h-5" />
+            {/* Search (Mobile Toggle) v2.9.6 */}
+            <button 
+              onClick={() => setIsMobileSearchOpen(true)}
+              className="md:hidden hover:text-white p-2"
+              aria-label="Abrir busca"
+            >
+              <Search className="w-5 h-5 text-slate-400 group-focus-within:text-blue-500" />
             </button>
           </div>
         </div>
@@ -283,8 +288,130 @@ export function Navbar() {
             </div>
             
             <div className="p-6 border-t border-slate-800 bg-slate-900/50">
-               <p className="text-[10px] text-slate-600 uppercase font-black tracking-widest text-center">Redação Tech · © 2026</p>
+               <p className="text-[10px] text-slate-600 uppercase font-black tracking-widest text-center">FolhaByte · © 2026</p>
             </div>
+          </div>
+        </div>
+      )}
+      {/* Mobile Search Overlay v2.9.6 */}
+      {isMobileSearchOpen && (
+        <div className="fixed inset-0 z-[100] bg-slate-950/98 backdrop-blur-2xl flex flex-col animate-in fade-in zoom-in duration-200">
+          <div className="p-4 flex items-center gap-4 border-b border-white/5 bg-slate-900/50">
+            <Search className="w-5 h-5 text-blue-500" />
+            <form onSubmit={handleSearch} className="flex-1">
+              <input
+                autoFocus
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="O que você está buscando?"
+                className="w-full bg-transparent text-white text-lg font-bold placeholder:text-slate-600 focus:outline-none"
+              />
+            </form>
+            <button 
+              onClick={() => {
+                setIsMobileSearchOpen(false);
+                setQuery("");
+              }}
+              className="p-2 bg-slate-800 rounded-full hover:bg-red-500/20 group transition-all"
+            >
+              <X className="w-5 h-5 text-slate-400 group-hover:text-red-500" />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto p-6 no-scrollbar">
+            {query.length < 2 ? (
+              <div className="space-y-6">
+                <div>
+                  <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <TrendingUp className="w-3 h-3" /> Tópicos em Alta
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {["IA", "Mercado", "Cibersegurança", "Reviews", "Eletrificação"].map((topic) => (
+                      <button
+                        key={topic}
+                        onClick={() => {
+                          setQuery(topic);
+                        }}
+                        className="px-4 py-2.5 rounded-2xl bg-slate-800/50 hover:bg-blue-500/20 hover:text-blue-400 text-xs font-bold text-slate-400 transition-all border border-slate-800"
+                      >
+                        {topic}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="pt-6 border-t border-white/5">
+                   <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <Zap className="w-3 h-3" /> Sugestão Rápida
+                  </div>
+                  <div className="p-6 rounded-3xl bg-gradient-to-br from-blue-600/20 to-indigo-600/20 border border-blue-500/20 flex flex-col items-center text-center gap-3">
+                     <Rocket className="w-8 h-8 text-blue-500" />
+                     <p className="text-slate-300 text-sm font-medium">Busque por qualquer tema, produto ou categoria para resultados inteligentes.</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-8 pb-10">
+                {isSearching && (
+                  <div className="flex items-center gap-3 text-blue-500 animate-pulse">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span className="text-xs font-bold uppercase tracking-widest">Buscando no banco de dados...</span>
+                  </div>
+                )}
+
+                {/* Categorias Sugeridas */}
+                {suggestions.categories.length > 0 && (
+                  <div>
+                    <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest mb-3">Categorias</div>
+                    <div className="space-y-1">
+                      {suggestions.categories.map((cat) => (
+                        <Link
+                          key={cat}
+                          href={`/categoria/${cat.toLowerCase().trim()}`}
+                          onClick={() => setIsMobileSearchOpen(false)}
+                          className="flex items-center justify-between p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-all"
+                        >
+                          <span className="text-sm font-bold text-white">{cat}</span>
+                          <ChevronRight className="w-4 h-4 text-slate-600" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Posts Sugeridos */}
+                {suggestions.posts.length > 0 ? (
+                  <div>
+                    <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest mb-3">Notícias Recentes</div>
+                    <div className="space-y-3">
+                      {suggestions.posts.map((post) => (
+                        <Link
+                          key={post.id}
+                          href={`/post/${post.id}`}
+                          onClick={() => setIsMobileSearchOpen(false)}
+                          className="flex flex-col p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 transition-all group"
+                        >
+                          <span className="text-sm font-bold text-slate-200 group-hover:text-blue-500 transition-colors line-clamp-2 leading-snug">{post.titulo}</span>
+                          <div className="flex items-center gap-2 mt-2">
+                             <Tag className="w-3 h-3 text-blue-500" />
+                             <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest">{post.categoria}</span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  !isSearching && query.length >= 2 && (
+                    <div className="flex flex-col items-center justify-center pt-20 text-center gap-4">
+                      <div className="w-16 h-16 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center">
+                         <X className="w-8 h-8 text-slate-700" />
+                      </div>
+                      <p className="text-slate-500 text-sm italic font-medium">Nenhum resultado para "{query}"</p>
+                    </div>
+                  )
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}

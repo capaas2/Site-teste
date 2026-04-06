@@ -1,4 +1,4 @@
-# Squad Memory: Redação Tech
+# Squad Memory: FolhaByte
 
 ## Estilo de Escrita
 - [2026-04-05] Tom "Digital Newsroom": Profissional, denso e técnico, sem clichês de IA.

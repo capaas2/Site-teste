@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Redação Tech — Notícias de Tecnologia",
+  title: "FolhaByte — Tecnologia de Alta Performance",
   description: "As melhores notícias de tecnologia, IA, gadgets e mercado digital.",
 };
 

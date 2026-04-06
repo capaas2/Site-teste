@@ -42,7 +42,7 @@ export async function GET(request: Request) {
     if (!postError && newPost) {
       // ENVIAR NOTÍCIA NOVA
       await resend.emails.send({
-        from: "Redação Tech <onboarding@resend.dev>",
+        from: "FolhaByte <onboarding@resend.dev>",
         to: emails,
         subject: `🚨 NOVO: ${newPost.titulo}`,
         html: renderEmailTemplate(newPost, "NOVA_NOTICIA"),
@@ -79,7 +79,7 @@ export async function GET(request: Request) {
 
     if (recentPosts && recentPosts.length > 0) {
       await resend.emails.send({
-        from: "Redação Tech <onboarding@resend.dev>",
+        from: "FolhaByte <onboarding@resend.dev>",
         to: emails,
         subject: `🗞️ Resumo: O que você perdeu nas últimas horas`,
         html: renderRecapTemplate(recentPosts),
@@ -114,7 +114,7 @@ function renderEmailTemplate(post: any, type: string) {
          LER MATÉRIA COMPLETA
       </a>
       <hr style="margin-top: 40px; border: 0; border-top: 1px solid #e2e8f0;" />
-      <p style="font-size: 12px; color: #94a3b8;">Você recebeu este e-mail porque se inscreveu na Redação Tech.</p>
+      <p style="font-size: 12px; color: #94a3b8;">Você recebeu este e-mail porque se inscreveu na FolhaByte.</p>
     </div>
   `;
 }
@@ -132,7 +132,7 @@ function renderRecapTemplate(posts: any[]) {
   return `
     <div style="font-family: sans-serif; max-width: 600px; margin: auto; color: #334155;">
       <h1 style="color: #0f172a;">🗞️ Resumo: O que você perdeu</h1>
-      <p>A produção não para na Redação Tech. Aqui estão os destaques das últimas horas:</p>
+      <p>A produção não para na FolhaByte. Aqui estão os destaques das últimas horas:</p>
       <ul style="list-style: none; padding: 0;">
         ${postsHtml}
       </ul>

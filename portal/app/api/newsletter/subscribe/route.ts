@@ -53,13 +53,13 @@ export async function POST(request: Request) {
     const confirmLink = `${baseUrl}/api/newsletter/confirm?token=${token}`;
 
     const { data: emailData, error: emailError } = await resend.emails.send({
-      from: "Redação Tech <onboarding@resend.dev>",
+      from: "FolhaByte <onboarding@resend.dev>",
       to: [email],
-      subject: "Falta pouco! Confirme sua inscrição na Redação Tech 🗞️",
+      subject: "Falta pouco! Confirme sua inscrição na FolhaByte 🗞️",
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; color: #1e293b;">
           <h2 style="color: #0f172a;">Quase lá!</h2>
-          <p>Obrigado por se interessar pela <b>Redação Tech</b>. Para começar a receber nossos resumos diários e alertas de última hora, precisamos que você confirme seu e-mail.</p>
+          <p>Obrigado por se interessar pela <b>FolhaByte</b>. Para começar a receber nossos resumos diários e alertas de última hora, precisamos que você confirme seu e-mail.</p>
           <div style="margin: 30px 0; text-align: center;">
             <a href="${confirmLink}" 
                style="background: #2563eb; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
           </div>
           <p style="font-size: 14px; color: #64748b;">Se você não solicitou esta inscrição, pode ignorar este e-mail com segurança.</p>
           <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;" />
-          <p style="font-size: 12px; color: #94a3b8;">Redação Tech - O seu portal de notícias de alta performance.</p>
+          <p style="font-size: 12px; color: #94a3b8;">FolhaByte - O seu portal de notícias de alta performance.</p>
         </div>
       `,
     });

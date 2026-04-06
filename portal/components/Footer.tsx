@@ -19,6 +19,7 @@ export function Footer() {
     { label: "Sobre Nós", href: "/sobre" },
     { label: "Contato", href: "/contato" },
     { label: "Política de Privacidade", href: "/privacidade" },
+    { label: "Termos e Condições", href: "/termos" },
   ];
 
   return (
@@ -27,7 +28,7 @@ export function Footer() {
         {/* Coluna 1: Bio & Logo */}
         <div className="space-y-6">
           <Link href="/" className="text-white font-black text-2xl tracking-tighter">
-            Redação<span className="text-blue-500">Tech</span>
+            Folha<span className="text-blue-500">Byte</span>
           </Link>
           <p className="text-sm leading-relaxed text-slate-400">
             A sua fonte definitiva de notícias sobre mobilidade elétrica, inteligência artificial e o futuro da tecnologia. 
@@ -81,7 +82,7 @@ export function Footer() {
           <ul className="space-y-4 text-sm text-slate-400">
             <li className="flex items-start gap-3">
               <Mail className="w-4 h-4 mt-1 text-blue-500" />
-              <span>contato@redacaotech.com.br</span>
+              <span>contato@folhabyte.com.br</span>
             </li>
             <li className="flex items-start gap-3">
               <MapPin className="w-4 h-4 mt-1 text-blue-500" />
@@ -96,7 +97,7 @@ export function Footer() {
 
       {/* Copyright Line */}
       <div className="max-w-7xl mx-auto px-4 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-        <p>© {currentYear} Redação Tech Inc. Todos os direitos reservados. </p>
+        <p>© {currentYear} FolhaByte Inc. Todos os direitos reservados. </p>
       </div>
     </footer>
   );

@@ -19,7 +19,7 @@ async function publish() {
   const post = {
     titulo: "Sora da OpenAI: Um Marco de Inovação ou um Custo Insustentável?",
     categoria: "IA & Cinema",
-    autor: "Redação Tech",
+    autor: "FolhaByte",
     imagem_url: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=1200",
     publicado_em: new Date().toISOString(),
     views: 0,

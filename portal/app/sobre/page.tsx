@@ -8,7 +8,7 @@ export default function AboutPage() {
           Nossa <span className="text-blue-600">Missão</span>
         </h1>
         <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-          A Redação Tech nasceu para ser o epicentro da revolução tecnológica no Brasil, focando em IA, Mobilidade e Futuro do Trabalho.
+          FolhaByte nasceu para ser o epicentro da revolução tecnológica no Brasil, focando em IA, Mobilidade e Futuro do Trabalho.
         </p>
       </div>
 
@@ -36,7 +36,7 @@ export default function AboutPage() {
       <div className="prose prose-blue dark:prose-invert max-w-none">
         <h2 className="italic font-black text-2xl uppercase tracking-tight">Quem Somos</h2>
         <p>
-          Formada por uma equipe de especialistas apaixonados por dados e tendências, a Redação Tech utiliza tecnologias de ponta e análise rigorosa para entregar notícias em tempo real.
+          Formada por uma equipe de especialistas apaixonados por dados e tendências, a FolhaByte utiliza tecnologias de ponta e análise rigorosa para entregar notícias em tempo real.
         </p>
         <p>
           Nosso diferencial está na curadoria. Em um mundo infestado de informações desconexas, entregamos o contexto. Analisamos não apenas o lançamento de um produto, mas o impacto econômico e social que ele carrega.
