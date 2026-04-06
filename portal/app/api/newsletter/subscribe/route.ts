@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://site-teste-ne4f.vercel.app";
     const confirmLink = `${baseUrl}/api/newsletter/confirm?token=${token}`;
 
-    await resend.emails.send({
+    const { data: emailData, error: emailError } = await resend.emails.send({
       from: "Redação Tech <onboarding@resend.dev>",
       to: [email],
       subject: "Falta pouco! Confirme sua inscrição na Redação Tech 🗞️",
@@ -73,15 +73,20 @@ export async function POST(request: Request) {
       `,
     });
 
+    if (emailError) {
+      console.error("Erro do Resend:", emailError);
+      throw new Error(`Falha no envio do e-mail: ${emailError.message}`);
+    }
+
     return NextResponse.json(
       { message: "Quase pronto! Enviamos um link de confirmação para o seu e-mail." },
       { status: 201 }
     );
   } catch (err: any) {
-    // Privacidade (Dica de Pai): Não logamos o e-mail real aqui.
-    console.error("Erro na inscrição (ID de rastreio):", Date.now()); 
+    // Retornamos o erro real temporariamente para debugar o ambiente (Vercel)
+    console.error("DEBUG NEWSLETTER ERROR:", err);
     return NextResponse.json(
-      { error: "Erro interno ao processar sua inscrição. Tente novamente mais tarde." },
+      { error: err.message || "Erro interno oculto." },
       { status: 500 }
     );
   }
