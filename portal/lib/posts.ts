@@ -73,7 +73,7 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
     .select("*", { count: "exact" });
 
   if (isExact) {
-    query.eq("categoria", searchTerm);
+    query.ilike("categoria", searchTerm);
   } else {
     query.ilike("categoria", `%${searchTerm}%`);
   }
