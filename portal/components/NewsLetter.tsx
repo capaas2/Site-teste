@@ -49,7 +49,7 @@ export function NewsLetter() {
   return (
     <div className="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 group focus-within:border-blue-500/30 transition-all">
       <p className="text-[10px] font-black text-blue-400 mb-2 uppercase tracking-[0.2em] text-center">
-        Newsletter Semanal
+        Newsletter Diário
       </p>
       
       {status === "success" ? (

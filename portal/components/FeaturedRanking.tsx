@@ -22,7 +22,7 @@ export function FeaturedRanking({ posts }: FeaturedRankingProps) {
           <TrendingUp className="w-5 h-5 text-white" />
         </div>
         <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white uppercase italic">
-          Os Mais <span className="text-blue-600">Lidos</span> da Semana
+          Os Mais <span className="text-blue-600">Lidos</span> do Dia
         </h2>
       </div>
 

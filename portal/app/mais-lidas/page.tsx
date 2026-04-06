@@ -22,7 +22,7 @@ export default async function MostReadPage() {
             <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase italic">
               Mais <span className="text-red-600">Lidas</span>
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Os hits da semana na FolhaByte</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Os hits do dia na FolhaByte</p>
           </div>
         </div>
         
@@ -58,7 +58,7 @@ export default async function MostReadPage() {
 
       {posts.length === 0 && (
         <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800">
-          <p className="text-slate-400">Ainda sem dados de visualização para o ranking semanal.</p>
+          <p className="text-slate-400">Ainda sem dados de visualização para o ranking diário.</p>
         </div>
       )}
     </div>

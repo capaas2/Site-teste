@@ -9,7 +9,7 @@ import {
   Search, Sun, Moon, ExternalLink, AtSign, Rss, 
   Menu, X, ChevronRight, 
   Globe, Shield, TrendingUp, Smartphone, Rocket, Zap, 
-  Car, Code, Palette, Leaf, Cpu, Mail, Loader2
+  Car, Code, Palette, Leaf, Cpu, Mail, Loader2, Tag
 } from "lucide-react";
 
 const mainNavItems = [
