@@ -22,7 +22,7 @@ export default function ContactPage() {
                </div>
                <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">E-mail</h3>
             </div>
-            <p className="text-lg font-black text-slate-900 dark:text-white italic">contato@redacaotech.com.br</p>
+            <p className="text-lg font-black text-slate-900 dark:text-white italic">contato@folhabyte.com.br</p>
           </div>
 
           <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -32,7 +32,7 @@ export default function ContactPage() {
                </div>
                <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Redação</h3>
             </div>
-            <p className="text-lg font-black text-slate-900 dark:text-white italic">pauta@redacaotech.com.br</p>
+            <p className="text-lg font-black text-slate-900 dark:text-white italic">redacao@folhabyte.com.br</p>
           </div>
 
           <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -52,7 +52,7 @@ export default function ContactPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                  <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Seu Nome</label>
-                    <input type="text" className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-emerald-500/50 transition-all shadow-sm" placeholder="Ex: Gustavo Capaz" required />
+                    <input type="text" className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-emerald-500/50 transition-all shadow-sm" placeholder="Ex: Seu Nome completo" required />
                  </div>
                  <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Seu E-mail</label>

@@ -8,7 +8,7 @@ export default function AboutPage() {
           Nossa <span className="text-blue-600">Missão</span>
         </h1>
         <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-          FolhaByte nasceu para ser o epicentro da revolução tecnológica no Brasil, focando em IA, Mobilidade e Futuro do Trabalho.
+          A FolhaByte nasceu para separar o sinal do ruído. Movidos por uma arquitetura inédita que combina curadoria humana e o poder da Inteligência Artificial.
         </p>
       </div>
 
@@ -36,10 +36,10 @@ export default function AboutPage() {
       <div className="prose prose-blue dark:prose-invert max-w-none">
         <h2 className="italic font-black text-2xl uppercase tracking-tight">Quem Somos</h2>
         <p>
-          Formada por uma equipe de especialistas apaixonados por dados e tendências, a FolhaByte utiliza tecnologias de ponta e análise rigorosa para entregar notícias em tempo real.
+          A FolhaByte nasceu para separar o sinal do ruído. Movidos por uma arquitetura inédita que combina curadoria humana e o poder de agentes de Inteligência Artificial, nós utilizamos tecnologia de ponta para entregar a notícia exata, em tempo real.
         </p>
         <p>
-          Nosso diferencial está na curadoria. Em um mundo infestado de informações desconexas, entregamos o contexto. Analisamos não apenas o lançamento de um produto, mas o impacto econômico e social que ele carrega.
+          Em uma internet saturada de informações rasas, o nosso diferencial é o contexto. Nós não cobrimos apenas a ficha técnica de um novo lançamento; nós decodificamos a tecnologia, analisando o impacto econômico, social e prático que cada inovação traz para a sua vida.
         </p>
         
         <div className="bg-blue-600/5 dark:bg-blue-600/10 border border-blue-500/20 p-8 rounded-3xl my-10 flex items-start gap-6">

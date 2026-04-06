@@ -58,7 +58,7 @@ export default function AdvertisePage() {
              Entre em contato para receber dados detalhados da nossa audiência e tabelas de investimento.
            </p>
            <a 
-             href="mailto:anuncie@redacaotech.com.br"
+             href="mailto:comercial@folhabyte.com.br"
              className="inline-flex items-center gap-3 bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-full font-black uppercase tracking-widest text-xs transition-all active:scale-95"
            >
               Falar com Comercial <Mail className="w-4 h-4" />
