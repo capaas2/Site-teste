@@ -5,48 +5,38 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const post = {
-  id: "fd65900f-3f32-464c-a789-e313b4e0c002", // UUID HEXADECIMAL VÁLIDO (0-9, a-f)
-  titulo: "Neuralink em Humanos: Primeiro Paciente Já Controla Mouse com o Pensamento",
-  conteudo_markdown: `# Neuralink em Humanos: Primeiro Paciente Já Controla Mouse com o Pensamento
+  id: "fd65900f-3f32-464c-a789-e313b4e0bf06", // UUID HEXADECIMAL VÁLIDO
+  titulo: "Starship Flight 6: O Salto Ambicioso da SpaceX Rumo a Marte",
+  conteudo_markdown: `# Starship Flight 6: O Salto Ambicioso da SpaceX Rumo a Marte
 
-O futuro da interface cérebro-computador (BCI) deixou de ser ficção científica para se tornar uma realidade clínica palpável. A Neuralink, startup de neurotecnologia de Elon Musk, confirmou que o primeiro paciente humano a receber o implante cerebral, Noland Arbaugh, já é capaz de controlar o cursor de um computador e jogar xadrez online utilizando exclusivamente seus pensamentos. O feito marca um divisor de águas não apenas para a medicina de reabilitação, mas para a própria definição de interação humana com a tecnologia digital.
+A SpaceX está prestes a realizar o sexto voo de teste do Starship, o maior e mais potente sistema de lançamento já construído pela humanidade. Após os sucessos parciais dos voos anteriores, que conseguiram demonstrar a separação de estágios e a reentrada atmosférica controlada, o Flight 6 focará na captura do booster Super Heavy diretamente na torre de lançamento ("Chopsticks") e na ignição de um dos motores Raptor no vácuo do espaço — uma manobra crítica para futuras missões interplanetárias.
 
-[IMAGEM: https://images.unsplash.com/photo-1518770660439-4636190af475 | LEGENDA: Detalhe de um microprocessador avançado simbolizando a tecnologia de implantes neurais]
+[IMAGEM: https://images.unsplash.com/photo-1541185933-ef5d8ed016c2 | LEGENDA: O foguete Starship iluminado durante preparativos para lançamento noturno em Boca Chica]
 
-O dispositivo, que possui o tamanho de uma moeda grande, é inserido no córtex motor por um robô cirúrgico de alta precisão. Composto por mais de mil eletrodos distribuídos em fios extremamente finos, o chip detecta picos de atividade elétrica (potenciais de ação) e os traduz em comandos digitais em tempo real. Segundo o paciente, o processo de aprendizado foi intuitivo: "É como tentar mover a mão, mas sem o esforço físico. Em poucos dias, eu já conseguia mover o mouse para onde queria", afirmou Arbaugh em uma transmissão ao vivo.
+A complexidade técnica desta missão é exponencial. Diferente de foguetes descartáveis, o Starship foi projetado para ser totalmente reutilizável, reduzindo drasticamente o custo por quilograma de carga enviada ao espaço. Elon Musk já indicou que, se o Flight 6 for bem-sucedido, a SpaceX poderá iniciar operações comerciais com cargas do Starlink e, possivelmente, as primeiras missões não tripuladas para o solo marciano ainda nesta década.
 
-> LEIA MAIS: [O Fim dos Cookies: Google Inicia Desativação Global do Rastreamento de Terceiros no Chrome](/post/fd65900f-3f32-464c-a789-e313b4e0c001)
+> LEIA MAIS: [O Fim de uma Era: Por que a OpenAI está Encerrando o Projeto Sora?](/post/fd65900f-3f32-464c-a789-e313b4e0708a)
 
-No entanto, a inovação levanta questões profundas sobre privacidade neural e segurança de dados. Especialistas em ética digital alertam que, diferentemente de um smartphone que podemos desligar, um implante cerebral cria um fluxo contínuo de dados biométricos sensíveis. A proteção contra "neuro-hacking" e a garantia de que os pensamentos do usuário permaneçam privados são os próximos grandes desafios que a Neuralink e seus concorrentes precisarão enfrentar antes de uma expansão comercial em larga escala.
+No entanto, o progresso tecnológico caminha lado a lado com os desafios regulatórios e ambientais. A Administração Federal de Aviação (FAA) e organizações de preservação local continuam a monitorar o impacto dos lançamentos na infraestrutura costeira e na fauna marinha de Brownsville. Enquanto os engenheiros refinam os escudos térmicos e a logística de combustível criogênico, o mundo observa o que pode ser o início oficial da colonização espacial.
 
-[IMAGEM: https://images.unsplash.com/photo-1550751827-4bd374c3f58b | LEGENDA: Representação conceitual de segurança cibernética aplicada à proteção de dados biológicos]
+[IMAGEM: https://images.unsplash.com/photo-1614728263952-84ea256f9679 | LEGENDA: Detalhe das superfícies de titânio de um motor de foguete simbolizando a resistência aos extremos térmicos do espaço]
 
-Apesar dos desafios regulatórios pendentes com a FDA e órgãos internacionais, o sucesso inicial de Arbaugh abre portas para casos de uso que vão além da paralisia. Musk já expressou sua visão de que a Neuralink poderá, no futuro, permitir a "telepatia digital" e o aprimoramento cognitivo humano. Enquanto o mundo observa o progresso de Noland, a Redação Tech continua acompanhando as implicações técnicas dessa nova fronteira, onde o silício e o neurônio finalmente falam a mesma língua.`,
-  autor: "Eduardo Editor-Chefe",
-  categoria: "Neurotecnologia",
-  imagem_url: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=1200",
+Enquanto gigantes do software repensam suas estratégias, a SpaceX mantém o acelerador no hardware pesado. Starship não é apenas um veículo: é o passaporte da humanidade para a multi-planetaridade. A Redação Tech acompanhará cada segundo da contagem regressiva, trazendo análises detalhadas sobre a telemetria e o futuro da economia orbital que este voo promete inaugurar.`,
+  autor: "Nando Notícia", // PERSONA DA SQUAD
+  categoria: "Exploração Espacial",
+  imagem_url: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=1200", // URL ÚNICA (Foguete de Longe)
   publicado_em: new Date().toISOString(),
-  views: 0,
-  affiliate_data: JSON.stringify([
-    {
-      productName: "Neuralink Concept Art: O Livro",
-      price: "159,00",
-      store: "Amazon",
-      affiliateUrl: "https://amazon.com",
-      productImage: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400",
-      isBestChoice: false
-    }
-  ])
+  views: 0
 };
 
 async function publish() {
-  console.log("Iniciando publicação da notícia Neuralink...");
+  console.log("Iniciando publicação v2.7 (Starship Flight 6)...");
   const { error } = await supabase.from('posts').upsert([post], { onConflict: 'id' });
   
   if (error) {
     console.error("Erro ao publicar:", JSON.stringify(error, null, 2));
   } else {
-    console.log("Sucesso! Notícia publicada: fd65900f-3f32-464c-a789-e313b4e0c002");
+    console.log("Sucesso! Post com Selo de Auditoria e Personas publicado: fd65900f-3f32-464c-a789-e313b4e0bf06");
   }
 }
 

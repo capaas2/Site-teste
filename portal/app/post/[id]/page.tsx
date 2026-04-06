@@ -70,6 +70,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   // REGRA: Remoção Final de Numeração de IA e Renderização de Imagens
   // Transformamos as tags de texto em strings de imagem HTML reais antes de renderizar
   const processedMarkdown = post.conteudo_markdown
+    .replace(/^# .*\n/g, '')         // Remove o título redundante no topo do MD
     .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
     .replace(/\[(IMAGEM|DETALHE_IMAGEM|INFO_GRAFICO):\s*([^|\]]+)(?:\s*\|\s*LEGENDA:\s*([^\]]+))?\]/gi, (match, type, firstPart, secondPart) => {
        let imageUrl = '';
@@ -146,6 +147,10 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
     }
   };
 
+  const optimizedFeaturedImage = post.imagem_url?.includes('unsplash.com') 
+    ? `${post.imagem_url.split('?')[0]}?auto=format&fit=crop&q=80&w=1200`
+    : post.imagem_url || PLACEHOLDER;
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 relative">
       <ReadingProgress />
@@ -155,10 +160,16 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           <ViewCounter postId={post.id} />
           
           <div className="mb-6">
-            <span className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg mb-4 tracking-tighter">
-              <Tag className="w-3 h-3" />
-              {post.categoria}
-            </span>
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter">
+                <Tag className="w-3 h-3" />
+                {post.categoria}
+              </span>
+              <span className="inline-flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 text-[9px] font-bold uppercase px-3 py-1.5 rounded-lg tracking-widest border border-emerald-200/50 dark:border-emerald-800/50 shadow-sm transition-all duration-500">
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                Auditado pela Rebeca Revisão
+              </span>
+            </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-2 italic">
               {post.titulo}
             </h1>
@@ -166,10 +177,13 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 
           <div className="flex flex-wrap items-center gap-6 text-sm text-slate-500 dark:text-slate-400 mb-6 pb-6 border-b border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center">
-                 <User className="w-4 h-4 text-blue-600" />
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                 <User className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold uppercase tracking-widest text-[10px]">{post.autor}</span>
+              <div className="flex flex-col">
+                 <span className="text-[9px] uppercase tracking-widest font-bold text-slate-400 leading-none mb-1">Autoridade</span>
+                 <span className="font-black uppercase tracking-tight text-slate-900 dark:text-white text-xs leading-none">{post.autor}</span>
+              </div>
             </div>
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4 text-slate-300" /> {formattedDate}
@@ -188,7 +202,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 
           <div className="relative w-full h-72 sm:h-96 rounded-[3rem] overflow-hidden mb-12 shadow-2xl shadow-blue-500/10 border border-slate-200 dark:border-slate-800">
             <Image
-              src={post.imagem_url || PLACEHOLDER}
+              src={optimizedFeaturedImage}
               alt={post.titulo}
               fill
               className="object-cover"

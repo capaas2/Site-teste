@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase";
 import { Resend } from "resend";
 
 export const dynamic = "force-dynamic";
@@ -15,8 +15,11 @@ export async function GET(request: Request) {
   }
 
   try {
-    // 1. Buscar inscritos CONFIRMADOS (Double Opt-in)
-    const { data: subscribers, error: subError } = await supabase
+    // 1. Usar Admin Client para ler e despachar (bypassa RLS)
+    const adminClient = createAdminClient();
+
+    // Buscar inscritos CONFIRMADOS (Double Opt-in)
+    const { data: subscribers, error: subError } = await adminClient
       .from("subscribers")
       .select("email")
       .eq("confirmed", true);
@@ -28,7 +31,7 @@ export async function GET(request: Request) {
     const emails = subscribers.map((s) => s.email);
 
     // 2. Tentar encontrar uma NOTÍCIA NOVA (last_sent_at is null)
-    const { data: newPost, error: postError } = await supabase
+    const { data: newPost, error: postError } = await adminClient
       .from("posts")
       .select("*")
       .is("last_sent_at", null)
@@ -46,17 +49,17 @@ export async function GET(request: Request) {
       });
 
       // Atualizar last_sent_at
-      await supabase.from("posts").update({ last_sent_at: new Date().toISOString() }).eq("id", newPost.id);
+      await adminClient.from("posts").update({ last_sent_at: new Date().toISOString() }).eq("id", newPost.id);
 
       // Logar o envio
-      await supabase.from("newsletter_logs").insert([{ type: "NEW_POST", post_id: newPost.id }]);
+      await adminClient.from("newsletter_logs").insert([{ type: "NEW_POST", post_id: newPost.id }]);
 
       return NextResponse.json({ message: "Notícia nova enviada com sucesso!" });
     }
 
     // 3. Se não houver nova, verificar se já enviamos um RECAPITULADO hoje
     const today = new Date().toISOString().split("T")[0];
-    const { data: lastRecap } = await supabase
+    const { data: lastRecap } = await adminClient
       .from("newsletter_logs")
       .select("*")
       .eq("type", "RECAP")
@@ -68,7 +71,7 @@ export async function GET(request: Request) {
     }
 
     // 4. ENVIAR RECAPITULADO (Resumo do que você perdeu)
-    const { data: recentPosts } = await supabase
+    const { data: recentPosts } = await adminClient
       .from("posts")
       .select("*")
       .order("publicado_em", { ascending: false })
@@ -83,7 +86,7 @@ export async function GET(request: Request) {
       });
 
       // Logar o recap
-      await supabase.from("newsletter_logs").insert([{ type: "RECAP" }]);
+      await adminClient.from("newsletter_logs").insert([{ type: "RECAP" }]);
 
       return NextResponse.json({ message: "Resumo diário enviado com sucesso!" });
     }

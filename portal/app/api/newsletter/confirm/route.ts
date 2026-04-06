@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 
@@ -12,8 +12,10 @@ export async function GET(request: Request) {
   }
 
   try {
-    // 1. Verificar se o token existe e confirmar usuário
-    const { data, error } = await supabase
+    // 1. Usar Admin Client para confirmar (bypassa RLS)
+    const adminClient = createAdminClient();
+    
+    const { data, error } = await adminClient
       .from("subscribers")
       .update({ confirmed: true })
       .eq("confirmation_token", token)

@@ -19,3 +19,6 @@
 - [2026-04-05] UUID: Todo ID de post DEVE ser hexadecimal (apenas 0-9 e a-f). NUNCA use letras como 'n', 'u', 't', etc.
 - [2026-04-05] Lucas Linkador: Autorizado a sugerir pautas transversais (Economia, Sociedade, Sci-Fi) se houver conexão lógica.
 - [2026-04-05] Image Search: Gabriel e Rebeca devem validar URLs reais antes da entrega.
+- [2026-04-06] Unicidade de Imagens: Rebeca DEVE rodar `node check_image_uniqueness.js` e barrar qualquer URL já usada nos últimos 20 posts. A imagem de capa DEVE ser diferente das imagens internas.
+- [2026-04-06] Nexus Audit: Lucas e Rebeca DEVEM rodar `node validate_all_links.js` para garantir que o ID do "Leia Mais" existe no banco.
+- [2026-04-06] Autoridade: Use as personas da Squad (Ex: "Nando Notícia", "Carlos Copy", "Gabriel Gerador") no campo `autor` para criar identidade de marca.

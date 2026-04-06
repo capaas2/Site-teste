@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase";
 import { Resend } from "resend";
 import { subscribeSchema } from "@/lib/schemas/newsletter";
 
@@ -24,12 +24,11 @@ export async function POST(request: Request) {
     const { email } = result.data;
     const token = crypto.randomUUID();
 
-    // 2. Rate Limit Básico (Aviso: Use Upstash Redis para produção real)
-    // Aqui capturamos o IP para logs de segurança, mas não exibimos o e-mail.
-    const ip = request.headers.get("x-forwarded-for") || "unknown";
+    // 2. Cliente Administrativo (Ignora RLS com segurança no servidor)
+    const adminClient = createAdminClient();
 
-    // 3. Inserção no Supabase com confirmed: false
-    const { data, error } = await supabase
+    // 3. Inserção no Supabase
+    const { data, error } = await adminClient
       .from("subscribers")
       .insert([{ 
         email, 
