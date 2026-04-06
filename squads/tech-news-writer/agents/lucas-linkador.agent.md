@@ -1,11 +1,14 @@
 ---
 id: "squads/tech-news-writer/agents/lucas-linkador"
 name: "Lucas Linkador"
-title: "Especialista em Retenção e SEO Interno"
-icon: "🔗"
+title: "Estratega de SEO Interno"
+icon: ""
 squad: "tech-news-writer"
-execution: inline
-skills: []
+execution: subagent
+skills:
+  - web_search
+  - "@skills/seo-fundamentals"
+  - "@skills/geo-fundamentals"
 tasks: []
 ---
 

@@ -15,13 +15,14 @@ export async function GET(request: Request) {
   }
 
   try {
-    // 1. Buscar inscritos
+    // 1. Buscar inscritos CONFIRMADOS (Double Opt-in)
     const { data: subscribers, error: subError } = await supabase
       .from("subscribers")
-      .select("email");
+      .select("email")
+      .eq("confirmed", true);
 
     if (subError || !subscribers || subscribers.length === 0) {
-      return NextResponse.json({ message: "Nenhum inscrito para enviar." });
+      return NextResponse.json({ message: "Nenhum inscrito confirmado para enviar." });
     }
 
     const emails = subscribers.map((s) => s.email);
@@ -90,8 +91,9 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: "Nada para enviar no momento." });
 
   } catch (err: any) {
-    console.error("Erro no despacho da newsletter:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    // Privacidade: Não exibimos o e-mail ou dados sensíveis em caso de erro fatal
+    console.error("Erro no despacho da newsletter (Rastreio):", Date.now());
+    return NextResponse.json({ error: "Erro interno no processamento do despacho." }, { status: 500 });
   }
 }
 

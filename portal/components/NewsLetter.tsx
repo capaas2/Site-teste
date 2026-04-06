@@ -7,18 +7,43 @@ export function NewsLetter() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
+  const [message, setMessage] = useState("");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
     setStatus("loading");
-    
-    // Simulação de inscrição (Resend/Supabase integrados no futuro)
-    setTimeout(() => {
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erro ao se inscrever.");
+      }
+
       setStatus("success");
+      setMessage(data.message || "Sucesso!");
       setEmail("");
-      setTimeout(() => setStatus("idle"), 3000);
-    }, 1500);
+      
+      // Resetar após 5 segundos
+      setTimeout(() => {
+        setStatus("idle");
+        setMessage("");
+      }, 5000);
+
+    } catch (err: any) {
+      setStatus("error");
+      setMessage(err.message);
+      setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   return (
@@ -59,7 +84,13 @@ export function NewsLetter() {
         </form>
       )}
       
-      {status !== "success" && (
+      {message && (
+        <p className={`text-[9px] text-center mt-3 font-bold uppercase tracking-tight ${status === "error" ? "text-rose-500" : "text-emerald-500"}`}>
+          {message}
+        </p>
+      )}
+
+      {status !== "success" && !message && (
         <p className="text-[9px] text-slate-500 text-center mt-3 leading-tight">
           Cancele quando quiser. <br/>Não enviamos spam.
         </p>

@@ -1,12 +1,13 @@
 ---
 id: "squads/tech-news-writer/agents/gabriel-gerador"
 name: "Gabriel Gerador"
-title: "Mago da IA Generativa (Socorrista)"
-icon: "🪄"
+title: "Arquiteto de Prompt"
+icon: ""
 squad: "tech-news-writer"
 execution: subagent
 skills:
-  - image-ai-generator
+  - "@skills/app-builder"
+  - "@skills/mcp-builder"
 tasks: []
 ---
 

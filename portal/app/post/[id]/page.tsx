@@ -66,7 +66,23 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   const formattedDate = formatPostDate(post.publicado_em);
   const formattedTime = formatPostTime(post.publicado_em);
 
-  // Função para renderizar componentes customizados dentro do Markdown
+  // REGRA: Remoção Final de Numeração de IA e Renderização de Imagens
+  // Transformamos as tags de texto em strings de imagem HTML reais antes de renderizar
+  const processedMarkdown = post.conteudo_markdown
+    .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
+    .replace(/\[(DETALHE_IMAGEM|INFO_GRAFICO):\s*(.+)\]/gi, (match, type, prompt) => {
+       const dynamicUrl = `https://images.unsplash.com/photo-1544380903-5862a86c47d8?q=80&w=1200&auto=format&fit=crop&sig=${encodeURIComponent(prompt)}`;
+       return `<figure class="my-12 group">
+          <div class="relative aspect-video w-full overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-2xl">
+            <img src="${dynamicUrl}" alt="${prompt}" class="object-cover w-full h-full" />
+          </div>
+          <figcaption class="mt-4 text-center text-[10px] font-bold uppercase tracking-[.3em] text-slate-500 italic">
+            ${prompt}
+          </figcaption>
+        </figure>`;
+    });
+
+  // Função para renderizar componentes customizados (Widgets de Oferta)
   const renderers = {
     p: (props: any) => {
       const { children } = props;
@@ -81,7 +97,6 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
         const deals = typeof post.affiliate_data === 'string' 
           ? JSON.parse(post.affiliate_data) 
           : post.affiliate_data;
-
         const dealData = deals && deals[dealIndex];
         
         if (dealData) {
@@ -97,7 +112,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           );
         }
       }
-      return <p className="mb-6 leading-relaxed text-slate-700 dark:text-slate-300">{children}</p>;
+      return <p className="mb-8 leading-relaxed text-slate-700 dark:text-slate-300 text-lg">{children}</p>;
     }
   };
 
@@ -148,6 +163,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
               fill
               className="object-cover"
               priority
+              unoptimized={true}
             />
           </div>
 
@@ -156,8 +172,8 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             prose-a:text-blue-600 dark:prose-a:text-blue-400
             prose-img:rounded-3xl prose-img:shadow-xl
             prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-950/30 prose-blockquote:rounded-r-2xl prose-blockquote:p-6 prose-blockquote:italic">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={renderers}>
-              {post.conteudo_markdown}
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={renderers} rehypePlugins={[[require("rehype-raw")]]}>
+              {processedMarkdown}
             </ReactMarkdown>
 
             <AdBanner className="mt-8" format="fluid" />

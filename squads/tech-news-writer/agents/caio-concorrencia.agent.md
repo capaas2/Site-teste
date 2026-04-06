@@ -8,6 +8,8 @@ execution: subagent
 skills:
   - web_search
   - web_fetch
+  - "@skills/competitive-landscape"
+  - "@skills/competitor-alternatives"
 tasks: []
 ---
 
