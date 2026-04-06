@@ -72,25 +72,15 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   const processedMarkdown = post.conteudo_markdown
     .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
     .replace(/\[(IMAGEM|DETALHE_IMAGEM|INFO_GRAFICO):\s*([^|\]]+)(?:\s*\|\s*LEGENDA:\s*([^\]]+))?\]/gi, (match, type, firstPart, secondPart) => {
-       const techImages = [
-         'photo-1518770660439-4636190af475', 'photo-1451187580459-43490279c0fa', 
-         'photo-1485827404703-89b55fcc595e', 'photo-1581091226825-a6a2a5aee158', 
-         'photo-1550751827-4bd374c3f58b', 'photo-1519389950473-47ba0277781c'
-       ];
-
        let imageUrl = '';
        let caption = '';
 
-       // Lógica de Parsing:
-       // Se houver |, a primeira parte é a URL e a segunda é a Legenda.
-       // Se não houver |, a primeira parte é tratada como Prompt/Legenda e a URL é gerada do pool.
        if (secondPart) {
          imageUrl = firstPart.trim();
          caption = secondPart.trim();
        } else {
          caption = firstPart.trim();
-         const imageId = techImages[caption.length % techImages.length];
-         imageUrl = `https://images.unsplash.com/${imageId}?auto=format&fit=crop&q=80&w=1200`;
+         imageUrl = `https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200`;
        }
 
         return `<figure class="my-16 group">

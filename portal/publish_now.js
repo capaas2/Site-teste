@@ -24,7 +24,7 @@ No entanto, a inovação levanta questões profundas sobre privacidade neural e 
 Apesar dos desafios regulatórios pendentes com a FDA e órgãos internacionais, o sucesso inicial de Arbaugh abre portas para casos de uso que vão além da paralisia. Musk já expressou sua visão de que a Neuralink poderá, no futuro, permitir a "telepatia digital" e o aprimoramento cognitivo humano. Enquanto o mundo observa o progresso de Noland, a Redação Tech continua acompanhando as implicações técnicas dessa nova fronteira, onde o silício e o neurônio finalmente falam a mesma língua.`,
   autor: "Eduardo Editor-Chefe",
   categoria: "Neurotecnologia",
-  imagem_url: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=1200&auto=format&fit=crop",
+  imagem_url: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=1200",
   publicado_em: new Date().toISOString(),
   views: 0,
   affiliate_data: JSON.stringify([
@@ -46,7 +46,7 @@ async function publish() {
   if (error) {
     console.error("Erro ao publicar:", JSON.stringify(error, null, 2));
   } else {
-    console.log("Sucesso! Notícia publicada: fd65900f-3f32-464c-a789-e313b4e0n7u1");
+    console.log("Sucesso! Notícia publicada: fd65900f-3f32-464c-a789-e313b4e0c002");
   }
 }
 
