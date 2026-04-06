@@ -19,7 +19,6 @@ const mainNavItems = [
   { label: "Mobilidade", slug: "mobilidade" },
   { label: "IA & Software", slug: "ia-software" },
   { label: "Mercado", slug: "mercado" },
-  { label: "Produtos", slug: "produtos" },
   { label: "Segurança", slug: "cibersegurança" },
   { label: "Sustentabilidade", slug: "sustentabilidade" },
 ];
