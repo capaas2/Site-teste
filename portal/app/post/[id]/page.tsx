@@ -72,22 +72,18 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   const processedMarkdown = post.conteudo_markdown
     .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
     .replace(/\[(DETALHE_IMAGEM|INFO_GRAFICO):\s*(.+)\]/gi, (match, type, prompt) => {
-       const searchTerms = encodeURIComponent(prompt.substring(0, 50));
-       const dynamicUrl = `https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200&sig=${Math.random()}`; // Placeholder estável por enquanto ou busca real
-       // Melhorando para busca real baseada no prompt
-       const realDynamicUrl = `https://source.unsplash.com/featured/1200x675?${searchTerms}`;
+       const searchTerms = encodeURIComponent(prompt.substring(0, 30).replace(/\s+/g, ','));
+       // Usando LoremFlickr para maior estabilidade em buscas dinâmicas (Source Unsplash foi depreciado)
+       const realDynamicUrl = `https://loremflickr.com/1200/675/technology,${searchTerms}/all`;
        
        return `<figure class="my-16 group">
-          <div class="relative aspect-video w-full overflow-hidden rounded-[2.5rem] border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]">
-            <img src="${realDynamicUrl}" alt="${prompt}" class="object-cover w-full h-full" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="relative aspect-video w-full overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-all duration-700 group-hover:shadow-blue-500/10">
+            <img src="${realDynamicUrl}" alt="${prompt}" class="object-cover w-full h-full opacity-0 transition-opacity duration-1000" onload="this.style.opacity='1'" />
           </div>
-          <figcaption class="mt-6 flex items-center justify-center gap-3">
-            <span class="h-[1px] w-8 bg-slate-200 dark:bg-slate-800"></span>
-            <span class="text-[11px] font-medium text-slate-400 dark:text-slate-500 tracking-tight italic">
-              ${prompt}
+          <figcaption class="mt-4 text-center px-6">
+            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 tracking-tight italic">
+              — ${prompt}
             </span>
-            <span class="h-[1px] w-8 bg-slate-200 dark:bg-slate-800"></span>
           </figcaption>
         </figure>`;
     });

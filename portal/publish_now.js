@@ -5,46 +5,46 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const post = {
-  id: "fd65900f-3f32-464c-a789-e313b4e0a7c3",
-  titulo: "O Despertar dos Humanoides: Optimus Gen 3 e o Fim da Era Prototipal",
-  conteudo_markdown: `A indústria de robótica atingiu um ponto de inflexão nesta semana com o anúncio surpresa das capacidades produtivas do Tesla Optimus Gen 3. O que antes era visto como um projeto de vaidade técnica de Elon Musk transformou-se em uma ameaça real para o setor de logística e manufatura pesada. A nova iteração do humanoide não apenas caminha com maior fluidez, mas introduz um sistema de rede neural ponta a ponta que permite ao robô aprender tarefas complexas apenas por observação visual, eliminando a necessidade de programação manual para cada movimento.
+  id: "fd65900f-3f32-464c-a789-e313b4e0cafe", // NOVO ID PARA NOVA NOTICIA
+  titulo: "A Era Quântica no Gabinete: Novos Chips de 20 Qubits que Operam sem Nitrogênio Líquido",
+  conteudo_markdown: `A barreira térmica que mantinha a computação quântica presa a laboratórios de pesquisa acaba de ser rompida. Uma startup europeia, em colaboração com pesquisadores da Universidade de Delft, demonstrou o primeiro processador quântico de 20 qubits capaz de manter a coerência em temperaturas próximas ao ambiente, eliminando a dependência de tanques massivos de nitrogênio líquido. Essa inovação utiliza uma nova técnica de isolamento via nanofótons e materiais supercondutores de alta temperatura, permitindo que o sistema seja integrado em gabinetes de servidor convencionais pela primeira vez na história.
 
-[DETALHE_IMAGEM: Robô humanoide moderno com acabamento branco fosco manipulando componentes eletrônicos delicados em laboratório futurista]
+[DETALHE_IMAGEM: Processador quântico futurista montado em um gabinete de computador transparente com luzes azuis e tubulações de metal líquido]
 
-O grande diferencial desta geração reside nos novos atuadores proprietários e na integração de sensores táteis de alta resolução nas pontas dos dedos. Essa "sensibilidade digital" permite que o Optimus manipule objetos frágeis, como ovos ou componentes de silício, com a mesma destreza de um técnico humano. Especialistas do MIT indicam que a redução de custo prevista para a produção em massa pode colocar o preço de uma unidade abaixo dos US$ 20.000 até 2027, um valor disruptivo que forçou concorrentes como a Boston Dynamics e a Figure AI a acelerarem seus cronogramas de lançamento comercial.
+O impacto imediato desta descoberta recai sobre o setor de criptografia e simulação de materiais. Com a possibilidade de rodar algoritmos quânticos em servidores locais, empresas de médio porte poderão acelerar a descoberta de novos compostos químicos sem depender das filas de espera das nuvens quânticas de gigantes como IBM ou Google. O chip, apelidado de "Q-One", utiliza uma arquitetura de qubits de spin em silício, uma tecnologia que aproveita as linhas de produção de semicondutores já existentes, facilitando o escalonamento para produção em massa nos próximos doze meses.
 
-A corrida pela automação doméstica e industrial não é apenas uma questão de hardware; é uma batalha de dados. Enquanto a Tesla utiliza a imensa frota de veículos do Direct-to-Consumer para treinar seus modelos de visão computacional, a Figure AI anunciou uma parceria estratégica com a OpenAI para integrar modelos de linguagem de grande escala diretamente no processamento de tomada de decisão dos robôs. Isso significa que, em breve, humanos poderão dar comandos naturais como "organize o estoque priorizando itens de alta rotatividade", e a máquina entenderá o contexto sem supervisão.
+Apesar do entusiasmo, o setor de segurança cibernética emitiu um alerta vermelho sobre a obsolescência acelerada dos métodos de criptografia atuais. Com processadores quânticos tornando-se acessíveis fisicamente, o risco de ataques por força bruta contra chaves RSA-2048 deixa de ser um temor teórico para se tornar uma variável de risco operacional imediato. Bancos centrais ao redor do mundo já iniciaram o protocolo de transição para chaves pós-quânticas, mas a integração do Q-One em ambientes de borda sugere que essa migração precisa ocorrer antes do cronograma previsto para o fim da década.
 
-[DETALHE_IMAGEM: Visão em perspectiva de uma linha de montagem com robôs humanoides trabalhando em harmonia com humanos em uma fábrica de alta tecnologia]
+[DETALHE_IMAGEM: Infográfico técnico sutil mostrando o fluxo de processamento de um chip de silício quântico moderno]
 
-No entanto, o avanço célere traz consigo debates acalorados sobre a substituição de mão de obra e a segurança cibernética. Com robôs capazes de operar ferramentas elétricas e navegar em ambientes humanos, o risco de falhas de software ou sequestros digitais torna-se uma preocupação de segurança nacional. O Fórum Econômico Mundial estima que, embora a produtividade global possa saltar 30% com a integração de humanoides, o deslocamento de funções operacionais exigirá uma requalificação sem precedentes da força de trabalho global nos próximos cinco anos.
+Para o consumidor final, a revolução quântica ainda parece distante, mas as implicações na inteligência artificial serão sentidas no curto prazo. Modelos de linguagem treinados com auxílio de processamento quântico poderão atingir níveis de raciocínio lógico e redução de alucinações que fogem da capacidade linear dos processadores binários de silício puro. A corrida agora não é apenas por mais qubits, mas por maior tempo de estabilidade das operações, um campo onde o Q-One demonstrou uma superioridade técnica de 15% sobre os protótipos anteriores em testes de estresse térmico.
 
-O futuro que antes pertencia apenas à ficção científica de Isaac Asimov está sendo montado agora, parafuso por parafuso, nas Gigafactories ao redor do mundo. A transição da robocortina para a realidade prática é inevitável. Aqueles que ignorarem a densidade técnica desta mudança poderão encontrar um mercado de trabalho irreconhecível antes do fim desta década. A Redação Tech continuará monitorando os próximos passos desta revolução que promete ser o maior salto produtivo desde a invenção da máquina a vapor.`,
+O nascimento da "Desktop Quantum Era" marca o início de uma nova fase na humanidade digital. A Redação Tech continuará acompanhando os primeiros lotes de entrega desses processadores, que prometem elevar a produtividade computacional a níveis antes restritos às supervagas de simulação científica. O silício tradicional acaba de ganhar um parceiro que fala a linguagem da probabilidade, alterando permanentemente a nossa relação com o poder de processamento.`,
   autor: "Eduardo Editor-Chefe",
-  categoria: "Robótica & AI",
-  imagem_url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200&auto=format&fit=crop",
+  categoria: "Ciência & Hardware",
+  imagem_url: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop",
   publicado_em: new Date().toISOString(),
   views: 0,
   affiliate_data: JSON.stringify([
     {
-      productName: "Kit Robótica Arduino Master",
-      price: "289,90",
+      productName: "Livro: Computação Quântica para Entusiastas",
+      price: "159,90",
       store: "Amazon",
       affiliateUrl: "https://amazon.com.br",
-      productImage: "https://images.unsplash.com/photo-1553406830-ef2513450d76?w=400",
-      isBestChoice: true
+      productImage: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400",
+      isBestChoice: false
     }
   ])
 };
 
 async function publish() {
-  console.log("Iniciando publicação da notícia de teste...");
+  console.log("Publicando notícia sobre Computação Quântica...");
   const { error } = await supabase.from('posts').upsert([post], { onConflict: 'id' });
   
   if (error) {
     console.error("Erro ao publicar:", JSON.stringify(error, null, 2));
   } else {
-    console.log("Notícia publicada com sucesso! ID:", post.id);
+    console.log("Sucesso! Notícia publicada: fd65900f-3f32-464c-a789-e313b4e0cafe");
   }
 }
 
