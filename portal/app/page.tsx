@@ -1,4 +1,4 @@
-import { getTopPosts, getLatestPosts } from "@/lib/posts";
+import { getTopPosts, getLatestPosts, getAllCategories } from "@/lib/posts";
 import { HeroGrid } from "@/components/HeroGrid";
 import { CategoryCarousel } from "@/components/CategoryCarousel";
 import { FeaturedRanking } from "@/components/FeaturedRanking";
@@ -18,7 +18,10 @@ export default async function HomePage() {
   // 3. Ranking da Semana (Top 3 histórico)
   const weeklyTop = await getTopPosts(7, 3);
 
-  // 4. Atalhos Rápidos (Seção Visual)
+  // 4. Todas as Categorias Ativas v2.9
+  const allCategories = await getAllCategories();
+
+  // 5. Atalhos Rápidos (Seção Visual)
   const shortcuts = [
     { label: "Segurança", icon: Shield, color: "bg-indigo-600", slug: "Segurança" },
     { label: "Mercado", icon: TrendingUp, color: "bg-emerald-600", slug: "Mercado" },
@@ -74,7 +77,7 @@ export default async function HomePage() {
 
       {/* 5. Carrossel de Categorias e Feed de Exploração */}
       <section className="space-y-10">
-        <CategoryCarousel />
+        <CategoryCarousel categories={allCategories} />
 
         <div className="flex flex-col items-center justify-center py-12 px-6 bg-blue-600 rounded-[2rem] text-white text-center space-y-6 shadow-2xl shadow-blue-500/20 overflow-hidden relative group">
            {/* Efeito Visual de Fundo */}

@@ -85,15 +85,15 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
        }
 
         return `<figure class="my-16 group">
-          <div class="relative aspect-video w-full overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-800 border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-all duration-700">
+          <div class="relative w-full overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-800 border border-slate-200/50 dark:border-slate-800 shadow-2xl transition-all duration-700">
             <img 
               src="${imageUrl}" 
               alt="${caption}" 
-              class="object-cover w-full h-full" 
+              class="w-full h-auto block" 
               loading="lazy"
               onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=60'"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent pointer-events-none"></div>
           </div>
           <figcaption class="mt-4 text-center px-6">
             <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 tracking-tight italic">
@@ -164,10 +164,6 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
               <span className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter">
                 <Tag className="w-3 h-3" />
                 {post.categoria}
-              </span>
-              <span className="inline-flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 text-[9px] font-bold uppercase px-3 py-1.5 rounded-lg tracking-widest border border-emerald-200/50 dark:border-emerald-800/50 shadow-sm transition-all duration-500">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                Auditado pela Rebeca Revisão
               </span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-2 italic">

@@ -97,7 +97,6 @@ export function Footer() {
       {/* Copyright Line */}
       <div className="max-w-7xl mx-auto px-4 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
         <p>© {currentYear} Redação Tech Inc. Todos os direitos reservados. </p>
-        <p className="mt-1 opacity-50">Desenvolvido com Antigravity Kit · Squad 15 Turbo Edition</p>
       </div>
     </footer>
   );

@@ -52,10 +52,25 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
+  // Dicionário de Mapeamento de Categoria v2.8.1
+  // Mapeia o SLUG da URL para a PALAVRA-CHAVE no banco de dados
+  const categoryMap: Record<string, string> = {
+    "ia-software": "IA",
+    "ia": "IA",
+    "mobilidade": "Mobilid",
+    "eletrificacao": "Elétri",
+    "cibersegurança": "Segurança",
+    "produtos": "Produto",
+    "sustentabilidade": "Sustentab",
+    "mercado": "Mercado"
+  };
+
+  let searchTerm = categoryMap[categorySlug.toLowerCase()] || categorySlug.replace(/-/g, ' ');
+
   const { data, count, error } = await supabase
     .from("posts")
     .select("*", { count: "exact" })
-    .ilike("categoria", `%${categorySlug}%`)
+    .ilike("categoria", `%${searchTerm}%`)
     .order("publicado_em", { ascending: false })
     .range(from, to);
 
@@ -64,4 +79,25 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
     return { posts: [], count: 0 };
   }
   return { posts: data as Post[], count: count || 0 };
+}
+
+export async function getAllCategories(): Promise<{ name: string; count: number }[]> {
+  const { data, error } = await supabase
+    .from("posts")
+    .select("categoria");
+
+  if (error) {
+    console.error("Error fetching all categories:", error.message);
+    return [];
+  }
+
+  const categoryCounts: Record<string, number> = {};
+  data.forEach((post: any) => {
+    const cat = post.categoria;
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+  });
+
+  return Object.entries(categoryCounts)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
 }

@@ -1,31 +1,35 @@
 import Link from "next/link";
-import { BatteryCharging, Car, Cpu, TrendingUp, Palette, Code, Leaf } from "lucide-react";
+import { Hash } from "lucide-react";
 
-const categories = [
-  { label: "Eletrificação", slug: "eletrificacao", icon: BatteryCharging },
-  { label: "Mobilidade", slug: "mobilidade", icon: Car },
-  { label: "IA & Software", slug: "ia-software", icon: Code },
-  { label: "Mercado", slug: "mercado", icon: TrendingUp },
-  { label: "Design", slug: "design", icon: Palette },
-  { label: "Tecnologia", slug: "tecnologia", icon: Cpu },
-  { label: "Sustentabilidade", slug: "sustentabilidade", icon: Leaf },
-];
+interface Category {
+  name: string;
+  count: number;
+}
 
-export function CategoryCarousel() {
+export function CategoryCarousel({ categories }: { categories: Category[] }) {
+  if (!categories || categories.length === 0) return null;
+
   return (
-    <section>
-      <h2 className="text-sm font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">
-        Navegar por Categoria
-      </h2>
-      <div className="flex gap-3 flex-wrap">
-        {categories.map(({ label, slug, icon: Icon }) => (
+    <section className="py-10">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
+          Explorar por Tópico
+        </h2>
+        <div className="h-[1px] flex-1 bg-slate-100 dark:bg-slate-800 ml-6"></div>
+      </div>
+      
+      <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-4 px-4 mask-fade-right">
+        {categories.map((cat) => (
           <Link
-            key={slug}
-            href={`/categoria/${slug}`}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-sm transition-all duration-200 text-sm font-semibold"
+            key={cat.name}
+            href={`/categoria/${cat.name.toLowerCase()}`}
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 text-xs font-bold whitespace-nowrap group"
           >
-            <Icon className="w-4 h-4" />
-            {label}
+            <Hash className="w-3.5 h-3.5 text-slate-300 group-hover:text-blue-500 transition-colors" />
+            {cat.name}
+            <span className="ml-1 text-[9px] bg-slate-100 dark:bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded-md font-black group-hover:bg-blue-500 group-hover:text-white transition-colors">
+              {cat.count}
+            </span>
           </Link>
         ))}
       </div>

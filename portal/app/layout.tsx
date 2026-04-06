@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { getAllCategories } from "@/lib/posts";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +20,9 @@ export const metadata: Metadata = {
   description: "As melhores notícias de tecnologia, IA, gadgets e mercado digital.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const allCategories = await getAllCategories();
+
   return (
     <html lang="pt-BR" suppressHydrationWarning className={inter.variable}>
       <head>
@@ -34,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
       >
         <Providers>
-          <Navbar />
+          <Navbar allCategories={allCategories} />
           <main>{children}</main>
           <Footer />
           <Analytics />

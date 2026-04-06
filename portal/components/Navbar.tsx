@@ -23,7 +23,11 @@ const mainNavItems = [
   { label: "Sustentabilidade", slug: "sustentabilidade" },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+  allCategories?: { name: string; count: number }[];
+}
+
+export function Navbar({ allCategories = [] }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
@@ -123,7 +127,7 @@ export function Navbar() {
           {/* Drawer */}
           <div className="relative w-full max-w-sm bg-slate-900 h-full shadow-2xl flex flex-col border-r border-slate-800 animate-in slide-in-from-left duration-300">
             <div className="p-6 border-b border-slate-800 flex items-center justify-between">
-              <span className="text-white font-black text-xl tracking-tighter">Navegação</span>
+              <span className="text-white font-black text-xl tracking-tighter uppercase italic">Explorar <span className="text-blue-500">Portal</span></span>
               <button 
                 onClick={() => setIsSidebarOpen(false)}
                 className="p-2 hover:bg-slate-800 rounded-full transition-colors"
@@ -132,34 +136,56 @@ export function Navbar() {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-2">
-              <div className="text-xs font-black text-slate-500 uppercase tracking-widest px-2 mb-4">Principais Áreas</div>
-              {mainNavItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href || `/categoria/${item.slug}`}
-                  onClick={() => setIsSidebarOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-800 group transition-all"
-                >
-                  <span className="text-slate-200 font-bold group-hover:text-blue-500 transition-colors">{item.label}</span>
-                  <ChevronRight className="w-4 h-4 text-slate-700 group-hover:text-blue-500" />
-                </Link>
-              ))}
+            <div className="flex-1 overflow-y-auto p-4 space-y-8 no-scrollbar pt-6">
+              {/* Seção Principal (Copied from Navbar) */}
+              <div>
+                <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2 mb-4 border-l-2 border-blue-500 pl-4">Menu Principal</div>
+                <div className="grid grid-cols-1 gap-1">
+                  {mainNavItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href || `/categoria/${item.slug}`}
+                      onClick={() => setIsSidebarOpen(false)}
+                      className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-800 group transition-all"
+                    >
+                      <span className="text-slate-200 text-sm font-bold group-hover:text-blue-500 transition-colors uppercase tracking-tight">{item.label}</span>
+                      <ChevronRight className="w-4 h-4 text-slate-700 group-hover:text-blue-500" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
 
-              <div className="mt-8 text-xs font-black text-slate-500 uppercase tracking-widest px-2 mb-4">Siga a Redação</div>
-              <div className="grid grid-cols-2 gap-2 px-2 pb-10">
-                <Link href="#" className="flex items-center gap-2 text-sm text-slate-400 hover:text-white bg-slate-800/30 p-4 rounded-2xl border border-slate-800/50">
-                  <AtSign className="w-4 h-4" /> Instagram
-                </Link>
-                <Link href="#" className="flex items-center gap-2 text-sm text-slate-400 hover:text-white bg-slate-800/30 p-4 rounded-2xl border border-slate-800/50">
-                  <ExternalLink className="w-4 h-4" /> Twitter (X)
-                </Link>
-                <Link href="#" className="flex items-center gap-2 text-sm text-slate-400 hover:text-white bg-slate-800/30 p-4 rounded-2xl border border-slate-800/50">
-                  <ExternalLink className="w-4 h-4" /> YouTube
-                </Link>
-                <Link href="#" className="flex items-center gap-2 text-sm text-slate-400 hover:text-white bg-slate-800/30 p-4 rounded-2xl border border-slate-800/50">
-                  <Rss className="w-4 h-4" /> Web RSS
-                </Link>
+              {/* Seção Dinâmica v2.9 */}
+              {allCategories.length > 0 && (
+                <div>
+                  <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2 mb-4 border-l-2 border-emerald-500 pl-4">Todos os Tópicos</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {allCategories.slice(0, 16).map((cat) => (
+                      <Link
+                        key={cat.name}
+                        href={`/categoria/${cat.name.toLowerCase()}`}
+                        onClick={() => setIsSidebarOpen(false)}
+                        className="flex flex-col p-3 rounded-xl bg-slate-800/30 hover:bg-slate-800 border border-slate-800/50 transition-all group"
+                      >
+                        <span className="text-slate-300 text-[10px] font-bold truncate group-hover:text-emerald-400">{cat.name}</span>
+                        <span className="text-[9px] text-slate-600 font-black mt-1 uppercase tracking-tighter">{cat.count} matérias</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Social */}
+              <div>
+                <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2 mb-4 border-l-2 border-slate-700 pl-4">Siga a Redação</div>
+                <div className="grid grid-cols-2 gap-2 px-2">
+                  <Link href="#" className="flex items-center gap-2 text-[10px] uppercase font-black text-slate-400 hover:text-white bg-slate-800/20 p-4 rounded-2xl border border-slate-800/50 transition-all">
+                    <AtSign className="w-4 h-4" /> Instagram
+                  </Link>
+                  <Link href="#" className="flex items-center gap-2 text-[10px] uppercase font-black text-slate-400 hover:text-white bg-slate-800/20 p-4 rounded-2xl border border-slate-800/50 transition-all">
+                    <ExternalLink className="w-4 h-4" /> Twitter (X)
+                  </Link>
+                </div>
               </div>
             </div>
             

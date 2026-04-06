@@ -39,9 +39,10 @@ export async function POST(request: Request) {
 
     if (error) {
       if (error.code === "23505") {
+        // Privacidade: Retornamos o mesmo sucesso para não revelar que o e-mail já existe
         return NextResponse.json(
-          { message: "Você já está inscrito! Verifique sua caixa de entrada se ainda não confirmou." },
-          { status: 200 }
+          { message: "Quase pronto! Enviamos um link de confirmação para o seu e-mail." },
+          { status: 201 }
         );
       }
       throw error;
@@ -82,10 +83,10 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (err: any) {
-    // Retornamos o erro real temporariamente para debugar o ambiente (Vercel)
-    console.error("DEBUG NEWSLETTER ERROR:", err);
+    // Privacidade e Segurança: Nunca retornamos detalhes do erro para o cliente
+    console.error("Newsletter Subscribe Error (Rastreio):", Date.now()); 
     return NextResponse.json(
-      { error: err.message || "Erro interno oculto." },
+      { error: "Ocorreu um erro ao processar sua inscrição. Tente novamente mais tarde." },
       { status: 500 }
     );
   }
