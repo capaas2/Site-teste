@@ -1,3 +1,4 @@
+import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -61,6 +62,49 @@ async function getRelatedPosts(category: string, currentId: string): Promise<Pos
   return (data as Post[]) || [];
 }
 
+// v2.20.16 - Motor de Imagens Resiliente
+const PostImage = ({ src, alt, caption }: { src: string, alt: string, caption?: string }) => {
+  const [error, setError] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+
+  // Fallback seguro: Servidor de imagens tecnológico
+  const fallbackUrl = "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200";
+
+  // Otimização automática para Unsplash
+  let finalUrl = src;
+  if (src.includes('unsplash.com') && !src.includes('?')) {
+    finalUrl = `${src}?auto=format&fit=crop&q=80&w=1200`;
+  }
+
+  return (
+    <figure className="my-16 group">
+      <div className={`relative w-full aspect-video md:aspect-[21/9] overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-2xl transition-all duration-700 ${loading ? 'animate-pulse' : ''}`}>
+        <Image 
+          src={error ? fallbackUrl : finalUrl}
+          alt={alt || caption || "FolhaByte Image"}
+          fill
+          className={`object-cover block group-hover:scale-105 transition-transform duration-700 ${loading ? 'opacity-0' : 'opacity-100'}`}
+          onLoadingComplete={() => setLoading(false)}
+          onError={() => {
+            console.error(`Falha ao carregar imagem: ${src}`);
+            setError(true);
+            setLoading(false);
+          }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+      {caption && (
+        <figcaption className="mt-4 text-center px-6">
+          <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest italic">
+            — {caption}
+          </span>
+        </figcaption>
+      )}
+    </figure>
+  );
+};
+
 export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -83,44 +127,20 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   const formattedDate = formatPostDate(post.publicado_em);
   const formattedTime = formatPostTime(post.publicado_em);
 
-  // REGRA: Remoção Final de Numeração de IA e Renderização de Imagens
-  // Transformamos as tags de texto em strings de imagem HTML reais antes de renderizar
+  // REGRA: Processamento de Conteúdo FolhaByte (v2.20.16)
+  // Substituímos as tags customizadas por componentes HTML que o ReactMarkdown processará via rehypeRaw
   const processedMarkdown = post.conteudo_markdown
     .replace(/^# .*\n/g, '')         // Remove o título redundante no topo do MD
     .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
     .replace(/\[(IMAGEM|DETALHE_IMAGEM|INFO_GRAFICO):\s*([^|\]]+)(?:\s*\|\s*LEGENDA:\s*([^\]]+))?\]/gi, (match, type, firstPart, secondPart) => {
-       let imageUrl = '';
-       let caption = '';
-
-       if (secondPart) {
-         imageUrl = firstPart.trim();
-         caption = secondPart.trim();
-       } else {
-         caption = firstPart.trim();
-         imageUrl = `https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200`;
-       }
-
-        return `<figure class="my-16 group">
-          <div class="relative w-full aspect-video md:aspect-[21/9] overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-2xl transition-all duration-700">
-            <img 
-              src="${imageUrl}" 
-              alt="${caption}" 
-              class="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700" 
-              loading="lazy"
-              onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=60'"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none"></div>
-          </div>
-          <figcaption class="mt-4 text-center px-6">
-            <span class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest italic">
-              — ${caption}
-            </span>
-          </figcaption>
-        </figure>`;
+        const url = secondPart ? firstPart.trim() : firstPart.trim();
+        const caption = secondPart ? secondPart.trim() : '';
+        return `<post-image src="${url}" caption="${caption}"></post-image>`;
     });
 
-  // Função para renderizar componentes customizados (Widgets de Oferta)
+  // Função para renderizar componentes customizados
   const renderers = {
+    'post-image': (props: any) => <PostImage {...props} />,
     p: (props: any) => {
       const { children } = props;
       const rawText = Array.isArray(children) 
