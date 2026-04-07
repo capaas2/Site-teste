@@ -11,6 +11,7 @@ import { AdBanner } from "@/components/AdBanner";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { StoryStream } from "@/components/StoryStream";
 import AffiliateWidget from "@/components/AffiliateWidget";
+import PostImage from "@/components/PostImage";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Calendar, User, Tag, Clock, Newspaper } from "lucide-react";
@@ -62,48 +63,6 @@ async function getRelatedPosts(category: string, currentId: string): Promise<Pos
   return (data as Post[]) || [];
 }
 
-// v2.20.16 - Motor de Imagens Resiliente
-const PostImage = ({ src, alt, caption }: { src: string, alt: string, caption?: string }) => {
-  const [error, setError] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
-
-  // Fallback seguro: Servidor de imagens tecnológico
-  const fallbackUrl = "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200";
-
-  // Otimização automática para Unsplash
-  let finalUrl = src;
-  if (src.includes('unsplash.com') && !src.includes('?')) {
-    finalUrl = `${src}?auto=format&fit=crop&q=80&w=1200`;
-  }
-
-  return (
-    <figure className="my-16 group">
-      <div className={`relative w-full aspect-video md:aspect-[21/9] overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-2xl transition-all duration-700 ${loading ? 'animate-pulse' : ''}`}>
-        <Image 
-          src={error ? fallbackUrl : finalUrl}
-          alt={alt || caption || "FolhaByte Image"}
-          fill
-          className={`object-cover block group-hover:scale-105 transition-transform duration-700 ${loading ? 'opacity-0' : 'opacity-100'}`}
-          onLoadingComplete={() => setLoading(false)}
-          onError={() => {
-            console.error(`Falha ao carregar imagem: ${src}`);
-            setError(true);
-            setLoading(false);
-          }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none"></div>
-      </div>
-      {caption && (
-        <figcaption className="mt-4 text-center px-6">
-          <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest italic">
-            — {caption}
-          </span>
-        </figcaption>
-      )}
-    </figure>
-  );
-};
 
 export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -235,16 +194,12 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             <ShareButtons titulo={post.titulo} />
           </div>
 
-          <div className="relative w-full h-72 sm:h-96 rounded-[3rem] overflow-hidden mb-12 shadow-2xl shadow-blue-500/10 border border-slate-200 dark:border-slate-800">
-            <Image
-              src={optimizedFeaturedImage}
-              alt={post.titulo}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 1200px"
-              className="object-cover"
-            />
-          </div>
+          <PostImage
+            src={optimizedFeaturedImage}
+            alt={post.titulo}
+            priority
+            className="!my-0 !mb-12"
+          />
 
           <div className="prose prose-blue dark:prose-invert lg:prose-lg max-w-none
             prose-headings:font-black prose-headings:tracking-tighter prose-headings:italic
