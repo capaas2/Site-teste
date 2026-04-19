@@ -16,13 +16,13 @@ Este documento detalha o fluxo de trabalho dos agentes de IA para a criação, r
 | **05** | **Ivan (Ideia)** | Gera o conceito criativo e a estrutura narrativa da reportagem. |
 | **06** | **Tina (Título)** | Cria 5 opções de títulos magnéticos (Click-Through Rate otimizado). |
 | **07** | **Carlos (Copy)** | Escreve o rascunho completo da notícia em Markdown seguindo a voz da marca. |
-| **08** | **Rebeca (Revisão)** | Ajusta o tom, gramática e garante a fluidez da leitura. |
-| **09** | **Felipe (Foto)** | Define as metatags da imagem principal e busca sugestões visuais. |
-| **10** | **Gabriel (Gerador)** | Gera prompts e metadados para as mídias sociais e imagens de IA. |
+| **08** | **Eduardo (Editor-Chefe)** | Realiza a aprovação editorial e garante que a notícia cumpre os padrões de qualidade. |
+| **09** | **Felipe (Foto)** | Busca imagens reais na internet usando Brave Web Search para ilustrar a matéria. |
+| **10** | **Gabriel (Gerador)** | Fallback visual: busca alternativa de imagens se Felipe declarar `FALHA_VISUAL`. |
 | **11** | **Edgar (Edição)** | Formata o Markdown final, adicionando negritos e listas para escaneabilidade. |
 | **12** | **Lucas (Linkador)** | Injeta links internos para outras matérias do portal (Estratégia de SEO). |
-| **13** | **Nico (Newsletter)** | Cria a versão compacta da notícia para o disparo matinal de e-mail. |
-| **14** | **Eduardo (Editor-Chefe)** | Realiza a aprovação final e garante que a notícia cumpre os padrões editoriais. |
+| **13** | **Rebeca (Revisão)** | Auditoria autônoma final: valida imagens, links e qualidade editorial. Gate de publicação. |
+| **14** | **Nico (Newsletter)** | Cria a versão compacta da notícia para o disparo de e-mail. |
 | **15** | **Pedro (Página)** | Executa a injeção via API no banco de dados e gera a URL pública do post. |
 
 ---

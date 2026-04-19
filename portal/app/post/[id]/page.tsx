@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,13 +15,52 @@ import AffiliateWidget from "@/components/AffiliateWidget";
 import PostImage from "@/components/PostImage";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Calendar, User, Tag, Clock, Newspaper } from "lucide-react";
+import { Calendar, User, Tag, Clock, Newspaper, ShieldCheck } from "lucide-react";
 import { formatPostDate, formatPostTime } from "@/lib/date-utils";
 import rehypeRaw from "rehype-raw";
 
 export const revalidate = 120;
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80";
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { id } = await params;
+  const post = await getPost(id);
+
+  if (!post) {
+    return {
+      title: 'Post não encontrado | FolhaByte',
+    };
+  }
+
+  const plainTextDescription = post.conteudo_markdown
+    .replace(/[#*\[\]()_`>]/g, "")
+    .substring(0, 150)
+    .trim() + "...";
+
+  return {
+    title: `${post.titulo} | FolhaByte`,
+    description: plainTextDescription,
+    openGraph: {
+      title: post.titulo,
+      description: plainTextDescription,
+      images: [post.imagem_url || PLACEHOLDER],
+      type: "article",
+      publishedTime: post.publicado_em,
+      authors: [post.autor || "Redação FolhaByte"]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.titulo,
+      description: plainTextDescription,
+      images: [post.imagem_url || PLACEHOLDER],
+    }
+  };
+}
+
 
 async function getPost(id: string): Promise<Post | null> {
   const { data, error } = await supabase
@@ -146,8 +186,33 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
     ? `${post.imagem_url.split('?')[0]}?auto=format&fit=crop&q=80&w=1200`
     : post.imagem_url || PLACEHOLDER;
 
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": post.titulo,
+    "image": [optimizedFeaturedImage],
+    "datePublished": post.publicado_em,
+    "dateModified": post.publicado_em,
+    "author": [{
+      "@type": "Person",
+      "name": post.autor || "Redação FolhaByte",
+    }],
+    "publisher": {
+      "@type": "Organization",
+      "name": "FolhaByte",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://folhabyte.com.br/favicon.ico"
+      }
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+      />
       <ReadingProgress />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -240,6 +305,20 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
                 </div>
               </div>
             )}
+
+            <div className="mt-12 mb-8 p-6 rounded-3xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-600 dark:text-slate-400 not-prose">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-2xl flex items-center justify-center flex-shrink-0">
+                   <ShieldCheck className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div>
+                  <h4 className="text-base font-black text-slate-900 dark:text-white uppercase italic mb-1">Padrão Editorial FolhaByte</h4>
+                  <p className="leading-relaxed m-0 text-xs sm:text-sm">
+                    Este artigo foi submetido a rigorosa checagem de fatos e validação técnica pela equipe editorial do FolhaByte. Seguimos nossa rígida política de integridade de conteúdo, assegurando a precisão dos dados, isenção e alta qualidade técnica das informações apresentadas. Escrito por <strong>{post.autor || "nossa redação"}</strong>.
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <AdBanner className="mt-8" format="fluid" />
           </div>

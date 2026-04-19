@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   images: {
     remotePatterns: [
       {
@@ -28,7 +29,69 @@ const nextConfig: NextConfig = {
         hostname: "raw.githubusercontent.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images-assets.nasa.gov",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.nasa.gov",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.arcpublishing.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+        pathname: "/**",
+      },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "origin-when-cross-origin",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+          },
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self';",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' va.vercel-scripts.com pagead2.googlesyndication.com;",
+              "style-src 'self' 'unsafe-inline';",
+              "img-src 'self' blob: data: cfqwufidvchaybqknuar.supabase.co images.unsplash.com images.pexels.com cdn.skoda-storyboard.com cdn.motor1.com raw.githubusercontent.com images-assets.nasa.gov www.nasa.gov images.arcpublishing.com pagead2.googlesyndication.com;",
+              "font-src 'self' data:;",
+              "connect-src 'self' cfqwufidvchaybqknuar.supabase.co vitals.vercel-insights.com pagead2.googlesyndication.com;",
+              "frame-ancestors 'none';",
+              "upgrade-insecure-requests;",
+            ].join(" "),
+          },
+        ],
+      },
+    ];
   },
 };
 

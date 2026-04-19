@@ -126,20 +126,31 @@ Before executing any step that references an agent:
    - Use Output Examples as quality reference
    - Avoid Anti-Patterns listed in the agent definition
    - Apply Voice Guidance (vocabulary always/never use, tone rules)
-4. **Inject format context**: Check if the current step's frontmatter contains a `format:` field.
+4. **Inject squad data**: Check if the squad's `squad.yaml` contains a `data:` section.
+   If present:
+   a. For each file path listed in the `data:` array:
+      - Read the file content from the squad directory (relative to squad root, e.g., `squads/{name}/{data_path}`).
+      - Append to the agent's context, before format injection:
+        ```
+        --- SQUAD DATA: {data_path} ---
+
+        {file content}
+        ```
+   If no `data:` section is present, skip this step.
+5. **Inject format context**: Check if the current step's frontmatter contains a `format:` field.
    If present:
    a. Read `_opensquad/core/best-practices/{format}.md` (e.g., `_opensquad/core/best-practices/instagram-feed.md`)
       - If the file does not exist → **WARNING**: "Format '{format}' not found in _opensquad/core/best-practices/. Skipping format injection." Continue without format.
    b. Parse the YAML frontmatter to extract the `name` field
    c. Extract the Markdown body (everything after the YAML frontmatter closing `---`)
-   d. Append to the agent's context, before skill instructions:
+   d. Append to the agent's context, after squad data but before skill instructions:
       ```
       --- FORMAT: {name from frontmatter} ---
 
       {format file markdown body}
       ```
    If the step has no `format:` field, skip this step entirely (backward compatible).
-5. **Inject skill instructions**: Check which skills the agent declares in its frontmatter `skills:`.
+6. **Inject skill instructions**: Check which skills the agent declares in its frontmatter `skills:`.
    For each non-native skill declared:
    a. Read `skills/{skill}/SKILL.md`
    b. Extract the Markdown body (everything after the YAML frontmatter closing `---`)
@@ -154,8 +165,10 @@ Before executing any step that references an agent:
 
    The final agent context composition order is:
    ```
-   Agent (.agent.md) → Platform Best Practices → Skill Instructions
+   Agent (.agent.md) → Squad Data (data:) → Platform Best Practices → Skill Instructions
    ```
+
+### Task-Based Agent Execution
 
 ### Task-Based Agent Execution
 

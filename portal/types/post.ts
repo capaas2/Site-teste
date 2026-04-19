@@ -7,7 +7,7 @@ export interface Post {
   imagem_url: string | null;
   publicado_em: string;
   views: number;
-  affiliate_data?: any; // Dados de ofertas injetados pela IA
+  affiliate_data?: AffiliateData[] | null; // Dados de ofertas injetados pela IA
 }
 
 export interface AffiliateData {

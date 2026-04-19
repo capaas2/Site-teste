@@ -52,16 +52,21 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
-  // Slugs fixos que usam mapeamento amplo (v2.8)
+  // Slugs fixos que usam mapeamento amplo (v3.0 — unificado com pipeline)
   const categoryMap: Record<string, { term: string; exact: boolean }> = {
     "ia-software": { term: "IA", exact: false },
     "ia": { term: "IA", exact: false },
     "mobilidade": { term: "Mobilid", exact: false },
     "eletrificacao": { term: "Elétri", exact: false },
+    "eletricos": { term: "Elétri", exact: false },
     "cibersegurança": { term: "Segurança", exact: false },
+    "seguranca": { term: "Segurança", exact: false },
     "produtos": { term: "Produto", exact: false },
+    "gadgets": { term: "Gadget", exact: false },
     "sustentabilidade": { term: "Sustentab", exact: false },
-    "mercado": { term: "Mercado", exact: false }
+    "mercado": { term: "Mercado", exact: false },
+    "ciencia": { term: "Ciência", exact: false },
+    "reviews": { term: "Review", exact: false },
   };
 
   const mapping = categoryMap[categorySlug.toLowerCase()];

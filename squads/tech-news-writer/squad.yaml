@@ -5,7 +5,6 @@ skills:
   - web_fetch
   - image-fetcher
   - image-ai-generator
-  - apify
 data:
   - pipeline/data/research-brief.md
   - pipeline/data/domain-framework.md

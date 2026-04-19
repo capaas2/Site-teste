@@ -1,9 +1,10 @@
 checkpoints:
   - step-beto-busca
+  - step-caio-concorrencia
   - step-ivan-ideia
   - step-tina-titulo
-  - step-rebeca-revisao
   - step-eduardo-editorchefe
+  - step-rebeca-revisao
   - step-pedro-pagina
 steps:
   - step-teo-tendencia.md
@@ -13,11 +14,11 @@ steps:
   - step-ivan-ideia.md
   - step-tina-titulo.md
   - step-carlos-copy.md
-  - step-rebeca-revisao.md
+  - step-eduardo-editorchefe.md
   - step-felipe-foto.md
   - step-gabriel-gerador.md
   - step-edgar-edicao.md
   - step-lucas-linkador.md
+  - step-rebeca-revisao.md
   - step-nico-newsletter.md
-  - step-eduardo-editorchefe.md
   - step-pedro-pagina.md

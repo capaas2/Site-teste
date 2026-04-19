@@ -1,0 +1,18 @@
+images:
+  - id: cover_image
+    url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b"
+    caption: "— Vista macro de um escudo digital representando a segurança nas Eleições 2026"
+    alt: "Circuito eletrônico brilhante em forma de escudo"
+    nexus: "contexto da Resolução nº 23.748/2026 e blindagem democrática"
+  - id: conceptual_ai_art
+    url: "file:///C:/Users/super/.gemini/antigravity/brain/b8d07a48-676d-48f0-b558-208cb369d504/ai_artwork_1775598511749.png"
+    caption: "— Representação artística do 'Hardware da Verdade': biometria e criptografia protegendo a soberania popular"
+    alt: "Ilustração técnica de um escudo de dados azul sobre uma urna transparente"
+    nexus: "conceito central da narrativa e análise técnica profunda"
+  - id: watermarking_image
+    url: "https://images.unsplash.com/photo-1518770660439-4636190af475"
+    caption: "— Assinatura criptográfica de procedência obrigatória para conteúdos de IA"
+    alt: "Placa de circuito impresso com luzes neon"
+    nexus: "implementação do watermarking digital"
+
+status: "Assets finalized with both real and conceptual imagery."

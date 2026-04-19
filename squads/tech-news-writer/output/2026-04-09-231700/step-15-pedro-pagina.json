@@ -1,0 +1,22 @@
+{
+  "title": "GPT-5.4: A IA da OpenAI que já sabe usar o PC como um humano",
+  "slug": "gpt-5-4-ia-executora-openai-2026",
+  "category": "Inteligência Artificial",
+  "author": "Redação FolhaByte",
+  "date": "2026-04-09",
+  "excerpt": "A OpenAI lança o GPT-5.4 com raciocínio 'Thinking', janela de 1M de tokens e controle nativo de sistemas. Saiba por que o benchmark de 75% no OSWorld muda tudo.",
+  "featured_image": "gpt54_reasoning_interface.png",
+  "content_file": "news_content.md",
+  "newsletter_file": "step-14-nico-newsletter.md",
+  "benchmarks": {
+    "osworld": "75%",
+    "webarena": "68%",
+    "swe-bench": "80%"
+  },
+  "technical_details": {
+    "context_window": "1.05M tokens",
+    "base_price": "$2.50 / 1M tokens",
+    "main_feature": "Computer Use API"
+  },
+  "status": "PUBLISHED"
+}
