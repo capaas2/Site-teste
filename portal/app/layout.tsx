@@ -74,15 +74,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
           {/* Simple Analytics - Integrado via GitHub Student Pack */}
           <Script
+            data-collect-dnt="true"
             async
-            defer
             src="https://scripts.simpleanalyticscdn.com/latest.js"
             strategy="afterInteractive"
           />
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://queue.simpleanalyticscdn.com/noscript.gif"
+              src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true"
               alt=""
               referrerPolicy="no-referrer-when-downgrade"
             />
