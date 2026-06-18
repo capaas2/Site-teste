@@ -1,4 +1,13 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Termos e Condições de Uso | FolhaByte",
+  description: "Leia os Termos e Condições de Uso do portal FolhaByte para compreender as regras, licenças e responsabilidades ao navegar em nosso site.",
+  alternates: {
+    canonical: "/termos",
+  },
+};
 
 export default function TermsPage() {
   const lastUpdated = "06 de Abril de 2026";

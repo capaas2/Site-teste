@@ -1,4 +1,13 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Política de Privacidade | FolhaByte",
+  description: "Leia a Política de Privacidade do portal FolhaByte e saiba como tratamos e protegemos seus dados pessoais de forma transparente e segura.",
+  alternates: {
+    canonical: "/privacidade",
+  },
+};
 
 export default function PrivacyPage() {
   const lastUpdated = "06 de Abril de 2026";
