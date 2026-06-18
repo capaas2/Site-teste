@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AtSign, ExternalLink, Rss, Mail, MapPin, Phone } from "lucide-react";
+import { Rss, Mail, MapPin, Phone } from "lucide-react";
 import { NewsLetter } from "./NewsLetter";
 
 export function Footer() {
@@ -35,8 +35,6 @@ export function Footer() {
             Direto ao ponto, com visão de mercado e rigor técnico.
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="hover:text-blue-500 transition-colors"><AtSign className="w-5 h-5" /></Link>
-            <Link href="#" className="hover:text-blue-500 transition-colors"><ExternalLink className="w-5 h-5" /></Link>
             <Link href="#" className="hover:text-white transition-colors"><Rss className="w-5 h-5" /></Link>
           </div>
         </div>

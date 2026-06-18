@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { slugify } from "@/lib/slugify";
 import { 
-  Search, Sun, Moon, ExternalLink, AtSign, Rss, 
+  Search, Sun, Moon, Rss, 
   Menu, X, ChevronRight, 
   Globe, Shield, TrendingUp, Smartphone, Rocket, Zap, 
   Car, Code, Palette, Leaf, Cpu, Mail, Loader2, Tag
@@ -191,8 +191,6 @@ export function Navbar() {
           {/* Social Icons & Theme (Desktop) */}
           <div className="flex items-center gap-4 text-slate-400">
             <div className="hidden lg:flex items-center gap-4 border-r border-slate-800 pr-4 mr-2">
-              <Link href="#" className="hover:text-white transition-colors"><AtSign className="w-4 h-4" /></Link>
-              <Link href="#" className="hover:text-white transition-colors"><ExternalLink className="w-4 h-4" /></Link>
               <Link href="#" className="hover:text-white transition-colors"><Rss className="w-4 h-4" /></Link>
             </div>
             
@@ -275,17 +273,6 @@ export function Navbar() {
 
 
               {/* Social */}
-              <div>
-                <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2 mb-4 border-l-2 border-slate-700 pl-4">Siga a Redação</div>
-                <div className="grid grid-cols-2 gap-2 px-2">
-                  <Link href="#" className="flex items-center gap-2 text-[10px] uppercase font-black text-slate-400 hover:text-white bg-slate-800/20 p-4 rounded-2xl border border-slate-800/50 transition-all">
-                    <AtSign className="w-4 h-4" /> Instagram
-                  </Link>
-                  <Link href="#" className="flex items-center gap-2 text-[10px] uppercase font-black text-slate-400 hover:text-white bg-slate-800/20 p-4 rounded-2xl border border-slate-800/50 transition-all">
-                    <ExternalLink className="w-4 h-4" /> Twitter (X)
-                  </Link>
-                </div>
-              </div>
             </div>
             
             <div className="p-6 border-t border-slate-800 bg-slate-900/50">
