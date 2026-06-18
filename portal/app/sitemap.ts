@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 import { slugify } from '@/lib/slugify';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://folhabyte.com.br';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://folhabyte.dev';
 
   const { data: posts } = await supabase
     .from('posts')

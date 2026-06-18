@@ -45,9 +45,13 @@ export async function generateMetadata(
   return {
     title: `${post.titulo} | FolhaByte`,
     description: plainTextDescription,
+    alternates: {
+      canonical: `/post/${slug}`,
+    },
     openGraph: {
       title: post.titulo,
       description: plainTextDescription,
+      url: `/post/${slug}`,
       images: [post.imagem_url || PLACEHOLDER],
       type: "article",
       publishedTime: post.publicado_em,
@@ -225,7 +229,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       "name": "FolhaByte",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://folhabyte.com.br/favicon.ico"
+        "url": `${process.env.NEXT_PUBLIC_SITE_URL || 'https://folhabyte.dev'}/favicon.ico`
       }
     }
   };
