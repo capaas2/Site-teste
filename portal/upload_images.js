@@ -51,8 +51,8 @@ async function upload(filePath, fileName) {
 }
 
 const files = [
-    { p: 'c:\\Users\\gusta\\OneDrive\\Documentos\\Site-teste\\squads\\tech-news-writer\\output\\2026-06-18-004800\\v1\\assets\\quantum_passkey_vault.png', n: 'quantum_passkey_vault.png' },
-    { p: 'c:\\Users\\gusta\\OneDrive\\Documentos\\Site-teste\\squads\\tech-news-writer\\output\\2026-06-18-004800\\v1\\assets\\lattice_cryptography_mesh.png', n: 'lattice_cryptography_mesh.png' }
+    { p: 'c:\\Users\\gusta\\OneDrive\\Documentos\\Site-teste\\squads\\tech-news-writer\\output\\2026-06-18-013300\\v1\\assets\\wetware_biological_brain_chip.png', n: 'wetware_biological_brain_chip.png' },
+    { p: 'c:\\Users\\gusta\\OneDrive\\Documentos\\Site-teste\\squads\\tech-news-writer\\output\\2026-06-18-013300\\v1\\assets\\automated_microfluidic_incubator.png', n: 'automated_microfluidic_incubator.png' }
 ];
 
 (async () => {
