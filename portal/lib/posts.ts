@@ -56,6 +56,10 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
   const categoryMap: Record<string, { term: string; exact: boolean }> = {
     "ia-software": { term: "IA", exact: false },
     "ia": { term: "IA", exact: false },
+    "inteligencia-artificial": { term: "IA", exact: false },
+    "inteligência-artificial": { term: "IA", exact: false },
+    "inteligencia artificial": { term: "IA", exact: false },
+    "inteligência artificial": { term: "IA", exact: false },
     "mobilidade": { term: "Mobilid", exact: false },
     "eletrificacao": { term: "Elétri", exact: false },
     "eletricos": { term: "Elétri", exact: false },
@@ -69,16 +73,23 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
     "reviews": { term: "Review", exact: false },
   };
 
-  const mapping = categoryMap[categorySlug.toLowerCase()];
+  const normalizedSlug = categorySlug.toLowerCase().replace(/-/g, ' ');
+  const mapping = categoryMap[categorySlug.toLowerCase()] || categoryMap[normalizedSlug];
   const searchTerm = mapping ? mapping.term : categorySlug.replace(/-/g, ' ');
-  const isExact = mapping ? mapping.exact : true; // Tags da nuvem/contexto usam exact match
 
   const query = supabase
     .from("posts")
     .select("*", { count: "exact" });
 
-  // Para suportar categorias múltiplas (separadas por vírgula), sempre buscamos usando busca parcial
-  query.ilike("categoria", `%${searchTerm}%`);
+  // Unificação das categorias de IA e Inteligência Artificial para retornar os mesmos artigos
+  const isIACategory = ["ia", "ia software", "inteligencia artificial", "inteligência artificial"].includes(normalizedSlug);
+
+  if (isIACategory) {
+    query.or("categoria.ilike.IA,categoria.ilike.IA,%,categoria.ilike.%, IA,categoria.ilike.%, IA,%,categoria.ilike.%Inteligência Artificial%,categoria.ilike.%Inteligencia Artificial%");
+  } else {
+    // Para suportar categorias múltiplas (separadas por vírgula), sempre buscamos usando busca parcial
+    query.ilike("categoria", `%${searchTerm}%`);
+  }
 
   const { data, count, error } = await query
     .order("publicado_em", { ascending: false })
@@ -108,7 +119,15 @@ export async function getAllCategories(): Promise<{ name: string; count: number 
       const categories = post.categoria.split(",").map((c: string) => c.trim());
       categories.forEach((cat: string) => {
         if (cat) {
-          categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+          // Normaliza categorias de IA para contar tudo sob "IA"
+          const normalized = cat.toLowerCase();
+          let finalName = cat;
+          
+          if (["ia", "inteligencia artificial", "inteligência artificial"].includes(normalized)) {
+            finalName = "IA";
+          }
+          
+          categoryCounts[finalName] = (categoryCounts[finalName] || 0) + 1;
         }
       });
     }

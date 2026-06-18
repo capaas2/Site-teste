@@ -19,19 +19,24 @@ export function CategoryCarousel({ categories }: { categories: Category[] }) {
       </div>
       
       <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-4 px-4 mask-fade-right">
-        {categories.map((cat) => (
-          <Link
-            key={cat.name}
-            href={`/categoria/${cat.name.toLowerCase()}`}
-            className="flex-shrink-0 flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 text-xs font-bold whitespace-nowrap group"
-          >
-            <Hash className="w-3.5 h-3.5 text-slate-300 group-hover:text-blue-500 transition-colors" />
-            {cat.name}
-            <span className="ml-1 text-[9px] bg-slate-100 dark:bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded-md font-black group-hover:bg-blue-500 group-hover:text-white transition-colors">
-              {cat.count}
-            </span>
-          </Link>
-        ))}
+        {categories.map((cat) => {
+          const lowerName = cat.name.toLowerCase();
+          const isIA = ["ia", "inteligencia artificial", "inteligência artificial"].includes(lowerName);
+          const hrefSlug = isIA ? "ia" : lowerName;
+          return (
+            <Link
+              key={cat.name}
+              href={`/categoria/${hrefSlug}`}
+              className="flex-shrink-0 flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 text-xs font-bold whitespace-nowrap group"
+            >
+              <Hash className="w-3.5 h-3.5 text-slate-300 group-hover:text-blue-500 transition-colors" />
+              {cat.name}
+              <span className="ml-1 text-[9px] bg-slate-100 dark:bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded-md font-black group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                {cat.count}
+              </span>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

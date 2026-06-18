@@ -244,16 +244,22 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           
           <div className="mb-6">
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              {post.categoria.split(',').map((cat) => (
-                <Link
-                  key={cat.trim()}
-                  href={`/categoria/${cat.toLowerCase().trim()}`}
-                  className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
-                >
-                  <Tag className="w-3 h-3" />
-                  {cat.trim()}
-                </Link>
-              ))}
+              {post.categoria.split(',').map((cat) => {
+                const trimmedCat = cat.trim();
+                const lowerCat = trimmedCat.toLowerCase();
+                const isIA = ["ia", "inteligencia artificial", "inteligência artificial"].includes(lowerCat);
+                const hrefSlug = isIA ? "ia" : lowerCat;
+                return (
+                  <Link
+                    key={trimmedCat}
+                    href={`/categoria/${hrefSlug}`}
+                    className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+                  >
+                    <Tag className="w-3 h-3" />
+                    {trimmedCat}
+                  </Link>
+                );
+              })}
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-2 italic">
               {post.titulo}
