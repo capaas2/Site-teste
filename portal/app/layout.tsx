@@ -72,6 +72,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             crossOrigin="anonymous"
             strategy="afterInteractive"
           />
+          {/* Simple Analytics - Integrado via GitHub Student Pack */}
+          <Script
+            async
+            defer
+            src="https://scripts.simpleanalyticscdn.com/latest.js"
+            strategy="afterInteractive"
+          />
+          <noscript>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://queue.simpleanalyticscdn.com/noscript.gif"
+              alt=""
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </noscript>
         </Providers>
       </body>
     </html>
