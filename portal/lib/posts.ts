@@ -77,11 +77,8 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
     .from("posts")
     .select("*", { count: "exact" });
 
-  if (isExact) {
-    query.ilike("categoria", searchTerm);
-  } else {
-    query.ilike("categoria", `%${searchTerm}%`);
-  }
+  // Para suportar categorias múltiplas (separadas por vírgula), sempre buscamos usando busca parcial
+  query.ilike("categoria", `%${searchTerm}%`);
 
   const { data, count, error } = await query
     .order("publicado_em", { ascending: false })
@@ -106,8 +103,15 @@ export async function getAllCategories(): Promise<{ name: string; count: number 
 
   const categoryCounts: Record<string, number> = {};
   data.forEach((post: any) => {
-    const cat = post.categoria;
-    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+    if (post.categoria) {
+      // Divide por vírgula caso o post possua até duas categorias
+      const categories = post.categoria.split(",").map((c: string) => c.trim());
+      categories.forEach((cat: string) => {
+        if (cat) {
+          categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+        }
+      });
+    }
   });
 
   return Object.entries(categoryCounts)

@@ -36,9 +36,11 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-8 space-y-4">
             <div className="flex items-center gap-3">
-               <span className="bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg">
-                  {main.categoria}
-               </span>
+               {main.categoria.split(',').map((cat) => (
+                  <span key={cat.trim()} className="bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg">
+                    {cat.trim()}
+                  </span>
+               ))}
                <span className="text-white/80 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full">
                   <Clock className="w-3.5 h-3.5 text-blue-400" /> {formatPostTime(main.publicado_em)}
                </span>
@@ -71,9 +73,11 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent" />
             <div className="absolute bottom-0 p-6 space-y-2">
               <div className="flex items-center gap-2">
-                 <span className="bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
-                    {post.categoria}
-                 </span>
+                 {post.categoria.split(',').map((cat) => (
+                    <span key={cat.trim()} className="bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
+                      {cat.trim()}
+                    </span>
+                 ))}
                  <span className="text-white/80 text-[8px] font-bold uppercase tracking-widest flex items-center gap-1">
                     <Clock className="w-3 h-3 text-blue-400" /> {formatPostTime(post.publicado_em)}
                  </span>
@@ -103,7 +107,9 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
               <div className="flex items-center gap-2 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
                  <span className="text-blue-600">{formatPostTime(post.publicado_em)}</span>
                  <span className="h-1 w-1 rounded-full bg-slate-300" />
-                 {post.categoria}
+                 {post.categoria.split(',').map((cat) => (
+                   <span key={cat.trim()}>{cat.trim()}</span>
+                 ))}
               </div>
               <span className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 leading-snug italic">
                 {post.titulo}

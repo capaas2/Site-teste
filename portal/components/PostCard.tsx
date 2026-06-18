@@ -29,9 +29,11 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         </div>
         <div className="flex-1 min-w-0 space-y-1">
           <div className="flex items-center gap-2">
-            <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded">
-              {post.categoria}
-            </span>
+            {post.categoria.split(',').map((cat) => (
+              <span key={cat.trim()} className="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded">
+                {cat.trim()}
+              </span>
+            ))}
             <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
                <Clock className="w-2.5 h-2.5" /> {formattedTime}
             </span>
@@ -57,10 +59,12 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
-        <div className="absolute top-4 left-4">
-          <span className="bg-blue-600 text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
-            {post.categoria}
-          </span>
+        <div className="absolute top-4 left-4 flex items-center gap-1.5">
+          {post.categoria.split(',').map((cat) => (
+            <span key={cat.trim()} className="bg-blue-600 text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
+              {cat.trim()}
+            </span>
+          ))}
         </div>
         <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest text-slate-700 dark:text-slate-200 shadow-sm">
            <Clock className="w-3 h-3 text-blue-600" /> {formattedTime}

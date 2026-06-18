@@ -26,9 +26,13 @@ export function StoryStream({ posts, post, variant = "vertical" }: StoryStreamPr
             className="object-cover group-hover:scale-110 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
-          <span className="absolute top-4 left-4 bg-blue-600 text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
-             {post.categoria}
-          </span>
+          <div className="absolute top-4 left-4 flex items-center gap-1.5">
+            {post.categoria.split(',').map((cat) => (
+              <span key={cat.trim()} className="bg-blue-600 text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
+                {cat.trim()}
+              </span>
+            ))}
+          </div>
           <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white/90 text-[10px] font-bold uppercase tracking-widest">
              <Clock className="w-3.5 h-3.5 text-blue-400" /> {formatPostTime(post.publicado_em)}
           </div>

@@ -137,7 +137,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   if (!post) notFound();
 
-  const relatedPosts = await getRelatedPosts(post.categoria, post.id);
+  const primaryCategory = post.categoria.split(',')[0].trim();
+  const relatedPosts = await getRelatedPosts(primaryCategory, post.id);
   
   // ... (reading time logic)
 
@@ -243,13 +244,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           
           <div className="mb-6">
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <Link 
-                href={`/categoria/${post.categoria.toLowerCase().trim()}`}
-                className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
-              >
-                <Tag className="w-3 h-3" />
-                {post.categoria}
-              </Link>
+              {post.categoria.split(',').map((cat) => (
+                <Link
+                  key={cat.trim()}
+                  href={`/categoria/${cat.toLowerCase().trim()}`}
+                  className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+                >
+                  <Tag className="w-3 h-3" />
+                  {cat.trim()}
+                </Link>
+              ))}
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-2 italic">
               {post.titulo}
@@ -305,7 +309,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             {relatedPosts.length > 0 && (
               <div className="mt-16 pt-10 border-t border-slate-100 dark:border-slate-800/50">
                 <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-8">
-                  Mais em <span className="text-blue-600 italic">{post.categoria}</span>
+                  Mais em <span className="text-blue-600 italic">{primaryCategory}</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {relatedPosts.map((p) => (

@@ -54,9 +54,13 @@ export function FeaturedRanking({ posts }: FeaturedRankingProps) {
 
             {/* Conteúdo */}
             <div className="p-6 pt-2 flex-1 flex flex-col relative z-10">
-              <span className="text-[10px] uppercase font-black tracking-[0.2em] text-blue-600 mb-3 block">
-                {post.categoria}
-              </span>
+              <div className="flex items-center gap-2 mb-3">
+                {post.categoria.split(',').map((cat) => (
+                  <span key={cat.trim()} className="text-[10px] uppercase font-black tracking-[0.2em] text-blue-600">
+                    {cat.trim()}
+                  </span>
+                ))}
+              </div>
               <h3 className="text-lg font-extrabold text-slate-900 dark:text-white leading-tight mb-3 group-hover:text-blue-600 transition-colors">
                 {post.titulo}
               </h3>
