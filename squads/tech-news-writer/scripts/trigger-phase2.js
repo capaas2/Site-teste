@@ -58,11 +58,11 @@ async function triggerAffiliateSquad() {
   // 2. Disparar a execução do Motor Autônomo de Monetização
   try {
     const monetizerScript = path.resolve(__dirname, "../../affiliate-monetizer/scripts/automatic-monetizer.js");
-    console.log(`⚡ Executando Motor Autônomo: node "${monetizerScript}"`);
+    console.log(`⚡ Executando Motor Autônomo: "${process.execPath}" "${monetizerScript}"`);
     
     // Execução assíncrona (não bloqueia a resposta do Pedro Página)
     const { spawn } = require("child_process");
-    const child = spawn("node", [monetizerScript], {
+    const child = spawn(process.execPath, [monetizerScript], {
       detached: true,
       stdio: "inherit"
     });

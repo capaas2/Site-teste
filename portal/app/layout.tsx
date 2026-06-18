@@ -19,6 +19,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "FolhaByte — Tecnologia de Alta Performance",
   description: "As melhores notícias de tecnologia, IA, gadgets e mercado digital.",
+  other: {
+    "google-adsense-account": "ca-pub-8490210284834886",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

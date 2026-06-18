@@ -130,7 +130,7 @@ async function publishNews() {
           const { execSync } = require("child_process");
           const triggerScript = path.join(__dirname, "trigger-phase2.js");
           if (fs.existsSync(triggerScript)) {
-            execSync(`node "${triggerScript}" ${newPostId} "${resolvedPath}"`, { stdio: "inherit" });
+            execSync(`"${process.execPath}" "${triggerScript}" ${newPostId} "${resolvedPath}"`, { stdio: "inherit" });
           } else {
             console.log("   ⚠️ trigger-phase2.js não encontrado — monetização ignorada.");
           }

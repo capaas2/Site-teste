@@ -16,7 +16,7 @@
 8. **NUNCA** reutilize URL de imagem de artigos anteriores — cada pauta exige busca nova.
 9. **NUNCA** use `file:///`, `localhost`, ou URLs que exijam login.
 10. **NUNCA** repita a imagem de capa (`imagem_url`) dentro do corpo (`conteudo_markdown`).
-11. **NUNCA** use imagens geradas por IA (Midjourney, DALL-E, Stable Diffusion).
+11. **NUNCA** use imagens de IA genéricas, cartunescas ou com bonecos 3D clichês. Imagens geradas por IA só são permitidas como fallback tático (mockups de software limpos, diagramas de hardware ou data centers premium) geradas exclusivamente pelo Gabriel Gerador.
 
 ### URLs Permanentemente Banidas:
 ```

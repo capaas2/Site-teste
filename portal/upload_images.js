@@ -1,8 +1,35 @@
 const fs = require('fs');
 const path = require('path');
 
-const supabaseUrl = "https://cfqwufidvchaybqknuar.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmcXd1ZmlkdmNoYXlicWtudWFyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTMyODA0OCwiZXhwIjoyMDkwOTA0MDQ4fQ.4EFbfd7AahVJNuvv8kur-7upva7GPPFWuHwEWIDyQkI";
+function loadEnv() {
+  const possiblePaths = [
+    path.resolve(__dirname, ".env.local"),
+    path.resolve(__dirname, "../portal/.env.local"),
+    path.resolve(__dirname, "../.env"),
+    path.resolve(process.cwd(), ".env.local"),
+    path.resolve(process.cwd(), ".env"),
+  ];
+
+  for (const envPath of possiblePaths) {
+    if (fs.existsSync(envPath)) {
+      const envFile = fs.readFileSync(envPath, "utf8");
+      return Object.fromEntries(
+        envFile
+          .split("\n")
+          .filter((line) => line.includes("=") && !line.startsWith("#"))
+          .map((line) => {
+            const idx = line.indexOf("=");
+            return [line.slice(0, idx).trim(), line.slice(idx + 1).trim()];
+          })
+      );
+    }
+  }
+  return {};
+}
+
+const env = loadEnv();
+const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "https://cfqwufidvchaybqknuar.supabase.co";
+const supabaseKey = env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmcXd1ZmlkdmNoYXlicWtudWFyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTMyODA0OCwiZXhwIjoyMDkwOTA0MDQ4fQ.4EFbfd7AahVJNuvv8kur-7upva7GPPFWuHwEWIDyQkI";
 
 async function upload(filePath, fileName) {
     try {
@@ -24,8 +51,8 @@ async function upload(filePath, fileName) {
 }
 
 const files = [
-    { p: 'C:\\Users\\super\\.gemini\\antigravity\\brain\\8c75ad88-7e9f-41b0-9dda-6f82b227f134\\gpt54_reasoning_interface_1775777748353.png', n: 'gpt54_reasoning.png' },
-    { p: 'C:\\Users\\super\\.gemini\\antigravity\\brain\\8c75ad88-7e9f-41b0-9dda-6f82b227f134\\gpt54_benchmark_computer_use_1775777769570.png', n: 'gpt54_benchmark.png' }
+    { p: 'c:\\Users\\gusta\\OneDrive\\Documentos\\Site-teste\\squads\\tech-news-writer\\output\\2026-06-18-004800\\v1\\assets\\quantum_passkey_vault.png', n: 'quantum_passkey_vault.png' },
+    { p: 'c:\\Users\\gusta\\OneDrive\\Documentos\\Site-teste\\squads\\tech-news-writer\\output\\2026-06-18-004800\\v1\\assets\\lattice_cryptography_mesh.png', n: 'lattice_cryptography_mesh.png' }
 ];
 
 (async () => {

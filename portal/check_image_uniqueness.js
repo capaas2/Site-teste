@@ -1,17 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { createClient } = require("@supabase/supabase-js");
-
-/**
- * Verificador de Unicidade de Imagens para o Squad FolhaByte.
- * 
- * Modo 1 (sem argumentos): Lista todas as URLs recentes.
- * Modo 2 (com URL): Verifica se uma URL específica já foi usada.
- * 
- * Uso:
- *   node check_image_uniqueness.js                    → Lista URLs recentes
- *   node check_image_uniqueness.js <URL_PARA_CHECAR>  → Verifica se é única
- */
 
 // Carregar credenciais do .env.local
 function loadEnv() {
@@ -19,6 +7,8 @@ function loadEnv() {
     path.resolve(__dirname, ".env.local"),
     path.resolve(__dirname, "portal/.env.local"),
     path.resolve(__dirname, "../portal/.env.local"),
+    path.resolve(process.cwd(), ".env.local"),
+    path.resolve(process.cwd(), "portal/.env.local"),
   ];
 
   for (const envPath of possiblePaths) {
@@ -43,20 +33,31 @@ function loadEnv() {
 const env = loadEnv();
 if (!env) return;
 
-const supabase = createClient(
-  env.NEXT_PUBLIC_SUPABASE_URL,
-  env.SUPABASE_SERVICE_ROLE_KEY
-);
+const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL || "https://cfqwufidvchaybqknuar.supabase.co";
+const supabaseKey = env.SUPABASE_SERVICE_ROLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmcXd1ZmlkdmNoYXlicWtudWFyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTMyODA0OCwiZXhwIjoyMDkwOTA0MDQ4fQ.4EFbfd7AahVJNuvv8kur-7upva7GPPFWuHwEWIDyQkI";
+
 
 async function getRecentImages(limit = 20) {
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id, titulo, imagem_url, conteudo_markdown")
-    .order("publicado_em", { ascending: false })
-    .limit(limit);
+  let data = [];
+  try {
+    const res = await fetch(`${supabaseUrl}/rest/v1/posts?select=id,titulo,imagem_url,conteudo_markdown&order=publicado_em.desc&limit=${limit}`, {
+      method: "GET",
+      headers: {
+        "apikey": supabaseKey,
+        "Authorization": `Bearer ${supabaseKey}`,
+        "Content-Type": "application/json"
+      }
+    });
 
-  if (error) {
-    console.error("Erro ao buscar imagens:", error.message);
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error("Erro ao buscar imagens:", errText);
+      process.exitCode = 1;
+      return new Map();
+    }
+    data = await res.json();
+  } catch (error) {
+    console.error("Erro na requisição de imagens:", error.message);
     process.exitCode = 1;
     return new Map();
   }
