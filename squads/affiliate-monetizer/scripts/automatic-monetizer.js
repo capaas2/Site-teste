@@ -102,34 +102,45 @@ async function runAutonomousMonetization() {
     "Apple iPhone 17 Pro": { 
       price: "7.499,00", 
       store: "Amazon",
-      image: "https://m.media-amazon.com/images/I/71v2jVh6nIL._AC_SX679_.jpg"
+      image: "https://m.media-amazon.com/images/I/71v2jVh6nIL._AC_SX679_.jpg",
+      url: "https://www.amazon.com.br/s?k=iphone"
     },
     "Motorola Edge 70 Fusion": { 
       price: "3.299,00", 
       store: "Mercado Livre",
-      image: "https://m.media-amazon.com/images/G/32/social_share/amazon_logo._CB633261775_.png" // Placeholder estável se necessário ou link verificado
+      image: "https://m.media-amazon.com/images/G/32/social_share/amazon_logo._CB633261775_.png",
+      url: "https://lista.mercadolivre.com.br/motorola-edge"
     },
     "Ray-Ban Meta Smart Glasses": { 
       price: "3.199,00", 
-      store: "Amazon",
-      image: "https://m.media-amazon.com/images/I/51wXhN6yIUL._AC_SX679_.jpg"
+      store: "Mercado Livre",
+      image: "https://m.media-amazon.com/images/I/51wXhN6yIUL._AC_SX679_.jpg",
+      url: "https://www.mercadolivre.com.br/social/capazgustavo20230204213400?matt_word=folhabyte&matt_tool=84086513&forceInApp=true&ref=BCpWZFg%2FH3NvoVrlDlUCb%2F0KZkdxN3SjO%2B7p0Up4KLfw%2BngJlq1QjJ21PfsoummHAK4FUfdweNzIht%2B9oqIpCmCTZuOX0g1g%2Ff88nKzExBUZiSFKVVOKHIXHISsA5v8Bj6AD6jIECdAxR8Dl1Cv04ynVgOwdYxzjv%2BmurDOwGfIc%2B3Tgf51uYA26sXFB0w7x3d%2B8MfU%3D"
     },
     "Plaud NotePin AI Voice Recorder": { 
       price: "1.450,00", 
       store: "Amazon",
-      image: "https://m.media-amazon.com/images/I/61Nl0kO5oIL._AC_SX679_.jpg"
+      image: "https://m.media-amazon.com/images/I/61Nl0kO5oIL._AC_SX679_.jpg",
+      url: "https://www.amazon.com/s?k=Plaud+NotePin"
     }
   };
-
+ 
   foundProducts.forEach((product, index) => {
-    const info = catalog2026[product] || { price: "0,00", store: "Loja", image: "" };
+    const info = catalog2026[product] || { price: "0,00", store: "Loja", image: "", url: "" };
+    const baseUri = info.url || `https://www.amazon.com.br/s?k=${encodeURIComponent(product)}`;
+    let finalAffiliateUrl = baseUri;
+    
+    // Se não for um link já completo (como o do Mercado Livre), adiciona a tag
+    if (!baseUri.includes("matt_tool") && !baseUri.includes("tag=")) {
+      finalAffiliateUrl = baseUri.includes("?") ? `${baseUri}&tag=[AFILIADO]` : `${baseUri}?tag=[AFILIADO]`;
+    }
     
     affiliateData.push({
       productName: product,
       price: info.price,
       store: info.store,
       productImage: info.image,
-      affiliateUrl: `https://store.com/p/${product.replace(/ /g,'_')}?tag=[AFILIADO]`,
+      affiliateUrl: finalAffiliateUrl,
       isBestChoice: product.includes("iPhone") || index === 0
     });
 
