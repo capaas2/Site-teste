@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Post } from "@/types/post";
 import { formatPostTime } from "@/lib/date-utils";
 import { Clock, TrendingUp } from "lucide-react";
+import { slugify } from "@/lib/slugify";
 
 interface SidebarProps {
   posts: Post[];
@@ -25,7 +26,7 @@ export function Sidebar({ posts }: SidebarProps) {
         </div>
         <div className="p-8 space-y-8">
           {posts.slice(0, 5).map((post: Post, index: number) => (
-            <Link key={post.id} href={`/post/${post.id}`} className="flex gap-5 group items-start">
+            <Link key={post.id} href={`/post/${slugify(post.titulo)}`} className="flex gap-5 group items-start">
               <span className="text-5xl font-black text-blue-300/20 leading-none w-12 flex-shrink-0 italic group-hover:text-white/40 transition-all group-hover:scale-110">
                 {index + 1}
               </span>

@@ -3,6 +3,7 @@ import { Clock, ExternalLink } from "lucide-react";
 import { Post } from "@/types/post";
 import { formatPostTime } from "@/lib/date-utils";
 import Image from "next/image";
+import { slugify } from "@/lib/slugify";
 
 interface StoryStreamProps {
   posts?: Post[];
@@ -14,7 +15,7 @@ export function StoryStream({ posts, post, variant = "vertical" }: StoryStreamPr
   if (variant === "horizontal" && post) {
     return (
       <Link 
-        href={`/post/${post.id}`}
+        href={`/post/${slugify(post.titulo)}`}
         className="flex-shrink-0 w-80 snap-start group"
       >
         <div className="relative h-48 w-full rounded-3xl overflow-hidden mb-4 border border-slate-200 dark:border-slate-800 shadow-sm transition-all group-hover:shadow-xl group-hover:shadow-blue-500/10 group-hover:-translate-y-1">
@@ -60,7 +61,7 @@ export function StoryStream({ posts, post, variant = "vertical" }: StoryStreamPr
           return (
             <div key={post.id} className="relative group">
               <div className="absolute -left-[21px] top-1.5 w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700 border-2 border-white dark:border-slate-900 group-hover:bg-red-500 group-hover:scale-125 transition-all" />
-              <Link href={`/post/${post.id}`} className="block space-y-1">
+              <Link href={`/post/${slugify(post.titulo)}`} className="block space-y-1">
                 <span className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                    <Clock className="w-3 h-3" /> {timeStr}
                 </span>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { slugify } from "@/lib/slugify";
 import { 
   Search, Sun, Moon, ExternalLink, AtSign, Rss, 
   Menu, X, ChevronRight, 
@@ -166,7 +167,7 @@ export function Navbar() {
                         {suggestions.posts.map((post) => (
                           <Link
                             key={post.id}
-                            href={`/post/${post.id}`}
+                            href={`/post/${slugify(post.titulo)}`}
                             className="flex flex-col px-3 py-2.5 rounded-xl hover:bg-slate-800 transition-colors group"
                           >
                             <span className="text-xs font-bold text-slate-200 group-hover:text-blue-500 transition-colors line-clamp-1">{post.titulo}</span>
@@ -387,7 +388,7 @@ export function Navbar() {
                       {suggestions.posts.map((post) => (
                         <Link
                           key={post.id}
-                          href={`/post/${post.id}`}
+                          href={`/post/${slugify(post.titulo)}`}
                           onClick={() => setIsMobileSearchOpen(false)}
                           className="flex flex-col p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 transition-all group"
                         >

@@ -18,17 +18,18 @@ import remarkGfm from "remark-gfm";
 import { Calendar, User, Tag, Clock, Newspaper, ShieldCheck } from "lucide-react";
 import { formatPostDate, formatPostTime } from "@/lib/date-utils";
 import rehypeRaw from "rehype-raw";
+import { slugify } from "@/lib/slugify";
 
 export const revalidate = 120;
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80";
 
 export async function generateMetadata(
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ slug: string }> },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { id } = await params;
-  const post = await getPost(id);
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     return {
@@ -62,11 +63,32 @@ export async function generateMetadata(
 }
 
 
-async function getPost(id: string): Promise<Post | null> {
+async function getPost(slugOrId: string): Promise<Post | null> {
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
+  
+  if (isUuid) {
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("id", slugOrId)
+      .single();
+    if (error || !data) return null;
+    return data as Post;
+  }
+
+  const { data: allPosts, error: listError } = await supabase
+    .from("posts")
+    .select("id, titulo");
+
+  if (listError || !allPosts) return null;
+
+  const matched = allPosts.find((p) => slugify(p.titulo) === slugOrId);
+  if (!matched) return null;
+
   const { data, error } = await supabase
     .from("posts")
     .select("*")
-    .eq("id", id)
+    .eq("id", matched.id)
     .single();
 
   if (error || !data) return null;
@@ -104,11 +126,11 @@ async function getRelatedPosts(category: string, currentId: string): Promise<Pos
 }
 
 
-export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
 
   const [post, sidebarPosts, latestPlantao] = await Promise.all([
-    getPost(id),
+    getPost(slug),
     getSidebarPosts(),
     getLatestPlantao(),
   ]);
@@ -287,7 +309,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {relatedPosts.map((p) => (
-                    <Link key={p.id} href={`/post/${p.id}`} className="group flex flex-col gap-4">
+                    <Link key={p.id} href={`/post/${slugify(p.titulo)}`} className="group flex flex-col gap-4">
                       <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800">
                         <Image 
                           src={p.imagem_url || PLACEHOLDER} 

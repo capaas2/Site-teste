@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Post } from "@/types/post";
 import { Calendar, User, Clock } from "lucide-react";
 import { formatPostDate, formatPostTime } from "@/lib/date-utils";
+import { slugify } from "@/lib/slugify";
 
 interface PostCardProps {
   post: Post;
@@ -17,7 +18,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
 
   if (variant === "horizontal") {
     return (
-      <Link href={`/post/${post.id}`} className="flex gap-4 group items-center">
+      <Link href={`/post/${slugify(post.titulo)}`} className="flex gap-4 group items-center">
         <div className="relative w-32 h-24 flex-shrink-0 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
           <Image
             src={post.imagem_url || PLACEHOLDER}
@@ -46,7 +47,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
 
   return (
     <Link
-      href={`/post/${post.id}`}
+      href={`/post/${slugify(post.titulo)}`}
       className="group flex flex-col bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-700 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500"
     >
       <div className="relative h-56 overflow-hidden">

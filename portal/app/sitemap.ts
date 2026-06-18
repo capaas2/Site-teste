@@ -1,16 +1,17 @@
 import { MetadataRoute } from 'next';
 import { supabase } from '@/lib/supabase';
+import { slugify } from '@/lib/slugify';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://folhabyte.com.br';
 
   const { data: posts } = await supabase
     .from('posts')
-    .select('id, publicado_em')
+    .select('id, titulo, publicado_em')
     .order('publicado_em', { ascending: false });
 
   const postUrls = (posts || []).map((post) => ({
-    url: `${baseUrl}/post/${post.id}`,
+    url: `${baseUrl}/post/${slugify(post.titulo)}`,
     lastModified: new Date(post.publicado_em),
     changeFrequency: 'daily' as const,
     priority: 0.8,

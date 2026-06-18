@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Post } from "@/types/post";
+import { slugify } from "@/lib/slugify";
 import { TrendingUp } from "lucide-react";
 
 interface FeaturedRankingProps {
@@ -30,7 +31,7 @@ export function FeaturedRanking({ posts }: FeaturedRankingProps) {
         {displayPosts.map((post, index) => (
           <Link
             key={post.id}
-            href={`/post/${post.id}`}
+            href={`/post/${slugify(post.titulo)}`}
             className="group relative flex flex-col h-full bg-white dark:bg-slate-900/50 backdrop-blur-md rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_40px_-15px_rgba(37,99,235,0.3)] shadow-sm"
           >
             {/* Numeral Gigante (Artístico) */}

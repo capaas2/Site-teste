@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Post } from "@/types/post";
 import { Clock } from "lucide-react";
 import { formatPostTime } from "@/lib/date-utils";
+import { slugify } from "@/lib/slugify";
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80";
 
@@ -21,7 +22,7 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
       {/* Notícia Principal — spans 2 cols */}
       {main && (
         <Link
-          href={`/post/${main.id}`}
+          href={`/post/${slugify(main.titulo)}`}
           className="lg:col-span-2 relative rounded-[2.5rem] overflow-hidden group min-h-[420px] block shadow-2xl shadow-blue-500/10 border border-slate-200 dark:border-slate-800"
         >
           <Image
@@ -57,7 +58,7 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
         {[second, third].filter(Boolean).map((post) => post && (
           <Link
             key={post.id}
-            href={`/post/${post.id}`}
+            href={`/post/${slugify(post.titulo)}`}
             className="relative rounded-[2rem] overflow-hidden group flex-1 min-h-[200px] block shadow-xl border border-slate-200 dark:border-slate-800"
           >
             <Image
@@ -98,7 +99,7 @@ export function HeroGrid({ featuredPosts, latestPosts }: HeroGridProps) {
         </div>
         <div className="space-y-6">
           {latestPosts.slice(0, 6).map((post) => (
-            <Link key={post.id} href={`/post/${post.id}`} className="flex flex-col gap-1 group">
+            <Link key={post.id} href={`/post/${slugify(post.titulo)}`} className="flex flex-col gap-1 group">
               <div className="flex items-center gap-2 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
                  <span className="text-blue-600">{formatPostTime(post.publicado_em)}</span>
                  <span className="h-1 w-1 rounded-full bg-slate-300" />
