@@ -1,6 +1,24 @@
 import { PostFeed } from "@/components/PostFeed";
 import { supabase } from "@/lib/supabase";
 import { Post } from "@/types/post";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}): Promise<Metadata> {
+  const { q } = await searchParams;
+  const query = q || "";
+  return {
+    title: query ? `Resultados para "${query}" | FolhaByte` : "Busca | FolhaByte",
+    description: `Resultados da busca no portal FolhaByte para o termo: "${query}".`,
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
+}
 
 export const revalidate = 0;
 

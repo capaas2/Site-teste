@@ -1,4 +1,13 @@
 import { Mail, MapPin, Send, MessageSquare } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Fale Conosco | FolhaByte",
+  description: "Entre em contato com as equipes editorial, de redação ou comercial do portal FolhaByte.",
+  alternates: {
+    canonical: "/contato",
+  },
+};
 
 export default function ContactPage() {
   return (

@@ -4,6 +4,23 @@ import { AdBanner } from "@/components/AdBanner";
 import { Pagination } from "@/components/Pagination";
 import Link from "next/link";
 import { ChevronRight, FolderOpen } from "lucide-react";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
+  return {
+    title: `Notícias sobre ${decodedSlug} | FolhaByte`,
+    description: `Fique atualizado com as últimas matérias, análises e novidades sobre ${decodedSlug} no portal FolhaByte.`,
+    alternates: {
+      canonical: `/categoria/${slug}`,
+    },
+  };
+}
 
 export const revalidate = 60;
 

@@ -4,6 +4,15 @@ import { AdBanner } from "@/components/AdBanner";
 import { Pagination } from "@/components/Pagination";
 import Link from "next/link";
 import { ChevronRight, Clock } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Últimas Notícias | FolhaByte",
+  description: "Acompanhe as últimas notícias, lançamentos e análises do mundo da tecnologia, inteligência artificial e gadgets em tempo real.",
+  alternates: {
+    canonical: "/ultimas",
+  },
+};
 
 export const revalidate = 60;
 

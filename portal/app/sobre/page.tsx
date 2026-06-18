@@ -1,4 +1,13 @@
 import { Info, Rocket, Target, ShieldCheck } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Quem Somos | FolhaByte",
+  description: "Saiba mais sobre a missão do FolhaByte: decodificar a tecnologia que molda o futuro com inteligência, curadoria humana e precisão editorial.",
+  alternates: {
+    canonical: "/sobre",
+  },
+};
 
 export default function AboutPage() {
   return (

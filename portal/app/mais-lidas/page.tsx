@@ -4,6 +4,15 @@ import { PostCard } from "@/components/PostCard";
 import { AdBanner } from "@/components/AdBanner";
 import Link from "next/link";
 import { ChevronRight, TrendingUp } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Notícias Mais Lidas | FolhaByte",
+  description: "Confira as matérias e notícias de tecnologia mais visualizadas e populares da semana na FolhaByte.",
+  alternates: {
+    canonical: "/mais-lidas",
+  },
+};
 
 export const revalidate = 120;
 
