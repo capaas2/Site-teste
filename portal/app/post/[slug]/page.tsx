@@ -20,6 +20,8 @@ import { formatPostDate, formatPostTime } from "@/lib/date-utils";
 import rehypeRaw from "rehype-raw";
 import { slugify } from "@/lib/slugify";
 import { headers } from "next/headers";
+import { translatePosts } from "@/lib/posts";
+import { getTranslation } from "@/lib/translations";
 
 export const revalidate = 120;
 
@@ -30,9 +32,9 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const postRaw = await getPost(slug);
 
-  if (!post) {
+  if (!postRaw) {
     return {
       title: 'Post não encontrado | FolhaByte',
     };
@@ -41,24 +43,15 @@ export async function generateMetadata(
   const headerList = await headers();
   const locale = headerList.get("x-locale") || "pt";
 
-  let activeTitle = post.titulo;
-  let activeContent = post.conteudo_markdown;
+  const [post] = translatePosts([postRaw], locale);
 
-  if (locale === "en" && post.titulo_en && post.conteudo_markdown_en) {
-    activeTitle = post.titulo_en;
-    activeContent = post.conteudo_markdown_en;
-  } else if (locale === "es" && post.titulo_es && post.conteudo_markdown_es) {
-    activeTitle = post.titulo_es;
-    activeContent = post.conteudo_markdown_es;
-  }
-
-  const plainTextDescription = activeContent
+  const plainTextDescription = post.conteudo_markdown
     .replace(/[#*\[\]()_`>]/g, "")
     .substring(0, 150)
     .trim() + "...";
 
   return {
-    title: `${activeTitle} | FolhaByte`,
+    title: `${post.titulo} | FolhaByte`,
     description: plainTextDescription,
     alternates: {
       canonical: `/post/${slug}`,
@@ -69,7 +62,7 @@ export async function generateMetadata(
       }
     },
     openGraph: {
-      title: activeTitle,
+      title: post.titulo,
       description: plainTextDescription,
       url: `/post/${slug}`,
       images: [post.imagem_url || PLACEHOLDER],
@@ -79,7 +72,7 @@ export async function generateMetadata(
     },
     twitter: {
       card: "summary_large_image",
-      title: activeTitle,
+      title: post.titulo,
       description: plainTextDescription,
       images: [post.imagem_url || PLACEHOLDER],
     }
@@ -153,27 +146,21 @@ async function getRelatedPosts(category: string, currentId: string): Promise<Pos
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const [post, sidebarPosts, latestPlantao] = await Promise.all([
+  const [postRaw, sidebarPostsRaw, latestPlantaoRaw] = await Promise.all([
     getPost(slug),
     getSidebarPosts(),
     getLatestPlantao(),
   ]);
 
-  if (!post) notFound();
+  if (!postRaw) notFound();
 
   const headerList = await headers();
   const locale = headerList.get("x-locale") || "pt";
 
-  let activeTitle = post.titulo;
-  let activeContent = post.conteudo_markdown;
-
-  if (locale === "en" && post.titulo_en && post.conteudo_markdown_en) {
-    activeTitle = post.titulo_en;
-    activeContent = post.conteudo_markdown_en;
-  } else if (locale === "es" && post.titulo_es && post.conteudo_markdown_es) {
-    activeTitle = post.titulo_es;
-    activeContent = post.conteudo_markdown_es;
-  }
+  // Tradução do post e listagens secundárias
+  const [post] = translatePosts([postRaw], locale);
+  const sidebarPosts = translatePosts(sidebarPostsRaw, locale);
+  const latestPlantao = translatePosts(latestPlantaoRaw, locale);
 
   const getLocalizedHref = (path: string) => {
     if (locale === "pt") return path;
@@ -181,18 +168,19 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   };
 
   const primaryCategory = post.categoria.split(',')[0].trim();
-  const relatedPosts = await getRelatedPosts(primaryCategory, post.id);
+  const relatedPostsRaw = await getRelatedPosts(primaryCategory, post.id);
+  const relatedPosts = translatePosts(relatedPostsRaw, locale);
 
   // Calcular Tempo de Leitura
-  const wordCount = activeContent.split(/\s+/).length;
+  const wordCount = post.conteudo_markdown.split(/\s+/).length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
-  const formattedDate = formatPostDate(post.publicado_em);
+  const formattedDate = formatPostDate(post.publicado_em, locale);
   const formattedTime = formatPostTime(post.publicado_em);
 
   // REGRA: Processamento de Conteúdo FolhaByte (v2.20.16)
   // Substituímos as tags customizadas por componentes HTML que o ReactMarkdown processará via rehypeRaw
-  const processedMarkdown = activeContent
+  const processedMarkdown = post.conteudo_markdown
     .replace(/^# .*\n/g, '')         // Remove o título redundante no topo do MD
     .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
     .replace(/\[(IMAGEM|DETALHE_IMAGEM|INFO_GRAFICO):\s*([^|\]]+)(?:\s*\|\s*LEGENDA:\s*([^\]]+))?\]/gi, (match, type, firstPart, secondPart) => {
@@ -253,13 +241,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
-    "headline": activeTitle,
+    "headline": post.titulo,
     "image": [optimizedFeaturedImage],
     "datePublished": post.publicado_em,
     "dateModified": post.publicado_em,
     "author": [{
       "@type": "Person",
-      "name": post.autor || "Redação FolhaByte",
+      "name": post.autor || getTranslation(locale, "author_redacao"),
     }],
     "publisher": {
       "@type": "Organization",
@@ -303,7 +291,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               })}
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-2 italic">
-              {activeTitle}
+              {post.titulo}
             </h1>
           </div>
 
@@ -313,7 +301,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                  <User className="w-4 h-4 text-white" />
               </div>
               <div className="flex flex-col">
-                 <span className="text-[9px] uppercase tracking-widest font-bold text-slate-400 leading-none mb-1">Autoridade</span>
+                 <span className="text-[9px] uppercase tracking-widest font-bold text-slate-400 leading-none mb-1">{getTranslation(locale, "authority")}</span>
                  <span className="font-black uppercase tracking-tight text-slate-900 dark:text-white text-xs leading-none">{post.autor}</span>
               </div>
             </div>
@@ -324,17 +312,17 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                {formattedTime}
             </span>
             <span className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 font-bold bg-blue-50 dark:bg-blue-950/20 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest">
-              <Clock className="w-3.5 h-3.5" /> {readingTime} min de leitura
+              <Clock className="w-3.5 h-3.5" /> {readingTime} {getTranslation(locale, "min_read")}
             </span>
           </div>
 
           <div className="mb-8">
-            <ShareButtons titulo={activeTitle} />
+            <ShareButtons titulo={post.titulo} />
           </div>
 
           <PostImage
             src={optimizedFeaturedImage}
-            alt={activeTitle}
+            alt={post.titulo}
             priority
             className="!my-0 !mb-12"
           />
@@ -356,11 +344,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             {relatedPosts.length > 0 && (
               <div className="mt-16 pt-10 border-t border-slate-100 dark:border-slate-800/50">
                 <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-8">
-                  Mais em <span className="text-blue-600 italic">{primaryCategory}</span>
+                  {getTranslation(locale, "more_in")} <span className="text-blue-600 italic">{primaryCategory}</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {relatedPosts.map((p) => (
-                    <Link key={p.id} href={getLocalizedHref(`/post/${slugify(p.titulo)}`)} className="group flex flex-col gap-4">
+                    <Link key={p.id} href={getLocalizedHref(`/post/${p.original_titulo ? slugify(p.original_titulo) : slugify(p.titulo)}`)} className="group flex flex-col gap-4">
                       <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800">
                         <Image 
                           src={p.imagem_url || PLACEHOLDER} 
@@ -385,9 +373,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                    <ShieldCheck className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div>
-                  <h4 className="text-base font-black text-slate-900 dark:text-white uppercase italic mb-1">Padrão Editorial FolhaByte</h4>
+                  <h4 className="text-base font-black text-slate-900 dark:text-white uppercase italic mb-1">{getTranslation(locale, "editorial_standard")}</h4>
                   <p className="leading-relaxed m-0 text-xs sm:text-sm">
-                    Este artigo foi submetido a rigorosa checagem de fatos e validação técnica pela equipe editorial do FolhaByte. Seguimos nossa rígida política de integridade de conteúdo, assegurando a precisão dos dados, isenção e alta qualidade técnica das informações apresentadas. Escrito por <strong>{post.autor || "nossa redação"}</strong>.
+                    {getTranslation(locale, "editorial_standard_desc")} <strong>{post.autor || getTranslation(locale, "our_editorial")}</strong>.
                   </p>
                 </div>
               </div>
@@ -412,16 +400,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   <Newspaper className="w-5 h-5" />
                </div>
                <h3 className="text-xl font-black italic uppercase tracking-tighter text-slate-900 dark:text-white">
-                  Plantão <span className="text-red-600">Tech</span>
+                  {getTranslation(locale, "tech_alert_title")} <span className="text-red-600">Tech</span>
                </h3>
             </div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Notícias de Última Hora</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">{getTranslation(locale, "breaking_news")}</span>
          </div>
          
          {/* Carrossel Horizontal de Notícias */}
          <div className="flex overflow-x-auto gap-6 pb-8 scrollbar-hide snap-x snap-mandatory">
             {latestPlantao.map((p) => (
-               <StoryStream key={p.id} post={p} variant="horizontal" />
+               <StoryStream key={p.id} post={p} variant="horizontal" locale={locale} />
             ))}
          </div>
       </section>

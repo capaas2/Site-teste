@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { getTranslation } from "@/lib/translations";
 
 interface PaginationProps {
   currentPage: number;
@@ -11,6 +13,9 @@ interface PaginationProps {
 }
 
 export function Pagination({ currentPage, totalCount, pageSize, baseUrl }: PaginationProps) {
+  const pathname = usePathname() || "";
+  const locale = pathname.startsWith('/en') ? 'en' : pathname.startsWith('/es') ? 'es' : 'pt';
+
   const totalPages = Math.ceil(totalCount / pageSize);
 
   if (totalPages <= 1) return null;
@@ -48,7 +53,7 @@ export function Pagination({ currentPage, totalCount, pageSize, baseUrl }: Pagin
           }`}
         >
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="hidden sm:inline">Anterior</span>
+          <span className="hidden sm:inline">{getTranslation(locale, "previous")}</span>
         </Link>
 
         {/* Números das Páginas */}
@@ -91,13 +96,13 @@ export function Pagination({ currentPage, totalCount, pageSize, baseUrl }: Pagin
               : "text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20"
           }`}
         >
-          <span className="hidden sm:inline">Próximo</span>
+          <span className="hidden sm:inline">{getTranslation(locale, "next")}</span>
           <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
 
       <div className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] italic">
-        Página <span className="text-blue-600">{currentPage}</span> de <span className="text-slate-900 dark:text-white">{totalPages}</span>
+        {getTranslation(locale, "page")} <span className="text-blue-600">{currentPage}</span> {getTranslation(locale, "page_of")} <span className="text-slate-900 dark:text-white">{totalPages}</span>
       </div>
     </nav>
   );

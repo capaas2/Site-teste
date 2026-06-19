@@ -2,15 +2,25 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Post } from "@/types/post";
 import { slugify } from "@/lib/slugify";
 import { TrendingUp } from "lucide-react";
+import { getTranslation } from "@/lib/translations";
 
 interface FeaturedRankingProps {
   posts: Post[];
 }
 
 export function FeaturedRanking({ posts }: FeaturedRankingProps) {
+  const pathname = usePathname() || "";
+  const locale = pathname.startsWith('/en') ? 'en' : pathname.startsWith('/es') ? 'es' : 'pt';
+
+  const getLocalizedHref = (href: string) => {
+    if (locale === 'pt') return href;
+    return `/${locale}${href === '/' ? '' : href}`;
+  };
+
   if (posts.length === 0) return null;
 
   // Pegamos apenas as top 3 ordenadas por visualizações
@@ -23,7 +33,7 @@ export function FeaturedRanking({ posts }: FeaturedRankingProps) {
           <TrendingUp className="w-5 h-5 text-white" />
         </div>
         <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white uppercase italic">
-          Os Mais <span className="text-blue-600">Lidos</span> do Dia
+          {getTranslation(locale, "weekly_hits")}
         </h2>
       </div>
 
@@ -31,7 +41,7 @@ export function FeaturedRanking({ posts }: FeaturedRankingProps) {
         {displayPosts.map((post, index) => (
           <Link
             key={post.id}
-            href={`/post/${slugify(post.titulo)}`}
+            href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)}
             className="group relative flex flex-col h-full bg-white dark:bg-slate-900/50 backdrop-blur-md rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_40px_-15px_rgba(37,99,235,0.3)] shadow-sm"
           >
             {/* Numeral Gigante (Artístico) */}
@@ -67,7 +77,7 @@ export function FeaturedRanking({ posts }: FeaturedRankingProps) {
               
               <div className="mt-auto pt-4 flex items-center justify-between">
                 <span className="text-xs font-medium text-slate-400">
-                  Por {post.autor}
+                  {getTranslation(locale, "by")} {post.autor}
                 </span>
                 <div className="h-0.5 w-0 group-hover:w-12 bg-blue-600 transition-all duration-500 rounded-full" />
               </div>

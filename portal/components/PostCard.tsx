@@ -8,17 +8,23 @@ import { slugify } from "@/lib/slugify";
 interface PostCardProps {
   post: Post;
   variant?: "default" | "horizontal";
+  locale?: string;
 }
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80";
 
-export function PostCard({ post, variant = "default" }: PostCardProps) {
-  const formattedDate = formatPostDate(post.publicado_em);
+export function PostCard({ post, variant = "default", locale = "pt" }: PostCardProps) {
+  const formattedDate = formatPostDate(post.publicado_em, locale);
   const formattedTime = formatPostTime(post.publicado_em);
+
+  const getLocalizedHref = (href: string) => {
+    if (locale === 'pt') return href;
+    return `/${locale}${href === '/' ? '' : href}`;
+  };
 
   if (variant === "horizontal") {
     return (
-      <Link href={`/post/${slugify(post.titulo)}`} className="flex gap-4 group items-center">
+      <Link href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)} className="flex gap-4 group items-center">
         <div className="relative w-32 h-24 flex-shrink-0 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
           <Image
             src={post.imagem_url || PLACEHOLDER}
@@ -49,7 +55,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
 
   return (
     <Link
-      href={`/post/${slugify(post.titulo)}`}
+      href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)}
       className="group flex flex-col bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-700 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500"
     >
       <div className="relative h-56 overflow-hidden">

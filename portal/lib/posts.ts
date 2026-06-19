@@ -11,25 +11,39 @@ async function getActiveLocale(): Promise<string> {
   }
 }
 
-function translatePosts(posts: Post[], locale: string): Post[] {
-  if (locale === "pt" || !posts) return posts || [];
+export function translatePosts(posts: Post[], locale: string): Post[] {
+  if (!posts) return [];
   
   return posts.map(post => {
+    const original_titulo = post.titulo;
+    let autor = post.autor;
+    if (locale !== "pt" && (autor === "Redação FolhaByte" || autor === "nossa redação" || !autor)) {
+      autor = locale === "en" ? "FolhaByte Editorial Staff" : "Redacción FolhaByte";
+    }
+    
     if (locale === "en" && post.titulo_en) {
       return {
         ...post,
         titulo: post.titulo_en,
-        conteudo_markdown: post.conteudo_markdown_en || post.conteudo_markdown
+        conteudo_markdown: post.conteudo_markdown_en || post.conteudo_markdown,
+        original_titulo,
+        autor
       };
     }
     if (locale === "es" && post.titulo_es) {
       return {
         ...post,
         titulo: post.titulo_es,
-        conteudo_markdown: post.conteudo_markdown_es || post.conteudo_markdown
+        conteudo_markdown: post.conteudo_markdown_es || post.conteudo_markdown,
+        original_titulo,
+        autor
       };
     }
-    return post;
+    return {
+      ...post,
+      original_titulo,
+      autor
+    };
   });
 }
 

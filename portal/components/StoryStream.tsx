@@ -1,21 +1,28 @@
 import Link from "next/link";
-import { Clock, ExternalLink } from "lucide-react";
+import { Clock } from "lucide-react";
 import { Post } from "@/types/post";
 import { formatPostTime } from "@/lib/date-utils";
 import Image from "next/image";
 import { slugify } from "@/lib/slugify";
+import { getTranslation } from "@/lib/translations";
 
 interface StoryStreamProps {
   posts?: Post[];
   post?: Post;
   variant?: "vertical" | "horizontal";
+  locale?: string;
 }
 
-export function StoryStream({ posts, post, variant = "vertical" }: StoryStreamProps) {
+export function StoryStream({ posts, post, variant = "vertical", locale = "pt" }: StoryStreamProps) {
+  const getLocalizedHref = (href: string) => {
+    if (locale === 'pt') return href;
+    return `/${locale}${href === '/' ? '' : href}`;
+  };
+
   if (variant === "horizontal" && post) {
     return (
       <Link 
-        href={`/post/${slugify(post.titulo)}`}
+        href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)}
         className="flex-shrink-0 w-80 snap-start group"
       >
         <div className="relative h-48 w-full rounded-3xl overflow-hidden mb-4 border border-slate-200 dark:border-slate-800 shadow-sm transition-all group-hover:shadow-xl group-hover:shadow-blue-500/10 group-hover:-translate-y-1">
@@ -54,7 +61,7 @@ export function StoryStream({ posts, post, variant = "vertical" }: StoryStreamPr
           <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
         </div>
         <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900 dark:text-white italic">
-          Plantão <span className="text-red-500">Tech</span>
+          {getTranslation(locale, "tech_alert_title")} <span className="text-red-500">Tech</span>
         </h3>
       </div>
 
@@ -64,8 +71,8 @@ export function StoryStream({ posts, post, variant = "vertical" }: StoryStreamPr
 
           return (
             <div key={post.id} className="relative group">
-              <div className="absolute -left-[21px] top-1.5 w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700 border-2 border-white dark:border-slate-900 group-hover:bg-red-500 group-hover:scale-125 transition-all" />
-              <Link href={`/post/${slugify(post.titulo)}`} className="block space-y-1">
+              <div className="absolute -left-[21px] top-1.5 w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700 border-2 border-white dark:border-slate-900 group-hover:bg-red-50 group-hover:scale-125 transition-all" />
+              <Link href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)} className="block space-y-1">
                 <span className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                    <Clock className="w-3 h-3" /> {timeStr}
                 </span>
@@ -79,10 +86,10 @@ export function StoryStream({ posts, post, variant = "vertical" }: StoryStreamPr
       </div>
 
       <Link 
-        href="/ultimas" 
+        href={getLocalizedHref("/ultimas")} 
         className="mt-8 flex items-center justify-center w-full py-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/10 transition-all border border-slate-100 dark:border-slate-800 border-dashed"
       >
-        Ver Todas as Últimas
+        {getTranslation(locale, "access_full_feed")}
       </Link>
     </div>
   );

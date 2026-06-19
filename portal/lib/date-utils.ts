@@ -3,9 +3,14 @@
  * Forçado para fuso horário America/Sao_Paulo (GMT-3) para precisão editorial.
  */
 
-export function formatPostDate(isoString: string): string {
+export function formatPostDate(isoString: string, locale = "pt"): string {
   const date = new Date(isoString);
-  return date.toLocaleDateString("pt-BR", {
+  const localeMap: Record<string, string> = {
+    pt: "pt-BR",
+    en: "en-US",
+    es: "es-ES",
+  };
+  return date.toLocaleDateString(localeMap[locale] || "pt-BR", {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -26,7 +31,7 @@ export function formatPostTime(isoString: string): string {
 /**
  * Retorna algo como "Hoje, 14:30" ou "Ontem, 10:00"
  */
-export function formatFriendlyDateTime(isoString: string): string {
+export function formatFriendlyDateTime(isoString: string, locale = "pt"): string {
   const date = new Date(isoString);
   const now = new Date();
   
@@ -37,7 +42,13 @@ export function formatFriendlyDateTime(isoString: string): string {
   const isToday = dateSP === nowSP;
   const time = formatPostTime(isoString);
   
-  if (isToday) return `Hoje, ${time}`;
+  if (isToday) {
+    if (locale === "en") return `Today, ${time}`;
+    if (locale === "es") return `Hoy, ${time}`;
+    return `Hoje, ${time}`;
+  }
   
-  return `${formatPostDate(isoString)} às ${time}`;
+  if (locale === "en") return `${formatPostDate(isoString, locale)} at ${time}`;
+  if (locale === "es") return `${formatPostDate(isoString, locale)} a las ${time}`;
+  return `${formatPostDate(isoString, locale)} às ${time}`;
 }

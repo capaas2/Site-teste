@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { slugify } from "@/lib/slugify";
+import { getTranslation } from "@/lib/translations";
 import { 
   Search, Sun, Moon, Rss, 
   Menu, X, ChevronRight, 
@@ -62,6 +63,18 @@ export function Navbar() {
     const searchParams = window.location.search;
     router.push(targetPath + searchParams);
   };
+
+  useEffect(() => {
+    if (!isLangOpen) return;
+    const handleOutsideClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest(".lang-selector-container")) {
+        setIsLangOpen(false);
+      }
+    };
+    document.addEventListener("click", handleOutsideClick);
+    return () => document.removeEventListener("click", handleOutsideClick);
+  }, [isLangOpen]);
 
   useEffect(() => setMounted(true), []);
 
@@ -123,7 +136,7 @@ export function Navbar() {
             className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
           >
             <Menu className="w-6 h-6" />
-            <span className="hidden md:inline text-xs font-black uppercase tracking-widest mt-1">Mais</span>
+            <span className="hidden md:inline text-xs font-black uppercase tracking-widest mt-1">{getTranslation(activeLocale, "more")}</span>
           </button>
 
           {/* Logo */}
@@ -144,7 +157,7 @@ export function Navbar() {
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
-                placeholder="Buscar no portal..."
+                placeholder={getTranslation(activeLocale, "search_placeholder")}
                 className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-800/50 text-white placeholder:text-slate-500 border border-slate-800 focus:border-blue-500/50 focus:outline-none focus:ring-0 text-sm transition-all"
               />
             </form>
@@ -154,7 +167,7 @@ export function Navbar() {
               <div className="absolute top-full left-0 right-0 mt-2 bg-slate-900/95 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                 {query.length < 2 ? (
                   <div className="p-4">
-                    <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 px-2">Tópicos em Alta</div>
+                    <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 px-2">{getTranslation(activeLocale, "trending_topics")}</div>
                     <div className="flex flex-wrap gap-2">
                       {["IA", "Mercado", "Cibersegurança", "Reviews", "Eletrificação"].map((topic) => (
                         <Link
@@ -172,7 +185,7 @@ export function Navbar() {
                     {/* Exibe Categorias Encontradas */}
                     {suggestions.categories.length > 0 && (
                       <div className="px-2 mb-2">
-                        <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest px-3 mb-1">Categorias</div>
+                        <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest px-3 mb-1">{getTranslation(activeLocale, "categories")}</div>
                         {suggestions.categories.map((cat) => (
                           <Link
                             key={cat}
@@ -191,11 +204,11 @@ export function Navbar() {
                     {/* Exibe Posts Encontrados */}
                     {suggestions.posts.length > 0 ? (
                       <div className="px-2">
-                        <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest px-3 mb-1">Notícias</div>
+                        <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest px-3 mb-1">{getTranslation(activeLocale, "news")}</div>
                         {suggestions.posts.map((post) => (
                           <Link
                             key={post.id}
-                            href={getLocalizedHref(`/post/${slugify(post.titulo)}`)}
+                            href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)}
                             className="flex flex-col px-3 py-2.5 rounded-xl hover:bg-slate-800 transition-colors group"
                           >
                             <span className="text-xs font-bold text-slate-200 group-hover:text-blue-500 transition-colors line-clamp-1">{post.titulo}</span>
@@ -206,7 +219,7 @@ export function Navbar() {
                     ) : (
                       !isSearching && (
                         <div className="p-6 text-center text-slate-500 text-xs">
-                          Nenhum resultado para "<span className="text-slate-300 italic">{query}</span>"
+                          {getTranslation(activeLocale, "no_results")} "<span className="text-slate-300 italic">{query}</span>"
                         </div>
                       )
                     )}
@@ -232,7 +245,7 @@ export function Navbar() {
                 </button>
 
                 {/* Seletor de Idiomas */}
-                <div className="relative group">
+                <div className="relative group lang-selector-container">
                   <button 
                     onClick={() => setIsLangOpen(!isLangOpen)}
                     className="flex items-center gap-1.5 hover:text-slate-200 text-slate-400 transition-colors uppercase font-black text-[10px] tracking-wider px-2 py-1 bg-slate-800/80 rounded-lg border border-slate-800"
@@ -240,34 +253,36 @@ export function Navbar() {
                     <Globe className="w-3.5 h-3.5 text-blue-500" />
                     <span>{activeLocale}</span>
                   </button>
-                  <div className={`absolute right-0 top-full mt-2 bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl min-w-[110px] z-50 ${isLangOpen ? "block" : "hidden md:group-hover:block"}`}>
-                    <button
-                      onClick={() => {
-                        handleLanguageChange("pt");
-                        setIsLangOpen(false);
-                      }}
-                      className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "pt" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
-                    >
-                      🇧🇷 PT
-                    </button>
-                    <button
-                      onClick={() => {
-                        handleLanguageChange("en");
-                        setIsLangOpen(false);
-                      }}
-                      className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "en" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
-                    >
-                      🇺🇸 EN
-                    </button>
-                    <button
-                      onClick={() => {
-                        handleLanguageChange("es");
-                        setIsLangOpen(false);
-                      }}
-                      className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "es" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
-                    >
-                      🇪🇸 ES
-                    </button>
+                  <div className={`absolute right-0 top-full pt-2 z-50 min-w-[110px] ${isLangOpen ? "block" : "hidden md:group-hover:block"}`}>
+                    <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
+                      <button
+                        onClick={() => {
+                          handleLanguageChange("pt");
+                          setIsLangOpen(false);
+                        }}
+                        className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "pt" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
+                      >
+                        🇧🇷 PT
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleLanguageChange("en");
+                          setIsLangOpen(false);
+                        }}
+                        className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "en" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
+                      >
+                        🇺🇸 EN
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleLanguageChange("es");
+                          setIsLangOpen(false);
+                        }}
+                        className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "es" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
+                      >
+                        🇪🇸 ES
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -312,7 +327,7 @@ export function Navbar() {
           {/* Drawer */}
           <div className="relative w-full max-w-sm bg-slate-900 h-full shadow-2xl flex flex-col border-r border-slate-800 animate-in slide-in-from-left duration-300">
             <div className="p-6 border-b border-slate-800 flex items-center justify-between">
-              <span className="text-white font-black text-xl tracking-tighter uppercase italic">Explorar <span className="text-blue-500">Portal</span></span>
+              <span className="text-white font-black text-xl tracking-tighter uppercase italic">{getTranslation(activeLocale, "explore_portal")}</span>
               <button 
                 onClick={() => setIsSidebarOpen(false)}
                 className="p-2 hover:bg-slate-800 rounded-full transition-colors"
@@ -324,7 +339,7 @@ export function Navbar() {
             <div className="flex-1 overflow-y-auto p-4 space-y-8 no-scrollbar pt-6">
               {/* Seção Principal (Copied from Navbar) */}
               <div>
-                <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2 mb-4 border-l-2 border-blue-500 pl-4">Menu Principal</div>
+                <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2 mb-4 border-l-2 border-blue-500 pl-4">{getTranslation(activeLocale, "main_menu")}</div>
                 <div className="grid grid-cols-1 gap-1">
                   {mainNavItems.map((item) => (
                     <Link
@@ -360,7 +375,7 @@ export function Navbar() {
                 autoFocus
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="O que você está buscando?"
+                placeholder={getTranslation(activeLocale, "search_question")}
                 className="w-full bg-transparent text-white text-lg font-bold placeholder:text-slate-600 focus:outline-none"
               />
             </form>
@@ -380,7 +395,7 @@ export function Navbar() {
               <div className="space-y-6">
                 <div>
                   <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <TrendingUp className="w-3 h-3" /> Tópicos em Alta
+                    <TrendingUp className="w-3 h-3" /> {getTranslation(activeLocale, "trending_topics")}
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {["IA", "Mercado", "Cibersegurança", "Reviews", "Eletrificação"].map((topic) => (
@@ -399,11 +414,11 @@ export function Navbar() {
                 
                 <div className="pt-6 border-t border-white/5">
                    <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <Zap className="w-3 h-3" /> Sugestão Rápida
+                    <Zap className="w-3 h-3" /> {getTranslation(activeLocale, "quick_suggestion")}
                   </div>
                   <div className="p-6 rounded-3xl bg-gradient-to-br from-blue-600/20 to-indigo-600/20 border border-blue-500/20 flex flex-col items-center text-center gap-3">
                      <Rocket className="w-8 h-8 text-blue-500" />
-                     <p className="text-slate-300 text-sm font-medium">Busque por qualquer tema, produto ou categoria para resultados inteligentes.</p>
+                     <p className="text-slate-300 text-sm font-medium">{getTranslation(activeLocale, "quick_suggestion_desc")}</p>
                   </div>
                 </div>
               </div>
@@ -419,7 +434,7 @@ export function Navbar() {
                 {/* Categorias Sugeridas */}
                 {suggestions.categories.length > 0 && (
                   <div>
-                    <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest mb-3">Categorias</div>
+                    <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest mb-3">{getTranslation(activeLocale, "categories")}</div>
                     <div className="space-y-1">
                       {suggestions.categories.map((cat) => (
                         <Link
@@ -439,12 +454,12 @@ export function Navbar() {
                 {/* Posts Sugeridos */}
                 {suggestions.posts.length > 0 ? (
                   <div>
-                    <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest mb-3">Notícias Recentes</div>
+                    <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest mb-3">{getTranslation(activeLocale, "recent_news")}</div>
                     <div className="space-y-3">
                       {suggestions.posts.map((post) => (
                         <Link
                           key={post.id}
-                          href={getLocalizedHref(`/post/${slugify(post.titulo)}`)}
+                          href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)}
                           onClick={() => setIsMobileSearchOpen(false)}
                           className="flex flex-col p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 transition-all group"
                         >
@@ -463,7 +478,7 @@ export function Navbar() {
                       <div className="w-16 h-16 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center">
                          <X className="w-8 h-8 text-slate-700" />
                       </div>
-                      <p className="text-slate-500 text-sm italic font-medium">Nenhum resultado para "{query}"</p>
+                      <p className="text-slate-500 text-sm italic font-medium">{getTranslation(activeLocale, "no_results")} "{query}"</p>
                     </div>
                   )
                 )}

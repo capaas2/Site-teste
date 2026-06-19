@@ -5,6 +5,8 @@ import { Pagination } from "@/components/Pagination";
 import Link from "next/link";
 import { ChevronRight, FolderOpen } from "lucide-react";
 import { Metadata } from "next";
+import { headers } from "next/headers";
+import { getTranslation } from "@/lib/translations";
 
 export async function generateMetadata({
   params,
@@ -13,11 +15,30 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  let title = `Notícias sobre ${decodedSlug} | FolhaByte`;
+  let description = `Fique atualizado com as últimas matérias, análises e novidades sobre ${decodedSlug} no portal FolhaByte.`;
+
+  if (locale === "en") {
+    title = `News about ${decodedSlug} | FolhaByte`;
+    description = `Stay updated with the latest articles, analysis, and news about ${decodedSlug} on FolhaByte.`;
+  } else if (locale === "es") {
+    title = `Noticias sobre ${decodedSlug} | FolhaByte`;
+    description = `Mantente actualizado con los últimos artículos, análisis y novedades sobre ${decodedSlug} en el portal FolhaByte.`;
+  }
+
   return {
-    title: `Notícias sobre ${decodedSlug} | FolhaByte`,
-    description: `Fique atualizado com as últimas matérias, análises e novidades sobre ${decodedSlug} no portal FolhaByte.`,
+    title,
+    description,
     alternates: {
       canonical: `/categoria/${slug}`,
+      languages: {
+        "pt-BR": `/categoria/${slug}`,
+        "en": `/en/categoria/${slug}`,
+        "es": `/es/categoria/${slug}`,
+      }
     },
   };
 }
@@ -34,6 +55,14 @@ export default async function CategoriaPage({
   const { slug } = await params;
   const { page } = await searchParams;
   
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  const getLocalizedHref = (href: string) => {
+    if (locale === 'pt') return href;
+    return `/${locale}${href === '/' ? '' : href}`;
+  };
+
   const decodedSlug = decodeURIComponent(slug);
   const currentPage = parseInt(page || "1", 10);
   const pageSize = 12;
@@ -49,16 +78,16 @@ export default async function CategoriaPage({
           </div>
           <div>
             <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase italic">
-              Categoria: <span className="text-indigo-600">{decodedSlug}</span>
+              {getTranslation(locale, "category_label")} <span className="text-indigo-600">{decodedSlug}</span>
             </h1>
             <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
-              Explore todo o nosso acervo sobre {decodedSlug}
+              {getTranslation(locale, "explore_archive")} {decodedSlug}
             </p>
           </div>
         </div>
 
         <nav className="flex items-center text-xs font-bold uppercase tracking-widest text-slate-400">
-          <Link href="/" className="hover:text-indigo-600">Home</Link>
+          <Link href={getLocalizedHref("/")} className="hover:text-indigo-600">{getTranslation(locale, "home")}</Link>
           <ChevronRight className="w-4 h-4 mx-1" />
           <span className="text-slate-900 dark:text-white">{decodedSlug}</span>
         </nav>
@@ -67,7 +96,7 @@ export default async function CategoriaPage({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post, index) => (
           <div key={post.id} className="relative group">
-            <PostCard post={post} />
+            <PostCard post={post} locale={locale} />
             {(index + 1) % 6 === 0 && (
               <div className="col-span-full py-8">
                 <AdBanner format="fluid" />
@@ -81,13 +110,13 @@ export default async function CategoriaPage({
         currentPage={currentPage}
         totalCount={count}
         pageSize={pageSize}
-        baseUrl={`/categoria/${slug}`}
+        baseUrl={getLocalizedHref(`/categoria/${slug}`)}
       />
 
       {posts.length === 0 && (
         <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800">
-          <p className="text-slate-400">Não encontramos notícias para esta categoria ou página.</p>
-          <Link href="/" className="mt-4 inline-block text-indigo-600 font-bold uppercase tracking-widest text-xs">Voltar para a Home</Link>
+          <p className="text-slate-400">{getTranslation(locale, "no_category_posts")}</p>
+          <Link href={getLocalizedHref("/")} className="mt-4 inline-block text-indigo-600 font-bold uppercase tracking-widest text-xs">{getTranslation(locale, "back_to_home")}</Link>
         </div>
       )}
     </div>

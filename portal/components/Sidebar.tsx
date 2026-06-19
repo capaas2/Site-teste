@@ -1,23 +1,33 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Post } from "@/types/post";
 import { formatPostTime } from "@/lib/date-utils";
 import { Clock, TrendingUp } from "lucide-react";
 import { slugify } from "@/lib/slugify";
+import { getTranslation } from "@/lib/translations";
 
 interface SidebarProps {
   posts: Post[];
 }
 
 export function Sidebar({ posts }: SidebarProps) {
+  const pathname = usePathname() || "";
+  const locale = pathname.startsWith('/en') ? 'en' : pathname.startsWith('/es') ? 'es' : 'pt';
+
+  const getLocalizedHref = (href: string) => {
+    if (locale === 'pt') return href;
+    return `/${locale}${href === '/' ? '' : href}`;
+  };
+
   return (
     <aside className="space-y-8">
       {/* Mais Lidas - Design de Alta Performance */}
       <div className="bg-blue-600 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-500/20 border border-blue-400">
         <div className="px-8 py-6 border-b border-blue-500/50 flex items-center justify-between">
           <h3 className="text-white font-black text-[10px] uppercase tracking-[0.3em] italic flex items-center gap-2">
-            <TrendingUp className="w-4 h-4" /> Em Alta
+            <TrendingUp className="w-4 h-4" /> {getTranslation(locale, "trending")}
           </h3>
           <div className="flex gap-1">
              <div className="w-1.5 h-1.5 rounded-full bg-blue-300 animate-pulse" />
@@ -26,7 +36,11 @@ export function Sidebar({ posts }: SidebarProps) {
         </div>
         <div className="p-8 space-y-8">
           {posts.slice(0, 5).map((post: Post, index: number) => (
-            <Link key={post.id} href={`/post/${slugify(post.titulo)}`} className="flex gap-5 group items-start">
+            <Link 
+              key={post.id} 
+              href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)} 
+              className="flex gap-5 group items-start"
+            >
               <span className="text-5xl font-black text-blue-300/20 leading-none w-12 flex-shrink-0 italic group-hover:text-white/40 transition-all group-hover:scale-110">
                 {index + 1}
               </span>
@@ -46,7 +60,7 @@ export function Sidebar({ posts }: SidebarProps) {
       {/* Adicional: Exploração Rápida (Opcional, para não deixar vazio) */}
       <div className="bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] p-8 border border-slate-200 dark:border-slate-800 border-dashed">
          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 text-center">
-            Continue explorando o futuro da tecnologia
+            {getTranslation(locale, "keep_exploring")}
          </p>
       </div>
     </aside>

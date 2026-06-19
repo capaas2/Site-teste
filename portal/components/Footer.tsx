@@ -1,25 +1,64 @@
 import Link from "next/link";
-import { Rss, Mail, MapPin, Phone } from "lucide-react";
+import { Rss, Mail, MapPin } from "lucide-react";
 import { NewsLetter } from "./NewsLetter";
+import { headers } from "next/headers";
+import { getTranslation } from "@/lib/translations";
 
-export function Footer() {
+export async function Footer() {
   const currentYear = new Date().getFullYear();
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  const getLocalizedHref = (href: string) => {
+    if (locale === 'pt') return href;
+    return `/${locale}${href === '/' ? '' : href}`;
+  };
 
   const categories = [
-    { label: "Eletrificação", slug: "eletrificacao" },
-    { label: "Mobilidade", slug: "mobilidade" },
-    { label: "IA & Software", slug: "ia-software" },
-    { label: "Mercado", slug: "mercado" },
-    { label: "Design", slug: "design" },
-    { label: "Tecnologia", slug: "tecnologia" },
+    { 
+      label: locale === "pt" ? "Eletrificação" : locale === "en" ? "Electrification" : "Electrificación", 
+      slug: "eletrificacao" 
+    },
+    { 
+      label: locale === "pt" ? "Mobilidade" : locale === "en" ? "Mobility" : "Movilidad", 
+      slug: "mobilidade" 
+    },
+    { 
+      label: locale === "pt" ? "IA & Software" : locale === "en" ? "AI & Software" : "IA y Software", 
+      slug: "ia-software" 
+    },
+    { 
+      label: locale === "pt" ? "Mercado" : locale === "en" ? "Market" : "Mercado", 
+      slug: "mercado" 
+    },
+    { 
+      label: locale === "pt" ? "Design" : locale === "en" ? "Design" : "Diseño", 
+      slug: "design" 
+    },
+    { 
+      label: locale === "pt" ? "Tecnologia" : locale === "en" ? "Technology" : "Tecnología", 
+      slug: "tecnologia" 
+    },
   ];
 
   const quickLinks = [
-    { label: "Início", href: "/" },
-    { label: "Sobre Nós", href: "/sobre" },
-    { label: "Contato", href: "/contato" },
-    { label: "Política de Privacidade", href: "/privacidade" },
-    { label: "Termos e Condições", href: "/termos" },
+    { label: getTranslation(locale, "home"), href: "/" },
+    { 
+      label: locale === "pt" ? "Sobre Nós" : locale === "en" ? "About Us" : "Sobre Nosotros", 
+      href: "/sobre" 
+    },
+    { 
+      label: locale === "pt" ? "Contato" : locale === "en" ? "Contact" : "Contacto", 
+      href: "/contato" 
+    },
+    { 
+      label: locale === "pt" ? "Política de Privacidade" : locale === "en" ? "Privacy Policy" : "Política de Privacidad", 
+      href: "/privacidade" 
+    },
+    { 
+      label: locale === "pt" ? "Termos e Condições" : locale === "en" ? "Terms & Conditions" : "Términos y Condiciones", 
+      href: "/termos" 
+    },
   ];
 
   return (
@@ -27,12 +66,11 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         {/* Coluna 1: Bio & Logo */}
         <div className="space-y-6">
-          <Link href="/" className="text-white font-black text-2xl tracking-tighter">
+          <Link href={getLocalizedHref("/")} className="text-white font-black text-2xl tracking-tighter">
             Folha<span className="text-blue-500">Byte</span>
           </Link>
           <p className="text-sm leading-relaxed text-slate-400">
-            A sua fonte definitiva de notícias sobre mobilidade elétrica, inteligência artificial e o futuro da tecnologia. 
-            Direto ao ponto, com visão de mercado e rigor técnico.
+            {getTranslation(locale, "footer_desc")}
           </p>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-white transition-colors"><Rss className="w-5 h-5" /></Link>
@@ -42,12 +80,12 @@ export function Footer() {
         {/* Coluna 2: Navegação */}
         <div>
           <h4 className="text-white font-bold mb-6 flex items-center gap-2">
-            Links <span className="h-0.5 w-6 bg-blue-500 inline-block"></span>
+            {locale === "pt" ? "Links" : locale === "en" ? "Links" : "Enlaces"} <span className="h-0.5 w-6 bg-blue-500 inline-block"></span>
           </h4>
           <ul className="space-y-3 text-sm">
             {quickLinks.map((link) => (
               <li key={link.label}>
-                <Link href={link.href} className="hover:text-white hover:translate-x-1 transition-all inline-block">
+                <Link href={getLocalizedHref(link.href)} className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {link.label}
                 </Link>
               </li>
@@ -58,12 +96,12 @@ export function Footer() {
         {/* Coluna 3: Categorias */}
         <div>
           <h4 className="text-white font-bold mb-6 flex items-center gap-2">
-            Categorias <span className="h-0.5 w-6 bg-blue-500 inline-block"></span>
+            {locale === "pt" ? "Categorias" : locale === "en" ? "Categories" : "Categorías"} <span className="h-0.5 w-6 bg-blue-500 inline-block"></span>
           </h4>
           <ul className="space-y-3 text-sm">
             {categories.map((cat) => (
               <li key={cat.label}>
-                <Link href={`/categoria/${cat.slug}`} className="hover:text-white flex items-center gap-2 transition-all">
+                <Link href={getLocalizedHref(`/categoria/${cat.slug}`)} className="hover:text-white flex items-center gap-2 transition-all">
                   <span className="w-1 h-1 bg-blue-500 rounded-full"></span>
                   {cat.label}
                 </Link>
@@ -75,7 +113,7 @@ export function Footer() {
         {/* Coluna 4: Contato / Newsletter */}
         <div>
           <h4 className="text-white font-bold mb-6 flex items-center gap-2">
-            Fale Conosco <span className="h-0.5 w-6 bg-blue-500 inline-block"></span>
+            {getTranslation(locale, "footer_talk")} <span className="h-0.5 w-6 bg-blue-500 inline-block"></span>
           </h4>
           <ul className="space-y-4 text-sm text-slate-400">
             <li className="flex items-start gap-3">
@@ -95,7 +133,7 @@ export function Footer() {
 
       {/* Copyright Line */}
       <div className="max-w-7xl mx-auto px-4 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-        <p>© {currentYear} FolhaByte Inc. Todos os direitos reservados. </p>
+        <p>© {currentYear} {getTranslation(locale, "footer_rights")}</p>
       </div>
     </footer>
   );

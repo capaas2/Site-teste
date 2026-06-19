@@ -12,6 +12,8 @@ export interface Post {
   conteudo_markdown_en?: string | null;
   titulo_es?: string | null;
   conteudo_markdown_es?: string | null;
+  original_titulo?: string | null;
+  slug?: string;
 }
 
 export interface AffiliateData {

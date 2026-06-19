@@ -5,14 +5,37 @@ import { Pagination } from "@/components/Pagination";
 import Link from "next/link";
 import { ChevronRight, Clock } from "lucide-react";
 import { Metadata } from "next";
+import { headers } from "next/headers";
+import { getTranslation } from "@/lib/translations";
 
-export const metadata: Metadata = {
-  title: "Últimas Notícias | FolhaByte",
-  description: "Acompanhe as últimas notícias, lançamentos e análises do mundo da tecnologia, inteligência artificial e gadgets em tempo real.",
-  alternates: {
-    canonical: "/ultimas",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  let title = "Últimas Notícias | FolhaByte";
+  let description = "Acompanhe as últimas notícias, lançamentos e análises do mundo da tecnologia, inteligência artificial e gadgets em tempo real.";
+
+  if (locale === "en") {
+    title = "Latest News | FolhaByte";
+    description = "Follow the latest news, releases and analysis of the tech world, artificial intelligence and gadgets in real time.";
+  } else if (locale === "es") {
+    title = "Últimas Noticias | FolhaByte";
+    description = "Sigue las últimas noticias, lanzamientos y análisis del mundo de la tecnología, inteligencia artificial y dispositivos en tiempo real.";
+  }
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: "/ultimas",
+      languages: {
+        "pt-BR": "/ultimas",
+        "en": "/en/ultimas",
+        "es": "/es/ultimas",
+      }
+    },
+  };
+}
 
 export const revalidate = 60;
 
@@ -25,6 +48,14 @@ export default async function LatestPostsPage({
   const currentPage = parseInt(page || "1", 10);
   const pageSize = 12;
 
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  const getLocalizedHref = (href: string) => {
+    if (locale === 'pt') return href;
+    return `/${locale}${href === '/' ? '' : href}`;
+  };
+
   const { posts, count } = await getLatestPosts(currentPage, pageSize);
 
   return (
@@ -36,23 +67,23 @@ export default async function LatestPostsPage({
           </div>
           <div>
             <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase italic">
-              Últimas <span className="text-blue-600">Notícias</span>
+              {getTranslation(locale, "latest")} <span className="text-blue-600">{getTranslation(locale, "news")}</span>
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Tudo o que aconteceu agora pouco</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{getTranslation(locale, "latest_news_desc")}</p>
           </div>
         </div>
 
         <nav className="flex items-center text-xs font-bold uppercase tracking-widest text-slate-400">
-          <Link href="/" className="hover:text-blue-600">Home</Link>
+          <Link href={getLocalizedHref("/")} className="hover:text-blue-600">{getTranslation(locale, "home")}</Link>
           <ChevronRight className="w-4 h-4 mx-1" />
-          <span className="text-slate-900 dark:text-white">Últimas</span>
+          <span className="text-slate-900 dark:text-white">{getTranslation(locale, "latest")}</span>
         </nav>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post, index) => (
           <div key={post.id} className="relative group">
-            <PostCard post={post} />
+            <PostCard post={post} locale={locale} />
             {/* AdSense Intercalado a cada 6 posts */}
             {(index + 1) % 6 === 0 && (
               <div className="col-span-full py-8">
@@ -67,13 +98,13 @@ export default async function LatestPostsPage({
         currentPage={currentPage}
         totalCount={count}
         pageSize={pageSize}
-        baseUrl="/ultimas"
+        baseUrl={getLocalizedHref("/ultimas")}
       />
 
       {posts.length === 0 && (
         <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800">
-          <p className="text-slate-400">Não encontramos notícias para esta página.</p>
-          <Link href="/ultimas" className="mt-4 inline-block text-blue-600 font-bold uppercase tracking-widest text-xs">Voltar para a página 1</Link>
+          <p className="text-slate-400">{getTranslation(locale, "no_page_posts")}</p>
+          <Link href={getLocalizedHref("/ultimas")} className="mt-4 inline-block text-blue-600 font-bold uppercase tracking-widest text-xs">{getTranslation(locale, "back_to_page1")}</Link>
         </div>
       )}
     </div>

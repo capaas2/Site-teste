@@ -5,18 +5,49 @@ import { AdBanner } from "@/components/AdBanner";
 import Link from "next/link";
 import { ChevronRight, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
+import { headers } from "next/headers";
+import { getTranslation } from "@/lib/translations";
 
-export const metadata: Metadata = {
-  title: "Notícias Mais Lidas | FolhaByte",
-  description: "Confira as matérias e notícias de tecnologia mais visualizadas e populares da semana na FolhaByte.",
-  alternates: {
-    canonical: "/mais-lidas",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  let title = "Notícias Mais Lidas | FolhaByte";
+  let description = "Confira as matérias e notícias de tecnologia mais visualizadas e populares da semana na FolhaByte.";
+
+  if (locale === "en") {
+    title = "Most Read Articles | FolhaByte";
+    description = "Check out the most viewed and popular technology articles and news of the week on FolhaByte.";
+  } else if (locale === "es") {
+    title = "Noticias Más Leídas | FolhaByte";
+    description = "Consulta los artículos y noticias de tecnología más vistos y populares de la semana en FolhaByte.";
+  }
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: "/mais-lidas",
+      languages: {
+        "pt-BR": "/mais-lidas",
+        "en": "/en/mais-lidas",
+        "es": "/es/mais-lidas",
+      }
+    },
+  };
+}
 
 export const revalidate = 120;
 
 export default async function MostReadPage() {
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  const getLocalizedHref = (href: string) => {
+    if (locale === 'pt') return href;
+    return `/${locale}${href === '/' ? '' : href}`;
+  };
+
   // Pegamos o ranking semanal (Top 20)
   const posts = await getTopPosts(7, 21);
 
@@ -29,16 +60,16 @@ export default async function MostReadPage() {
           </div>
           <div>
             <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase italic">
-              Mais <span className="text-red-600">Lidas</span>
+              {getTranslation(locale, "most_read")}
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Os hits do dia na FolhaByte</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{getTranslation(locale, "hits_of_the_day")}</p>
           </div>
         </div>
         
         <nav className="flex items-center text-xs font-bold uppercase tracking-widest text-slate-400">
-          <Link href="/" className="hover:text-red-600">Home</Link>
+          <Link href={getLocalizedHref("/")} className="hover:text-red-600">{getTranslation(locale, "home")}</Link>
           <ChevronRight className="w-4 h-4 mx-1" />
-          <span className="text-slate-900 dark:text-white">Mais Lidas</span>
+          <span className="text-slate-900 dark:text-white">{getTranslation(locale, "most_read")}</span>
         </nav>
       </div>
 
@@ -54,7 +85,7 @@ export default async function MostReadPage() {
              <div className="absolute top-2 left-2 z-10 w-8 h-8 rounded-full bg-slate-900/80 backdrop-blur-sm border border-slate-700 flex items-center justify-center text-xs font-black text-white italic">
                #{index + 4}
              </div>
-             <PostCard post={post} />
+             <PostCard post={post} locale={locale} />
              {/* AdSense Intercalado a cada 6 posts */}
              {(index + 1) % 6 === 0 && (
                <div className="col-span-full py-8">
@@ -67,7 +98,7 @@ export default async function MostReadPage() {
 
       {posts.length === 0 && (
         <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800">
-          <p className="text-slate-400">Ainda sem dados de visualização para o ranking diário.</p>
+          <p className="text-slate-400">{getTranslation(locale, "no_ranking_data")}</p>
         </div>
       )}
     </div>
