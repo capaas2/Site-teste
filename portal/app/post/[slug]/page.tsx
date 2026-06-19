@@ -93,15 +93,11 @@ async function getPost(slugOrId: string): Promise<Post | null> {
     return data as Post;
   }
 
-  // Otimização: Filtra no banco de dados por aproximação usando ILIKE antes de fazer a correspondência exata,
-  // reduzindo drasticamente a carga do banco de dados e o tempo de resposta em vez de puxar todas as linhas.
-  const titlePattern = `%${slugOrId.split("-").join("%")}%`;
   const { data: allPosts, error: listError } = await supabase
     .from("posts")
-    .select("id, titulo")
-    .ilike("titulo", titlePattern);
+    .select("id, titulo");
 
-  if (listError || !allPosts || allPosts.length === 0) return null;
+  if (listError || !allPosts) return null;
 
   const matched = allPosts.find((p) => slugify(p.titulo) === slugOrId);
   if (!matched) return null;
