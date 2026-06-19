@@ -31,6 +31,7 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<{ posts: any[]; categories: string[] }>({ posts: [], categories: [] });
   const [isSearching, setIsSearching] = useState(false);
@@ -232,25 +233,37 @@ export function Navbar() {
 
                 {/* Seletor de Idiomas */}
                 <div className="relative group">
-                  <button className="flex items-center gap-1.5 hover:text-slate-200 text-slate-400 transition-colors uppercase font-black text-[10px] tracking-wider px-2 py-1 bg-slate-800/80 rounded-lg border border-slate-800">
+                  <button 
+                    onClick={() => setIsLangOpen(!isLangOpen)}
+                    className="flex items-center gap-1.5 hover:text-slate-200 text-slate-400 transition-colors uppercase font-black text-[10px] tracking-wider px-2 py-1 bg-slate-800/80 rounded-lg border border-slate-800"
+                  >
                     <Globe className="w-3.5 h-3.5 text-blue-500" />
                     <span>{activeLocale}</span>
                   </button>
-                  <div className="absolute right-0 top-full mt-2 hidden group-hover:block bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl min-w-[110px] z-50">
+                  <div className={`absolute right-0 top-full mt-2 bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl min-w-[110px] z-50 ${isLangOpen ? "block" : "hidden md:group-hover:block"}`}>
                     <button
-                      onClick={() => handleLanguageChange("pt")}
+                      onClick={() => {
+                        handleLanguageChange("pt");
+                        setIsLangOpen(false);
+                      }}
                       className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "pt" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
                     >
                       🇧🇷 PT
                     </button>
                     <button
-                      onClick={() => handleLanguageChange("en")}
+                      onClick={() => {
+                        handleLanguageChange("en");
+                        setIsLangOpen(false);
+                      }}
                       className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "en" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
                     >
                       🇺🇸 EN
                     </button>
                     <button
-                      onClick={() => handleLanguageChange("es")}
+                      onClick={() => {
+                        handleLanguageChange("es");
+                        setIsLangOpen(false);
+                      }}
                       className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "es" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
                     >
                       🇪🇸 ES

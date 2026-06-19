@@ -1,5 +1,37 @@
 import { supabase } from "./supabase";
 import { Post } from "@/types/post";
+import { headers } from "next/headers";
+
+async function getActiveLocale(): Promise<string> {
+  try {
+    const headerList = await headers();
+    return headerList.get("x-locale") || "pt";
+  } catch {
+    return "pt";
+  }
+}
+
+function translatePosts(posts: Post[], locale: string): Post[] {
+  if (locale === "pt" || !posts) return posts || [];
+  
+  return posts.map(post => {
+    if (locale === "en" && post.titulo_en) {
+      return {
+        ...post,
+        titulo: post.titulo_en,
+        conteudo_markdown: post.conteudo_markdown_en || post.conteudo_markdown
+      };
+    }
+    if (locale === "es" && post.titulo_es) {
+      return {
+        ...post,
+        titulo: post.titulo_es,
+        conteudo_markdown: post.conteudo_markdown_es || post.conteudo_markdown
+      };
+    }
+    return post;
+  });
+}
 
 export async function getLatestPosts(page = 1, pageSize = 12): Promise<{ posts: Post[], count: number }> {
   const from = (page - 1) * pageSize;
@@ -15,10 +47,15 @@ export async function getLatestPosts(page = 1, pageSize = 12): Promise<{ posts: 
     console.error("Error fetching latest posts:", error.message);
     return { posts: [], count: 0 };
   }
-  return { posts: data as Post[], count: count || 0 };
+
+  const locale = await getActiveLocale();
+  const translatedPosts = translatePosts(data as Post[], locale);
+
+  return { posts: translatedPosts, count: count || 0 };
 }
 
 export async function getTopPosts(days = 7, limit = 10): Promise<Post[]> {
+  const locale = await getActiveLocale();
   const dateLimit = new Date();
   dateLimit.setDate(dateLimit.getDate() - days);
 
@@ -37,7 +74,7 @@ export async function getTopPosts(days = 7, limit = 10): Promise<Post[]> {
       .select("*")
       .order("views", { ascending: false })
       .limit(limit);
-    return (fallback as Post[]) || [];
+    return translatePosts((fallback || []) as Post[], locale);
   }
 
   // Se o período for muito curto (ex: 24h) e não houver posts suficientes (precisamos de pelo menos 3), tenta aumentar o período
@@ -45,7 +82,7 @@ export async function getTopPosts(days = 7, limit = 10): Promise<Post[]> {
     return getTopPosts(days * 2, limit);
   }
 
-  return data as Post[];
+  return translatePosts(data as Post[], locale);
 }
 
 export async function getPostsByCategory(categorySlug: string, page = 1, pageSize = 12): Promise<{ posts: Post[], count: number }> {
@@ -99,7 +136,11 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
     console.error(`Error fetching posts for category ${categorySlug}:`, error.message);
     return { posts: [], count: 0 };
   }
-  return { posts: data as Post[], count: count || 0 };
+
+  const locale = await getActiveLocale();
+  const translatedPosts = translatePosts(data as Post[], locale);
+
+  return { posts: translatedPosts, count: count || 0 };
 }
 
 export async function getAllCategories(): Promise<{ name: string; count: number }[]> {
