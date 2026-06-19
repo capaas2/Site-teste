@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface AdBannerProps {
   slot?: string;
@@ -9,17 +9,58 @@ interface AdBannerProps {
 }
 
 export function AdBanner({ slot = "8490210284834886", format = "auto", className = "" }: AdBannerProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [adLoaded, setAdLoaded] = useState(false);
+
   useEffect(() => {
-    try {
-      // @ts-expect-error - adsbygoogle is loaded dynamically via window object
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (err) {
-      console.error("AdSense error:", err);
+    if (adLoaded) return;
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    let observer: ResizeObserver | null = null;
+
+    const pushAd = () => {
+      try {
+        // @ts-expect-error - adsbygoogle is loaded dynamically via window object
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        setAdLoaded(true);
+      } catch (err) {
+        console.error("AdSense error:", err);
+      }
+    };
+
+    const checkDimensionsAndPush = () => {
+      // Verifica se o container tem largura e altura reais no layout
+      if (container.offsetWidth > 0 && container.offsetHeight > 0) {
+        pushAd();
+        if (observer) {
+          observer.disconnect();
+        }
+      }
+    };
+
+    checkDimensionsAndPush();
+
+    if (!adLoaded && typeof ResizeObserver !== "undefined") {
+      observer = new ResizeObserver(() => {
+        checkDimensionsAndPush();
+      });
+      observer.observe(container);
     }
-  }, []);
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [adLoaded]);
 
   return (
-    <div className={`w-full overflow-hidden my-8 glass-morphism rounded-2xl flex items-center justify-center p-4 bg-slate-100/50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 min-h-[100px] ${className}`}>
+    <div 
+      ref={containerRef}
+      className={`w-full overflow-hidden my-8 glass-morphism rounded-2xl flex items-center justify-center p-4 bg-slate-100/50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 min-h-[100px] ${className}`}
+    >
       <ins
         className="adsbygoogle"
         style={{ display: "block", textAlign: "center" }}
