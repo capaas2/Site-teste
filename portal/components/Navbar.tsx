@@ -35,7 +35,10 @@ export function Navbar() {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<{ posts: Post[]; categories: string[] }>({ posts: [], categories: [] });
+  const [suggestions, setSuggestions] = useState<{
+    posts: { id: string; titulo: string; categoria: string; original_titulo?: string }[];
+    categories: string[];
+  }>({ posts: [], categories: [] });
   const [isSearching, setIsSearching] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -102,7 +105,7 @@ export function Navbar() {
           const uniqueCategories = Array.from(new Set(categoriesData?.map(c => c.categoria))).slice(0, 2);
 
           setSuggestions({ 
-            posts: posts || [], 
+            posts: (posts || []) as { id: string; titulo: string; categoria: string; original_titulo?: string }[], 
             categories: uniqueCategories as string[] 
           });
         } catch (error) {
