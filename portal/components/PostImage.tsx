@@ -25,23 +25,20 @@ export default function PostImage({ src, alt, caption, className, priority }: Po
   }
 
   return (
-    <figure className={`my-16 group ${className || ''}`}>
-      <div className={`relative w-full aspect-video md:aspect-[21/9] overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-2xl transition-all duration-700 ${loading ? 'animate-pulse' : ''}`}>
-        <Image 
+    <figure className={`my-12 group flex flex-col items-center ${className || ''}`}>
+      <div className={`w-full overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-2xl transition-all duration-700 ${loading ? 'animate-pulse min-h-[300px]' : ''}`}>
+        <img 
           src={error || !src ? fallbackUrl : finalUrl}
           alt={alt || caption || "FolhaByte Image"}
-          fill
-          priority={priority}
-          className={`object-cover block group-hover:scale-105 transition-transform duration-700 ${loading ? 'opacity-0' : 'opacity-100'}`}
-          onLoadingComplete={() => setLoading(false)}
+          loading={priority ? "eager" : "lazy"}
+          className={`w-full h-auto max-h-[600px] object-contain block group-hover:scale-[1.02] transition-transform duration-700 ${loading ? 'opacity-0' : 'opacity-100'}`}
+          onLoad={() => setLoading(false)}
           onError={() => {
             console.error(`Falha ao carregar imagem: ${src}`);
             setError(true);
             setLoading(false);
           }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none"></div>
       </div>
       {caption && (
         <figcaption className="mt-4 text-center px-6">
