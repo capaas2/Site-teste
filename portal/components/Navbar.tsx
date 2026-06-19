@@ -138,6 +138,7 @@ export function Navbar() {
           <button 
             onClick={() => setIsSidebarOpen(true)}
             className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
+            aria-label={getTranslation(activeLocale, "more")}
           >
             <Menu className="w-6 h-6" />
             <span className="hidden md:inline text-xs font-black uppercase tracking-widest mt-1">{getTranslation(activeLocale, "more")}</span>
@@ -335,6 +336,7 @@ export function Navbar() {
               <button 
                 onClick={() => setIsSidebarOpen(false)}
                 className="p-2 hover:bg-slate-800 rounded-full transition-colors"
+                aria-label={activeLocale === "en" ? "Close menu" : activeLocale === "es" ? "Cerrar menú" : "Fechar menu"}
               >
                 <X className="w-6 h-6 text-slate-400" />
               </button>
@@ -389,6 +391,7 @@ export function Navbar() {
                 setQuery("");
               }}
               className="p-2 bg-slate-800 rounded-full hover:bg-red-500/20 group transition-all"
+              aria-label={activeLocale === "en" ? "Close search" : activeLocale === "es" ? "Cerrar búsqueda" : "Fechar busca"}
             >
               <X className="w-5 h-5 text-slate-400 group-hover:text-red-500" />
             </button>
