@@ -38,6 +38,8 @@ export function HeroGrid({ featuredPosts, latestPosts, locale = "pt" }: HeroGrid
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-700"
             priority
+            fetchPriority="high"
+            loading="eager"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent" />
@@ -115,9 +117,9 @@ export function HeroGrid({ featuredPosts, latestPosts, locale = "pt" }: HeroGrid
               href={getLocalizedHref(`/post/${post.original_titulo ? slugify(post.original_titulo) : slugify(post.titulo)}`)} 
               className="flex flex-col gap-1 group"
             >
-              <div className="flex items-center gap-2 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-                 <span className="text-blue-600">{formatPostTime(post.publicado_em)}</span>
-                 <span className="h-1 w-1 rounded-full bg-slate-300" />
+              <div className="flex items-center gap-2 text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+                 <span className="text-blue-600 dark:text-blue-400">{formatPostTime(post.publicado_em)}</span>
+                 <span className="h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-700" />
                  {post.categoria.split(',').map((cat) => (
                    <span key={cat.trim()}>{cat.trim()}</span>
                  ))}

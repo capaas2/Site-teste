@@ -63,7 +63,7 @@ export default async function HomePage() {
           <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600 italic">
             {getTranslation(locale, "hot_today")}
           </h2>
-          <Link href={getLocalizedHref("/mais-lidas")} className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 flex items-center gap-1 transition-colors">
+          <Link href={getLocalizedHref("/mais-lidas")} className="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-blue-600 flex items-center gap-1 transition-colors">
             {getTranslation(locale, "view_full_ranking")} <ChevronRight className="w-3 h-3" />
           </Link>
         </div>

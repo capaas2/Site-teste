@@ -30,7 +30,7 @@ export function Pagination({ currentPage, totalCount, pageSize, baseUrl }: Pagin
   const maxVisiblePages = 5;
   
   let startPage = Math.max(1, currentPage - 2);
-  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+  const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
   if (endPage - startPage < maxVisiblePages - 1) {
     startPage = Math.max(1, endPage - maxVisiblePages + 1);

@@ -216,7 +216,7 @@ export function Navbar() {
                             className="flex flex-col px-3 py-2.5 rounded-xl hover:bg-slate-800 transition-colors group"
                           >
                             <span className="text-xs font-bold text-slate-200 group-hover:text-blue-500 transition-colors line-clamp-1">{post.titulo}</span>
-                            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-tight mt-0.5">{post.categoria}</span>
+                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-tight mt-0.5">{post.categoria}</span>
                           </Link>
                         ))}
                       </div>
@@ -236,7 +236,7 @@ export function Navbar() {
           {/* Social Icons & Theme (Desktop) */}
           <div className="flex items-center gap-4 text-slate-400">
             <div className="hidden lg:flex items-center gap-4 border-r border-slate-800 pr-4 mr-2">
-              <Link href="#" className="hover:text-white transition-colors"><Rss className="w-4 h-4" /></Link>
+              <Link href="#" className="hover:text-white transition-colors" aria-label="RSS Feed"><Rss className="w-4 h-4" /></Link>
             </div>
               {mounted && (
               <div className="flex items-center gap-3">

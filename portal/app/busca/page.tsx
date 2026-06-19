@@ -72,7 +72,7 @@ export default async function BuscaPage({
     <div className="max-w-7xl mx-auto px-4 py-10 min-h-[60vh]">
       <div className="pb-6 mb-8 border-b border-slate-200 dark:border-slate-800">
         <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          {getTranslation(locale, "results_for")} <span className="text-blue-600 dark:text-blue-500">"{query}"</span>
+          {getTranslation(locale, "results_for")} <span className="text-blue-600 dark:text-blue-500">&quot;{query}&quot;</span>
         </h1>
         <p className="text-slate-500 dark:text-slate-400 mt-2 font-medium">
           {feedbackText}

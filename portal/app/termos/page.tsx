@@ -40,14 +40,14 @@ export default function TermsPage() {
             <li>Usar os materiais para qualquer finalidade comercial ou para exibição pública;</li>
             <li>Tentar descompilar ou fazer engenharia reversa de qualquer software contido no site FolhaByte;</li>
             <li>Remover quaisquer direitos autorais ou outras notações de propriedade;</li>
-            <li>Transferir os materiais para outra pessoa ou "espelhar" os materiais em qualquer outro servidor.</li>
+            <li>Transferir os materiais para outra pessoa ou &quot;espelhar&quot; os materiais em qualquer outro servidor.</li>
           </ul>
         </section>
 
         <section>
           <h2 className="text-xl font-black italic uppercase text-slate-900 dark:text-white">3. Isenção de Responsabilidade e Recomendações</h2>
           <p>
-            Os materiais no site do FolhaByte são fornecidos "como estão". O FolhaByte não oferece garantias, expressas ou implícitas, e, por este meio, isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas de comercialização ou adequação a um fim específico.
+            Os materiais no site do FolhaByte são fornecidos &quot;como estão&quot;. O FolhaByte não oferece garantias, expressas ou implícitas, e, por este meio, isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas de comercialização ou adequação a um fim específico.
           </p>
           <div className="mt-4 p-6 rounded-3xl bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800/30">
             <h3 className="text-xs font-black uppercase tracking-widest text-blue-600 mb-2">Compras e Afiliados</h3>

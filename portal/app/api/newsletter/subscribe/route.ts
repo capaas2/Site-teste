@@ -82,7 +82,7 @@ export async function POST(request: Request) {
       { message: "Quase pronto! Enviamos um link de confirmação para o seu e-mail." },
       { status: 201 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     // Privacidade e Segurança: Nunca retornamos detalhes do erro para o cliente
     console.error("Newsletter Subscribe Error (Rastreio):", Date.now()); 
     return NextResponse.json(

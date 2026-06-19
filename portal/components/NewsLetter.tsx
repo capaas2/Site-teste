@@ -43,9 +43,10 @@ export function NewsLetter() {
         setMessage("");
       }, 5000);
 
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setMessage(err.message);
+      const errorMessage = err instanceof Error ? err.message : "Erro ao se inscrever.";
+      setMessage(errorMessage);
       setTimeout(() => setStatus("idle"), 4000);
     }
   };

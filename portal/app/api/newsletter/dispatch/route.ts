@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase";
 import { Resend } from "resend";
 import { slugify } from "@/lib/slugify";
+import { Post } from "@/types/post";
 
 export const dynamic = "force-dynamic";
 
@@ -46,7 +47,7 @@ export async function GET(request: Request) {
         from: "FolhaByte <onboarding@resend.dev>",
         to: emails,
         subject: `🚨 NOVO: ${newPost.titulo}`,
-        html: renderEmailTemplate(newPost, "NOVA_NOTICIA"),
+        html: renderEmailTemplate(newPost as Post),
       });
 
       // Atualizar last_sent_at
@@ -83,7 +84,7 @@ export async function GET(request: Request) {
         from: "FolhaByte <onboarding@resend.dev>",
         to: emails,
         subject: `🗞️ Resumo: O que você perdeu nas últimas horas`,
-        html: renderRecapTemplate(recentPosts),
+        html: renderRecapTemplate(recentPosts as Post[]),
       });
 
       // Logar o recap
@@ -94,7 +95,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ message: "Nada para enviar no momento." });
 
-  } catch (err: any) {
+  } catch (err: unknown) {
     // Privacidade: Não exibimos o e-mail ou dados sensíveis em caso de erro fatal
     console.error("Erro no despacho da newsletter (Rastreio):", Date.now());
     return NextResponse.json({ error: "Erro interno no processamento do despacho." }, { status: 500 });
@@ -102,11 +103,11 @@ export async function GET(request: Request) {
 }
 
 // Templates Helper
-function renderEmailTemplate(post: any, type: string) {
+function renderEmailTemplate(post: Post) {
   return `
     <div style="font-family: sans-serif; max-width: 600px; margin: auto; color: #334155;">
       <h1 style="color: #0f172a;">${post.titulo}</h1>
-      <img src="${post.imagem_url}" style="width: 100%; border-radius: 12px; margin-bottom: 20px;" />
+      <img src="${post.imagem_url || ''}" style="width: 100%; border-radius: 12px; margin-bottom: 20px;" />
       <div style="font-size: 16px; line-height: 1.6;">
         ${post.conteudo_markdown.slice(0, 500)}...
       </div>
@@ -120,7 +121,7 @@ function renderEmailTemplate(post: any, type: string) {
   `;
 }
 
-function renderRecapTemplate(posts: any[]) {
+function renderRecapTemplate(posts: Post[]) {
   const postsHtml = posts.map(p => `
     <li style="margin-bottom: 15px;">
       <a href="https://site-teste-ne4f.vercel.app/post/${slugify(p.titulo)}" style="color: #2563eb; font-weight: bold; font-size: 16px;">

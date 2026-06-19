@@ -73,7 +73,7 @@ export async function Footer() {
             {getTranslation(locale, "footer_desc")}
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="hover:text-white transition-colors"><Rss className="w-5 h-5" /></Link>
+            <Link href="#" className="hover:text-white transition-colors" aria-label="RSS Feed"><Rss className="w-5 h-5" /></Link>
           </div>
         </div>
 

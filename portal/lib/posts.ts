@@ -158,7 +158,7 @@ export async function getAllCategories(): Promise<{ name: string; count: number 
   }
 
   const categoryCounts: Record<string, number> = {};
-  data.forEach((post: any) => {
+  data?.forEach((post: { categoria: string | null }) => {
     if (post.categoria) {
       // Divide por vírgula caso o post possua até duas categorias
       const categories = post.categoria.split(",").map((c: string) => c.trim());

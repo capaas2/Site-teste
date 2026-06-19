@@ -11,7 +11,7 @@ interface AdBannerProps {
 export function AdBanner({ slot = "8490210284834886", format = "auto", className = "" }: AdBannerProps) {
   useEffect(() => {
     try {
-      // @ts-ignore
+      // @ts-expect-error - adsbygoogle is loaded dynamically via window object
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (err) {
       console.error("AdSense error:", err);
