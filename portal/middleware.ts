@@ -16,6 +16,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // 1.5. Se o request já possui o header x-locale, significa que ele já foi processado e reescrito
+  if (request.headers.has('x-locale')) {
+    return NextResponse.next();
+  }
+
   // 2. Verificar se o caminho já começa com um idioma suportado (ex: /en/sobre ou /en)
   const matchedLocale = locales.find(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
