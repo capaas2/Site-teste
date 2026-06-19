@@ -183,16 +183,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const processedMarkdown = post.conteudo_markdown
     .replace(/^# .*\n/g, '')         // Remove o título redundante no topo do MD
     .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
-    .replace(/\[(IMAGEM|DETALHE_IMAGEM|INFO_GRAFICO):\s*([^|\]]+)(?:\s*\|\s*LEGENDA:\s*([^\]]+))?\]/gi, (match, type, firstPart, secondPart) => {
-        const url = secondPart ? firstPart.trim() : firstPart.trim();
-        const caption = secondPart ? secondPart.trim() : '';
+    .replace(/\[(IMAGEM|IMAGE|IMAGEN|DETALHE_IMAGEM|IMAGE_DETAIL|DETALLE_IMAGEN|DETALLE DE IMAGEN|INFO_GRAFICO|INFOGRAPHIC|INFOGRAFÍA|INFOGRAFIA|INFO GRAPHIC)\s*:\s*([^|\]\n\r]+)(?:\s*\|\s*([^:]+)\s*:\s*([^\]\n\r]+))?\]?/gi, (match, type, firstPart, secondPart, thirdPart) => {
+        const url = firstPart.trim();
+        const caption = thirdPart ? thirdPart.trim() : '';
         return `<post-image src="${url}" caption="${caption}"></post-image>`;
     });
 
   // Função para renderizar componentes customizados
   const renderers = {
-    'post-image': (props: any) => <PostImage {...props} />,
-    p: (props: any) => {
+    'post-image': (props: { src: string; caption?: string; alt?: string }) => <PostImage {...props} />,
+    p: (props: React.ComponentProps<'p'>) => {
       const { children } = props;
       const rawText = Array.isArray(children) 
         ? children.map(c => typeof c === 'string' ? c : '').join('')
