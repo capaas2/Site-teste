@@ -104,43 +104,33 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
   const to = from + pageSize - 1;
 
   // Slugs fixos que usam mapeamento amplo (v3.0 — unificado com pipeline)
-  const categoryMap: Record<string, { term: string; exact: boolean }> = {
-    "ia-software": { term: "IA", exact: false },
-    "ia": { term: "IA", exact: false },
-    "inteligencia-artificial": { term: "IA", exact: false },
-    "inteligência-artificial": { term: "IA", exact: false },
-    "inteligencia artificial": { term: "IA", exact: false },
-    "inteligência artificial": { term: "IA", exact: false },
-    "mobilidade": { term: "Mobilid", exact: false },
-    "eletrificacao": { term: "Elétri", exact: false },
-    "eletricos": { term: "Elétri", exact: false },
-    "cibersegurança": { term: "Segurança", exact: false },
-    "seguranca": { term: "Segurança", exact: false },
-    "produtos": { term: "Produto", exact: false },
-    "gadgets": { term: "Gadget", exact: false },
-    "sustentabilidade": { term: "Sustentab", exact: false },
-    "mercado": { term: "Mercado", exact: false },
-    "ciencia": { term: "Ciência", exact: false },
-    "reviews": { term: "Review", exact: false },
+  const categoryMap: Record<string, string> = {
+    "ia-software": "IA",
+    "ia": "IA",
+    "inteligencia-artificial": "IA",
+    "inteligência-artificial": "IA",
+    "inteligencia artificial": "IA",
+    "inteligência artificial": "IA",
+    "mobilidade": "Mobilidade",
+    "eletrificacao": "Eletr",
+    "eletricos": "Eletr",
+    "cibersegurança": "Segurança",
+    "seguranca": "Segurança",
+    "produtos": "Produto",
+    "gadgets": "Gadget",
+    "sustentabilidade": "Sustentab",
+    "mercado": "Mercado",
+    "ciencia": "Ciência",
+    "reviews": "Review",
   };
 
   const normalizedSlug = categorySlug.toLowerCase().replace(/-/g, ' ');
-  const mapping = categoryMap[categorySlug.toLowerCase()] || categoryMap[normalizedSlug];
-  const searchTerm = mapping ? mapping.term : categorySlug.replace(/-/g, ' ');
+  const searchTerm = categoryMap[categorySlug.toLowerCase()] || categoryMap[normalizedSlug] || categorySlug.replace(/-/g, ' ');
 
   const query = supabase
     .from("posts")
-    .select("*", { count: "exact" });
-
-  // Unificação das categorias de IA e Inteligência Artificial para retornar os mesmos artigos
-  const isIACategory = ["ia", "ia software", "inteligencia artificial", "inteligência artificial"].includes(normalizedSlug);
-
-  if (isIACategory) {
-    query.or("categoria.ilike.IA,categoria.ilike.IA,%,categoria.ilike.%, IA,categoria.ilike.%, IA,%,categoria.ilike.%Inteligência Artificial%,categoria.ilike.%Inteligencia Artificial%");
-  } else {
-    // Para suportar categorias múltiplas (separadas por vírgula), sempre buscamos usando busca parcial
-    query.ilike("categoria", `%${searchTerm}%`);
-  }
+    .select("*", { count: "exact" })
+    .ilike("categoria", `%${searchTerm}%`);
 
   const { data, count, error } = await query
     .order("publicado_em", { ascending: false })
