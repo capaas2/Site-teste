@@ -47,7 +47,7 @@ export function translatePosts(posts: Post[], locale: string): Post[] {
   });
 }
 
-export async function getLatestPosts(page = 1, pageSize = 12): Promise<{ posts: Post[], count: number }> {
+export async function getLatestPosts(page = 1, pageSize = 12, locale?: string): Promise<{ posts: Post[], count: number }> {
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
@@ -62,14 +62,14 @@ export async function getLatestPosts(page = 1, pageSize = 12): Promise<{ posts: 
     return { posts: [], count: 0 };
   }
 
-  const locale = await getActiveLocale();
-  const translatedPosts = translatePosts(data as Post[], locale);
+  const activeLocale = locale || await getActiveLocale();
+  const translatedPosts = translatePosts(data as Post[], activeLocale);
 
   return { posts: translatedPosts, count: count || 0 };
 }
 
-export async function getTopPosts(days = 7, limit = 10): Promise<Post[]> {
-  const locale = await getActiveLocale();
+export async function getTopPosts(days = 7, limit = 10, locale?: string): Promise<Post[]> {
+  const activeLocale = locale || await getActiveLocale();
   const dateLimit = new Date();
   dateLimit.setDate(dateLimit.getDate() - days);
 
@@ -88,15 +88,15 @@ export async function getTopPosts(days = 7, limit = 10): Promise<Post[]> {
       .select("*")
       .order("views", { ascending: false })
       .limit(limit);
-    return translatePosts((fallback || []) as Post[], locale);
+    return translatePosts((fallback || []) as Post[], activeLocale);
   }
 
   // Se o período for muito curto (ex: 24h) e não houver posts suficientes (precisamos de pelo menos 3), tenta aumentar o período
   if (data.length < 3 && days < 30) {
-    return getTopPosts(days * 2, limit);
+    return getTopPosts(days * 2, limit, activeLocale);
   }
 
-  return translatePosts(data as Post[], locale);
+  return translatePosts(data as Post[], activeLocale);
 }
 
 export async function getPostsByCategory(categorySlug: string, page = 1, pageSize = 12): Promise<{ posts: Post[], count: number }> {

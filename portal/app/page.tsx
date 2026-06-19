@@ -18,14 +18,14 @@ export default async function HomePage() {
     return `/${locale}${href === '/' ? '' : href}`;
   };
 
-  // 1. Destaques do Dia (Mais lidas das últimas 48h)
-  const dailyTop = await getTopPosts(2, 3);
+  // Executa todas as consultas de banco de dados em paralelo para evitar o waterfall e reduzir o TTFB/LCP no mobile
+  const [dailyTop, latestResult, weeklyTop] = await Promise.all([
+    getTopPosts(2, 3, locale),
+    getLatestPosts(1, 6, locale),
+    getTopPosts(7, 3, locale)
+  ]);
   
-  // 2. Últimas Notícias para a Sidebar do Hero
-  const { posts: latestPosts } = await getLatestPosts(1, 6);
-  
-  // 3. Ranking da Semana (Top 3 histórico)
-  const weeklyTop = await getTopPosts(7, 3);
+  const latestPosts = latestResult.posts;
 
   // 4. Atalhos Rápidos (Seção Visual)
   const shortcuts = [
