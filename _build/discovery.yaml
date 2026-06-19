@@ -1,34 +1,31 @@
-squad_code: "tech-news-writer"
-purpose: "Um esquadrão para pesquisar notícias de tecnologia, estruturar as ideias, redigir artigos, buscar imagens na internet (com preferência para opções sem marca d'água) ou gerar via IA caso necessário, revisar o texto e preparar a estrutura de publicação para um site de tecnologia."
+squad_code: "instagram-news-poster"
+purpose: "Transformar notícias publicadas no site da FolhaByte em posts de Instagram"
 domain: "content"
 
 company:
-  name: "Teste Site"
-  tone: "Direto, neutro e focado em testes"
-  products: "Projeto genérico em ambiente de testes ou desenvolvimento"
+  name: "FolhaByte"
+  tone: "\"Digital Newsroom\" — Profissional, denso, técnico e livre de clichês de IA."
+  products: "Holding central de portais de tecnologia, inovação e notícias automatizadas via IA."
 
 language: "Português do Brasil"
 
 context:
-  audience: "Público geral e entusiastas de tecnologia"
-  platforms: "Site de tecnologia"
-  tone: "Mistura de profissional e direto com abordagem educativa e analítica"
-  sources: "Internet em geral"
-  output_format: "Artigos"
-  frequency: "Diário / Sob demanda"
+  audience: "Público geral interessado em tecnologia, curiosidades e notícias rápidas de fácil consumo."
+  platforms: "Instagram"
+  tone: "Adaptativo, dependendo do assunto e do estilo da notícia original do site."
 
 tools_needed:
-  - "image-fetcher"
+  - "image-creator"
   - "image-ai-generator"
-  - "apify"
+  - "template-designer"
+  - "instagram-publisher"
 
 investigation:
   enabled: true
   profiles:
-    - url: "https://www.instagram.com/tecmundo/"
+    - url: "https://www.instagram.com/tecnoblog"
       platform: "instagram"
       investigation_mode: "profile_3"
 
 target_formats:
-  - "blog-post"
-  - "blog-seo"
+  - "instagram-feed"

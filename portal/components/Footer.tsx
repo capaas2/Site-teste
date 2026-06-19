@@ -28,12 +28,12 @@ export async function Footer() {
       slug: "ia-software" 
     },
     { 
-      label: locale === "pt" ? "Mercado" : locale === "en" ? "Market" : "Mercado", 
-      slug: "mercado" 
+      label: locale === "pt" ? "Ciência" : locale === "en" ? "Science" : "Ciencia", 
+      slug: "ciencia" 
     },
     { 
-      label: locale === "pt" ? "Design" : locale === "en" ? "Design" : "Diseño", 
-      slug: "design" 
+      label: locale === "pt" ? "Cibersegurança" : locale === "en" ? "Cybersecurity" : "Ciberseguridad", 
+      slug: "cibersegurança" 
     },
     { 
       label: locale === "pt" ? "Tecnologia" : locale === "en" ? "Technology" : "Tecnología", 

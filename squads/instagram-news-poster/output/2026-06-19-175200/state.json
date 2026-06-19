@@ -1,0 +1,44 @@
+{
+  "squad": "instagram-news-poster",
+  "status": "failed",
+  "step": { "current": 8, "total": 8, "label": "Aprovação e Publicação no Instagram" },
+  "agents": [
+    {
+      "id": "pedro-pauta",
+      "name": "Pedro Pauta",
+      "icon": "📄",
+      "status": "done",
+      "desk": { "col": 1, "row": 1 }
+    },
+    {
+      "id": "iago-instagram",
+      "name": "Iago Instagram",
+      "icon": "📸",
+      "status": "done",
+      "desk": { "col": 2, "row": 1 }
+    },
+    {
+      "id": "daniel-design",
+      "name": "Daniel Design",
+      "icon": "🎨",
+      "status": "done",
+      "desk": { "col": 3, "row": 1 }
+    },
+    {
+      "id": "vera-veredito",
+      "name": "Vera Veredito",
+      "icon": "⚖️",
+      "status": "done",
+      "desk": { "col": 1, "row": 2 }
+    }
+  ],
+  "handoff": {
+    "from": "vera-veredito",
+    "to": "checkpoint",
+    "message": "Publicação revisada e aprovada com nota 9.8. Aguardando aprovação final para publicação.",
+    "completedAt": "2026-06-19T18:01:05Z"
+  },
+  "startedAt": "2026-06-19T17:52:00Z",
+  "updatedAt": "2026-06-19T18:02:00Z",
+  "completedAt": "2026-06-19T18:02:00Z"
+}

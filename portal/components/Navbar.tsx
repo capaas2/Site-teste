@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { slugify } from "@/lib/slugify";
 import { getTranslation } from "@/lib/translations";
+import { Post } from "@/types/post";
 import { 
   Search, Sun, Moon, Rss, 
   Menu, X, ChevronRight, 
@@ -20,7 +21,7 @@ const mainNavItems = [
   { label: "Eletrificação", slug: "eletrificacao" },
   { label: "Mobilidade", slug: "mobilidade" },
   { label: "IA & Software", slug: "ia-software" },
-  { label: "Mercado", slug: "mercado" },
+  { label: "Ciência", slug: "ciencia" },
   { label: "Segurança", slug: "cibersegurança" },
   { label: "Sustentabilidade", slug: "sustentabilidade" },
 ];
@@ -34,7 +35,7 @@ export function Navbar() {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<{ posts: any[]; categories: string[] }>({ posts: [], categories: [] });
+  const [suggestions, setSuggestions] = useState<{ posts: Post[]; categories: string[] }>({ posts: [], categories: [] });
   const [isSearching, setIsSearching] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -219,7 +220,7 @@ export function Navbar() {
                     ) : (
                       !isSearching && (
                         <div className="p-6 text-center text-slate-500 text-xs">
-                          {getTranslation(activeLocale, "no_results")} "<span className="text-slate-300 italic">{query}</span>"
+                          {getTranslation(activeLocale, "no_results")} &quot;<span className="text-slate-300 italic">{query}</span>&quot;
                         </div>
                       )
                     )}
@@ -478,7 +479,7 @@ export function Navbar() {
                       <div className="w-16 h-16 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center">
                          <X className="w-8 h-8 text-slate-700" />
                       </div>
-                      <p className="text-slate-500 text-sm italic font-medium">{getTranslation(activeLocale, "no_results")} "{query}"</p>
+                       <p className="text-slate-500 text-sm italic font-medium">{getTranslation(activeLocale, "no_results")} &quot;{query}&quot;</p>
                     </div>
                   )
                 )}

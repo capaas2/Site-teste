@@ -1,0 +1,25 @@
+pipeline:
+  - step: 1
+    name: "Ler Matéria do Portal"
+    file: "steps/step-01-ler-materia.md"
+  - step: 2
+    name: "Gerar Ângulos de Post"
+    file: "steps/step-02-gerar-angulos.md"
+  - step: 3
+    name: "Escolher Ângulo de Abordagem"
+    file: "steps/step-03-escolher-angulo.md"
+  - step: 4
+    name: "Escrever Conteúdo do Carrossel e Legenda"
+    file: "steps/step-04-escrever-conteudo.md"
+  - step: 5
+    name: "Rever e Ajustar Texto do Post"
+    file: "steps/step-05-rever-ajustar-texto.md"
+  - step: 6
+    name: "Gerar Imagens do Carrossel"
+    file: "steps/step-06-gerar-imagens.md"
+  - step: 7
+    name: "Revisão e Controle de Qualidade"
+    file: "steps/step-07-revisao-qualidade.md"
+  - step: 8
+    name: "Aprovação e Publicação no Instagram"
+    file: "steps/step-08-aprovacao-publicacao.md"

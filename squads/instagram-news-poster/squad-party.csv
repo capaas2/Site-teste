@@ -1,0 +1,5 @@
+id,name,title,icon,path,execution
+pedro-pauta,Pedro Pauta,Curador de Notícias e Pautas,📄,./agents/pedro-pauta.agent.md,subagent
+iago-instagram,Iago Instagram,Redator e Criador de Conteúdo para Instagram,📸,./agents/iago-instagram.agent.md,inline
+daniel-design,Daniel Design,Designer Gráfico de Mídia Social,🎨,./agents/daniel-design.agent.md,subagent
+vera-veredito,Vera Veredito,Revisora e Inspetora de Qualidade,⚖️,./agents/vera-veredito.agent.md,inline

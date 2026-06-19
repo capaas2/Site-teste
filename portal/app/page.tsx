@@ -3,7 +3,7 @@ import { HeroGrid } from "@/components/HeroGrid";
 import { FeaturedRanking } from "@/components/FeaturedRanking";
 import { AdBanner } from "@/components/AdBanner";
 import Link from "next/link";
-import { Shield, TrendingUp, Zap, Smartphone, ChevronRight, ArrowRight } from "lucide-react";
+import { Shield, Zap, Smartphone, ChevronRight, ArrowRight, Cpu } from "lucide-react";
 import { headers } from "next/headers";
 import { getTranslation } from "@/lib/translations";
 
@@ -36,10 +36,10 @@ export default async function HomePage() {
       slug: "cibersegurança" 
     },
     { 
-      label: locale === "pt" ? "Mercado" : locale === "en" ? "Market" : "Mercado", 
-      icon: TrendingUp, 
+      label: locale === "pt" ? "Ciência" : locale === "en" ? "Science" : "Ciencia", 
+      icon: Cpu, 
       color: "bg-emerald-600", 
-      slug: "mercado" 
+      slug: "ciencia" 
     },
     { 
       label: locale === "pt" ? "Elétricos" : locale === "en" ? "Electrics" : "Eléctricos", 

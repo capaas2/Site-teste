@@ -1,0 +1,18 @@
+url: "https://folha.dev/post/janelas-solares-transparentes-entram-em-producao-e-transformam-predios-em-usinas-de-energia"
+title: "Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia"
+date: "2026-06-19"
+key_facts:
+  - "Início da comercialização em larga escala das primeiras células solares orgânicas transparentes (TLSCs) pela Heliatek e Universidade de Michigan."
+  - "Tecnologia permite transformar fachadas de vidro de arranha-céus em geradores de eletricidade sem alterar a transparência das janelas."
+  - "Películas absorvem seletivamente comprimentos de onda invisíveis ao olho humano (ultravioleta e infravermelho próximo) mantendo transmitância de luz visível acima de 70%."
+  - "Reduz custos de climatização diminuindo a temperatura interna em até 4°C (gerando 30% de economia no ar-condicionado)."
+  - "Arranha-céus de 40 andares revestidos podem cobrir até 100% de sua própria demanda interna de eletricidade."
+technical_specs:
+  - name: "Eficiência de conversão"
+    value: "9,2%"
+  - name: "Transmitância de luz visível"
+    value: "Acima de 70%"
+  - name: "Redução de custo de climatização"
+    value: "Até 30% de economia"
+  - name: "Queda na temperatura interna"
+    value: "Até 4°C"
