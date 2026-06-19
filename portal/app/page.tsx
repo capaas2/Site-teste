@@ -55,8 +55,44 @@ export default async function HomePage() {
     },
   ];
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://folhabyte.dev";
+
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${baseUrl}/#website`,
+        "url": baseUrl,
+        "name": "FolhaByte",
+        "publisher": {
+          "@id": `${baseUrl}/#organization`
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": `${baseUrl}/busca?q={search_term_string}`,
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": `${baseUrl}/#organization`,
+        "name": "FolhaByte",
+        "url": baseUrl,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${baseUrl}/favicon.ico`
+        }
+      }
+    ]
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+      />
       {/* 1. Hero Grid — Banner Destaque Dia + Sidebar Últimas */}
       <section id="hero">
         <div className="flex items-center justify-between mb-6">

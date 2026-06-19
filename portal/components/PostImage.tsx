@@ -33,7 +33,6 @@ export default function PostImage({ src, alt, caption, className, priority }: Po
           fill
           priority={priority}
           fetchPriority={priority ? "high" : undefined}
-          loading={priority ? "eager" : undefined}
           className={`object-cover block group-hover:scale-105 transition-transform duration-700 ${loading ? 'opacity-0' : 'opacity-100'}`}
           onLoadingComplete={() => setLoading(false)}
           onError={() => {

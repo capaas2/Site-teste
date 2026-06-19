@@ -10,8 +10,29 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://folhabyte.dev";
+
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "FolhaByte",
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/favicon.ico`
+      },
+      "description": "Saiba mais sobre a missão do FolhaByte: decodificar a tecnologia que molda o futuro com inteligência, curadoria humana e precisão editorial."
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+      />
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter text-slate-900 dark:text-white uppercase mb-6">
           Nossa <span className="text-blue-600">Missão</span>

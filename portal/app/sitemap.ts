@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { supabase } from '@/lib/supabase';
 import { slugify } from '@/lib/slugify';
+import { getAllCategories } from '@/lib/posts';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://folhabyte.dev';
@@ -36,6 +37,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ];
   });
 
+  const categories = await getAllCategories();
+  const categoryUrls = (categories || []).flatMap((cat) => {
+    const lowerName = cat.name.toLowerCase();
+    const isIA = ["ia", "inteligencia artificial", "inteligência artificial"].includes(lowerName);
+    const slug = isIA ? "ia" : slugify(cat.name);
+
+    return [
+      {
+        url: `${baseUrl}/categoria/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+      },
+      {
+        url: `${baseUrl}/en/categoria/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+      },
+      {
+        url: `${baseUrl}/es/categoria/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+      }
+    ];
+  });
+
   return [
     {
       url: baseUrl,
@@ -67,6 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    ...categoryUrls,
     ...postUrls,
   ];
 }
