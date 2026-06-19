@@ -83,3 +83,5 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     </html>
   );
 }
+
+// Deploy trigger: force Vercel redeployment after reconnection.
