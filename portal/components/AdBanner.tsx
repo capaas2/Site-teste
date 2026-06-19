@@ -31,9 +31,13 @@ export function AdBanner({ slot = "8490210284834886", format = "auto", className
     };
 
     const checkDimensionsAndPush = () => {
-      // Verifica se o container tem largura e altura reais no layout
-      if (container.offsetWidth > 0 && container.offsetHeight > 0) {
-        pushAd();
+      // Verifica se o contêiner tem largura mínima (250px) e altura
+      if (container.offsetWidth >= 250 && container.offsetHeight > 0) {
+        // Evita erro de 'All ins elements already have ads' verificando se existe algum ins não processado na página
+        const unprocessed = document.querySelectorAll("ins.adsbygoogle:not([data-adsbygoogle-status='done'])");
+        if (unprocessed.length > 0) {
+          pushAd();
+        }
         if (observer) {
           observer.disconnect();
         }
