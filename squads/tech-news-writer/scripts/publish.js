@@ -34,6 +34,8 @@ const env = loadEnv();
 
 const SUPABASE_URL = env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = env.SUPABASE_SERVICE_ROLE_KEY;
+const AZURE_TRANSLATOR_KEY = env.AZURE_TRANSLATOR_KEY;
+const AZURE_TRANSLATOR_REGION = env.AZURE_TRANSLATOR_REGION;
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
   console.error("❌ Erro: NEXT_PUBLIC_SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY não encontradas no .env.local.");
@@ -91,6 +93,48 @@ async function publishNews() {
   }
 
   try {
+    let titulo_en = null;
+    let titulo_es = null;
+    let conteudo_markdown_en = null;
+    let conteudo_markdown_es = null;
+
+    if (AZURE_TRANSLATOR_KEY && AZURE_TRANSLATOR_REGION) {
+      try {
+        console.log("🌐 Traduzindo matéria para Inglês e Espanhol via Azure AI Translator...");
+        const crypto = require("crypto");
+        const translateUrl = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en&to=es`;
+        const transRes = await fetch(translateUrl, {
+          method: "POST",
+          headers: {
+            "Ocp-Apim-Subscription-Key": AZURE_TRANSLATOR_KEY,
+            "Ocp-Apim-Subscription-Region": AZURE_TRANSLATOR_REGION,
+            "Content-Type": "application/json",
+            "X-ClientTraceId": crypto.randomUUID(),
+          },
+          body: JSON.stringify([
+            { text: payload.titulo },
+            { text: payload.conteudo_markdown }
+          ]),
+        });
+
+        if (transRes.ok) {
+          const transData = await transRes.json();
+          titulo_en = transData[0].translations.find(t => t.to === "en").text;
+          titulo_es = transData[0].translations.find(t => t.to === "es").text;
+          conteudo_markdown_en = transData[1].translations.find(t => t.to === "en").text;
+          conteudo_markdown_es = transData[1].translations.find(t => t.to === "es").text;
+          console.log("   ✅ Tradução concluída com sucesso!");
+        } else {
+          const transErr = await transRes.text();
+          console.warn(`   ⚠️ Erro na API do Translator (HTTP ${transRes.status}): ${transErr}`);
+        }
+      } catch (transErr) {
+        console.warn("   ⚠️ Falha ao realizar tradução automática:", transErr.message);
+      }
+    } else {
+      console.log("   ⚠️ AZURE_TRANSLATOR_KEY ou AZURE_TRANSLATOR_REGION não configuradas no .env.local. Ignorando tradução automática.");
+    }
+
     console.log("🚀 Publicando notícia no portal FolhaByte...");
 
     const noticiaRecord = {
@@ -101,6 +145,10 @@ async function publishNews() {
       imagem_url: imageUrl,
       publicado_em: new Date().toISOString(),
       views: 0,
+      titulo_en,
+      titulo_es,
+      conteudo_markdown_en,
+      conteudo_markdown_es
     };
 
     const dbRes = await fetch(`${SUPABASE_URL}/rest/v1/posts`, {

@@ -10,12 +10,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .select('id, titulo, publicado_em')
     .order('publicado_em', { ascending: false });
 
-  const postUrls = (posts || []).map((post) => ({
-    url: `${baseUrl}/post/${slugify(post.titulo)}`,
-    lastModified: new Date(post.publicado_em),
-    changeFrequency: 'daily' as const,
-    priority: 0.8,
-  }));
+  const postUrls = (posts || []).flatMap((post) => {
+    const slug = slugify(post.titulo);
+    const lastModified = new Date(post.publicado_em);
+    
+    return [
+      {
+        url: `${baseUrl}/post/${slug}`,
+        lastModified,
+        changeFrequency: 'daily' as const,
+        priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/en/post/${slug}`,
+        lastModified,
+        changeFrequency: 'daily' as const,
+        priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/es/post/${slug}`,
+        lastModified,
+        changeFrequency: 'daily' as const,
+        priority: 0.8,
+      }
+    ];
+  });
 
   return [
     {

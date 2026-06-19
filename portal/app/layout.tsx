@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getAllCategories } from "@/lib/posts";
 import Script from "next/script";
+import { headers } from "next/headers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -52,9 +53,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+  const htmlLang = locale === "pt" ? "pt-BR" : locale;
+
   return (
-    <html lang="pt-BR" suppressHydrationWarning className={inter.variable}>
+    <html lang={htmlLang} suppressHydrationWarning className={inter.variable}>
       <head />
       <body
         className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen"

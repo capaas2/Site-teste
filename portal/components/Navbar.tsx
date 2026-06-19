@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
@@ -27,6 +27,7 @@ const mainNavItems = [
 export function Navbar() {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
+  const pathname = usePathname() || "";
   const [mounted, setMounted] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
@@ -34,6 +35,32 @@ export function Navbar() {
   const [suggestions, setSuggestions] = useState<{ posts: any[]; categories: string[] }>({ posts: [], categories: [] });
   const [isSearching, setIsSearching] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  const activeLocale = pathname.startsWith('/en') ? 'en' : pathname.startsWith('/es') ? 'es' : 'pt';
+
+  const getLocalizedHref = (href: string) => {
+    if (activeLocale === 'pt') return href;
+    if (href.startsWith('/en') || href.startsWith('/es')) return href;
+    return `/${activeLocale}${href === '/' ? '' : href}`;
+  };
+
+  const handleLanguageChange = (newLocale: string) => {
+    let cleanPathname = pathname;
+    if (activeLocale !== 'pt') {
+      cleanPathname = pathname.substring(activeLocale.length + 1);
+      if (!cleanPathname.startsWith('/')) {
+        cleanPathname = '/' + cleanPathname;
+      }
+    }
+    
+    let targetPath = cleanPathname;
+    if (newLocale !== 'pt') {
+      targetPath = `/${newLocale}${cleanPathname === '/' ? '' : cleanPathname}`;
+    }
+    
+    const searchParams = window.location.search;
+    router.push(targetPath + searchParams);
+  };
 
   useEffect(() => setMounted(true), []);
 
@@ -79,7 +106,7 @@ export function Navbar() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      router.push(`/busca?q=${encodeURIComponent(query)}`);
+      router.push(getLocalizedHref(`/busca?q=${encodeURIComponent(query)}`));
       setIsSidebarOpen(false);
     }
   };
@@ -99,7 +126,7 @@ export function Navbar() {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 text-white font-black text-2xl tracking-tighter">
+          <Link href={getLocalizedHref("/")} className="flex-shrink-0 text-white font-black text-2xl tracking-tighter">
             Folha<span className="text-blue-500">Byte</span>
           </Link>
 
@@ -131,7 +158,7 @@ export function Navbar() {
                       {["IA", "Mercado", "Cibersegurança", "Reviews", "Eletrificação"].map((topic) => (
                         <Link
                           key={topic}
-                          href={`/categoria/${topic.toLowerCase()}`}
+                          href={getLocalizedHref(`/categoria/${topic.toLowerCase()}`)}
                           className="px-3 py-1.5 rounded-lg bg-slate-800/50 hover:bg-blue-500/20 hover:text-blue-400 text-xs font-bold text-slate-400 transition-all border border-slate-800"
                         >
                           {topic}
@@ -148,7 +175,7 @@ export function Navbar() {
                         {suggestions.categories.map((cat) => (
                           <Link
                             key={cat}
-                            href={`/categoria/${cat.toLowerCase().trim()}`}
+                            href={getLocalizedHref(`/categoria/${cat.toLowerCase().trim()}`)}
                             className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 transition-colors group"
                           >
                             <div className="bg-slate-800 p-1.5 rounded-lg group-hover:bg-blue-500/20 group-hover:text-blue-500 transition-colors">
@@ -167,7 +194,7 @@ export function Navbar() {
                         {suggestions.posts.map((post) => (
                           <Link
                             key={post.id}
-                            href={`/post/${slugify(post.titulo)}`}
+                            href={getLocalizedHref(`/post/${slugify(post.titulo)}`)}
                             className="flex flex-col px-3 py-2.5 rounded-xl hover:bg-slate-800 transition-colors group"
                           >
                             <span className="text-xs font-bold text-slate-200 group-hover:text-blue-500 transition-colors line-clamp-1">{post.titulo}</span>
@@ -193,15 +220,44 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-4 border-r border-slate-800 pr-4 mr-2">
               <Link href="#" className="hover:text-white transition-colors"><Rss className="w-4 h-4" /></Link>
             </div>
-            
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="hover:text-white transition-colors"
-                aria-label="Alternar tema"
-              >
-                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
+              {mounted && (
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="hover:text-white transition-colors"
+                  aria-label="Alternar tema"
+                >
+                  {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                </button>
+
+                {/* Seletor de Idiomas */}
+                <div className="relative group">
+                  <button className="flex items-center gap-1.5 hover:text-slate-200 text-slate-400 transition-colors uppercase font-black text-[10px] tracking-wider px-2 py-1 bg-slate-800/80 rounded-lg border border-slate-800">
+                    <Globe className="w-3.5 h-3.5 text-blue-500" />
+                    <span>{activeLocale}</span>
+                  </button>
+                  <div className="absolute right-0 top-full mt-2 hidden group-hover:block bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl min-w-[110px] z-50">
+                    <button
+                      onClick={() => handleLanguageChange("pt")}
+                      className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "pt" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
+                    >
+                      🇧🇷 PT
+                    </button>
+                    <button
+                      onClick={() => handleLanguageChange("en")}
+                      className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "en" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
+                    >
+                      🇺🇸 EN
+                    </button>
+                    <button
+                      onClick={() => handleLanguageChange("es")}
+                      className={`w-full text-left px-3.5 py-2 text-[10px] font-black tracking-widest uppercase transition-colors hover:bg-slate-800 flex items-center gap-2 ${activeLocale === "es" ? "text-blue-500 bg-slate-800/40" : "text-slate-400"}`}
+                    >
+                      🇪🇸 ES
+                    </button>
+                  </div>
+                </div>
+              </div>
             )}
             
             {/* Search (Mobile Toggle) v2.9.6 */}
@@ -214,14 +270,14 @@ export function Navbar() {
             </button>
           </div>
         </div>
-
+ 
         {/* Horizontal Navigation (Secondary Bar) */}
         <nav className="border-t border-slate-800 hidden md:block">
           <div className="max-w-7xl mx-auto px-4 flex gap-6 overflow-x-auto py-3 no-scrollbar">
             {mainNavItems.map((item) => (
               <Link
                 key={item.label}
-                href={item.href || `/categoria/${item.slug}`}
+                href={getLocalizedHref(item.href || `/categoria/${item.slug}`)}
                 className="flex-shrink-0 text-xs font-black uppercase tracking-[0.15em] text-slate-400 hover:text-white transition-all hover:scale-105"
               >
                 {item.label}
@@ -260,7 +316,7 @@ export function Navbar() {
                   {mainNavItems.map((item) => (
                     <Link
                       key={item.label}
-                      href={item.href || `/categoria/${item.slug}`}
+                      href={getLocalizedHref(item.href || `/categoria/${item.slug}`)}
                       onClick={() => setIsSidebarOpen(false)}
                       className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-800 group transition-all"
                     >
@@ -355,7 +411,7 @@ export function Navbar() {
                       {suggestions.categories.map((cat) => (
                         <Link
                           key={cat}
-                          href={`/categoria/${cat.toLowerCase().trim()}`}
+                          href={getLocalizedHref(`/categoria/${cat.toLowerCase().trim()}`)}
                           onClick={() => setIsMobileSearchOpen(false)}
                           className="flex items-center justify-between p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-all"
                         >
@@ -375,7 +431,7 @@ export function Navbar() {
                       {suggestions.posts.map((post) => (
                         <Link
                           key={post.id}
-                          href={`/post/${slugify(post.titulo)}`}
+                          href={getLocalizedHref(`/post/${slugify(post.titulo)}`)}
                           onClick={() => setIsMobileSearchOpen(false)}
                           className="flex flex-col p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 transition-all group"
                         >

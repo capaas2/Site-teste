@@ -19,6 +19,7 @@ import { Calendar, User, Tag, Clock, Newspaper, ShieldCheck } from "lucide-react
 import { formatPostDate, formatPostTime } from "@/lib/date-utils";
 import rehypeRaw from "rehype-raw";
 import { slugify } from "@/lib/slugify";
+import { headers } from "next/headers";
 
 export const revalidate = 120;
 
@@ -37,19 +38,38 @@ export async function generateMetadata(
     };
   }
 
-  const plainTextDescription = post.conteudo_markdown
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  let activeTitle = post.titulo;
+  let activeContent = post.conteudo_markdown;
+
+  if (locale === "en" && post.titulo_en && post.conteudo_markdown_en) {
+    activeTitle = post.titulo_en;
+    activeContent = post.conteudo_markdown_en;
+  } else if (locale === "es" && post.titulo_es && post.conteudo_markdown_es) {
+    activeTitle = post.titulo_es;
+    activeContent = post.conteudo_markdown_es;
+  }
+
+  const plainTextDescription = activeContent
     .replace(/[#*\[\]()_`>]/g, "")
     .substring(0, 150)
     .trim() + "...";
 
   return {
-    title: `${post.titulo} | FolhaByte`,
+    title: `${activeTitle} | FolhaByte`,
     description: plainTextDescription,
     alternates: {
       canonical: `/post/${slug}`,
+      languages: {
+        "pt-BR": `/post/${slug}`,
+        "en": `/en/post/${slug}`,
+        "es": `/es/post/${slug}`,
+      }
     },
     openGraph: {
-      title: post.titulo,
+      title: activeTitle,
       description: plainTextDescription,
       url: `/post/${slug}`,
       images: [post.imagem_url || PLACEHOLDER],
@@ -59,7 +79,7 @@ export async function generateMetadata(
     },
     twitter: {
       card: "summary_large_image",
-      title: post.titulo,
+      title: activeTitle,
       description: plainTextDescription,
       images: [post.imagem_url || PLACEHOLDER],
     }
@@ -141,13 +161,30 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   if (!post) notFound();
 
+  const headerList = await headers();
+  const locale = headerList.get("x-locale") || "pt";
+
+  let activeTitle = post.titulo;
+  let activeContent = post.conteudo_markdown;
+
+  if (locale === "en" && post.titulo_en && post.conteudo_markdown_en) {
+    activeTitle = post.titulo_en;
+    activeContent = post.conteudo_markdown_en;
+  } else if (locale === "es" && post.titulo_es && post.conteudo_markdown_es) {
+    activeTitle = post.titulo_es;
+    activeContent = post.conteudo_markdown_es;
+  }
+
+  const getLocalizedHref = (path: string) => {
+    if (locale === "pt") return path;
+    return `/${locale}${path}`;
+  };
+
   const primaryCategory = post.categoria.split(',')[0].trim();
   const relatedPosts = await getRelatedPosts(primaryCategory, post.id);
-  
-  // ... (reading time logic)
 
   // Calcular Tempo de Leitura
-  const wordCount = post.conteudo_markdown.split(/\s+/).length;
+  const wordCount = activeContent.split(/\s+/).length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   const formattedDate = formatPostDate(post.publicado_em);
@@ -155,7 +192,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   // REGRA: Processamento de Conteúdo FolhaByte (v2.20.16)
   // Substituímos as tags customizadas por componentes HTML que o ReactMarkdown processará via rehypeRaw
-  const processedMarkdown = post.conteudo_markdown
+  const processedMarkdown = activeContent
     .replace(/^# .*\n/g, '')         // Remove o título redundante no topo do MD
     .replace(/^## (\d+)\. /gm, '## ') // Remove numeração "1. ", "2. " de H2
     .replace(/\[(IMAGEM|DETALHE_IMAGEM|INFO_GRAFICO):\s*([^|\]]+)(?:\s*\|\s*LEGENDA:\s*([^\]]+))?\]/gi, (match, type, firstPart, secondPart) => {
@@ -216,7 +253,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
-    "headline": post.titulo,
+    "headline": activeTitle,
     "image": [optimizedFeaturedImage],
     "datePublished": post.publicado_em,
     "dateModified": post.publicado_em,
@@ -256,7 +293,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 return (
                   <Link
                     key={trimmedCat}
-                    href={`/categoria/${hrefSlug}`}
+                    href={getLocalizedHref(`/categoria/${hrefSlug}`)}
                     className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black underline uppercase px-3 py-1.5 rounded-lg tracking-tighter hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
                   >
                     <Tag className="w-3 h-3" />
@@ -266,7 +303,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               })}
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-2 italic">
-              {post.titulo}
+              {activeTitle}
             </h1>
           </div>
 
@@ -292,12 +329,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
 
           <div className="mb-8">
-            <ShareButtons titulo={post.titulo} />
+            <ShareButtons titulo={activeTitle} />
           </div>
 
           <PostImage
             src={optimizedFeaturedImage}
-            alt={post.titulo}
+            alt={activeTitle}
             priority
             className="!my-0 !mb-12"
           />
@@ -323,7 +360,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {relatedPosts.map((p) => (
-                    <Link key={p.id} href={`/post/${slugify(p.titulo)}`} className="group flex flex-col gap-4">
+                    <Link key={p.id} href={getLocalizedHref(`/post/${slugify(p.titulo)}`)} className="group flex flex-col gap-4">
                       <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800">
                         <Image 
                           src={p.imagem_url || PLACEHOLDER} 
