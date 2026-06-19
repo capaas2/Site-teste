@@ -43,11 +43,3 @@ if (!fs.existsSync(publicDir)) {
 fs.writeFileSync(destPublicIco, icoData);
 console.log('Favicon ICO gerado em:', destPublicIco);
 
-// Grava em app/favicon.ico
-const appDir = path.dirname(destAppIco);
-if (!fs.existsSync(appDir)) {
-  fs.mkdirSync(appDir, { recursive: true });
-}
-fs.writeFileSync(destAppIco, icoData);
-console.log('Favicon ICO gerado em:', destAppIco);
-
