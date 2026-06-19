@@ -1,4 +1,4 @@
-import { Info, Rocket, Target, ShieldCheck } from "lucide-react";
+import { Rocket, Target, ShieldCheck } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

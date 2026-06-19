@@ -1,5 +1,5 @@
 import React from "react";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,8 +28,7 @@ export const revalidate = 120;
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80";
 
 export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> },
-  parent: ResolvingMetadata
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const { slug } = await params;
   const postRaw = await getPost(slug);

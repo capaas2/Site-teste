@@ -95,7 +95,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ message: "Nada para enviar no momento." });
 
-  } catch (err: unknown) {
+  } catch {
     // Privacidade: Não exibimos o e-mail ou dados sensíveis em caso de erro fatal
     console.error("Erro no despacho da newsletter (Rastreio):", Date.now());
     return NextResponse.json({ error: "Erro interno no processamento do despacho." }, { status: 500 });

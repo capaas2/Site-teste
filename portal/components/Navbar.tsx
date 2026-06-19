@@ -7,12 +7,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { slugify } from "@/lib/slugify";
 import { getTranslation } from "@/lib/translations";
-import { Post } from "@/types/post";
 import { 
   Search, Sun, Moon, Rss, 
   Menu, X, ChevronRight, 
-  Globe, Shield, TrendingUp, Smartphone, Rocket, Zap, 
-  Car, Code, Palette, Leaf, Cpu, Mail, Loader2, Tag
+  Globe, TrendingUp, Rocket, Zap, 
+  Loader2, Tag
 } from "lucide-react";
 
 const mainNavItems = [

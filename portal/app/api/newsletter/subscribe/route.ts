@@ -5,9 +5,8 @@ import { subscribeSchema } from "@/lib/schemas/newsletter";
 
 export const dynamic = "force-dynamic";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await request.json();
     
@@ -28,7 +27,7 @@ export async function POST(request: Request) {
     const adminClient = createAdminClient();
 
     // 3. Inserção no Supabase
-    const { data, error } = await adminClient
+    const { error } = await adminClient
       .from("subscribers")
       .insert([{ 
         email, 
@@ -52,7 +51,7 @@ export async function POST(request: Request) {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://site-teste-ne4f.vercel.app";
     const confirmLink = `${baseUrl}/api/newsletter/confirm?token=${token}`;
 
-    const { data: emailData, error: emailError } = await resend.emails.send({
+    const { error: emailError } = await resend.emails.send({
       from: "FolhaByte <onboarding@resend.dev>",
       to: [email],
       subject: "Falta pouco! Confirme sua inscrição na FolhaByte 🗞️",
@@ -82,7 +81,7 @@ export async function POST(request: Request) {
       { message: "Quase pronto! Enviamos um link de confirmação para o seu e-mail." },
       { status: 201 }
     );
-  } catch (err: unknown) {
+  } catch {
     // Privacidade e Segurança: Nunca retornamos detalhes do erro para o cliente
     console.error("Newsletter Subscribe Error (Rastreio):", Date.now()); 
     return NextResponse.json(
