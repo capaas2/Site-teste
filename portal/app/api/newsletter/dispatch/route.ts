@@ -102,14 +102,52 @@ export async function GET(request: Request) {
   }
 }
 
+// Helper para limpar a sintaxe de Markdown e extrair um resumo limpo para o e-mail
+function cleanMarkdownExcerpt(markdown: string, limit: number = 400): string {
+  if (!markdown) return "";
+
+  // 1. Remover o título principal (# Título) no início
+  let clean = markdown.replace(/^# .*\n/g, "");
+
+  // 2. Remover outras linhas de cabeçalho completas (##, ###)
+  clean = clean.replace(/^#+ .*\n/gm, "");
+
+  // 3. Remover tags customizadas de imagens [IMAGEM: ...]
+  clean = clean.replace(/\[(?:IMAGEM|IMAGE|IMAGEN|DETALHE_IMAGEM|IMAGE_DETAIL|DETALLE_IMAGEN|DETALLE DE IMAGEN|INFO_GRAFICO|INFOGRAPHIC|INFOGRAFÍA|INFOGRAFIA|INFO GRAPHIC)[^\]]*\]/gi, "");
+
+  // 4. Remover blocos de "VEJA TAMBÉM:"
+  clean = clean.replace(/>\s*VEJA TAMBÉM:[^\n]*\n?/gi, "");
+
+  // 5. Remover links markdown [Texto](URL) mantendo apenas o texto
+  clean = clean.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+
+  // 6. Remover formatação de negrito, itálico e outros caracteres do markdown
+  clean = clean.replace(/[*_`~>]/g, "");
+
+  // 7. Substituir múltiplas quebras de linha e espaços por um único espaço
+  clean = clean.replace(/\s+/g, " ").trim();
+
+  // 8. Cortar no limite de caracteres de forma limpa (cortando em espaço se possível)
+  if (clean.length <= limit) return clean;
+  
+  const excerpt = clean.slice(0, limit);
+  const lastSpace = excerpt.lastIndexOf(" ");
+  if (lastSpace > 0) {
+    return excerpt.slice(0, lastSpace) + "...";
+  }
+  return excerpt + "...";
+}
+
 // Templates Helper
 function renderEmailTemplate(post: Post) {
+  const cleanExcerpt = cleanMarkdownExcerpt(post.conteudo_markdown, 400);
+
   return `
     <div style="font-family: sans-serif; max-width: 600px; margin: auto; color: #334155;">
       <h1 style="color: #0f172a;">${post.titulo}</h1>
       <img src="${post.imagem_url || ''}" style="width: 100%; border-radius: 12px; margin-bottom: 20px;" />
       <div style="font-size: 16px; line-height: 1.6;">
-        ${post.conteudo_markdown.slice(0, 500)}...
+        ${cleanExcerpt}
       </div>
       <a href="https://site-teste-ne4f.vercel.app/post/${slugify(post.titulo)}" 
          style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px;">

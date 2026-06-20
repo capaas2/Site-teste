@@ -54,11 +54,6 @@ export async function generateMetadata(
     description: plainTextDescription,
     alternates: {
       canonical: `/post/${slug}`,
-      languages: {
-        "pt-BR": `/post/${slug}`,
-        "en": `/en/post/${slug}`,
-        "es": `/es/post/${slug}`,
-      }
     },
     openGraph: {
       title: post.titulo,
@@ -153,8 +148,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   if (!postRaw) notFound();
 
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
+  const locale = "pt";
 
   // Tradução do post e listagens secundárias
   const [post] = translatePosts([postRaw], locale);
@@ -162,8 +156,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const latestPlantao = translatePosts(latestPlantaoRaw, locale);
 
   const getLocalizedHref = (path: string) => {
-    if (locale === "pt") return path;
-    return `/${locale}${path}`;
+    return path;
   };
 
   const primaryCategory = post.categoria.split(',')[0].trim();

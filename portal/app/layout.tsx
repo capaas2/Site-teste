@@ -7,7 +7,6 @@ import { Footer } from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
-import { headers } from "next/headers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,9 +52,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
-  const htmlLang = locale === "pt" ? "pt-BR" : locale;
+  const htmlLang = "pt-BR";
 
   return (
     <html lang={htmlLang} suppressHydrationWarning className={inter.variable}>

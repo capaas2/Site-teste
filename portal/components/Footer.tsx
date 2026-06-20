@@ -1,42 +1,39 @@
 import Link from "next/link";
 import { Rss, Mail, MapPin } from "lucide-react";
 import { NewsLetter } from "./NewsLetter";
-import { headers } from "next/headers";
 import { getTranslation } from "@/lib/translations";
 
 export async function Footer() {
   const currentYear = new Date().getFullYear();
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
+  const locale = "pt";
 
   const getLocalizedHref = (href: string) => {
-    if (locale === 'pt') return href;
-    return `/${locale}${href === '/' ? '' : href}`;
+    return href;
   };
 
   const categories = [
     { 
-      label: locale === "pt" ? "Eletrificação" : locale === "en" ? "Electrification" : "Electrificación", 
+      label: "Eletrificação", 
       slug: "eletrificacao" 
     },
     { 
-      label: locale === "pt" ? "Mobilidade" : locale === "en" ? "Mobility" : "Movilidad", 
+      label: "Mobilidade", 
       slug: "mobilidade" 
     },
     { 
-      label: locale === "pt" ? "IA & Software" : locale === "en" ? "AI & Software" : "IA y Software", 
+      label: "IA & Software", 
       slug: "ia-software" 
     },
     { 
-      label: locale === "pt" ? "Ciência" : locale === "en" ? "Science" : "Ciencia", 
+      label: "Ciência", 
       slug: "ciencia" 
     },
     { 
-      label: locale === "pt" ? "Cibersegurança" : locale === "en" ? "Cybersecurity" : "Ciberseguridad", 
+      label: "Cibersegurança", 
       slug: "cibersegurança" 
     },
     { 
-      label: locale === "pt" ? "Tecnologia" : locale === "en" ? "Technology" : "Tecnología", 
+      label: "Tecnologia", 
       slug: "tecnologia" 
     },
   ];
@@ -44,19 +41,19 @@ export async function Footer() {
   const quickLinks = [
     { label: getTranslation(locale, "home"), href: "/" },
     { 
-      label: locale === "pt" ? "Sobre Nós" : locale === "en" ? "About Us" : "Sobre Nosotros", 
+      label: "Sobre Nós", 
       href: "/sobre" 
     },
     { 
-      label: locale === "pt" ? "Contato" : locale === "en" ? "Contact" : "Contacto", 
+      label: "Contato", 
       href: "/contato" 
     },
     { 
-      label: locale === "pt" ? "Política de Privacidade" : locale === "en" ? "Privacy Policy" : "Política de Privacidad", 
+      label: "Política de Privacidade", 
       href: "/privacidade" 
     },
     { 
-      label: locale === "pt" ? "Termos e Condições" : locale === "en" ? "Terms & Conditions" : "Términos y Condiciones", 
+      label: "Termos e Condições", 
       href: "/termos" 
     },
   ];

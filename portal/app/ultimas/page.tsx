@@ -5,34 +5,17 @@ import { Pagination } from "@/components/Pagination";
 import Link from "next/link";
 import { ChevronRight, Clock } from "lucide-react";
 import { Metadata } from "next";
-import { headers } from "next/headers";
 import { getTranslation } from "@/lib/translations";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
-
-  let title = "Últimas Notícias | FolhaByte";
-  let description = "Acompanhe as últimas notícias, lançamentos e análises do mundo da tecnologia, inteligência artificial e gadgets em tempo real.";
-
-  if (locale === "en") {
-    title = "Latest News | FolhaByte";
-    description = "Follow the latest news, releases and analysis of the tech world, artificial intelligence and gadgets in real time.";
-  } else if (locale === "es") {
-    title = "Últimas Noticias | FolhaByte";
-    description = "Sigue las últimas noticias, lanzamientos y análisis del mundo de la tecnología, inteligencia artificial y dispositivos en tiempo real.";
-  }
+  const title = "Últimas Notícias | FolhaByte";
+  const description = "Acompanhe as últimas notícias, lançamentos e análises do mundo da tecnologia, inteligência artificial e gadgets em tempo real.";
 
   return {
     title,
     description,
     alternates: {
       canonical: "/ultimas",
-      languages: {
-        "pt-BR": "/ultimas",
-        "en": "/en/ultimas",
-        "es": "/es/ultimas",
-      }
     },
   };
 }
@@ -48,12 +31,10 @@ export default async function LatestPostsPage({
   const currentPage = parseInt(page || "1", 10);
   const pageSize = 12;
 
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
+  const locale = "pt";
 
   const getLocalizedHref = (href: string) => {
-    if (locale === 'pt') return href;
-    return `/${locale}${href === '/' ? '' : href}`;
+    return href;
   };
 
   const { posts, count } = await getLatestPosts(currentPage, pageSize);

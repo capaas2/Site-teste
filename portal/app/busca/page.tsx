@@ -2,7 +2,6 @@ import { PostFeed } from "@/components/PostFeed";
 import { supabase } from "@/lib/supabase";
 import { Post } from "@/types/post";
 import { Metadata } from "next";
-import { headers } from "next/headers";
 import { translatePosts } from "@/lib/posts";
 import { getTranslation } from "@/lib/translations";
 
@@ -13,19 +12,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { q } = await searchParams;
   const query = q || "";
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
 
-  let title = query ? `Resultados para "${query}" | FolhaByte` : "Busca | FolhaByte";
-  let description = `Resultados da busca no portal FolhaByte para o termo: "${query}".`;
-
-  if (locale === "en") {
-    title = query ? `Results for "${query}" | FolhaByte` : "Search | FolhaByte";
-    description = `Search results on the FolhaByte portal for the term: "${query}".`;
-  } else if (locale === "es") {
-    title = query ? `Resultados para "${query}" | FolhaByte` : "Buscar | FolhaByte";
-    description = `Resultados de la búsqueda en el portal FolhaByte para el término: "${query}".`;
-  }
+  const title = query ? `Resultados para "${query}" | FolhaByte` : "Busca | FolhaByte";
+  const description = `Resultados da busca no portal FolhaByte para o termo: "${query}".`;
 
   return {
     title,
@@ -47,8 +36,7 @@ export default async function BuscaPage({
   const { q } = await searchParams;
   const query = q || "";
 
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
+  const locale = "pt";
 
   let posts: Post[] = [];
 

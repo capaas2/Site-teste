@@ -5,34 +5,17 @@ import { AdBanner } from "@/components/AdBanner";
 import Link from "next/link";
 import { ChevronRight, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
-import { headers } from "next/headers";
 import { getTranslation } from "@/lib/translations";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
-
-  let title = "Notícias Mais Lidas | FolhaByte";
-  let description = "Confira as matérias e notícias de tecnologia mais visualizadas e populares da semana na FolhaByte.";
-
-  if (locale === "en") {
-    title = "Most Read Articles | FolhaByte";
-    description = "Check out the most viewed and popular technology articles and news of the week on FolhaByte.";
-  } else if (locale === "es") {
-    title = "Noticias Más Leídas | FolhaByte";
-    description = "Consulta los artículos y noticias de tecnología más vistos y populares de la semana en FolhaByte.";
-  }
+  const title = "Notícias Mais Lidas | FolhaByte";
+  const description = "Confira as matérias e notícias de tecnologia mais visualizadas e populares da semana na FolhaByte.";
 
   return {
     title,
     description,
     alternates: {
       canonical: "/mais-lidas",
-      languages: {
-        "pt-BR": "/mais-lidas",
-        "en": "/en/mais-lidas",
-        "es": "/es/mais-lidas",
-      }
     },
   };
 }
@@ -40,12 +23,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export const revalidate = 120;
 
 export default async function MostReadPage() {
-  const headerList = await headers();
-  const locale = headerList.get("x-locale") || "pt";
+  const locale = "pt";
 
   const getLocalizedHref = (href: string) => {
-    if (locale === 'pt') return href;
-    return `/${locale}${href === '/' ? '' : href}`;
+    return href;
   };
 
   // Pegamos o ranking semanal (Top 20)

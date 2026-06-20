@@ -11,58 +11,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .select('id, titulo, publicado_em')
     .order('publicado_em', { ascending: false });
 
-  const postUrls = (posts || []).flatMap((post) => {
+  const postUrls = (posts || []).map((post) => {
     const slug = slugify(post.titulo);
     const lastModified = new Date(post.publicado_em);
     
-    return [
-      {
-        url: `${baseUrl}/post/${slug}`,
-        lastModified,
-        changeFrequency: 'daily' as const,
-        priority: 0.8,
-      },
-      {
-        url: `${baseUrl}/en/post/${slug}`,
-        lastModified,
-        changeFrequency: 'daily' as const,
-        priority: 0.8,
-      },
-      {
-        url: `${baseUrl}/es/post/${slug}`,
-        lastModified,
-        changeFrequency: 'daily' as const,
-        priority: 0.8,
-      }
-    ];
+    return {
+      url: `${baseUrl}/post/${slug}`,
+      lastModified,
+      changeFrequency: 'daily' as const,
+      priority: 0.8,
+    };
   });
 
   const categories = await getAllCategories();
-  const categoryUrls = (categories || []).flatMap((cat) => {
+  const categoryUrls = (categories || []).map((cat) => {
     const lowerName = cat.name.toLowerCase();
     const isIA = ["ia", "inteligencia artificial", "inteligência artificial"].includes(lowerName);
     const slug = isIA ? "ia" : slugify(cat.name);
 
-    return [
-      {
-        url: `${baseUrl}/categoria/${slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-      },
-      {
-        url: `${baseUrl}/en/categoria/${slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-      },
-      {
-        url: `${baseUrl}/es/categoria/${slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-      }
-    ];
+    return {
+      url: `${baseUrl}/categoria/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    };
   });
 
   return [
