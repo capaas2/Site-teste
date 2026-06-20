@@ -8,7 +8,17 @@ export async function POST(request: Request) {
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!authHeader || !authHeader.startsWith('Bearer ') || authHeader.split(' ')[1] !== serviceRoleKey) {
-      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
+      return NextResponse.json({ 
+        error: 'Não autorizado',
+        debug: {
+          hasAuthHeader: !!authHeader,
+          authHeaderStartsWithBearer: authHeader ? authHeader.startsWith('Bearer ') : false,
+          authHeaderTokenLength: authHeader ? authHeader.split(' ')[1]?.length : 0,
+          hasServiceRoleKey: !!serviceRoleKey,
+          serviceRoleKeyLength: serviceRoleKey ? serviceRoleKey.length : 0,
+          isMatch: authHeader ? authHeader.split(' ')[1] === serviceRoleKey : false
+        }
+      }, { status: 401 });
     }
 
     // 2. Extração dos parâmetros da requisição
