@@ -64,6 +64,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen"
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
       >
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KRNZF6WB"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <Providers>
           <Navbar />
           <main>{children}</main>
@@ -77,6 +85,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             strategy="afterInteractive"
           />
           <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
+          <Script
+            id="gtm-script"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-KRNZF6WB');
+              `
+            }}
+          />
         </Providers>
       </body>
     </html>
