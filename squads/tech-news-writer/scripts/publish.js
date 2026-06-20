@@ -42,6 +42,20 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
   process.exit(1);
 }
 
+function slugify(text) {
+  if (!text) return "";
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/--+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 async function publishNews() {
   const jsonFilePath = process.argv[2];
 
@@ -171,7 +185,48 @@ async function publishNews() {
       console.log(`   🖼️ Imagem: ${imageUrl}`);
       console.log(`   📂 Categoria: ${payload.categoria}`);
 
-      // GATILHO PARA FASE 2: MONETIZAÇÃO
+      // GATILHO PARA GOOGLE INDEXING API
+      const siteUrl = env.NEXT_PUBLIC_SITE_URL || "https://folhabyte.dev";
+      console.log(`⚡ Enviando sinal para Google Search Indexing API...`);
+      try {
+        const postSlug = slugify(payload.titulo);
+        const urlsToNotify = [
+          `${siteUrl}/post/${postSlug}`
+        ];
+        if (titulo_en) {
+          urlsToNotify.push(`${siteUrl}/en/post/${postSlug}`);
+        }
+        if (titulo_es) {
+          urlsToNotify.push(`${siteUrl}/es/post/${postSlug}`);
+        }
+
+        for (const targetUrl of urlsToNotify) {
+          console.log(`   📤 Notificando URL: ${targetUrl}`);
+          const indexRes = await fetch(`${siteUrl}/api/index-url`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${SUPABASE_SERVICE_KEY}`
+            },
+            body: JSON.stringify({
+              url: targetUrl,
+              action: "URL_UPDATED"
+            })
+          });
+
+          if (indexRes.ok) {
+            console.log(`   ✅ Google notificado com sucesso para: ${targetUrl}`);
+          } else {
+            const indexErr = await indexRes.text();
+            console.warn(`   ⚠️ Erro ao notificar o Google para ${targetUrl} (HTTP ${indexRes.status}): ${indexErr}`);
+          }
+        }
+      } catch (indexErr) {
+        console.warn("   ⚠️ Falha ao acionar a API de Indexação do Google:", indexErr.message);
+      }
+
+      // GATILHO PARA FASE 2: MONETIZAÇÃO (Desativado temporariamente a pedido do usuário)
+      /*
       if (newPostId) {
         console.log("🔗 Ativando Affiliate Squad (Fase 2) para monetização automática...");
         try {
@@ -186,6 +241,7 @@ async function publishNews() {
           console.error("   ⚠️ Aviso: Falha ao disparar o Affiliate Squad:", triggerErr.message);
         }
       }
+      */
 
       process.exit(0);
     } else {
