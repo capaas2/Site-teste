@@ -84,11 +84,11 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self';",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.googletagmanager.com va.vercel-scripts.com pagead2.googlesyndication.com tpc.googlesyndication.com scripts.simpleanalyticscdn.com fundingchoicesmessages.google.com;",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.googletagmanager.com va.vercel-scripts.com pagead2.googlesyndication.com tpc.googlesyndication.com scripts.simpleanalyticscdn.com fundingchoicesmessages.google.com api.adtrafficquality.google;",
               "style-src 'self' 'unsafe-inline';",
               "img-src 'self' blob: data: cfqwufidvchaybqknuar.supabase.co images.unsplash.com images.pexels.com cdn.skoda-storyboard.com cdn.motor1.com raw.githubusercontent.com images-assets.nasa.gov www.nasa.gov images.arcpublishing.com pagead2.googlesyndication.com tpc.googlesyndication.com *.doubleclick.net queue.simpleanalyticscdn.com www.googletagmanager.com;",
               "font-src 'self' data:;",
-              "connect-src 'self' cfqwufidvchaybqknuar.supabase.co vitals.vercel-insights.com pagead2.googlesyndication.com tpc.googlesyndication.com *.doubleclick.net queue.simpleanalyticscdn.com fundingchoicesmessages.google.com www.googletagmanager.com;",
+              "connect-src 'self' cfqwufidvchaybqknuar.supabase.co vitals.vercel-insights.com pagead2.googlesyndication.com tpc.googlesyndication.com *.doubleclick.net queue.simpleanalyticscdn.com fundingchoicesmessages.google.com www.googletagmanager.com api.adtrafficquality.google;",
               "frame-src 'self' fundingchoicesmessages.google.com googleads.g.doubleclick.net tpc.googlesyndication.com www.google.com www.googletagmanager.com;",
               "frame-ancestors 'none';",
               "upgrade-insecure-requests;",
