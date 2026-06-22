@@ -98,6 +98,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/feed",
+        destination: "/feed.xml",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
