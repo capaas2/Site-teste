@@ -141,6 +141,7 @@ function cleanMarkdownExcerpt(markdown: string, limit: number = 400): string {
 // Templates Helper
 function renderEmailTemplate(post: Post) {
   const cleanExcerpt = cleanMarkdownExcerpt(post.conteudo_markdown, 400);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://folhabyte.dev";
 
   return `
     <div style="font-family: sans-serif; max-width: 600px; margin: auto; color: #334155;">
@@ -149,7 +150,7 @@ function renderEmailTemplate(post: Post) {
       <div style="font-size: 16px; line-height: 1.6;">
         ${cleanExcerpt}
       </div>
-      <a href="https://site-teste-ne4f.vercel.app/post/${slugify(post.titulo)}" 
+      <a href="${baseUrl}/post/${slugify(post.titulo)}" 
          style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px;">
          LER MATÉRIA COMPLETA
       </a>
@@ -160,9 +161,10 @@ function renderEmailTemplate(post: Post) {
 }
 
 function renderRecapTemplate(posts: Post[]) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://folhabyte.dev";
   const postsHtml = posts.map(p => `
     <li style="margin-bottom: 15px;">
-      <a href="https://site-teste-ne4f.vercel.app/post/${slugify(p.titulo)}" style="color: #2563eb; font-weight: bold; font-size: 16px;">
+      <a href="${baseUrl}/post/${slugify(p.titulo)}" style="color: #2563eb; font-weight: bold; font-size: 16px;">
         ${p.titulo}
       </a>
       <p style="margin: 5px 0; font-size: 14px; color: #64748b;">${p.categoria}</p>
@@ -176,7 +178,7 @@ function renderRecapTemplate(posts: Post[]) {
       <ul style="list-style: none; padding: 0;">
         ${postsHtml}
       </ul>
-      <a href="https://site-teste-ne4f.vercel.app" 
+      <a href="${baseUrl}" 
          style="display: inline-block; background: #0f172a; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px;">
          ACESSAR PORTAL
       </a>

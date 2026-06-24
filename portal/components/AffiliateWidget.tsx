@@ -64,6 +64,7 @@ export default function AffiliateWidget({
           
           <div className="relative w-40 sm:w-1/3 aspect-square rounded-[2rem] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center p-6 border border-slate-100 dark:border-slate-700 shadow-inner group-hover:shadow-md transition-shadow">
             {productImage ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
               <img 
                 src={productImage} 
                 alt={productName} 

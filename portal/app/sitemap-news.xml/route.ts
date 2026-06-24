@@ -64,9 +64,10 @@ export async function GET() {
       },
     });
 
-  } catch (err: any) {
-    console.error('Erro ao gerar sitemap de notícias:', err);
-    return new Response(`Error: ${err.message || 'Erro interno'}`, { status: 500 });
+  } catch (err) {
+    const error = err as Error;
+    console.error('Erro ao gerar sitemap de notícias:', error);
+    return new Response(`Error: ${error.message || 'Erro interno'}`, { status: 500 });
   }
 }
 

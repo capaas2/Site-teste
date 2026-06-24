@@ -3,9 +3,15 @@
  * Forçado para fuso horário America/Sao_Paulo (GMT-3) para precisão editorial.
  */
 
-export function formatPostDate(isoString: string, _locale = "pt"): string {
+export function formatPostDate(isoString: string, locale = "pt"): string {
   const date = new Date(isoString);
-  return date.toLocaleDateString("pt-BR", {
+  const localeMap: Record<string, string> = {
+    pt: "pt-BR",
+    en: "en-US",
+    es: "es-ES",
+  };
+  const l = localeMap[locale] || "pt-BR";
+  return date.toLocaleDateString(l, {
     day: "2-digit",
     month: "long",
     year: "numeric",

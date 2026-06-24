@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     }
 
     // 4. Enviar E-mail de Confirmação (Double Opt-in)
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://site-teste-ne4f.vercel.app";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://folhabyte.dev";
     const confirmLink = `${baseUrl}/api/newsletter/confirm?token=${token}`;
 
     const { error: emailError } = await resend.emails.send({

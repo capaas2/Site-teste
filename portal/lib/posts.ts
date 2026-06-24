@@ -8,13 +8,17 @@ async function getActiveLocale(): Promise<string> {
 export function translatePosts(posts: Post[], _locale: string): Post[] {
   if (!posts) return [];
   
+  // Mantém a referência do locale ativa para futuras traduções dinâmicas
+  const currentLocale = _locale || "pt";
+  
   return posts.map(post => {
     const original_titulo = post.titulo;
     const autor = post.autor || "Redação FolhaByte";
     return {
       ...post,
       original_titulo,
-      autor
+      autor,
+      locale: currentLocale
     };
   });
 }

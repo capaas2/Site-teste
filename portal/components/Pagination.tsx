@@ -25,19 +25,36 @@ export function Pagination({ currentPage, totalCount, pageSize, baseUrl }: Pagin
     return `${baseUrl}${separator}page=${page}`;
   };
 
-  // Lógica para mostrar apenas algumas páginas (ex: 1, 2, 3 ... 13)
-  const pages = [];
-  const maxVisiblePages = 5;
-  
-  let startPage = Math.max(1, currentPage - 2);
-  const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
-  if (endPage - startPage < maxVisiblePages - 1) {
-    startPage = Math.max(1, endPage - maxVisiblePages + 1);
-  }
-
-  for (let i = startPage; i <= endPage; i++) {
-    pages.push(i);
+  // Lógica para mostrar apenas algumas páginas (ex: 1, 2, 3 ... 10)
+  const pages: (number | string)[] = [];
+  if (totalPages <= 6) {
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(i);
+    }
+  } else {
+    if (currentPage <= 4) {
+      const end = Math.max(4, currentPage + 1);
+      for (let i = 1; i <= end; i++) {
+        pages.push(i);
+      }
+      pages.push("...");
+      pages.push(totalPages);
+    } else if (currentPage >= totalPages - 3) {
+      pages.push(1);
+      pages.push("...");
+      const start = Math.min(totalPages - 3, currentPage - 1);
+      for (let i = start; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      pages.push("...");
+      pages.push(currentPage - 1);
+      pages.push(currentPage);
+      pages.push(currentPage + 1);
+      pages.push("...");
+      pages.push(totalPages);
+    }
   }
 
   return (
@@ -58,33 +75,33 @@ export function Pagination({ currentPage, totalCount, pageSize, baseUrl }: Pagin
 
         {/* Números das Páginas */}
         <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800">
-          {startPage > 1 && (
-             <>
-               <Link href={getPageUrl(1)} className="w-10 h-10 flex items-center justify-center rounded-xl text-sm font-bold text-slate-500 hover:text-blue-600 transition-all">1</Link>
-               {startPage > 2 && <span className="text-slate-400 px-1">...</span>}
-             </>
-          )}
+          {pages.map((page, index) => {
+            if (page === "...") {
+              return (
+                <span
+                  key={`ellipsis-${index}`}
+                  className="w-8 h-10 flex items-center justify-center text-slate-400 text-sm font-bold select-none"
+                >
+                  ...
+                </span>
+              );
+            }
 
-          {pages.map((page) => (
-            <Link
-              key={page}
-              href={getPageUrl(page)}
-              className={`w-10 h-10 flex items-center justify-center rounded-xl text-sm font-black transition-all ${
-                currentPage === page
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-110"
-                  : "text-slate-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              }`}
-            >
-              {page}
-            </Link>
-          ))}
-
-          {endPage < totalPages && (
-            <>
-              {endPage < totalPages - 1 && <span className="text-slate-400 px-1">...</span>}
-              <Link href={getPageUrl(totalPages)} className="w-10 h-10 flex items-center justify-center rounded-xl text-sm font-bold text-slate-500 hover:text-blue-600 transition-all">{totalPages}</Link>
-            </>
-          )}
+            const pageNum = page as number;
+            return (
+              <Link
+                key={pageNum}
+                href={getPageUrl(pageNum)}
+                className={`w-10 h-10 flex items-center justify-center rounded-xl text-sm font-black transition-all ${
+                  currentPage === pageNum
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-110"
+                    : "text-slate-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                }`}
+              >
+                {pageNum}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Botão Próximo */}
