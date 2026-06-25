@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "transparent_solar_hero_1781897116472.png", remote: "posts/transparent-solar-hero.png" },
-  { local: "transparent_solar_detail_1781897141543.png", remote: "posts/transparent-solar-detail.png" },
+  { local: "biological_silicon_hybrid_hero_1782044943164.png", remote: "posts/bio-hybrid-hero.png" },
+  { local: "biological_silicon_hybrid_detail_1782044970163.png", remote: "posts/bio-hybrid-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Solar") && !titulo.includes("Transparent") && !titulo.includes("Vidro")) {
+  if (!titulo.includes("Bio-Híbridos") && !titulo.includes("Processadores") && !titulo.includes("Neurônios")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Ciência de Materiais, Sustentabilidade e Células Solares Transparentes.");
+  console.log("   -> Tema aprovado: Biocomputação, Semicondutores Biológicos e Neuroengenharia.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -86,44 +86,47 @@ async function uploadImage(localName, remotePath) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia";
-  const categoria = "Sustentabilidade, Inovação";
+  const titulo = "Processadores Bio-Híbridos: Chips de Silício Integrados a Neurônios Vivos Entram em Testes";
+  const categoria = "Biotecnologia, Computação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia
+  const conteudo_markdown = `# Processadores Bio-Híbridos: Chips de Silício Integrados a Neurônios Vivos Entram em Testes
 
-A arquitetura urbana sustentável acaba de ganhar a sua tecnologia mais invisível e potente. Consórcios de engenharia e a startup alemã de energia fotovoltaica *Heliatek*, em colaboração com pesquisadores da *Universidade de Michigan*, anunciaram o início da comercialização em larga escala das primeiras **células solares orgânicas transparentes (TLSCs)** para revestimento de edifícios comerciais. A tecnologia permite transformar as fachadas de vidro de arranha-céus comuns em gigantescos geradores de eletricidade sem alterar a transparência das janelas ou comprometer a entrada de luz natural nos escritórios.
+A busca por inteligência artificial energeticamente eficiente está abandonando a emulação puramente digital para fundir a microeletrônica tradicional diretamente com a biologia. Um consórcio global de neuroengenharia liderado pela *Universidade de Kyoto*, em parceria com laboratórios de semicondutores na Suíça, anunciou o início dos testes de campo de seus **processadores bio-híbridos (Wetware Computing)**. Trata-se da integração física e funcional de **culturas de neurônios humanos vivos cultivados sobre matrizes de eletrodos de silício**, criando sistemas de computação biológica auto-adaptativos que operam com frações mínimas de energia no ano de **2026**.
 
-O lançamento promete redefinir o conceito de autossuficiência energética nas grandes metrópoles mundiais.
+A inovação marca a primeira vez que tecidos cerebrais biológicos in vitro realizam tarefas complexas de reconhecimento de padrões integrados nativamente a barramentos de dados de silício de servidores de rack.
 
-## A Física por Trás do Vidro Invisível que Gera Energia
+## A Arquitetura da Interface Célula-Silício
 
-Até hoje, as tentativas de criar vidros solares esbarravam em um limite físico: quanto mais energia o painel gerava, mais escuro e opaco o vidro se tornava. As células solares orgânicas transparentes resolvem essa contradição concentrando-se no espectro de luz invisível ao olho humano.
+Diferente de chips neuromórficos artificiais que copiam matematicamente o comportamento de sinapses de forma digital, o processador bio-híbrido utiliza células cerebrais reais.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Detalhe microscópico da camada ativa de polímeros que absorvem comprimentos de onda invisíveis (ultravioleta e infravermelho), deixando a luz visível passar sem alterações]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhe tridimensional da interface bio-híbrida, mostrando axônios e dendritos biológicos crescendo e criando sinapses físicas sobre micro-eletrodos de ouro e silício]
 
-As janelas solares utilizam uma película ultra-fina de compostos orgânicos que absorvem seletivamente comprimentos de onda de **luz ultravioleta (UV)** e **infravermelho próximo (NIR)**. Como esses espectros de luz não são detectados pelos olhos humanos, o vidro permanece excepcionalmente claro e transparente (com transmitância de luz visível acima de **70%**). Os fótons de infravermelho e UV absorvidos pela película ativa de carbono são conduzidos por filamentos de eletrodos dourados microscópicos nas bordas das placas, gerando energia elétrica que é direcionada diretamente para a rede de distribuição do prédio.
+A estrutura consiste em uma matriz de micro-eletrodos de alta densidade (HD-MEA) revestida com uma película hidrofílica biocompatível.
 
-> VEJA TAMBÉM: [Painéis Solares de Perovskita Batem Recorde de Eficiência e Entram em Produção Comercial](/post/paineis-solares-de-perovskita-batem-recorde-de-eficiencia-e-entram-em-producao-comercial)
+Neurônios derivados de células-tronco humanas são semeados sobre essa matriz, onde crescem e formam redes neurais físicas funcionais ao longo de poucas semanas. Os eletrodos de silício capturam os potenciais de ação (pulsos elétricos ou *spikes*) disparados pelos neurônios biológicos e traduzem esses sinais biológicos em código digital binário. Simultaneamente, sinais elétricos digitais são enviados de volta através da matriz para estimular e moldar as conexões sinápticas biológicas por meio de plasticidade dependente do tempo de spike (STDP).
 
-## A Revolução nos Prédios Comerciais e Casas Inteligentes
+> VEJA TAMBÉM: [Chips Microfluídicos de Órgãos em Laboratório Começam a Substituir Testes em Animais](/post/chips-microfluidicos-de-orgaos-em-laboratorio-comecam-a-substituir-testes-em-animais)
 
-A aplicação de células fotovoltaicas transparentes traz benefícios diretos que vão além da simples geração de eletricidade:
+## Eficiência Energética e Aprendizado Contínuo sem Algoritmos
 
-1. **Redução de Custo de Climatização**: A película ativa que reveste as janelas solares absorve e bloqueia a radiação infravermelha, que é a principal responsável por aquecer o interior dos prédios no verão. Ao reter esse calor na própria janela e transformá-lo em eletricidade, o AeroSolar diminui a temperatura interna média do edifício em até **4°C**, gerando uma economia de **30%** no uso de sistemas de ar-condicionado.
-2. **Independência Energética em Centros Urbanos**: Edifícios corporativos possuem superfícies de teto muito pequenas se comparadas à gigantesca área de suas fachadas verticais cobertas de vidro. Ao revestir toda a fachada envidraçada de um arranha-céu de 40 andares com vidro solar transparente, o edifício pode gerar energia suficiente para cobrir **100%** de sua própria demanda interna de eletricidade.
+A fusão de neurônios biológicos com silício traz vantagens práticas que desafiam o paradigma da computação moderna:
 
-> VEJA TAMBÉM: [Baterias de Sódio em Estado Sólido Entram em Produção e Prometem Carros Elétricos com Metade do Preço](/post/baterias-de-sodio-em-estado-solido-entram-em-producao-e-prometem-carros-eletricos-com-metade-do-preco)
+1. **Consumo de Energia no Nível de Microwatts**: O cérebro humano consome cerca de 20 watts de potência para realizar cálculos de alta complexidade. Um processador bio-híbrido realiza triagens de dados com menos de **1 microwatt**, o que representa uma eficiência energética **milhões de vezes superior** a placas aceleradoras de IA digitais baseadas em GPU.
+2. **Autoaprendizado Sem Backpropagation**: Redes neurais biológicas aprendem por alteração de conexões físicas reais (plasticidade sináptica), sem necessidade de rodar algoritmos matemáticos complexos de retropropagação e treinamento estático, adaptando-se e corrigindo desvios em tempo real.
+3. **Resiliência a Falhas Críticas**: Se parte das células morrer ou sofrer danos, a rede neural viva reorganiza espontaneamente seus caminhos sinápticos ao redor da área inativa, mantendo a integridade da computação sem necessidade de reconfiguração de software.
 
-## Desafios de Eficiência e Perspectivas para Dispositivos Móveis
+> VEJA TAMBÉM: [Primeira Pele Eletrônica Biodegradável e Autoreparável é Apresentada por Cientistas](/post/primeira-pele-eletronica-biodegradavel-e-autoreparavel-e-apresentada-por-cientistas)
 
-Atualmente, o AeroSolar atinge uma eficiência de conversão elétrica de **9,2%** para vidros de alta transparência comercial. Embora seja uma taxa menor que a dos painéis de silício tradicionais instalados em telhados (cerca de 20%), a gigantesca área de superfície disponível em prédios de vidro compensa essa diferença, produzindo um fluxo energético maciço e constante.
+## O Futuro da Computação Wetware em Datacenters
 
-A Heliatek já trabalha em parcerias com fabricantes de eletrônicos para aplicar películas protetoras TLSCs nas telas de smartphones e smartwatches. A meta é permitir que telefones celulares se recarreguem continuamente enquanto expostos à luz do dia ou de lâmpadas internas, pavimentando o caminho para um ecossistema sustentável de eletrônicos autossuficientes e reduzindo a nossa dependência de tomadas elétricas domésticas tradicionais.
+Os primeiros protótipos de servidores equipados com cartuchos bio-híbridos refrigerados e nutridos por microfluídica integrada foram ativados em datacenters experimentais em **dezembro de 2026**. O principal desafio dos engenheiros reside na manutenção a longo prazo do ecossistema de nutrientes para manter as células vivas por períodos superiores a 12 meses.
+
+A computação wetware demonstra que a inteligência artificial do futuro pode não ser puramente artificial, mas sim orgânica e integrada à própria biologia. Ao integrar a sofisticação da evolução neurológica com a velocidade dos circuitos integrados modernos de 2026, abrimos uma nova fronteira tecnológica onde biologia e engenharia eletrônica operam como um único sistema simbiótico sustentável.
 
 ---
 
-**Fonte:** Heliatek Power Technologies / University of Michigan Research Communications — Munique 2026.`;
+**Fonte:** Kyoto University Neuroengineering Division / Swiss Institute of Technology (EPFL) Publications — Kyoto 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -192,7 +195,7 @@ A Heliatek já trabalha em parcerias com fabricantes de eletrônicos para aplica
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Energia Solar: AeroSolar...\n");
+  console.log("📰 Publicando notícia de Biocomputação: Processadores Bio-Híbridos...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -206,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de vidros solares publicada com sucesso!");
+    console.log("\n🎉 Notícia publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

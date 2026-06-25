@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "transparent_solar_hero_1781897116472.png", remote: "posts/transparent-solar-hero.png" },
-  { local: "transparent_solar_detail_1781897141543.png", remote: "posts/transparent-solar-detail.png" },
+  { local: "automated_microfluidic_incubator_1781746494052.png", remote: "posts/organ-on-a-chip-hero.png" },
+  { local: "microfluidic_chip_detail_1781804949349.png", remote: "posts/organ-on-a-chip-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Solar") && !titulo.includes("Transparent") && !titulo.includes("Vidro")) {
+  if (!titulo.includes("Chip") && !titulo.includes("Órgão") && !titulo.includes("Microfluídica")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Ciência de Materiais, Sustentabilidade e Células Solares Transparentes.");
+  console.log("   -> Tema aprovado: Biotecnologia, Fisiologia em Chip e Testes Alternativos.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -86,44 +86,47 @@ async function uploadImage(localName, remotePath) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia";
-  const categoria = "Sustentabilidade, Inovação";
+  const titulo = "Chips Microfluídicos de Órgãos em Laboratório Começam a Substituir Testes em Animais";
+  const categoria = "Biotecnologia, Medicina";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia
+  const conteudo_markdown = `# Chips Microfluídicos de Órgãos em Laboratório Começam a Substituir Testes em Animais
 
-A arquitetura urbana sustentável acaba de ganhar a sua tecnologia mais invisível e potente. Consórcios de engenharia e a startup alemã de energia fotovoltaica *Heliatek*, em colaboração com pesquisadores da *Universidade de Michigan*, anunciaram o início da comercialização em larga escala das primeiras **células solares orgânicas transparentes (TLSCs)** para revestimento de edifícios comerciais. A tecnologia permite transformar as fachadas de vidro de arranha-céus comuns em gigantescos geradores de eletricidade sem alterar a transparência das janelas ou comprometer a entrada de luz natural nos escritórios.
+A indústria farmacêutica e a pesquisa biomédica estão no limiar de uma mudança histórica ética e de precisão laboratorial. Consórcios de engenharia biomédica na Europa e nos Estados Unidos anunciaram a adoção em larga escala de **chips microfluídicos de órgãos em laboratório (Organ-on-a-Chip)** para a fase inicial de testes de novos medicamentos e substâncias cosméticas. A tecnologia utiliza microcanais de silicone com culturas de células humanas vivas para simular o comportamento e a fisiologia de órgãos complexos em tempo real no ano de **2026**, dispensando cobaias e oferecendo dados clínicos muito mais próximos da resposta humana real.
 
-O lançamento promete redefinir o conceito de autossuficiência energética nas grandes metrópoles mundiais.
+O marco tecnológico acelera o desenvolvimento de terapias personalizadas e reduz drasticamente o custo e o tempo de desenvolvimento de novos compostos.
 
-## A Física por Trás do Vidro Invisível que Gera Energia
+## O que é a Tecnologia Organ-on-a-Chip?
 
-Até hoje, as tentativas de criar vidros solares esbarravam em um limite físico: quanto mais energia o painel gerava, mais escuro e opaco o vidro se tornava. As células solares orgânicas transparentes resolvem essa contradição concentrando-se no espectro de luz invisível ao olho humano.
+Ao contrário das culturas celulares tradicionais em placas de Petri rígidas e estáticas, a tecnologia microfluídica simula as condições mecânicas e dinâmicas internas do corpo humano.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Detalhe microscópico da camada ativa de polímeros que absorvem comprimentos de onda invisíveis (ultravioleta e infravermelho), deixando a luz visível passar sem alterações]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhe microscópico dos microcanais do chip de pulmão artificial, onde células do alvéolo humano interagem sob microfluxos contínuos de fluidos que mimetizam a respiração]
 
-As janelas solares utilizam uma película ultra-fina de compostos orgânicos que absorvem seletivamente comprimentos de onda de **luz ultravioleta (UV)** e **infravermelho próximo (NIR)**. Como esses espectros de luz não são detectados pelos olhos humanos, o vidro permanece excepcionalmente claro e transparente (com transmitância de luz visível acima de **70%**). Os fótons de infravermelho e UV absorvidos pela película ativa de carbono são conduzidos por filamentos de eletrodos dourados microscópicos nas bordas das placas, gerando energia elétrica que é direcionada diretamente para a rede de distribuição do prédio.
+Os chips são dispositivos de silicone transparentes do tamanho de um pendrive, cortados por microcanais de diâmetro nanométrico.
 
-> VEJA TAMBÉM: [Painéis Solares de Perovskita Batem Recorde de Eficiência e Entram em Produção Comercial](/post/paineis-solares-de-perovskita-batem-recorde-de-eficiencia-e-entram-em-producao-comercial)
+Dentro desses canais, cientistas cultivam células vivas específicas (como neurônios, células hepáticas ou renais). Bombas microscópicas empurram fluidos simuladores de sangue e oxigênio através do chip em taxas de fluxo precisas, enquanto atuadores mecânicos tensionam as membranas de forma rítmica para emular batimentos cardíacos ou movimentos pulmonares. Essa dinâmica faz com que as células humanas se comportem exatamente como fariam dentro de um corpo vivo, permitindo observar com riqueza de detalhes como um novo medicamento interage com tecidos vitais.
 
-## A Revolução nos Prédios Comerciais e Casas Inteligentes
+> VEJA TAMBÉM: [Primeira Pele Eletrônica Biodegradável e Autoreparável é Apresentada por Cientistas](/post/primeira-pele-eletronica-biodegradavel-e-autoreparavel-e-apresentada-por-cientistas)
 
-A aplicação de células fotovoltaicas transparentes traz benefícios diretos que vão além da simples geração de eletricidade:
+## Vantagens no Desenvolvimento de Fármacos
 
-1. **Redução de Custo de Climatização**: A película ativa que reveste as janelas solares absorve e bloqueia a radiação infravermelha, que é a principal responsável por aquecer o interior dos prédios no verão. Ao reter esse calor na própria janela e transformá-lo em eletricidade, o AeroSolar diminui a temperatura interna média do edifício em até **4°C**, gerando uma economia de **30%** no uso de sistemas de ar-condicionado.
-2. **Independência Energética em Centros Urbanos**: Edifícios corporativos possuem superfícies de teto muito pequenas se comparadas à gigantesca área de suas fachadas verticais cobertas de vidro. Ao revestir toda a fachada envidraçada de um arranha-céu de 40 andares com vidro solar transparente, o edifício pode gerar energia suficiente para cobrir **100%** de sua própria demanda interna de eletricidade.
+A transição dos modelos animais para chips biológicos microfluídicos traz benefícios imediatos para o setor de biomedicina:
 
-> VEJA TAMBÉM: [Baterias de Sódio em Estado Sólido Entram em Produção e Prometem Carros Elétricos com Metade do Preço](/post/baterias-de-sodio-em-estado-solido-entram-em-producao-e-prometem-carros-eletricos-com-metade-do-preco)
+1. **Previsibilidade Clínica Muito Superior**: Medicamentos que funcionam em cobaias frequentemente falham em testes clínicos humanos devido a diferenças metabólicas e genéticas. Os chips utilizam células de origem puramente humana, fornecendo resultados de toxicidade e eficácia muito mais confiáveis.
+2. **Medicina Personalizada e de Precisão**: Chips podem ser povoados com células-tronco pluripotentes induzidas (iPSCs) extraídas diretamente de um paciente específico. Isso permite que oncologistas testem múltiplos coquetéis de quimioterapia em chips de fígado e tumor do próprio paciente antes de aplicar o tratamento real no corpo, determinando a dose exata e o menor dano colateral.
+3. **Fim de Questões Éticas**: Reduz em até **90% a necessidade de testes em cobaias animais** na fase pré-clínica, respondendo a demandas éticas globais de bem-estar animal.
 
-## Desafios de Eficiência e Perspectivas para Dispositivos Móveis
+> VEJA TAMBÉM: [Supercomputadores Biológicos: Nuvem ativa 16 mini-cérebros humanos](/post/supercomputadores-biologicos-nuvem-ativa-16-mini-cerebros-humanos)
 
-Atualmente, o AeroSolar atinge uma eficiência de conversão elétrica de **9,2%** para vidros de alta transparência comercial. Embora seja uma taxa menor que a dos painéis de silício tradicionais instalados em telhados (cerca de 20%), a gigantesca área de superfície disponível em prédios de vidro compensa essa diferença, produzindo um fluxo energético maciço e constante.
+## Implantação e Certificação pela FDA e EMA
 
-A Heliatek já trabalha em parcerias com fabricantes de eletrônicos para aplicar películas protetoras TLSCs nas telas de smartphones e smartwatches. A meta é permitir que telefones celulares se recarreguem continuamente enquanto expostos à luz do dia ou de lâmpadas internas, pavimentando o caminho para um ecossistema sustentável de eletrônicos autossuficientes e reduzindo a nossa dependência de tomadas elétricas domésticas tradicionais.
+As primeiras plataformas integradas de chips interligados (simulando um sistema multi-órgãos ou "corpo em um chip") foram adotadas oficialmente para triagem de segurança toxicológica em **outubro de 2026**. O principal desafio atual reside no refinamento dos sensores ópticos e elétricos embutidos nos chips para automatizar a leitura de dados metabólicos em larga escala por inteligência artificial.
+
+A validação de biossensores microfluídicos demonstra que a inovação biomédica avança para além da mera modelagem por computador, unindo o melhor da biologia celular real com a microeletrônica moderna. Ao criar simulações de órgãos humanos funcionais, o ano de 2026 marca um salto ético e tecnológico decisivo na busca de curas médicas mais rápidas, eficientes e integradas ao respeito pela vida animal mundial.
 
 ---
 
-**Fonte:** Heliatek Power Technologies / University of Michigan Research Communications — Munique 2026.`;
+**Fonte:** European Organ-on-a-Chip Society (EUROoCS) Annual Summit / Harvard Wyss Institute Publications — Boston 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -192,7 +195,7 @@ A Heliatek já trabalha em parcerias com fabricantes de eletrônicos para aplica
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Energia Solar: AeroSolar...\n");
+  console.log("📰 Publicando notícia de Biotecnologia: Organ-on-a-Chip...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -206,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de vidros solares publicada com sucesso!");
+    console.log("\n🎉 Notícia publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

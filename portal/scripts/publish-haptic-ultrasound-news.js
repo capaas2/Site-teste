@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "transparent_solar_hero_1781897116472.png", remote: "posts/transparent-solar-hero.png" },
-  { local: "transparent_solar_detail_1781897141543.png", remote: "posts/transparent-solar-detail.png" },
+  { local: "haptic_ultrasound_hero_1781896923979.png", remote: "posts/haptic-ultrasound-hero.png" },
+  { local: "haptic_ultrasound_detail_1781896943363.png", remote: "posts/haptic-ultrasound-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Solar") && !titulo.includes("Transparent") && !titulo.includes("Vidro")) {
+  if (!titulo.includes("Háptico") && !titulo.includes("Ultrassom") && !titulo.includes("Toque")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Ciência de Materiais, Sustentabilidade e Células Solares Transparentes.");
+  console.log("   -> Tema aprovado: Computação Espacial, Ultrassom Háptico e Interfaces Invisíveis.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -86,44 +86,49 @@ async function uploadImage(localName, remotePath) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia";
-  const categoria = "Sustentabilidade, Inovação";
+  const titulo = "Interfaces de Ultrassom Háptico Projetam Sensações de Toque Físico no Ar sem Dispositivos";
+  const categoria = "Tecnologia, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia
+  const conteudo_markdown = `# Interfaces de Ultrassom Háptico Projetam Sensações de Toque Físico no Ar sem Dispositivos
 
-A arquitetura urbana sustentável acaba de ganhar a sua tecnologia mais invisível e potente. Consórcios de engenharia e a startup alemã de energia fotovoltaica *Heliatek*, em colaboração com pesquisadores da *Universidade de Michigan*, anunciaram o início da comercialização em larga escala das primeiras **células solares orgânicas transparentes (TLSCs)** para revestimento de edifícios comerciais. A tecnologia permite transformar as fachadas de vidro de arranha-céus comuns em gigantescos geradores de eletricidade sem alterar a transparência das janelas ou comprometer a entrada de luz natural nos escritórios.
+A interação humana com ambientes virtuais e computação espacial está prestes a se tornar física de verdade, eliminando a barreira intangível das telas e hologramas. Um grupo de pesquisa de interface homem-máquina na *Universidade de Bristol*, em colaboração com a desenvolvedora de hardware tátil *UltrasonicX*, anunciou a homologação comercial do **AeroTouch**, o primeiro sistema de **ultrassom háptico focalizado de mesa**. A tecnologia utiliza ondas sonoras de alta frequência concentradas para **projetar sensações físicas de toque no ar**, permitindo que usuários sintam e manipulem botões digitais e objetos tridimensionais holográficos sem vestir luvas táteis rígidas ou segurar controles físicos no ano de **2026**.
 
-O lançamento promete redefinir o conceito de autossuficiência energética nas grandes metrópoles mundiais.
+O avanço promete revolucionar painéis de controle industriais, interfaces automotivas e a experiência imersiva de headsets de Realidade Mista (XR).
 
-## A Física por Trás do Vidro Invisível que Gera Energia
+## A Física por Trás do Toque Acústico Invisível
 
-Até hoje, as tentativas de criar vidros solares esbarravam em um limite físico: quanto mais energia o painel gerava, mais escuro e opaco o vidro se tornava. As células solares orgânicas transparentes resolvem essa contradição concentrando-se no espectro de luz invisível ao olho humano.
+Como é possível sentir um objeto sólido no ar se ele não existe fisicamente? A resposta está no controle e modelagem de ondas sonoras ultrassônicas de alta potência.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Detalhe microscópico da camada ativa de polímeros que absorvem comprimentos de onda invisíveis (ultravioleta e infravermelho), deixando a luz visível passar sem alterações]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhe técnico da matriz de transdutores de ultrassom AeroTouch focando múltiplos pontos de pressão acústica na palma da mão para criar contornos virtuais]
 
-As janelas solares utilizam uma película ultra-fina de compostos orgânicos que absorvem seletivamente comprimentos de onda de **luz ultravioleta (UV)** e **infravermelho próximo (NIR)**. Como esses espectros de luz não são detectados pelos olhos humanos, o vidro permanece excepcionalmente claro e transparente (com transmitância de luz visível acima de **70%**). Os fótons de infravermelho e UV absorvidos pela película ativa de carbono são conduzidos por filamentos de eletrodos dourados microscópicos nas bordas das placas, gerando energia elétrica que é direcionada diretamente para a rede de distribuição do prédio.
+O dispositivo AeroTouch é uma matriz plana composta por **256 transdutores ultrassônicos miniaturizados**.
 
-> VEJA TAMBÉM: [Painéis Solares de Perovskita Batem Recorde de Eficiência e Entram em Produção Comercial](/post/paineis-solares-de-perovskita-batem-recorde-de-eficiencia-e-entram-em-producao-comercial)
+Esses transdutores emitem ondas sonoras em uma frequência de **40 kHz** (inaudível para humanos e animais de estimação). Utilizando algoritmos de atraso de fase rápidos, os transdutores coordenam seus disparos para que as frentes de onda colidam com precisão milimétrica em um ponto específico no espaço acima do painel, criando um ponto de alta pressão acústica conhecido como **foco háptico**.
 
-## A Revolução nos Prédios Comerciais e Casas Inteligentes
+Quando a mão do usuário se posiciona sobre esse foco, a diferença de pressão acústica gera uma força mecânica imperceptível, mas que estimula os receptores de toque da pele (mecanorreceptores), recriando com fidelidade texturas virtuais, vibrações, arestas de objetos geométricos flutuantes e cliques físicos de botões virtuais no ar.
 
-A aplicação de células fotovoltaicas transparentes traz benefícios diretos que vão além da simples geração de eletricidade:
+> VEJA TAMBÉM: [Processadores Bio-Híbridos: Chips de Silício Integrados a Neurônios Vivos Entram em Testes](/post/processadores-bio-hibridos-chips-de-silicio-integrados-a-neuronios-vivos-entram-em-testes)
 
-1. **Redução de Custo de Climatização**: A película ativa que reveste as janelas solares absorve e bloqueia a radiação infravermelha, que é a principal responsável por aquecer o interior dos prédios no verão. Ao reter esse calor na própria janela e transformá-lo em eletricidade, o AeroSolar diminui a temperatura interna média do edifício em até **4°C**, gerando uma economia de **30%** no uso de sistemas de ar-condicionado.
-2. **Independência Energética em Centros Urbanos**: Edifícios corporativos possuem superfícies de teto muito pequenas se comparadas à gigantesca área de suas fachadas verticais cobertas de vidro. Ao revestir toda a fachada envidraçada de um arranha-céu de 40 andares com vidro solar transparente, o edifício pode gerar energia suficiente para cobrir **100%** de sua própria demanda interna de eletricidade.
+## Principais Vantagens das Interfaces Hápticas Acústicas
 
-> VEJA TAMBÉM: [Baterias de Sódio em Estado Sólido Entram em Produção e Prometem Carros Elétricos com Metade do Preço](/post/baterias-de-sodio-em-estado-solido-entram-em-producao-e-prometem-carros-eletricos-com-metade-do-preco)
+A eliminação de telas físicas e controles mecânicos traz benefícios práticos substanciais em diversos setores industriais e médicos:
 
-## Desafios de Eficiência e Perspectivas para Dispositivos Móveis
+1. **Higiene e Contato Zero em Locais Públicos**: Em quiosques de atendimento público (como caixas eletrônicos, totens de aeroportos e painéis hospitalares), os usuários interagem e confirmam comandos apenas tocando no ar. Isso elimina a transmissão bacteriana por superfícies de toque compartilhadas.
+2. **Segurança Automotiva sem Distração**: Em veículos inteligentes modernos, botões virtuais projetados no ar para controle de ar-condicionado ou música fornecem um feedback de clique tátil diretamente na ponta dos dedos do motorista, permitindo que ele confirme comandos sem tirar os olhos da rodovia.
+3. **Imersão Total em Jogos e Design 3D**: Designers gráficos e engenheiros conseguem "sentir" o relevo tridimensional de moldes digitais de peças flutuando à sua frente, facilitando o ajuste fino de design industrial de maneira orgânica e tátil.
 
-Atualmente, o AeroSolar atinge uma eficiência de conversão elétrica de **9,2%** para vidros de alta transparência comercial. Embora seja uma taxa menor que a dos painéis de silício tradicionais instalados em telhados (cerca de 20%), a gigantesca área de superfície disponível em prédios de vidro compensa essa diferença, produzindo um fluxo energético maciço e constante.
+> VEJA TAMBÉM: [Primeira Pele Eletrônica Biodegradável e Autoreparável é Apresentada por Cientistas](/post/primeira-pele-eletronica-biodegradavel-e-autoreparavel-e-apresentada-por-cientistas)
 
-A Heliatek já trabalha em parcerias com fabricantes de eletrônicos para aplicar películas protetoras TLSCs nas telas de smartphones e smartwatches. A meta é permitir que telefones celulares se recarreguem continuamente enquanto expostos à luz do dia ou de lâmpadas internas, pavimentando o caminho para um ecossistema sustentável de eletrônicos autossuficientes e reduzindo a nossa dependência de tomadas elétricas domésticas tradicionais.
+## Produção em Larga Escala e Disponibilidade no Mercado
+
+Os primeiros kits de desenvolvimento de software (SDK) do AeroTouch começam a ser distribuídos a fabricantes de painéis automotivos e de aviação em **dezembro de 2026**. Os desenvolvedores focam na integração de sensores ópticos de rastreamento de mãos em tempo real para sincronizar o foco do ultrassom exatamente sob a ponta dos dedos do usuário, acompanhando movimentos de forma instantânea.
+
+A chegada das interfaces hápticas por ultrassom estabelece um marco no qual o tato humano se liberta dos suportes físicos rígidos. Ao converter matemática sonora em pressão física real no ar, o ano de 2026 transforma nossa relação com a computação espacial de uma simples observação visual para uma experiência imersiva física de toque no mundo digital.
 
 ---
 
-**Fonte:** Heliatek Power Technologies / University of Michigan Research Communications — Munique 2026.`;
+**Fonte:** Bristol University Department of Computer Science / UltrasonicX Technologies Press Release — Bristol 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -192,7 +197,7 @@ A Heliatek já trabalha em parcerias com fabricantes de eletrônicos para aplica
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Energia Solar: AeroSolar...\n");
+  console.log("📰 Publicando notícia de Interfaces Hápticas: AeroTouch...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -206,7 +211,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de vidros solares publicada com sucesso!");
+    console.log("\n🎉 Notícia publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

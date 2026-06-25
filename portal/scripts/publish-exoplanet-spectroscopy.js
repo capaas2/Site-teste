@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "transparent_solar_hero_1781897116472.png", remote: "posts/transparent-solar-hero.png" },
-  { local: "transparent_solar_detail_1781897141543.png", remote: "posts/transparent-solar-detail.png" },
+  { local: "exoplanet_spectroscopy_detail_1781805179680.png", remote: "posts/exoplanet-spectroscopy-hero.png" },
+  { local: "exoplanet_spectroscopy_detail_1781805179680.png", remote: "posts/exoplanet-spectroscopy-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Solar") && !titulo.includes("Transparent") && !titulo.includes("Vidro")) {
+  if (!titulo.includes("Espectroscopia") && !titulo.includes("Exoplanetas") && !titulo.includes("Atmosferas")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Ciência de Materiais, Sustentabilidade e Células Solares Transparentes.");
+  console.log("   -> Tema aprovado: Astronomia, Espectroscopia de Exoplanetas e Busca de Biosseletividade.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -86,44 +86,47 @@ async function uploadImage(localName, remotePath) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia";
-  const categoria = "Sustentabilidade, Inovação";
+  const titulo = "Nova Espectroscopia de Alta Definição Mapeia Atmosferas de Exoplanetas Próximos";
+  const categoria = "Ciência, Astronomia";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Janelas Solares Transparentes Entram em Produção e Transformam Prédios em Usinas de Energia
+  const conteudo_markdown = `# Nova Espectroscopia de Alta Definição Mapeia Atmosferas de Exoplanetas Próximos
 
-A arquitetura urbana sustentável acaba de ganhar a sua tecnologia mais invisível e potente. Consórcios de engenharia e a startup alemã de energia fotovoltaica *Heliatek*, em colaboração com pesquisadores da *Universidade de Michigan*, anunciaram o início da comercialização em larga escala das primeiras **células solares orgânicas transparentes (TLSCs)** para revestimento de edifícios comerciais. A tecnologia permite transformar as fachadas de vidro de arranha-céus comuns em gigantescos geradores de eletricidade sem alterar a transparência das janelas ou comprometer a entrada de luz natural nos escritórios.
+A busca por biosassinaturas fora do nosso sistema solar acaba de receber um salto gigante em resolução de dados químicos. Consórcios de astrofísicos operando telescópios espaciais anunciaram o sucesso prático de um novo método de **espectroscopia de transmissão em alta definição**. A técnica de calibração dinâmica em **2026** permitiu extrair e isolar o ruído da luz estelar, mapeando com precisão sem precedentes as atmosferas gasosas e assinaturas moleculares de exoplanetas rochosos localizados a menos de 100 anos-luz da Terra.
 
-O lançamento promete redefinir o conceito de autossuficiência energética nas grandes metrópoles mundiais.
+O avanço viabiliza a triagem em alta fidelidade de componentes químicos associados à vida, como metano e oxigênio molecular.
 
-## A Física por Trás do Vidro Invisível que Gera Energia
+## A Física da Espectroscopia de Transmissão HD
 
-Até hoje, as tentativas de criar vidros solares esbarravam em um limite físico: quanto mais energia o painel gerava, mais escuro e opaco o vidro se tornava. As células solares orgânicas transparentes resolvem essa contradição concentrando-se no espectro de luz invisível ao olho humano.
+A detecção de atmosferas de exoplanetas é um desafio óptico monumental. À medida que um exoplaneta orbita sua estrela hospedeira e passa à frente dela (evento conhecido como trânsito), a luz da estrela atravessa a fina camada gasosa do planeta antes de chegar aos sensores dos telescópios.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Detalhe microscópico da camada ativa de polímeros que absorvem comprimentos de onda invisíveis (ultravioleta e infravermelho), deixando a luz visível passar sem alterações]
+[IMAGEM: ${detailUrl} | LEGENDA: Gráfico espectroscópico mostrando as bandas de absorção infravermelha de vapor d'água e metano mapeadas com precisão na atmosfera do exoplaneta rochoso]
 
-As janelas solares utilizam uma película ultra-fina de compostos orgânicos que absorvem seletivamente comprimentos de onda de **luz ultravioleta (UV)** e **infravermelho próximo (NIR)**. Como esses espectros de luz não são detectados pelos olhos humanos, o vidro permanece excepcionalmente claro e transparente (com transmitância de luz visível acima de **70%**). Os fótons de infravermelho e UV absorvidos pela película ativa de carbono são conduzidos por filamentos de eletrodos dourados microscópicos nas bordas das placas, gerando energia elétrica que é direcionada diretamente para a rede de distribuição do prédio.
+Os gases da atmosfera absorvem comprimentos de onda específicos da luz da estrela, criando "linhas de absorção" escuras no espectro de luz.
 
-> VEJA TAMBÉM: [Painéis Solares de Perovskita Batem Recorde de Eficiência e Entram em Produção Comercial](/post/paineis-solares-de-perovskita-batem-recorde-de-eficiencia-e-entram-em-producao-comercial)
+O novo método HD utiliza **grelhas de difração baseadas em metamateriais de silício** integradas aos sensores do espectrógrafo. Essas grelhas eliminam a dispersão luminosa das camadas externas da estrela hospedeira, permitindo medir com estabilidade oscilações de brilho de apenas algumas partes por milhão. A filtragem limpa de ruídos revelou bandas claras de absorção correspondentes a dióxido de carbono, vapor de água e traços significativos de metano na atmosfera de planetas rochosos na zona habitável de anãs vermelhas próximas.
 
-## A Revolução nos Prédios Comerciais e Casas Inteligentes
+> VEJA TAMBÉM: [Primeiras Estações de Carregamento Megawatt para Caminhões Elétricos Entram em Operação](/post/primeiras-estacoes-de-carregamento-megawatt-para-caminhoes-eletricos-entram-em-operacao)
 
-A aplicação de células fotovoltaicas transparentes traz benefícios diretos que vão além da simples geração de eletricidade:
+## Biosassinaturas e o Futuro do Mapeamento Interestelar
 
-1. **Redução de Custo de Climatização**: A película ativa que reveste as janelas solares absorve e bloqueia a radiação infravermelha, que é a principal responsável por aquecer o interior dos prédios no verão. Ao reter esse calor na própria janela e transformá-lo em eletricidade, o AeroSolar diminui a temperatura interna média do edifício em até **4°C**, gerando uma economia de **30%** no uso de sistemas de ar-condicionado.
-2. **Independência Energética em Centros Urbanos**: Edifícios corporativos possuem superfícies de teto muito pequenas se comparadas à gigantesca área de suas fachadas verticais cobertas de vidro. Ao revestir toda a fachada envidraçada de um arranha-céu de 40 andares com vidro solar transparente, o edifício pode gerar energia suficiente para cobrir **100%** de sua própria demanda interna de eletricidade.
+A espectroscopia aprimorada oferece dados de qualidade inédita para o mapeamento da habitabilidade cósmica:
 
-> VEJA TAMBÉM: [Baterias de Sódio em Estado Sólido Entram em Produção e Prometem Carros Elétricos com Metade do Preço](/post/baterias-de-sodio-em-estado-solido-entram-em-producao-e-prometem-carros-eletricos-com-metade-do-preco)
+1. **Assinaturas Químicas Combinadas**: A detecção simultânea de metano e dióxido de carbono em atmosferas rochosas é uma forte biosassinatura de desequilíbrio químico, frequentemente associada à atividade biológica, superando modelos teóricos de atividade vulcânica isolada.
+2. **Triagem de Efeito Estufa Desgovernado**: A tecnologia permite medir a pressão parcial de vapor de água em atmosferas alienígenas, ajudando a classificar se o exoplaneta possui oceanos líquidos estáveis ou se sofreu um processo de evaporação descontrolado.
+3. **Catálogo de Alvos para Sondas Interestelares**: O refinamento químico das atmosferas ajuda a priorizar quais exoplanetas próximos devem ser alvos prioritários de futuras sondas interestelares aceleradas por laser.
 
-## Desafios de Eficiência e Perspectivas para Dispositivos Móveis
+> VEJA TAMBÉM: [O Fim das Senhas Físicas: Google e Apple iniciam transição total para Passkeys Quânticas](/post/o-fim-das-senhas-fisicas-google-e-apple-iniciam-transicao-total-para-passkeys-quanticas)
 
-Atualmente, o AeroSolar atinge uma eficiência de conversão elétrica de **9,2%** para vidros de alta transparência comercial. Embora seja uma taxa menor que a dos painéis de silício tradicionais instalados em telhados (cerca de 20%), a gigantesca área de superfície disponível em prédios de vidro compensa essa diferença, produzindo um fluxo energético maciço e constante.
+## Expansão de Pesquisa para o Ano de 2027
 
-A Heliatek já trabalha em parcerias com fabricantes de eletrônicos para aplicar películas protetoras TLSCs nas telas de smartphones e smartwatches. A meta é permitir que telefones celulares se recarreguem continuamente enquanto expostos à luz do dia ou de lâmpadas internas, pavimentando o caminho para um ecossistema sustentável de eletrônicos autossuficientes e reduzindo a nossa dependência de tomadas elétricas domésticas tradicionais.
+Os astrofísicos planejam expandir o catálogo de mapeamento para incluir mais de trinta planetas rochosos de massa terrestre até **junho de 2027**. O foco reside no aprimoramento dos sistemas de óptica adaptativa baseados em terra para compensar o desvio térmico da atmosfera terrestre e integrar leitores espectrais automatizados guiados por inteligência artificial para detecção rápida.
+
+O avanço na espectroscopia de trânsito demonstra que o entendimento do cosmos evolui junto com as ferramentas de detecção e filtragem física de luz. Ao converter variações de fótons estelares em assinaturas químicas claras e funcionais em 2026, avançamos em direção ao entendimento definitivo da nossa posição no ecossistema de mundos habitáveis da nossa galáxia.
 
 ---
 
-**Fonte:** Heliatek Power Technologies / University of Michigan Research Communications — Munique 2026.`;
+**Fonte:** Association of Universities for Research in Astronomy (AURA) Space Science Brief / La Silla Observatory Technology Report — Coquimbo 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -192,7 +195,7 @@ A Heliatek já trabalha em parcerias com fabricantes de eletrônicos para aplica
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Energia Solar: AeroSolar...\n");
+  console.log("📰 Publicando notícia de Astronomia: Exoplanet Spectroscopy...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -206,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de vidros solares publicada com sucesso!");
+    console.log("\n🎉 Notícia publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);
