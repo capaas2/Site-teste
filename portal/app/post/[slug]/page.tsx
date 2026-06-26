@@ -8,7 +8,6 @@ import { Post } from "@/types/post";
 import { Sidebar } from "@/components/Sidebar";
 import { ShareButtons } from "@/components/ShareButtons";
 import { ViewCounter } from "@/components/ViewCounter";
-import { AdBanner } from "@/components/AdBanner";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { StoryStream } from "@/components/StoryStream";
 import AffiliateWidget from "@/components/AffiliateWidget";
@@ -373,14 +372,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               </div>
             </div>
 
-            <AdBanner className="mt-8" format="fluid" />
+            
           </div>
         </article>
 
         {/* Sidebar Limpa */}
         <div className="lg:sticky lg:top-24 lg:self-start space-y-10">
           <Sidebar posts={sidebarPosts} />
-          <AdBanner className="my-0" format="rectangle" />
         </div>
       </div>
 

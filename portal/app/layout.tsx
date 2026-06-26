@@ -81,7 +81,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             crossOrigin="anonymous"
             strategy="afterInteractive"
           />
-          <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
+
           <Script
             id="gtm-script"
             strategy="afterInteractive"

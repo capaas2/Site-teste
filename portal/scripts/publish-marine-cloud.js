@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "marine_cloud_brightening_hero_1782476045129.png", remote: "posts/marine-cloud-hero.png" },
+  { local: "salt_aerosol_condensation_detail_1782476059293.png", remote: "posts/marine-cloud-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Nuvens") && !titulo.includes("Marinhas") && !titulo.includes("Clareamento")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Sustentabilidade, Geoengenharia, Clima e Oceanografia.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Tecnologia de Clareamento de Nuvens Marinhas Inicia Testes para Salvar a Grande Barreira de Corais";
+  const categoria = "Sustentabilidade, Inovação, Clima";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Tecnologia de Clareamento de Nuvens Marinhas Inicia Testes para Salvar a Grande Barreira de Corais
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+O avanço das mudanças climáticas tem forçado a comunidade científica a buscar medidas de adaptação locais para proteger os ecossistemas mais vulneráveis do planeta. Em **novembro de 2026**, cientistas marinhos e engenheiros atmosféricos australianos iniciaram a maior fase de testes práticos já realizada com a **tecnologia de clareamento de nuvens marinhas (Marine Cloud Brightening - MCB)**. Projetada para resfriar a temperatura da água sobre a Grande Barreira de Corais, a geoengenharia solar localizada visa conter o branqueamento em massa e preservar a biodiversidade marinha no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+A técnica baseia-se em um princípio simples da física atmosférica: tornar as nuvens baixas sobre o oceano mais reflexivas à radiação solar incidente, criando um "escudo térmico" temporário sobre os corais.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Ciência por trás do Clareamento por Aerossóis de Sal Marinho
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+As nuvens marinhas baixas (estratocúmulos) são naturalmente compostas de gotículas de água condensadas em torno de partículas de sal do próprio mar. Ao aumentar artificialmente a quantidade dessas partículas, as nuvens passam a conter gotículas menores, porém muito mais numerosas e densas, o que eleva consideravelmente a sua capacidade de refletir a luz do Sol de volta para o espaço (albedo).
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Diagrama científico de close-up mostrando bicos atomizadores injetando bilhões de núcleos de sal marinho nas nuvens estratocúmulos, aumentando sua densidade e reflexão solar]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+Para que o clareamento ocorra, navios equipados com **bicos atomizadores de alta pressão** geram uma névoa microscópica composta por trilhões de gotículas de água do mar purificada por segundo. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Essas microgotículas sobem passivamente através das correntes de ar térmicas ascendentes até alcançarem a base das nuvens marinhas. Lá, a água evapora rapidamente, deixando para trás cristais microscópicos de sal puro de tamanho uniforme (cerca de 100 nanômetros). Esses cristais agem como núcleos de condensação altamente eficientes. A água presente na atmosfera se condensa ao redor deles, formando uma nuvem clareada que funciona como um espelho de radiação localizado.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Fotobiorreatores Urbanos de Microalgas Iniciam Testes de Purificação de Ar em Grandes Metrópoles](/post/fotobiorreatores-urbanos-de-microalgas-iniciam-testes-de-purificacao-de-ar-em-grandes-metropoles)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Benefícios Locais e Mitigação do Calor na Água
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+Ao contrário de grandes intervenções de geoengenharia solar global, o clareamento de nuvens marinhas é uma técnica de ação rápida e escopo puramente local:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Resfriamento Focado na Superfície**: Os primeiros dados de simulação indicam que o sombreamento localizado pode reduzir a radiação solar na água em até 6%, diminuindo a temperatura média da superfície marinha em até 0,8°C em semanas.
+2. **Reversibilidade Imediata**: Caso ocorram ventos desfavoráveis ou quedas de temperatura naturais, basta desligar os atomizadores. Os aerossóis de sal marinho precipitam-se e dissolvem-se de volta no mar em poucos dias, sem deixar resíduos persistentes.
+3. **Escudo nos Meses Críticos**: A operação concentrar-se-á estritamente durante o pico do verão austral (de dezembro a fevereiro), quando a temperatura das águas atinge o limiar letal para os tecidos dos corais simbiontes.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Sistemas de Fotossíntese Artificial Começam a Produzir Combustíveis Líquidos em Larga Escala](/post/sistemas-de-fotossintese-artificial-comecam-a-produzir-combustiveis-liquidos-em-larga-escala)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Próximos Passos e Avaliações de Impacto
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os testes de 2026 estão sendo monitorados minuciosamente por agências de proteção ambiental para assegurar que a alteração localizada na reflexão solar não afete as correntes de vento regionais ou os padrões de precipitação na costa. Modelos de supercomputadores atmosféricos são atualizados em tempo real para regular as quantidades exatas de injeção salina de acordo com a umidade e vento diários. Se os testes clínicos de larga escala demonstrarem eficácia e segurança nos próximos meses, a frota de navios atomizadores poderá ser expandida até 2028, criando uma barreira de proteção permanente para mitigar os impactos de picos de calor marinho em recifes ao redor do globo.
+
+A geoengenharia solar marinha de 2026 prova que o ser humano pode atuar como um engenheiro ecológico adaptativo, comprando tempo valioso para que a Grande Barreira de Corais sobreviva enquanto as emissões globais de carbono são reduzidas.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Great Barrier Reef Research Authority / Atmospheric and Oceanographic Research Institute — Sydney / Melbourne 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "tecnologia-de-clareamento-de-nuvens-marinhas-inicia-testes-para-salvar-a-grande-barreira-de-corais";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Sustentabilidade: Clareamento de Nuvens Marinhas...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Clareamento de Nuvens Marinhas publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

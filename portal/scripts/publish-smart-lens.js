@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "smart_contact_lens_hero_1782476156608.png", remote: "posts/smart-lens-hero.png" },
+  { local: "lens_microstructure_tear_detail_1782476170427.png", remote: "posts/smart-lens-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Lentes") && !titulo.includes("Contato") && !titulo.includes("Lágrimas")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Biotecnologia, Wearables, Computação Espacial e Micro-eletrônica.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,49 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Lentes de Contato Inteligentes Alimentadas por Lágrimas Iniciam Fase de Homologação Médica";
+  const categoria = "Tecnologia, Saúde, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Lentes de Contato Inteligentes Alimentadas por Lágrimas Iniciam Fase de Homologação Médica
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A computação espacial e o diagnóstico preventivo de saúde estão prestes a convergir para a córnea dos usuários de maneira totalmente invisível e contínua. Em **dezembro de 2026**, agências de regulação de saúde e comitês de bioengenharia autorizaram a fase final de homologação clínica para as primeiras **lentes de contato inteligentes comerciais (smart contact lenses)**. Equipadas com um display micro-LED ultrafino e alimentadas de forma ininterrupta por biocélulas que convertem substâncias químicas das lágrimas humanas em eletricidade, as lentes prometem redefinir o acesso a dados médicos e a interfaces visuais sem óculos ou headsets no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Este dispositivo inovador funciona como uma plataforma dupla: uma interface de exibição holográfica de Realidade Aumentada e um laboratório de diagnóstico bioquímico portátil.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Biocélula Lacrimal e o Display Micro-LED
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Colocar circuitos eletrônicos diretamente sobre o olho humano requer soluções extremas de biocompatibilidade, espessura e dissipação térmica. O maior avanço desta tecnologia em 2026 reside em como o dispositivo é energizado, eliminando totalmente a necessidade de baterias convencionais volumosas ou induções magnéticas externas.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Diagrama técnico demonstrando a estrutura em camadas da lente de contato inteligente, evidenciando as biocélulas que utilizam glicose e lactato lacrimal para alimentar os circuitos]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+A lente possui **biocélulas enzimáticas flexíveis integradas na sua periferia**, onde não interferem com a visão. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Estas biocélulas reagem com a glicose, o oxigênio e o lactato presentes naturalmente no fluido lacrimal constante do olho. A reação química catalisa e gera uma corrente elétrica estável de baixa voltagem, suficiente para manter carregada uma microbateria flexível de polímero com espessura menor que um fio de cabelo. 
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+Esta energia alimenta um projetor micro-LED central microscópico. O projetor reflete imagens e dados diretamente na retina do usuário, criando uma tela de Realidade Aumentada flutuante visível apenas para quem veste a lente, com consumo térmico nulo para evitar qualquer aquecimento ou desconforto ocular.
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+> VEJA TAMBÉM: [Interfaces Cérebro-Computador Não Invasivas por Sensores Optoacústicos Entram em Fase de Testes](/post/interfaces-cerebro-computador-nao-invasivas-por-sensores-optoacusticos-entram-em-fase-de-testes)
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+## Monitoramento de Saúde Contínuo e Diagnóstico Precoce
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+Para além da interface de Realidade Aumentada, as lentes de contato de 2026 trazem benefícios médicos revolucionários:
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+1. **Monitoramento Glicêmico Não Invasivo**: Para diabéticos, as lentes medem os níveis de glicose no fluido lacrimal em tempo real, enviando alertas ópticos diretos ou transmitindo dados via Bluetooth de baixíssima potência para o smartphone, acabando com a necessidade de furos diários no dedo.
+2. **Detecção de Biomarcadores de Câncer e Glaucoma**: Sensores integrados monitoram continuamente a pressão intraocular (útil na prevenção do glaucoma) e buscam proteínas indicadoras de tumores oculares precoces.
+3. **Filtro Dinâmico de Luz**: A camada eletrônica pode escurecer-se de forma ativa sob sol intenso ou luzes fortes de faróis à noite, protegendo a visão de forma automática e responsiva.
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+> VEJA TAMBÉM: [Primeiro Anel Inteligente com Assistente de IA por Condução Óssea Inicia Vendas Globais](/post/primeiro-anel-inteligente-com-assistente-de-ia-por-conducao-ossea-inicia-vendas-globais)
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+## Desafios Regulatórios e Lançamento no Mercado
+
+A aprovação médica é o último degrau para a introdução no mercado de consumo. Os ensaios de segurança de 2026 focam na garantia de que o uso prolongado das lentes inteligentes não afete a oxigenação normal da córnea ou cause irritações por fricção física prolongada. Os testes iniciais em voluntários demonstram um tempo de uso seguro contínuo de até 12 horas. Com a homologação regulatória esperada para o primeiro trimestre de 2027, as lentes inteligentes devem começar a ser vendidas inicialmente para fins médicos e de reabilitação visual, com as versões voltadas a entretenimento e computação espacial chegando ao grande público no final de 2027.
+
+O desenvolvimento das lentes alimentadas por lágrimas em 2026 prova que a tecnologia do futuro não será apenas vestível, mas sim biologicamente integrada ao nosso próprio corpo de forma sutil, invisível e benéfica.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Association of Ophthalmic Engineering / Clinical Biomaterials Research Laboratory — San Jose / Kyoto 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +187,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "lentes-de-contato-inteligentes-alimentadas-por-lagrimas-iniciam-fase-de-homologacao-medica";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +197,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Wearables: Lentes de Contato Inteligentes...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +211,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Lentes Inteligentes publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

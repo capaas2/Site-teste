@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "paper_saliva_battery_hero_1782395213644.png", remote: "posts/paper-saliva-battery-hero.png" },
+  { local: "paper_battery_microstructure_detail_1782395229706.png", remote: "posts/paper-saliva-battery-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Baterias") && !titulo.includes("Papel") && !titulo.includes("Saliva")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Biotecnologia, Baterias de Papel e Dispositivos Médicos Descartáveis.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Baterias de Papel Ativadas por Saliva Iniciam Fase Comercial para Sensores Descartáveis";
+  const categoria = "Biotecnologia, Sustentabilidade";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Baterias de Papel Ativadas por Saliva Iniciam Fase Comercial para Sensores Descartáveis
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A eletrônica descartável de uso médico e de monitoramento doméstico está dando um passo definitivo rumo à sustentabilidade ecológica com o fim do descarte de metais pesados em baterias de botão. Um grupo de pesquisa do *Laboratório de Bioeletrônica de Estocolmo (SBL)* anunciou a homologação comercial das primeiras **baterias biodegradáveis de papel ativadas por saliva**. Integradas a embalagens de testes rápidos de saúde e sensores ambientais descartáveis, a tecnologia gera energia instantânea e suficiente para alimentar microchips de borda no ano de **2026** a partir de uma única gota de fluido biológico.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta inovação representa o fim das baterias de lítio descartáveis em embalagens médicas e farmacêuticas de dose única.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física das Baterias de Celulose Ativadas por Capilaridade
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+O princípio de funcionamento do dispositivo combina microfluídica capilar e eletroquímica de base orgânica em papel. A estrutura consiste em uma fita de papel de celulose altamente porosa impressa com tintas condutoras especiais.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento microscópico tridimensional mostrando as fibras de celulose revestidas com carbono e as reações químicas ocorrendo durante a capilaridade da gota de saliva]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+A fita de papel é impressa com **ânodos de carbono revestidos com enzimas específicas** e **cátodos baseados em óxido de metal inofensivo**. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Em seu estado seco, a bateria permanece totalmente inerte e descarregada, o que garante uma vida útil de armazenamento de vários anos sem perda de carga. Ao adicionar uma única gota de saliva (ou qualquer fluido aquoso contendo íons livres) na zona de entrada, o papel atua como uma bomba capilar passiva, sugando o líquido ao longo das fibras. O fluido atua como eletrólito condutor, ativando uma reação de oxirredução estável. A reação gera energia estável de 1.5 Volts em segundos, suficiente para manter acesos displays e alimentar microprocessadores de comunicação por minutos.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Primeira Pele Eletrônica Biodegradável e Autoreparável é Apresentada por Cientistas](/post/primeira-pele-eletronica-biodegradavel-e-autoreparavel-e-apresentada-por-cientistas)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Aplicações Médicas Descartáveis e Redução de Lixo Eletrônico
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A viabilidade de energia descartável biodegradável revoluciona o design de produtos médicos de massa e diagnósticos rápidos de balcão:
+
+1. **Testes de Gravidez e Doenças Conectados**: Embalagens de testes rápidos de fluxo lateral ganham capacidade de processamento digital local e comunicação via Bluetooth para smartphones, exibindo diagnósticos precisos e eliminando dúvidas visuais das tiras reagentes comuns.
+2. **Sensores de Logística de Vacinas**: Sensores de temperatura colados a vacinas registram se houve quebra de cadeia de frio. Ao final do uso, o sensor de papel é simplesmente descartado em composteiras comuns.
+3. **Remendos Médicos Inteligentes (Smart Patches)**: Adesivos aplicados à pele monitoram parâmetros biológicos do paciente, alimentando-se do próprio suor corporal para transmitir telemetria médica periódica.
 
 > VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+## Biodegradabilidade Total e Desafios de Produção
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+As primeiras remessas comerciais de testes rápidos integrados com baterias de papel serão distribuídas para redes farmacêuticas europeias em **novembro de 2026**. O maior desafio enfrentado pelos engenheiros reside na calibração da velocidade de capilaridade das fibras de papel para garantir que o fluxo de energia elétrica gerada permaneça constante e uniforme ao longo de toda a leitura do teste diagnóstico.
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Ao integrar energia estável e biodegradabilidade a dispositivos médicos descartáveis em 2026, as baterias de papel provam que a eletrônica moderna pode se integrar perfeitamente aos ciclos naturais de decomposição, oferecendo saúde monitorada com resíduo ecológico zero para o meio ambiente.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Stockholm Bioelectronics Lab / Nordic Diagnostics Consortium Press Release — Estocolmo / Helsinque 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "baterias-de-papel-ativadas-por-saliva-iniciam-fase-comercial-para-sensores-descartaveis";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Biotecnologia: Bateria de Papel...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Bateria de Papel e Saliva publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

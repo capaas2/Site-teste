@@ -8,7 +8,7 @@ const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f54
 
 const images = [
   { local: "transgenic_leaf_glow_hero_1782225725100.png", remote: "posts/quinone-battery-hero.png" },
-  { local: "transgenic_leaf_glow_hero_1782225725100.png", remote: "posts/quinone-battery-detail.png" },
+  { local: "quinone_battery_detail_new_1782412688908.png", remote: "posts/quinone-battery-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])

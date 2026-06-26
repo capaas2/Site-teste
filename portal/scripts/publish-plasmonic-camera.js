@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "plasmonic_microscope_hero_1782428441141.png", remote: "posts/plasmonic-microscope-hero.png" },
+  { local: "plasmonic_virus_live_detail_1782428453973.png", remote: "posts/plasmonic-microscope-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Câmeras") && !titulo.includes("Plasmônicas") && !titulo.includes("Vírus")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Óptica Plasmônica, Nanotecnologia e Imagens Biológicas em Tempo Real.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Primeiras Câmeras Plasmônicas de Mesa Permitem Filmar Vírus Vivos em Tempo Real";
+  const categoria = "Ciência, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Primeiras Câmeras Plasmônicas de Mesa Permitem Filmar Vírus Vivos em Tempo Real
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A microbiologia e a virologia médica estão deixando para trás as imagens estáticas e sem vida das amostras congeladas. Um consórcio de física aplicada e óptica molecular de Munique e Boston anunciou o desenvolvimento e a homologação comercial das **primeiras câmeras ópticas plasmônicas de mesa**. Utilizando nanoestruturas metálicas que concentram a luz visível além dos limites teóricos da difração óptica convencional, a inovação permite filmar bactérias, organelas celulares e vírus vivos se movendo em tempo real em seu estado dinâmico natural no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta descoberta representa um marco que supera a barreira dos caros e complexos microscópios eletrônicos de varredura, que exigem a preparação de amostras a vácuo que inevitavelmente mata os organismos.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física dos Plasmons de Superfície e a Super-Resolução Óptica
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Em microscópios tradicionais, existe uma barreira física conhecida como o **Limite de Difração de Abbe**, que impede que a luz visível focalize objetos menores do que a metade do seu comprimento de onda (cerca de 200 nanômetros). Vírus típicos medem entre 20 e 150 nanômetros, tornando-os completamente invisíveis sob a luz visível comum.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Captura real gerada por câmera plasmônica mostrando a dinâmica de um bacteriófago vivo em meio líquido celular, brilhando sob o campo eletromagnético concentrado]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+A câmera plasmônica supera esse limite explorando as oscilações coletivas de elétrons em nanoestruturas metálicas (geralmente ouro ou prata), conhecidas como **plasmons de superfície**. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Ao incidir um laser infravermelho e visível estruturado sobre a lâmina com ranhuras nanométricas, os plasmons concentram a energia eletromagnética da luz em volumes extremamente reduzidos (menores que o diâmetro de um vírus). Quando o vírus passa por esses "pontos quentes" de energia luminosa, ele espalha a luz intensamente. Sensores ópticos ultrarrápidos e algoritmos avançados de reconstrução digital capturam essa luz dispersa e geram imagens tridimensionais detalhadas de objetos de até 10 nanômetros, a uma taxa de 120 quadros por segundo.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Chips Microfluídicos de Órgãos em Laboratório Começam a Substituir Testes em Animais](/post/chips-microfluidicos-de-orgaos-em-laboratorio-comecam-a-substituir-testes-em-animais)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Revolução no Desenvolvimento de Vacinas e Diagnósticos Clínicos
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A capacidade de observar agentes infecciosos em ação de forma simples em mesas de laboratório traz aplicações revolucionárias:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Desenvolvimento Acelerado de Antivirais**: Cientistas conseguem observar o momento exato em que um vírus ataca e infecta uma célula hospedeira, permitindo testar a eficácia de novas moléculas de vacinas e medicamentos antivirais em minutos.
+2. **Diagnóstico Imediato em Clínicas**: Em vez de aguardar dias por culturas de laboratório ou análises complexas, clínicas médicas conseguem coletar pequenas amostras de fluidos dos pacientes e identificar a cepa viral exata visualmente em segundos.
+3. **Estudo de Organelas em Funcionamento**: Biólogos conseguem filmar o transporte de proteínas e o funcionamento interno de organelas como mitocôndrias sem a necessidade de marcadores fluorescentes invasivos.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Enxames de Nanorrobôs Magnéticos Biodegradáveis Eliminam Tumores Sólidos em Testes Clínicos](/post/enxames-de-nanorrobos-magneticos-biodegradaveis-eliminam-tumores-solidos-em-testes-clinicos)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Custos, Produção e Próximos Passos de Homologação
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os primeiros protótipos industriais dessas câmeras ópticas plasmônicas serão disponibilizados para laboratórios de virologia selecionados na Suíça e nos Estados Unidos em **novembro de 2026**. O maior desafio no momento consiste na produção em larga escala das lâminas de silício com gravuras de altíssima precisão nanométrica necessárias para induzir os campos plasmônicos de forma uniforme.
+
+Ao quebrar a barreira da difração da luz no final de 2026, as câmeras plasmônicas transformam a ciência invisível em espetáculo visual de alta definição, abrindo caminhos inimagináveis para a medicina preventiva mundial e para a compreensão dinâmica da vida em sua escala mais íntima.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Munich Optoelectronics Institute / Boston Biotech Instrumentation Press Release — Munique / Boston 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "primeiras-cameras-plasmonicas-de-mesa-permitem-filmar-virus-vivos-em-tempo-real";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Óptica e Medicina: Câmera Plasmônica...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Câmeras Plasmônicas publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

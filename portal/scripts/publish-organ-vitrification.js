@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "organ_vitrification_chamber_hero_1782475882932.png", remote: "posts/organ-vitrification-hero.png" },
+  { local: "nanoparticle_heating_microstructure_detail_1782475895655.png", remote: "posts/organ-vitrification-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Criopreservação") && !titulo.includes("Órgãos") && !titulo.includes("Nanopartículas")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Biotecnologia, Saúde, Criobiologia e Nanopartículas Magnéticas.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,49 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Criopreservação Reversível de Órgãos por Nanopartículas Magnéticas Inicia Fase de Testes Clínicos";
+  const categoria = "Biotecnologia, Saúde, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Criopreservação Reversível de Órgãos por Nanopartículas Magnéticas Inicia Fase de Testes Clínicos
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A medicina transplantológica está prestes a superar um dos seus maiores e mais persistentemente trágicos gargalos históricos: o curtíssimo tempo de viabilidade dos órgãos doados fora do corpo humano. Em um anúncio histórico que promete revolucionar os sistemas de saúde globais no ano de **2026**, consórcios internacionais de biotecnologia e universidades médicas iniciaram os primeiros testes clínicos em humanos de uma técnica avançada de **criopreservação reversível**. O método utiliza vitrificação ultra-rápida combinada com reaquecimento homogêneo via nanopartículas de óxido de ferro ativadas por campos eletromagnéticos alternados, abrindo caminho para a criação dos primeiros bancos estáveis de órgãos vitais do mundo.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta descoberta visa estender a vida útil de corações, fígados e rins de poucas horas para meses ou até anos, eliminando as perdas de órgãos saudáveis por falhas de transporte ou compatibilidade imunológica.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Vitrificação sem Gelo e o Aquecimento por Nanopartículas
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+O maior desafio histórico de congelar um órgão completo é a formação de cristais de gelo intracelulares, que atuam como agulhas rasgando a estrutura celular delicada e tornando o órgão inutilizável. A nova técnica resolve isso por meio da vitrificação: a água dentro das células é transformada em um estado amorfo vítreo antes que qualquer cristal se organize.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento microscópico demonstrando a dispersão homogênea das nanopartículas magnéticas no tecido vascular, liberando calor de forma coordenada sob ondas eletromagnéticas]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+No entanto, o problema crítico sempre foi o reaquecimento (thawing). Se o aquecimento do órgão for lento ou desigual, zonas frias continuam vitrificadas enquanto zonas quentes se expandem, rachando o órgão termicamente ou permitindo a cristalização tardia da água.
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Para mitigar isso, as novas soluções cirúrgicas de 2026 introduzem **nanopartículas de óxido de ferro biocompatíveis revestidas de sílica** que são infundidas na rede vascular do órgão antes do resfriamento. Quando chega o momento do transplante, o órgão é colocado dentro de uma bobina de radiofrequência especializada. 
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+A bobina gera um campo magnético alternado de alta frequência que faz as nanopartículas oscilarem fisicamente no nível atômico. Esse movimento gera calor idêntico e simultâneo em todas as partes do órgão ao mesmo tempo. O calor uniforme eleva a temperatura de -150°C para 37°C em menos de um minuto, restabelecendo a viabilidade celular sem causar estresse térmico ou danos mecânicos. Após o aquecimento, as nanopartículas são lavadas e extraídas facilmente através da própria perfusão vascular normal.
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+> VEJA TAMBÉM: [Retinas Artificiais de Grafeno Iniciam Fase de Testes para Reverter Cegueira Degenerativa](/post/retinas-artificiais-de-grafeno-iniciam-fase-de-testes-para-reverter-cegueira-degenerativa)
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+## Impacto na Saúde Global e Fim das Filas de Espera
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+A viabilidade de preservar órgãos sem limite estrito de tempo de transporte cria vantagens incomparáveis:
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+1. **Bancos Globais de Órgãos**: Em vez do modelo de urgência frenética atual (onde um coração dura no máximo 4 a 6 horas fora do corpo), os hospitais poderão manter estoques criopreservados classificados por compatibilidade imunológica.
+2. **Compatibilidade Perfeita**: Tempo estendido permite análises detalhadas de compatibilidade genética e HLA, reduzindo significativamente os episódios de rejeição crônica.
+3. **Logística Descentralizada**: Órgãos capturados em áreas remotas poderão ser vitrificados no local e enviados por rotas normais de distribuição para qualquer lugar do planeta.
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+> VEJA TAMBÉM: [Sistemas de Fotossíntese Artificial Começam a Produzir Combustíveis Líquidos em Larga Escala](/post/sistemas-de-fotossintese-artificial-comecam-a-produzir-combustiveis-liquidos-em-larga-escala)
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+## Próximas Etapas e Regulação Médica
+
+Os testes clínicos de 2026 representam a fase de validação biológica e segurança clínica em órgãos de doadores não utilizados para transplante direto, visando comprovar que a função metabólica volta com 100% da integridade após a vitrificação. Órgãos mais simples como vasos sanguíneos, pele e cartilagem já obtiveram aprovação regulatória total e estão sendo amplamente distribuídos com a tecnologia. O avanço clínico atual para órgãos vitais inteiros deve pavimentar o caminho para as primeiras aprovações cirúrgicas de transplante de órgãos vitificados humanos até 2028.
+
+A engenharia médica de 2026 mostra que o congelamento não é mais o fim da viabilidade celular, mas sim o botão de pausa ideal para salvar milhões de vidas no futuro.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Global Transplantology Initiative / Journal of Advanced Cryobiology Press Release — Boston / Genebra 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +187,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "criopreservacao-reversivel-de-orgaos-por-nanoparticulas-magneticas-inicia-fase-de-testes-clinicos";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +197,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Biotecnologia: Criopreservação Reversível de Órgãos...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +211,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Criopreservação Reversível publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

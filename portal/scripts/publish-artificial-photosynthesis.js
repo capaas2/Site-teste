@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "artificial_photosynthesis_plant_hero_1782475681738.png", remote: "posts/artificial-photosynthesis-hero.png" },
+  { local: "photoelectrochemical_cell_detail_1782475696161.png", remote: "posts/artificial-photosynthesis-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Fotossíntese") && !titulo.includes("Artificial") && !titulo.includes("Combustíveis")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Transição Energética, Combustíveis Sintéticos e Fotossíntese Artificial.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Sistemas de Fotossíntese Artificial Começam a Produzir Combustíveis Líquidos em Larga Escala";
+  const categoria = "Energia, Sustentabilidade";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Sistemas de Fotossíntese Artificial Começam a Produzir Combustíveis Líquidos em Larga Escala
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A busca por alternativas viáveis e neutras em carbono para substituir combustíveis fósseis no setor de transportes pesados e aviação comercial acaba de alcançar um patamar revolucionário. Consórcios de engenharia química e energia limpa na Europa e Ásia anunciaram a entrada em operação comercial das primeiras **usinas de fotossíntese artificial para produção de combustíveis sintéticos líquidos**. Utilizando painéis fotoeletroquímicos que imitam as folhas das plantas para quebrar moléculas de água e CO2 diretamente do ar com o auxílio da luz solar, o sistema gera metanol e outros hidrocarbonetos sintéticos de forma limpa e econômica no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta conquista consolida a transição do carbono de um resíduo poluente industrial para uma matéria-prima circular e renovável.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física das Folhas Artificiais e Catalisadores 2D
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Ao contrário dos painéis solares fotovoltaicos convencionais, que convertem a luz solar em eletricidade (gerando problemas de armazenamento em baterias), a fotossíntese artificial armazena a energia solar diretamente na forma de **ligações químicas líquidas**, assim como a biologia vegetal.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento microscópico tridimensional mostrando a dissociação molecular sob luz solar e a formação de metanol nas superfícies de nano-catalisadores 2D]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+O coração tecnológico do sistema é a chamada **célula fotoeletroquímica ou folha artificial**. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Ela é composta por semicondutores nanoestruturados revestidos com **catalisadores de materiais bidimensionais (como dissulfeto de molibdênio e grafeno modificado)**. Quando a luz solar atinge a célula, ela gera pares elétron-lacuna de energia suficiente para quebrar a molécula de água em oxigênio e prótons de hidrogênio. Simultaneamente, o sistema capta o dióxido de carbono da atmosfera por meio de membranas de captura direta de ar e, em uma reação termo-catalítica acoplada na mesma célula, liga o hidrogênio extraído ao CO2, sintetizando metanol puro de alta densidade energética.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Plantas Transgênicas Aceleradas Capturam 100 Vezes Mais Carbono do que Árvores Comuns](/post/plantas-transgenicas-aceleradas-capturam-100-vezes-mais-carbono-do-que-arvores-comuns)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Neutralidade Total de Carbono e Desempenho Energético
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A fotossíntese artificial fecha o ciclo do carbono de forma perfeita, trazendo vantagens estruturais para a transição energética global:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Combustíveis Drop-in sem Modificações**: O metanol e o querosene sintético obtidos podem ser queimados diretamente em turbinas de aviação e motores navais existentes sem exigir qualquer adaptação de engenharia de motores, acelerando a descarbonização dos transportes de longo curso.
+2. **Pegada de Carbono Nula**: Como a produção consome exatamente a mesma quantidade de CO2 atmosférico que o combustível libera durante a combustão, o balanço líquido de emissões é rigorosamente zero.
+3. **Armazenamento de Longo Prazo Estável**: Fluidos sintéticos líquidos podem ser estocados de forma segura e transportados por oleodutos comuns, eliminando a dependência de baterias caras ou tanques de hidrogênio sob alta pressão.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Pinturas de Resfriamento Radiativo Passivo Permitem Esfriar Prédios sob Sol Forte](/post/pinturas-de-resfriamento-radiativo-passivo-permitem-esfriar-predios-sol-forte)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Expansão Industrial e Desafios de Custo por Metro Quadrado
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+As primeiras biorrefinarias solares em escala industrial foram inauguradas no final de **novembro de 2026** em regiões com alta incidência de luz solar, como o sul da Espanha e áreas da Austrália. O principal desafio dos bioengenheiros reside no aumento da eficiência fotossintética artificial (atualmente em torno de 10% de conversão de energia luminosa em ligações químicas estáveis) e na redução do custo de manufatura das células fotoeletroquímicas contendo materiais bidimensionais.
+
+A fotossíntese artificial de 2026 prova que o controle da matéria em nanoescala nos permite aprender com a sabedoria da natureza para criar uma infraestrutura energética limpa e autossuficiente, onde a própria luz do Sol e o ar que respiramos se transformam na base combustível para sustentar a civilização moderna de forma equilibrada.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** European Association for Solar Fuels / Solar Chemistry Research Center Press Release — Madri / Genebra 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "sistemas-de-fotossintese-artificial-comecam-a-produzir-combustiveis-liquidos-em-larga-escala";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Energia: Fotossíntese Artificial...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Fotossíntese Artificial publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

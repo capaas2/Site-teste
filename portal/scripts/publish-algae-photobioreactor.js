@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "algae_photobioreactor_urban_hero_1782428361101.png", remote: "posts/algae-photobioreactor-hero.png" },
+  { local: "microalgae_cells_co2_detail_1782428371940.png", remote: "posts/algae-photobioreactor-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Fotobiorreatores") && !titulo.includes("Microalgas") && !titulo.includes("Purificação")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Biotecnologia Urbana, Sustentabilidade e Fotobiorreatores de Microalgas.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Fotobiorreatores Urbanos de Microalgas Iniciam Testes de Purificação de Ar em Grandes Metrópoles";
+  const categoria = "Sustentabilidade, Biotecnologia";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Fotobiorreatores Urbanos de Microalgas Iniciam Testes de Purificação de Ar em Grandes Metrópoles
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A luta contra a poluição atmosférica e o aquecimento global ganhou um aliado vivo e altamente tecnológico nas fachadas dos edifícios urbanos. Consórcios internacionais de arquitetura sustentável e engenharia biológica anunciaram a instalação dos primeiros **fotobiorreatores urbanos de microalgas integrados a fachadas comerciais**. Utilizando colunas de vidro preenchidas com culturas líquidas de algas geneticamente otimizadas, a tecnologia permite que edifícios inteiros capturem dióxido de carbono (CO2) e poluentes do ar de forma ativa, purificando a atmosfera de grandes centros urbanos no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Este avanço transforma construções civis de consumidoras passivas de energia em filtros ecológicos ativos.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física e a Biologia por Trás dos Fotobiorreatores Verticais
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Os fotobiorreatores funcionam como sistemas fechados e controlados que otimizam o processo natural de fotossíntese. Ao contrário de plantas terrestres comuns, as microalgas suspensas em meio aquoso não necessitam de solo e possuem uma taxa de conversão fotossintética extraordinariamente superior.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento microscópico mostrando as células de microalgas geneticamente modificadas expostas à luz, gerando bolhas ativas de oxigênio enquanto consomem moléculas de CO2]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+O sistema captura o ar poluído das ruas adjacentes através de ventiladores de baixo consumo e o injeta na base das colunas de vidro. À medida que as bolhas de ar sobem pelo líquido enriquecido com nutrientes, as microalgas absorvem o CO2 e os óxidos de nitrogênio (NOx), convertendo-os em biomassa através da luz solar. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Sensores inteligentes baseados em IoT monitoram continuamente o pH, a temperatura e a densidade celular da cultura. Quando as algas atingem a densidade ideal, a biomassa sobressalente é colhida de forma automatizada e direcionada para centrais que a processam na produção de biocombustíveis e biofertilizantes de alto valor econômico.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Plantas Transgênicas Aceleradas Capturam 100 Vezes Mais Carbono do que Árvores Comuns](/post/plantas-transgenicas-aceleradas-capturam-100-vezes-mais-carbono-do-que-arvores-comuns)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Benefícios Ecológicos e Integração Arquitetônica
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A implementação de fotobiorreatores na arquitetura urbana traz uma série de vantagens multifuncionais:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Eficiência Climática de Alta Densidade**: Uma fachada de 500 metros quadrados equipada com fotobiorreatores de microalgas consegue sequestrar a mesma quantidade anual de CO2 que uma floresta com centenas de árvores adultas, ocupando uma fração minúscula do espaço terrestre.
+2. **Isolamento Térmico Dinâmico**: A presença do líquido verde nas fachadas de vidro atua como uma barreira térmica natural. Ao absorver a radiação solar para a fotossíntese, as colunas reduzem a temperatura interna do edifício, diminuindo o consumo de ar-condicionado em até 35%.
+3. **Produção Circular Integrada**: A biomassa colhida pode ser transformada localmente em bioplásticos e aditivos para o próprio solo de jardins urbanos, fechando o ciclo ecológico dentro da própria cidade.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Primeiro Bioplástico Inteligente se Autodestrói no Oceano Sem Deixar Microplásticos](/post/primeiro-bioplastico-inteligente-se-autodestroi-no-oceano-sem-deixar-microplasticos)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Desafios de Manutenção e Escalar a Tecnologia
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os primeiros testes práticos em larga escala estão ocorrendo em fachadas corporativas em Tóquio, Japão, e Berlim, Alemanha, no final de **2026**. O principal desafio dos bioengenheiros reside no controle rigoroso de contaminações das culturas por bactérias ou fungos externos e na manutenção das colunas limpas contra a incrustação interna de algas nas paredes de vidro, o que atenuaria a passagem de luz.
+
+Os fotobiorreatores de microalgas provam que o design arquitetônico de 2026 caminha para uma simbiose profunda com a biologia, mostrando que o futuro das grandes metrópoles depende de integrarmos a engenharia natural à paisagem urbana para criarmos ecossistemas verdadeiramente sustentáveis e respiráveis.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Tokyo Institute of Environmental Biotechnology / Berlin Green Architecture Consortium Press Release — Tóquio / Berlim 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "fotobiorreatores-urbanos-de-microalgas-iniciam-testes-de-purificacao-de-ar-em-grandes-metropoles";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Sustentabilidade: Fotobiorreatores de Microalgas...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Fotobiorreatores de Microalgas publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

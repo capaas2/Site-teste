@@ -8,7 +8,7 @@ const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f54
 
 const images = [
   { local: "megawatt_charging_station_1781743641001.png", remote: "posts/megawatt-charging-hero.png" },
-  { local: "megawatt_charging_station_1781743641001.png", remote: "posts/megawatt-charging-detail.png" },
+  { local: "megawatt_connector_detail_1782412706805.png", remote: "posts/megawatt-charging-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])

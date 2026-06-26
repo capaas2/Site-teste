@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "lifi_commercial_office_hero_1782394685301.png", remote: "posts/lifi-commercial-office-hero.png" },
+  { local: "lifi_transceiver_chip_detail_1782394699015.png", remote: "posts/lifi-commercial-office-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Li-Fi") && !titulo.includes("Comercial") && !titulo.includes("Wi-Fi")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Telecomunicações, Conectividade Li-Fi e Redes Corporativas.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Tecnologia Li-Fi de 1 Tbps Inicia Transição Comercial para Substituir Wi-Fi Corporativo";
+  const categoria = "Internet, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Tecnologia Li-Fi de 1 Tbps Inicia Transição Comercial para Substituir Wi-Fi Corporativo
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+O futuro das redes sem fio em escritórios comerciais e ambientes industriais de alta densidade está deixando para trás as ondas de rádio do Wi-Fi tradicional. Consórcios de telecomunicação de vanguarda e fabricantes de semicondutores anunciaram o lançamento dos primeiros sistemas de **Li-Fi (Light Fidelity) comercial de 1 Tbps de velocidade**. Utilizando lâmpadas LED especiais instaladas nos tetos dos escritórios para transmitir dados criptografados através de modulações de luz imperceptíveis ao olho humano, a tecnologia inicia sua transição oficial para o mercado corporativo no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta solução pioneira resolve problemas históricos de saturação de canais de radiofrequência e vulnerabilidades de segurança física em datacenters e escritórios.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física do Li-Fi e a Modulação Luminosa Ultrarrápida
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Enquanto as frequências de rádio usadas no Wi-Fi comum (2.4 GHz a 6 GHz) enfrentam gargalos de largura de banda devido ao grande número de dispositivos conectados, o espectro da luz visível e infravermelha é cerca de 10.000 vezes maior e completamente livre de interferências.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento macro do chip transceptor óptico Li-Fi montado em uma placa mãe, convertendo sinais de fótons em dados elétricos em nanoescala]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+O transmissor Li-Fi é composto por **moduladores de estado sólido acoplados a luminárias LED comerciais**. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Esses moduladores alteram a intensidade da luz emitida em frequências de bilhões de vezes por segundo. Receptores ópticos baseados em fotodetectores instalados em computadores e smartphones capturam essa sutil oscilação luminosa e a convertem em sinais binários digitais instantaneamente. Ao operar com feixes de luz infravermelha e óptica paralelos, os transceptores atingem velocidades recordes de até 1 Tbps em testes de campo fechado corporativo, permitindo downloads de terabytes de dados corporativos e modelos locais de IA em frações de segundo.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Redes de Fibra Óptica com Distribuição Quântica de Chaves (QKD) Entram em Operação Comercial](/post/redes-de-fibra-optica-com-distribuicao-quantica-de-chaves-qkd-entram-em-operacao-comercial)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Segurança Física Absoluta e Conectividade Sem Gargalos
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A transição da radiofrequência para redes luminosas Li-Fi traz vantagens disruptivas na governança de dados e infraestrutura corporativa:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Blindagem Contra Interceptações**: As ondas de rádio do Wi-Fi ultrapassam paredes de salas de reuniões e escritórios, permitindo ataques de interceptação física de fora do prédio. O Li-Fi é contido pelas paredes físicas: se a luz do teto não chega ao dispositivo do atacante, ele não tem acesso à rede, bloqueando invasões perimetrais.
+2. **Imunidade a Interferências Eletromagnéticas**: O Li-Fi opera perfeitamente em áreas sensíveis a ruídos eletromagnéticos ou radiação, como salas de ressonância magnética hospitalar, usinas geradoras de energia e cabines de aeronaves.
+3. **Largura de Banda Compartilhada Sem Perdas**: A modulação de luz individual por lâmpada permite criar micro-células de dados focadas. Cada mesa do escritório recebe sua própria largura de banda gigabit dedicada, evitando quedas de velocidade.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [O Fim das Senhas Físicas: Google e Apple iniciam transição total para Passkeys Quânticas](/post/o-fim-das-senhas-fisicas-google-e-apple-iniciam-transicao-total-para-passkeys-quanticas)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Desafios de Linha de Visada e a Integração no Mercado
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os primeiros escritórios financeiros na Suíça e datacenters corporativos na Ásia começaram a migrar para a infraestrutura híbrida Li-Fi/Wi-Fi no final de **novembro de 2026**. O maior desafio do Li-Fi corporativo reside no requisito de "linha de visada" (line-of-sight): se o sensor do dispositivo for completamente obstruído, a conexão cai. Engenheiros resolvem este problema integrando sistemas de handover óptico que alternam o sinal dinamicamente entre diferentes luminárias do teto à medida que o usuário se move.
+
+A expansão do Li-Fi comercial em 2026 demonstra que a luz, a mais antiga ferramenta de comunicação da humanidade, foi domada na escala nanométrica dos semicondutores para transformar a iluminação ambiente dos escritórios em uma rede de dados invisível de alta velocidade, segura e ecologicamente eficiente.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Global Li-Fi Alliance / Optical Communications Research Center Press Release — Zurique / Tóquio 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "tecnologia-lifi-de-1-tbps-inicia-transicao-comercial-para-substituir-wifi-corporativo";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Conectividade: Li-Fi Comercial...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Li-Fi Comercial publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

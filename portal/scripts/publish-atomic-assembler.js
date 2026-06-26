@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "atomic_assembler_hero_1782427747646.png", remote: "posts/atomic-assembler-hero.png" },
+  { local: "atomic_alignment_detail_1782427765195.png", remote: "posts/atomic-assembler-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Sintetizadores") && !titulo.includes("Atômicos") && !titulo.includes("Molecular")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Nanotecnologia, Manufatura Molecular e Sintetizadores Atômicos.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Sintetizadores Atômicos de Mesa Iniciam a Era da Manufatura Molecular";
+  const categoria = "Nanosoluções, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Sintetizadores Atômicos de Mesa Iniciam a Era da Manufatura Molecular
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A manufatura industrial e a ciência de materiais estão prestes a deixar de depender de grandes linhas de fundição rígidas e processos químicos pesados. Consórcios de nanotecnologia aplicada anunciaram o início dos testes práticos de seus primeiros **sintetizadores de matéria por montagem atômica de mesa**. O equipamento inovador utiliza feixes magnéticos de alta definição guiados por computação quântica para posicionar átomos individuais com precisão cirúrgica, permitindo a manufatura de micro-estruturas e cristais semicondutores sob demanda diretamente em laboratórios no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta inovação marca a transição da nanotecnologia teórica de laboratórios fechados para a linha de produção comercial distribuída.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## Como Funciona a Montagem Atômica por Pinças Ópticas
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Diferente de impressoras 3D convencionais que derretem e depositam filamentos de plástico ou pó metálico (processo que gera imprecisões no nível microscópico), o sintetizador atômico atua diretamente sobre a matriz de matéria.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhe esquemático microscópico mostrando pinças de nanotubo de carbono alinhando átomos individuais de carbono para formar uma estrutura cristalina perfeita de grafeno]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+O dispositivo utiliza a tecnologia de **pinças ópticas de luz laser estruturada de campo próximo**.
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Os cientistas alimentam a câmara de vácuo do sintetizador com gases purificados contendo os elementos básicos necessários (como carbono, silício ou titânio). O laser de alta precisão aprisiona átomos isolados no ar e os empurra em direção a um substrato de silício. Ao manipular a orientação e a distância de ligação atômica em escala nanométrica, o sistema cria ligas e componentes cristalinos perfeitos livres de qualquer impureza ou defeito estrutural, alcançando propriedades físicas teoricamente impossíveis em fundições macroscópicas.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Chips Microfluídicos de Órgãos em Laboratório Começam a Substituir Testes em Animais](/post/chips-microfluidicos-de-orgaos-em-laboratorio-comecam-a-substituir-testes-em-animais)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Vantagens da Manufatura Molecular Localizada
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A viabilidade de sintetizar materiais avançados em escala atômica de mesa revoluciona a cadeia de suprimentos global:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Desenvolvimento Instantâneo de Supercondutores**: Engenheiros conseguem sintetizar pequenas amostras de cristais supercondutores complexos e materiais de metamateriais térmicos para testes de circuitos em minutos, acelerando a pesquisa científica.
+2. **Desperdício Zero de Matéria-Prima**: O sintetizador deposita e liga apenas os átomos estritamente necessários para formar o microchip ou peça estrutural, eliminando totalmente a geração de resíduos industriais ou subprodutos químicos poluentes.
+3. **Produção Distribuída e Segura**: Equipamentos de montagem molecular permitem que clínicas e laboratórios locais criem sensores e dispositivos de alta tecnologia sob demanda, eliminando prazos logísticos e fretes de importação.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Primeira Pele Eletrônica Biodegradável e Autoreparável é Apresentada por Cientistas](/post/primeira-pele-eletronica-biodegradavel-e-autoreparavel-e-apresentada-por-cientistas)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Cronograma de Homologação e Futuro
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os primeiros lotes de protótipos de sintetizadores moleculares comerciais serão instalados em institutos de física de semicondutores na Alemanha e na Ásia em **novembro de 2026**. O principal desafio dos desenvolvedores agora reside no aumento da velocidade de montagem dos átomos para permitir a fabricação de componentes de tamanho macroscópico (na escala de milímetros) em tempos comercialmente viáveis.
+
+A era da manufatura molecular demonstra que o domínio tecnológico do futuro reside no controle absoluto da matéria em sua menor escala física. Ao permitir que a humanidade molde e ligue átomos um a um em 2026, transformamos a criação de materiais avançados em um processo digital de software, abrindo infinitas possibilidades para a engenharia aeroespacial e médica mundial.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Munich Nanotechnology Center / International Society for Molecular Assembly Press Release — Munique 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "sintetizadores-atomicos-de-mesa-iniciam-a-era-da-manufatura-molecular";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia de Nanotecnologia: Sintetizadores Atômicos...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "optoacoustic_bci_headset_hero_1782428181554.png", remote: "posts/optoacoustic-bci-hero.png" },
+  { local: "optoacoustic_cortex_detail_1782428194769.png", remote: "posts/optoacoustic-bci-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Interfaces") && !titulo.includes("Cérebro-Computador") && !titulo.includes("Optoacústicos")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Neurotecnologia, Interfaces Cérebro-Computador e Sensores Optoacústicos.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Interfaces Cérebro-Computador Não Invasivas por Sensores Optoacústicos Entram em Fase de Testes";
+  const categoria = "Neurotecnologia, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Interfaces Cérebro-Computador Não Invasivas por Sensores Optoacústicos Entram em Fase de Testes
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+O sonho de controlar máquinas e digitar textos diretamente com o pensamento, sem a necessidade de cirurgias invasivas para implantes de chips, está mais próximo de se tornar realidade corporativa e médica. Um consórcio de neuroengenharia liderado pelo *Instituto de Tecnologia de Massachusetts (MIT)* e a *startup de biotecnologia NeuralLight* anunciaram o início da fase de testes em humanos de sua nova **interface cérebro-computador (BCI) baseada em transdução optoacústica não invasiva**. Utilizando um headset leve equipado com emissores de luz laser infravermelha próxima, a tecnologia consegue ler pensamentos e intenções motoras com precisão antes só alcançada por implantes cirúrgicos diretos no córtex no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta conquista representa um salto histórico em relação às antigas toucas de eletroencefalograma (EEG), cuja leitura de ondas cerebrais era severamente atenuada pelos ossos do crânio.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Transdução Optoacústica no Cérebro
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+O principal diferencial da tecnologia reside no princípio físico da optoacústica. Ao invés de tentar ler os sinais elétricos fracos que vazam pelo crânio, o sistema atua emitindo feixes de luz laser infravermelha inofensivos em direção ao couro cabeludo.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Diagrama científico demonstrando a luz infravermelha próxima incidindo no córtex cerebral e a geração de ultrassons acústicos para leitura neural de alta resolução]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+A luz infravermelha atravessa o osso do crânio sem causar qualquer aquecimento ou dano aos tecidos. Ao atingir os capilares sanguíneos do córtex cerebral, a hemoglobina absorve a energia luminosa de forma pulsada. Essa absorção rápida gera micro-expansões térmicas que criam **ondas acústicas ultrassônicas de alta definição**. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Como o osso craniano é um excelente condutor para ondas sonoras (ao contrário de sinais elétricos), sensores piezoelétricos de ultrassom de alta densidade no headset capturam esses eco-sinais acústicos com riqueza espacial. Algoritmos de aprendizado profundo decodificam as variações acústicas de fluxo sanguíneo e atividade celular em comandos digitais em milissegundos.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Intel Loihi 3: O processador neuromórfico que roda IA com consumo zero](/post/intel-loihi-3-o-processador-neuromorfico-que-roda-ia-com-consumo-zero)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Aplicações Médicas, Produtividade e Reabilitação Motora
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A viabilidade de uma interface de alto desempenho sem cirurgias expande massivamente os horizontes de aplicação da neurotecnologia:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Reabilitação sem Riscos de Infecção**: Pacientes que sofreram AVC ou com esclerose lateral amiotrófica (ELA) podem voltar a se comunicar ou controlar braços robóticos sem passar por cirurgias de crânio aberto, eliminando riscos de rejeição biológica e infecção.
+2. **Escrita Mental Silenciosa**: Voluntários saudáveis em testes iniciais conseguiram digitar em média 60 palavras por minuto apenas imaginando os movimentos de digitação em um teclado virtual, abrindo caminho para novas formas de trabalho e interação espacial.
+3. **Controle Industrial de Precisão**: Operadores de maquinários complexos e engenheiros de automação aérea conseguem interagir com painéis de controle por telemetria neural direta de baixa latência.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Supercomputadores Biológicos: Nuvem ativa 16 mini-cérebros humanos](/post/supercomputadores-biologicos-nuvem-ativa-16-mini-cerebros-humanos)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Desafios de Engenharia de Hardware e Segurança de Dados
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Embora os testes clínicos iniciais sejam altamente promissores, engenheiros ainda trabalham para reduzir o tamanho e o custo de fabricação dos chips transdutores do headset, visando torná-los um produto acessível ao público geral até o final de **novembro de 2026**. Há também uma forte cooperação com auditores de cibersegurança para garantir a criptografia ponta a ponta dos dados neurais gerados pelos usuários, evitando qualquer possibilidade de interceptação de ondas cerebrais por terceiros.
+
+A transição para as interfaces optoacústicas prova que a neurotecnologia de 2026 está superando a barreira cirúrgica, transformando o crânio humano de um obstáculo elétrico em um canal de comunicação de banda larga acústica, unindo mentes e computadores em simbiose perfeita e segura.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** MIT Neuroengineering Lab / NeuralLight Biotech Press Release — Cambridge / Boston 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "interfaces-cerebro-computador-nao-invasivas-por-sensores-optoacusticos-entram-em-fase-de-testes";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Neurotecnologia: Optoacoustic BCI...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de BCI Optoacústico publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

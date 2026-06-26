@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "mrna_printer_clinic_hero_1782476371654.png", remote: "posts/mrna-printer-hero.png" },
+  { local: "mrna_nanoparticles_detail_1782476385111.png", remote: "posts/mrna-printer-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("mRNA") && !titulo.includes("Impressoras") && !titulo.includes("Saúde")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Biotecnologia, Saúde, Microfluídica e mRNA.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,49 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Micro-impressoras de mRNA sob Demanda Iniciam Testes em Áreas de Saúde Isoladas";
+  const categoria = "Biotecnologia, Saúde, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Micro-impressoras de mRNA sob Demanda Iniciam Testes em Áreas de Saúde Isoladas
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A logística de transporte a frio extremo que historicamente limitou a distribuição global de imunizantes de última geração está prestes a ser substituída pela manufatura biológica no ponto de atendimento. Em **novembro de 2026**, consórcios internacionais de saúde e laboratórios de biologia sintética iniciaram os primeiros testes de campo práticos com **micro-impressoras de vacinas de mRNA sob demanda**. Instaladas em clínicas rurais e postos de saúde isolados, as impressoras compactas de bancada utilizam cartuchos químicos universais para sintetizar doses personalizadas de imunizantes contra patógenos em menos de duas horas no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta inovação representa a transição da vacinação em massa de grandes lotes industriais para a produção farmacêutica hiper-localizada e digital.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Impressão Microfluídica de Nanopartículas Lipídicas
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+A produção de vacinas de mRNA de forma automatizada e compacta exige a reprodução precisa de processos de síntese química que antes dependiam de grandes bioreatores industriais. O dispositivo realiza isso integrando **chips microfluídicos de mistura rápida** no nível micrométrico.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento científico 3D mostrando a junção microfluídica onde fitas de mRNA são encapsuladas por nanopartículas lipídicas de forma contínua]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+O processo começa com o recebimento digital da sequência de código de nucleotídeos da vacina via conexão criptografada. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+A impressora então sintetiza a fita de mRNA combinando bases nitrogenadas a partir de cartuchos químicos universais acoplados. 
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+Em seguida, a fita de mRNA sintetizada entra no coração do chip microfluídico. Em um canal de dimensões capilares, correntes de mRNA purificado e correntes de lipídios se chocam em velocidades controladas. Sob pressões hidrodinâmicas milimetricamente calculadas, os lipídios se auto-organizam espontaneamente ao redor das moléculas de mRNA, encapsulando-as em **nanopartículas lipídicas (LNPs) estáveis**. O resultado é uma solução de vacina pronta, purificada e com taxa de eficácia molecular superior a 98%, sintetizada localmente sem necessidade de conservação a frio de longo prazo.
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+> VEJA TAMBÉM: [Impressoras Moleculares de Medicamentos Sob Demanda Iniciam Testes em Clínicas e Domicílios](/post/impressoras-moleculares-de-medicamentos-sob-demanda-iniciam-testes-em-clinicas-e-domicilios)
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+## Vantagens Logísticas e Combate a Surtos Rápidos
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+A descentralização digital da manufatura de vacinas redefine a resposta médica global de 2026:
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+1. **Eliminação da Cadeia de Frio Extremo**: Os cartuchos de matéria-prima química estável não requerem freezers de ultracongelamento, permitindo que postos isolados mantenham estoques secos duráveis.
+2. **Atualização Genética em Minutos**: Se um novo surto de vírus ou variante surge, cientistas em qualquer lugar do mundo atualizam a sequência digital e a enviam online. Em poucos minutos, as clínicas de fronteira começam a imprimir o imunizante corrigido.
+3. **Desperdício Zero**: As doses são impressas sob demanda e em pequenos lotes diários de acordo com o agendamento de pacientes da comunidade, acabando com as milhões de ampolas descartadas por vencimento.
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+> VEJA TAMBÉM: [Biotinta Viva: O Primeiro Transplante de Rim Impresso em 3D Funcional Abre Caminho para Fim de Filas](/post/biotinta-viva-o-primeiro-transplante-de-rim-impresso-em-3d-funcional-abre-caminho-para-fim-de-filas)
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+## Desafios de Calibração e Certificação Médica
+
+A principal barreira atual para a adoção massiva das micro-impressoras de vacinas de 2026 reside em garantir a calibração 100% perfeita dos chips microfluídicos contra entupimentos microscópicos e contaminações cruzadas entre lotes de sequências diferentes. A fase atual de testes clínicos em áreas isoladas da África Subsariana e da Amazônia busca comprovar que o controle de qualidade digital interno das impressoras é suficiente para certificar cada lote de vacina impresso sem a necessidade de testes laboratoriais de hangar complexos. A validação definitiva da tecnologia deve viabilizar a autorização regulatória global para uso civil até o ano de 2028.
+
+As micro-impressoras de vacinas de 2026 demonstram que, ao converter o desenvolvimento de imunizantes em um processo de código de computador transmitido digitalmente e sintetizado localmente, a medicina se torna infinitamente mais rápida, flexível e acessível para toda a humanidade.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Coalition for Epidemic Preparedness Innovations (CEPI) / World Health Organization Synthetics Lab Press Release — Genebra / Munique 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +187,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "micro-impressoras-de-mrna-sob-demanda-iniciam-testes-em-areas-de-saude-isoladas";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +197,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Biotecnologia: Impressão de mRNA sob Demanda...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +211,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Impressão de mRNA publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

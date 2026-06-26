@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "magnetic_plasma_sail_hero_1782428522708.png", remote: "posts/magnetic-plasma-sail-hero.png" },
+  { local: "magnetic_sail_schematic_detail_1782428534098.png", remote: "posts/magnetic-plasma-sail-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Vela") && !titulo.includes("Plasma") && !titulo.includes("Viagens")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Engenharia Aeroespacial, Propulsão Espacial e Vela de Plasma Magnético.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Primeira Vela de Plasma Magnético Viabiliza Viagens Interplanetárias Ultrarrápidas";
+  const categoria = "Espaço, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Primeira Vela de Plasma Magnético Viabiliza Viagens Interplanetárias Ultrarrápidas
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A exploração humana do Sistema Solar acaba de ganhar um motor de propulsão limpo e incrivelmente rápido, capaz de encurtar drasticamente as viagens para Marte e o Cinturão de Asteroides. Um consórcio de agências espaciais e laboratórios de física de plasma anunciou o teste em órbita bem-sucedido do primeiro protótipo de **Vela de Plasma Magnético (M2P2 - Mini-Magnetospheric Plasma Propulsion)**. Ao contrário de foguetes químicos pesados ou velas solares físicas delicadas, a tecnologia utiliza um campo magnético inflado com plasma para capturar o fluxo de vento solar, impulsionando sondas espaciais a velocidades inéditas no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta inovação marca o início de uma nova era de logística espacial de alta velocidade, reduzindo a dependência de combustíveis fósseis e pesados no vácuo espacial.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Vela Magnética de Plasma (M2P2)
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+As velas solares físicas tradicionais necessitam de folhas reflexivas gigantes (de centenas de metros de diâmetro) que são extremamente difíceis de implantar e vulneráveis a micrometeoritos. A tecnologia M2P2 resolve esse problema utilizando uma **vela eletromagnética virtual de plasma**.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Blueprint técnico detalhando o núcleo magnético central da sonda gerando o campo de plasma confinado por solenoides supercondutores]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+A sonda é equipada com um pequeno núcleo solenoide supercondutor de campo alto e um injetor de gás hélio. Quando o sistema é ativado, o gás é ionizado em plasma quente e injetado ao redor da sonda. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+O campo magnético gerado pelo supercondutor aprisiona e infla esse plasma, criando uma bolha magnética de proteção e propulsão de dezenas de quilômetros de diâmetro. À medida que o vento solar (um fluxo rápido de prótons e elétrons ejetados pelo Sol a mais de 400 km/s) colide com essa barreira magnética artificial, ele transfere seu momento cinético para a bolha, empurrando a sonda acoplada em direção ao espaço exterior de forma contínua e sem consumo de combustível propelente.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Primeira Sonda de Mineração de Asteroides Inicia Operação no Cinturão Próximo à Terra](/post/primeira-sonda-de-mineracao-de-asteroides-inicia-operacao-no-cinturao-proximo-a-terra)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Viagens para Marte em Meses e Logística de Asteroides
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A aceleração contínua proporcionada pelas velas magnéticas de plasma de 2026 abre oportunidades sem precedentes para a astrofísica e o comércio espacial:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Trânsito Rápido para Planetas**: Uma viagem tripulada de ida a Marte, que tradicionalmente leva entre 7 e 9 meses com propulsão química convencional, pode ser reduzida para menos de 3 meses usando a aceleração contínua da vela de plasma magnético.
+2. **Logística Sustentável de Cargas**: Sondas de carga destinadas à mineração de recursos em asteroides conseguem transitar de ida e volta sem carregar toneladas de combustível, maximizando a capacidade de carga útil trazida de volta para a Terra.
+3. **Desvio de Trajetórias de Asteroides**: Ao acoplar pequenos geradores M2P2 a asteroides com potencial risco de colisão, cientistas conseguem alterar sutilmente suas trajetórias ao longo dos anos usando apenas a pressão constante do vento solar.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Primeiro Motor de Propulsão a Laser para Viagens Interestelares Passa em Testes de Vácuo](/post/primeiro-motor-de-propulsao-a-laser-para-viagens-interestelares-passa-em-testes-de-vacuo)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Próximos Passos de Integração e Engenharia de Escala
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os primeiros testes práticos em órbita terrestre média foram concluídos com sucesso no final de **novembro de 2026**, validando a estabilidade da bolha de plasma contra flutuações magnéticas do vento solar. O maior desafio dos desenvolvedores aeroespaciais agora reside na refrigeração dos supercondutores centrais com sistemas criogênicos ultraleves e duráveis, adequados para missões espaciais de longa duração no espaço profundo.
+
+A propulsão por vela de plasma magnético de 2026 prova que o vento solar, antes visto como um perigo de radiação para os astronautas, pode ser domado e canalizado como a maior fonte de energia cinética gratuita para impulsionar a humanidade em direção às estrelas, transformando a navegação espacial em uma arte digital de controle eletromagnético.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** International Aerospace Propulsion Laboratory / Space Physics Research Group Press Release — Pasadena / Genebra 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "primeira-vela-de-plasma-magnetico-viabiliza-viagens-interplanetarias-ultrarrapidas";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Engenharia Aeroespacial: Vela de Plasma Magnético...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Vela de Plasma Magnético publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

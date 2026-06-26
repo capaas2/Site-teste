@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "self_healing_alloy_turbine_hero_1782475774747.png", remote: "posts/self-healing-alloy-hero.png" },
+  { local: "alloy_microstructure_healing_detail_1782475790691.png", remote: "posts/self-healing-alloy-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Ligas") && !titulo.includes("Autoreparáveis") && !titulo.includes("Aviação")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Ciência de Materiais, Engenharia Mecânica e Metais Autoreparáveis.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Ligas Metálicas Autoreparáveis Iniciam Testes em Componentes Críticos da Aviação Comercial";
+  const categoria = "Ciência de Materiais, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Ligas Metálicas Autoreparáveis Iniciam Testes em Componentes Críticos da Aviação Comercial
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A segurança e a eficiência estrutural da aviação civil estão prestes a passar por uma transformação histórica que promete erradicar acidentes causados por fadiga invisível de materiais. Consórcios aeroespaciais líderes de mercado e institutos de metalurgia de ponta anunciaram o início dos testes de voo práticos com componentes de turbina construídos em **ligas metálicas super-resistentes autoreparáveis (self-healing alloys)**. Utilizando uma microestrutura inteligente que reage à pressão mecânica para selar trincas no nível microscópico, a tecnologia visa estender a vida útil das aeronaves e reduzir custos operacionais no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta inovação representa o avanço do conceito de reparação passiva que antes limitava-se a polímeros moles para ligas metálicas estruturais duras.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Auto-Cura de Metais por Nanocápsulas Térmicas
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Em metais comuns sob tensão constante, a fadiga gera microfissuras internas difíceis de detectar. Com o tempo, essas trincas se expandem até causar colapsos catastróficos. O novo metal inteligente evita esse cenário integrando **nanocápsulas contendo agentes de cura de metal líquido de baixo ponto de fusão**.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento científico 3D mostrando uma trinca estrutural em nível molecular sendo preenchida e solidificada pela reação das nanocápsulas de metal líquido]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+A matriz da liga de alumínio e titânio é preenchida uniformemente com essas nanocápsulas microscópicas durante o processo de fundição. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Quando uma trinca microscópica começa a se formar devido ao estresse estrutural, a pressão localizada rompe as nanocápsulas no caminho da rachadura. O agente de cura líquido é liberado e flui por capilaridade para o interior da fenda. Ao entrar em contato com o ar ou ao ser ativado pelo próprio calor operacional da turbina, o metal líquido se solidifica rapidamente, soldando a fenda de forma passiva e restabelecendo até 95% da resistência mecânica original do componente em minutos.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Primeira Pele Eletrônica Biodegradável e Autoreparável é Apresentada por Cientistas](/post/primeira-pele-eletronica-biodegradavel-e-autoreparavel-e-apresentada-por-cientistas)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Vantagens de Segurança, Custo e Peso na Aviação
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A aplicação das ligas com auto-cura de 2026 redefine a segurança e a economia das frotas aéreas comerciais:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Prevenção Ativa de Fadiga Crítica**: Trincas estruturais internas em pás de compressores e asas são corrigidas no momento exato em que surgem, eliminando o risco de falhas de fadiga de metal em pleno voo.
+2. **Redução de Peso Estrutural**: Engenheiros aeroespaciais tradicionalmente superdimensionam as peças de metal para resistir a danos futuros. Com a autoreparação, as ligas podem ser projetadas mais finas e leves, poupando até 15% do peso da fuselagem e reduzindo o consumo de combustível.
+3. **Manutenção Preventiva Acelerada**: O intervalo de inspeções críticas de ultrassom é estendido, permitindo que as companhias mantenham as aeronaves operando por mais tempo e cortando drasticamente custos de hangar.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Primeira Usina Solar Orbital Inicia Transmissão de Energia por Micro-ondas para a Terra](/post/primeira-usina-solar-orbital-inicia-transmissao-de-energia-por-micro-ondas-para-a-terra)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Desafios de Produção e Escala Industrial
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os primeiros componentes de asas e partes estáticas de turbinas aéreas equipados com a tecnologia iniciaram testes de voo práticos e homologações de segurança em **novembro de 2026**. O maior desafio enfrentado pelos metalurgistas reside em garantir a dispersão 100% homogênea das nanocápsulas na liga metálica líquida a temperaturas industriais extremamente elevadas, sem que as cápsulas se rompam prematuramente durante o processo de fundição inicial.
+
+A chegada comercial das ligas metálicas autoreparáveis em 2026 demonstra que a engenharia aeroespacial está transformando os limites estáticos dos materiais em estruturas inteligentes e adaptativas. Ao permitir que o metal cure a si mesmo, abrimos as portas para aeronaves mais eficientes, seguras e ecologicamente responsáveis, redefinindo as bases da mobilidade aérea global.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** International Aviation Metallurgy Alliance / Advanced Aerospace Materials Lab Press Release — Munique / Toulouse 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "ligas-metalicas-autoreparaveis-iniciam-testes-em-componentes-criticos-da-aviacao-comercial";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Ciência de Materiais: Ligas Metálicas Autoreparáveis...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Ligas Metálicas Autoreparáveis publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "glass_holographic_storage_hero_1782394837786.png", remote: "posts/glass-holographic-storage-hero.png" },
+  { local: "femtosecond_laser_writing_detail_1782394852478.png", remote: "posts/glass-holographic-storage-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Armazenamento") && !titulo.includes("Vidro") && !titulo.includes("Dados")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Armazenamento Holográfico, Vidro Sílica e Preservação de Dados de Longo Prazo.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Armazenamento de Dados em Vidro Sílica Promete Durabilidade de 1 Bilhão de Anos";
+  const categoria = "Tecnologia, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Armazenamento de Dados em Vidro Sílica Promete Durabilidade de 1 Bilhão de Anos
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+O pesadelo da obsolescência dos suportes digitais e da perda de dados históricos importantes devido à degradação de mídias magnéticas pode estar com os dias contados. Pesquisadores de engenharia óptica e armazenamento frio de dados corporativos anunciaram a homologação do primeiro sistema de **armazenamento holográfico 5D em vidro sílica (Project Silica)**. Gravando dados em nanoescala dentro de placas de vidro puro por meio de lasers pulsados ultrarrápidos, o sistema garante a integridade de dados digitais por mais de 1 bilhão de anos sem necessidade de energia ou refrigeração no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta solução inovadora revoluciona a preservação de dados frios e arquivos históricos em datacenters globais.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Gravação 5D por Laser de Femtossegundo
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Diferente de mídias ópticas comuns, como CDs ou DVDs, que gravam dados apenas em sua superfície reflexiva de plástico (sujeita a riscos e oxidação química), o armazenamento em vidro sílica grava a informação **dentro da estrutura tridimensional interna do vidro**.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento macro da gravação interna por laser de femtossegundo, criando voxels ópticos permanentes no interior da placa de vidro sílica]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+O processo utiliza um **laser de femtossegundo ultrarrápido** que emite pulsos de luz extremamente curtos e intensos. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+Esses pulsos de luz laser modificam permanentemente a estrutura molecular do vidro em escala nanométrica, criando micro-cavidades tridimensionais chamadas de "voxels". O termo "gravação 5D" refere-se ao fato de que cada voxel armazena informações com base em cinco dimensões físicas distintas: a posição espacial tridimensional (X, Y, Z) dentro do vidro e duas dimensões ópticas adicionais determinadas pela orientação da luz e pela força de birrefringência gerada no material.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [O Fim das Senhas Físicas: Google e Apple iniciam transição total para Passkeys Quânticas](/post/o-fim-das-senhas-fisicas-google-e-apple-iniciam-transicao-total-para-passkeys-quanticas)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Resistência Extrema e Consumo Energético Zero
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+As vantagens das placas de vidro sílica em comparação a fitas magnéticas e discos rígidos tradicionais são avassaladoras para a sustentabilidade de datacenters:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Resistência Física Absoluta**: As placas de vidro sílica suportam temperaturas de até 1.000 °C, inundações, campos magnéticos intensos e radiação ionizante sem sofrer qualquer alteração estrutural ou perda de dados.
+2. **Pegada de Carbono Mínima**: Datacenters frios gastam bilhões de dólares anuais apenas em sistemas de refrigeração e desumidificação de fitas magnéticas. As placas de vidro podem ser armazenadas em prateleiras comuns sem energia, poupando até 90% da eletricidade de manutenção.
+3. **Leitura Óptica Dinâmica**: Para recuperar os dados, o sistema utiliza microscópios de polarização controlados por computador e algoritmos de aprendizado de máquina para decodificar os padrões de luz refratados nos voxels instantaneamente.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Cristais de Memória Quântica Viabilizam o Primeiro Armazenamento de Dados Coerente e Estável](/post/cristais-de-memoria-quantica-viabilizam-o-primeiro-armazenamento-de-dados-coerente-e-estavel)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Escalabilidade Comercial de Datacenters em 2026
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os primeiros módulos de arquivamento automatizados com robôs que manipulam as placas de vidro sílica estão sendo integrados a datacenters na Europa no final de **novembro de 2026**. O principal desafio dos engenheiros é aumentar a velocidade de gravação dos lasers de femtossegundo para viabilizar o arquivamento rápido de petabytes de dados em tempo industrial viável.
+
+O armazenamento holográfico em vidro sílica de 2026 prova que a preservação do legado da humanidade não depende de mídias magnéticas complexas e voláteis, mas sim do retorno ao mais durável e antigo dos suportes de registro — a pedra e o vidro —, transformados pela luz laser em bibliotecas eternas de conhecimento indestrutível.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** European Optical Data Consortium / Project Silica Development Lab Press Release — Genebra / Cambridge 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "armazenamento-de-dados-em-vidro-silica-promete-durabilidade-de-1-bilhao-de-anos";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Armazenamento Óptico: Vidro Sílica...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Armazenamento em Vidro Sílica publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

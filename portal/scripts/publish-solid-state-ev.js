@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "solid_state_battery_car_hero_1782221509531.png", remote: "posts/lithium-metal-solid-state-hero.png" },
+  { local: "lithium_anode_detail_1782221525723.png", remote: "posts/lithium-metal-solid-state-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Baterias") && !titulo.includes("Lítio") && !titulo.includes("Autonomia")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Eletromobilidade, Química de Baterias e Estado Sólido.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Baterias de Lítio Metálico de 500 Wh/kg Iniciam Produção para Superar 1.000 km de Autonomia";
+  const categoria = "Mobilidade, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Baterias de Lítio Metálico de 500 Wh/kg Iniciam Produção para Superar 1.000 km de Autonomia
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A indústria automotiva global está prestes a quebrar de forma definitiva a última barreira psicológica e prática de adoção em massa dos veículos elétricos (EVs): a ansiedade de autonomia. Um consórcio internacional de química eletromolecular e montadoras anunciou o início da produção industrial de suas primeiras **baterias de estado sólido de lítio metálico com densidade de 500 Wh/kg**. O novo componente permite duplicar a capacidade de armazenamento de energia em relação às baterias atuais sem aumentar o peso físico do veículo no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta solução pioneira viabiliza autonomias reais que superam os 1.000 quilômetros com uma única carga rápida em automóveis de passeio.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Química do Ânodo de Lítio Metálico de Estado Sólido
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Baterias de íons de lítio convencionais utilizam ânodos de grafite suspensos em eletrólitos líquidos inflamáveis. O novo sistema revoluciona esse design ao substituir o eletrólito líquido por uma **membrana cerâmica condutora sólida** e o grafite por uma folha ultrafina de **lítio metálico puro**.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento atômico microscópico mostrando a estabilização do ânodo de lítio metálico em contato com a interface sólida cerâmica, prevenindo dendritos]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+Esta mudança estrutural elimina totalmente o risco de curto-circuito e incêndio. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+No entanto, o principal desafio das baterias de lítio metálico sempre foi a formação de "dendritos" (depósitos pontiagudos de lítio que crescem durante as recargas e furavam as membranas internas). A nova tecnologia resolve este obstáculo aplicando uma camada molecular de grafeno protetora no ânodo e uma membrana cerâmica com estrutura de treliça de alta resistência mecânica, que guia a deposição plana de átomos de lítio de forma uniforme e impede o crescimento de dendritos.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Baterias de estado sólido e grafeno: Recarga de 3 minutos e 1.200 km](/post/baterias-de-estado-solido-e-grafeno-recarga-de-3-minutos-e-1-200-km)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Densidade Energética Avançada e Impactos no Mercado
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+Com 500 Wh/kg de densidade energética (próximo ao dobro do padrão comercial atual de 260 Wh/kg), a tecnologia reformula o design e a performance dos veículos:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Autonomia de Longo Alcance Real**: Sedãs de passeio comuns equipados com pacotes de bateria do mesmo peso físico atual superam facilmente 1.000 km de autonomia em rodovias, aproximando-se da conveniência de carros a combustão.
+2. **Vida Útil Duplicada**: Os novos materiais estáveis de estado sólido registram retenção de capacidade de 90% mesmo após 1.500 ciclos de recarga rápida completa, equivalendo a mais de 800.000 quilômetros rodados.
+3. **Redução de Peso e Emissões**: Menos peso de bateria no veículo resulta em maior eficiência dinâmica, menor consumo elétrico por quilômetro e menor desgaste de pneus e freios.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Primeiras Estações de Carregamento Megawatt para Caminhões Elétricos Entram em Operação](/post/primeiras-estacoes-de-carregamento-megawatt-para-caminhoes-eletricos-entram-em-operacao)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Cronograma de Lançamento e Homologação Automotiva
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+Os primeiros lotes comerciais de células de estado sólido de lítio metálico de 500 Wh/kg serão entregues a montadoras na Alemanha e na Ásia no final de **novembro de 2026** para homologação em protótipos de estrada. O principal desafio industrial reside na transição da fabricação em salas limpas de laboratório para a produção contínua em larga escala e custos competitivos.
+
+A chegada comercial do lítio metálico de estado sólido em 2026 demonstra que a engenharia de materiais está superando os limites da química tradicional, pavimentando um caminho limpo, seguro e duradouro para a eletrificação total do transporte de passageiros e cargas em escala planetária.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Automotive Battery Alliance / Solid-State Chemical Research Consortium Press Release — Munique / Tóquio 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "baterias-de-litio-metalico-de-500-wh-kg-iniciam-producao-para-superar-1-000-km-de-autonomia";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Eletromobilidade: Lítio Metálico Estado Sólido...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Lítio Metálico Estado Sólido publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

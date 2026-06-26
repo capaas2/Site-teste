@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "plasma_jet_flight_hero_1782476466052.png", remote: "posts/plasma-jet-hero.png" },
+  { local: "mhd_propulsion_submarine_detail_1782336267091.png", remote: "posts/plasma-jet-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Motores") && !titulo.includes("Plasma") && !titulo.includes("Voo")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Física de Plasmas, Aeroespacial, Propulsão e Mobilidade.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,49 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Motores a Jato de Plasma Atmosférico Iniciam Testes de Voo Supersônico sem Combustível";
+  const categoria = "Mobilidade, Energia, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Motores a Jato de Plasma Atmosférico Iniciam Testes de Voo Supersônico sem Combustível
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A descarbonização total da aviação comercial, um dos setores mais difíceis de mitigar as emissões de gases de efeito estufa, acaba de dar seu passo mais ousado. Em **dezembro de 2026**, consórcios de propulsão aeroespacial e institutos de física aplicada iniciaram os primeiros testes de voo práticos com protótipos de **motores a jato de plasma atmosférico (atmospheric plasma jet engines)**. Capaz de gerar empuxo supersônico utilizando apenas eletricidade e ar ambiente, sem queimar uma única gota de combustível fóssil, a tecnologia promete viabilizar a aviação comercial sustentável no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Este avanço elimina a necessidade de carregar tanques massivos de querosene ou hidrogênio criogênico, utilizando o próprio ar como propelente.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Ionização do Ar e Aceleração de Plasma
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Diferente dos motores iônicos de satélites espaciais (que operam no vácuo e necessitam de gases raros como xenônio), o motor a jato de plasma atmosférico opera em pressões atmosféricas normais e utiliza o ar do próprio ambiente para criar empuxo.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Diagrama físico em corte demonstrando a câmara de ionização do ar por micro-ondas e o arranjo de eletrodos para compressão e ejeção do jato de plasma supersônico]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+O funcionamento do motor baseia-se em comprimir o ar de entrada e submetê-lo a um campo de micro-ondas de alta potência. 
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+No núcleo do motor, um gerador de micro-ondas de alta frequência ioniza as moléculas de oxigênio e nitrogênio do ar comprimido, separando os elétrons dos núcleos atômicos e transformando o ar em um plasma de alta temperatura e pressão. 
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+Eletrodos magnéticos arranjados ao longo da câmara de exaustão confinam e aceleram este plasma superaquecido a velocidades supersônicas através de bocais eletromagnéticos. A expansão violenta do plasma ionizado gera uma força de empuxo idêntica ou superior à de uma turbina a jato comercial convencional, mas de forma 100% elétrica e sem emissões de carbono.
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+> VEJA TAMBÉM: [Baterias de Ar-Alumínio de Estado Sólido Viabilizam os Primeiros Voos Comerciais Elétricos](/post/baterias-de-ar-aluminio-de-estado-solid-viabilizam-os-primeiros-voos-comerciais-eletricos)
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+## Vantagens de Descarbonização e Eficiência de Peso
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+A substituição da combustão térmica por propulsão a plasma elétrico redefine a arquitetura das aeronaves do futuro:
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+1. **Emissões Zero**: O único escape do motor é o próprio ar atmospheric reinjetado na atmosfera após perder o estado de plasma, com emissão zero de CO2, óxidos de nitrogênio ou fuligem.
+2. **Redução Drástica de Peso de Decolagem**: Metade do peso de um avião comercial na decolagem corresponde ao combustível. Ao usar o ar circundante como propelente de plasma, a aeronave decola consideravelmente mais leve, reduzindo o consumo de energia estrutural.
+3. **Eficiência Térmica e de Altitude**: Os motores a jato de plasma tornam-se ainda mais eficientes em altitudes elevadas, onde a menor densidade do ar reduz o arrasto, exigindo menos energia para ionização estável do plasma.
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+> VEJA TAMBÉM: [Primeira Vela de Plasma Magnético Viabiliza Viagens Interplanetárias Ultrarrápidas](/post/primeira-vela-de-plasma-magnetico-viabiliza-viagens-interplanetarias-ultrarrapidas)
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+## Desafios de Alimentação Elétrica em Larga Escala
+
+O principal desafio para a comercialização dos jatos de plasma reside na quantidade massiva de energia elétrica necessária para alimentar os geradores de micro-ondas. Para um jato de passageiros, seriam necessários megawatts de potência contínua. Os protótipos de 2026 estão sendo testados em aeronaves experimentais de médio porte alimentadas por geradores a bordo híbridos de alta densidade e baterias estruturais de estado sólido de última geração. Espera-se que com o avanço de reatores de fusão portáteis ou super-baterias de alta capacidade projetadas para a próxima década, a aviação a plasma atinja maturidade comercial para rotas intercontinentais até 2035.
+
+A tecnologia dos jatos de plasma de 2026 demonstra que a física do estado da matéria mais abundante do universo pode nos fornecer o caminho para voar de forma totalmente limpa e sustentável.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Institute for Advanced Plasma Research / European Aerospace Propulsion Alliance Press Release — Toulouse / Munique 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +187,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "motores-a-jato-de-plasma-atmosferico-iniciam-testes-de-voo-supersonico-sem-combustivel";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +197,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Aeroespacial: Jatos de Plasma Atmosférico...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +211,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Jatos de Plasma publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

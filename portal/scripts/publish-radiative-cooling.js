@@ -7,8 +7,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "iout_underwater_sensor_hero_1782394924681.png", remote: "posts/iout-underwater-sensor-hero.png" },
-  { local: "iout_network_topology_detail_1782394939862.png", remote: "posts/iout-network-topology-detail.png" },
+  { local: "radiative_cooling_building_hero_1782428607925.png", remote: "posts/radiative-cooling-hero.png" },
+  { local: "radiative_cooling_nanoparticle_detail_1782428624773.png", remote: "posts/radiative-cooling-detail.png" },
 ];
 
 // SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
@@ -17,10 +17,10 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. PROJECT PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("Subaquática") && !titulo.includes("Sensores") && !titulo.includes("IoUT")) {
+  if (!titulo.includes("Pinturas") && !titulo.includes("Resfriamento") && !titulo.includes("Radiativo")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Internet das Coisas Subaquática, Redes Acústicas e Monitoramento Oceânico.");
+  console.log("   -> Tema aprovado: Ciência de Materiais, Climatização Passiva e Resfriamento Radiativo.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -114,45 +114,47 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem";
-  const categoria = "Internet, Tecnologia";
+  const titulo = "Pinturas de Resfriamento Radiativo Passivo Permitem Esfriar Prédios sob Sol Forte";
+  const categoria = "Sustentabilidade, Inovação";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Internet das Coisas Subaquática (IoUT): Rede de Sensores Acústicos Conecta o Fundo do Mar à Nuvem
+  const conteudo_markdown = `# Pinturas de Resfriamento Radiativo Passivo Permitem Esfriar Prédios sob Sol Forte
 
-A conectividade global acaba de alcançar a última fronteira inexplorada de nosso planeta: os abismos oceânicos. Um consórcio internacional de oceanografia e engenharia de telecomunicações anunciou a ativação da primeira **rede comercial de Internet das Coisas Subaquática (IoUT - Internet of Underwater Things) em águas profundas**. Utilizando uma malha de nós de sensores inteligentes ancorados no leito marinho que se comunicam por meio de ondas acústicas de alta frequência, a tecnologia permite transmitir dados oceanográficos e ecológicos em tempo real diretamente para servidores em nuvem no ano de **2026**.
+A climatização de grandes edifícios comerciais e residenciais está a caminho de se desvincular do consumo intensivo de eletricidade exigido por ares-condicionados e chillers mecânicos. Cientistas de engenharia química e termodinâmica aplicada anunciaram o início da comercialização em larga escala das primeiras **tintas de resfriamento radiativo passivo por dispersão molecular**. Revestindo telhados e fachadas com uma formulação de nanopartículas de alta definição, a inovação reflete a luz solar quase em sua totalidade e permite que o calor interno escape de forma ativa para o vácuo espacial, resfriando os prédios mesmo sob sol forte sem consumir energia no ano de **2026**.
 
-A inovação promete revolucionar o monitoramento ambiental, a detecção precoce de tsunamis e a exploração científica marinha.
+Esta solução se consolida como uma ferramenta essencial na atenuação das ilhas de calor urbanas de forma passiva e sustentável.
 
-## A Física da Transmissão Acústica e Óptica sob a Água
+## A Física da Janela de Transparência Atmosférica
 
-Diferente do Wi-Fi ou celular tradicional, que utilizam ondas de rádio (que são rapidamente absorvidas e dissipadas pela água salgada), a IoUT utiliza **ondas acústicas (som) de alta frequência** para transmissões de longo alcance e **feixes de laser azul-esverdeado de curto alcance** para transferências de dados em altíssima velocidade.
+Para que um material esfrie abaixo da temperatura do ar ambiente enquanto é atingido pela radiação solar direta, ele precisa de duas propriedades simultâneas: refletir quase 100% da luz solar visível e emitir calor intensamente em uma faixa de frequência específica chamada de **Janela de Transparência Atmosférica** (comprimentos de onda de infravermelho de 8 a 13 micrômetros).
 
-[IMAGEM: ${detailUrl} | LEGENDA: Tela de controle digital exibindo o mapa tridimensional da topologia da rede IoUT e os feixes acústicos entre os sensores subaquáticos e a boia de superfície]
+[IMAGEM: ${detailUrl} | LEGENDA: Representação científica de nanopartículas de sulfato de bário espalhando a luz solar e direcionando a radiação infravermelha de calor diretamente para o espaço através da atmosfera]
 
-Cada sensor subaquático atua como um nó repetidor autônomo, processando dados brutos localmente com chips de baixo consumo e enviando pacotes codificados de som pela água. Sinais acústicos viajam até boias na superfície, que convertem o som em ondas de rádio convencionais e transmitem as informações via satélite ou redes 5G de borda costeira.
+A atmosfera terrestre é quase transparente a essa faixa específica de radiação térmica infravermelha, agindo como um canal aberto direto para o vácuo do espaço sideral (cuja temperatura é de aproximadamente -270 °C).
 
-> VEJA TAMBÉM: [Propulsão Magnetohidrodinâmica Silenciosa Inicia Testes Práticos em Submarinos Civis](/post/propulsao-magnetohidrodinamica-silenciosa-inicia-testes-praticos-em-submarinos-civis)
+A nova formulação utiliza **nanopartículas de sulfato de bário de tamanhos variados e calibrados com precisão**. O sulfato de bário possui um bandgap eletrônico que impede a absorção da luz solar. Ao variar o tamanho das nanopartículas dentro do revestimento, a tinta consegue dispersar com eficiência todos os comprimentos de onda da luz visível e ultravioleta, refletindo mais de 98% da energia solar. Ao mesmo tempo, a composição química possui altíssima emissividade térmica exatamente na janela infravermelha, agindo como uma ponte térmica direta que canaliza e irradia o calor interno do edifício direto para o espaço profundo.
 
-## Monitoramento Ecológico e Alertas de Desastres Naturais
+> VEJA TAMBÉM: [Metamateriais Termocrômicos Prometem Reduzir Gasto de Climatização de Edifícios em 60%](/post/metamateriais-termocromicos-prometem-reduzir-gasto-de-climatizacao-de-edificios-em-60)
 
-A capacidade de manter milhares de sensores operando continuamente sob o mar oferece vantagens críticas para a preservação global:
+## Redução de Consumo Energético e Conforto Térmico Urbano
 
-1. **Prevenção de Tsunamis em Tempo Real**: Sensores de pressão acústica de altíssima precisão no leito marinho detectam variações milimétricas de deslocamento de água causadas por abalos sísmicos profundos, enviando alertas de tsunami para centros costeiros em segundos.
-2. **Rastreamento de Fauna e Poluição**: Micro-sensores acústicos fixados em animais marinhos transmitem dados de temperatura, pH e nível de oxigênio da água à medida que nadam pela malha de recepção IoUT.
-3. **Eficiência Energética por Colheita de Vibração**: Os nós de sensores utilizam geradores piezoelétricos internos que colhem energia mecânica das próprias correntes marítimas profundas, estendendo a vida útil de bateria útil para décadas.
+A possibilidade de resfriar estruturas sem fontes de alimentação elétrica externas traz vantagens ecológicas e econômicas sem precedentes:
 
-> VEJA TAMBÉM: [Sensores Biodegradáveis de Dente-de-Leão Revolucionam o Monitoramento Ecológico](/post/sensores-biodegradaveis-de-dente-de-leao-revolucionam-o-monitoramento-ecologico)
+1. **Redução Drástica na Conta de Energia**: Edifícios revestidos com pinturas radiativas registram reduções de temperatura em telhados de até 12 °C sob sol direto de verão, gerando uma redução média de 40% na demanda energética dos sistemas de refrigeração interna.
+2. **Mitigação de Ilhas de Calor Urbanas**: Cidades inteiras revestidas com a tecnologia passam a irradiar seu excesso de calor térmico acumulado direto para o espaço profundo em vez de dispersá-lo no ar circundante, atenuando o aquecimento das metrópoles.
+3. **Proteção Durável e Custo Acessível**: Ao contrário de sistemas ativos complexos, a tinta radiativa é aplicada por rolos convencionais e possui durabilidade estendida por polímeros acrílicos hidrofóbicos autolimpantes.
 
-## Expansão do Mercado e Desafios de Engenharia Marítima
+> VEJA TAMBÉM: [Membranas de Grafeno Iônico Viabilizam Dessalinização de Larga Escala com Baixo Consumo](/post/membranas-de-grafeno-ionico-viabilizam-dessalinizacao-de-larga-escala-com-baixo-consumo)
 
-Os primeiros testes comerciais bem-sucedidos estão sendo conduzidos no *Cinturão de Fogo do Pacífico* e nas bacias marinhas do *Mar do Norte*, monitorando a integridade estrutural de turbinas eólicas flutuantes e oleodutos ecológicos no final de **2026**. O maior desafio enfrentado pelos engenheiros marinhos é a corrosão por salinidade e a bioincrustação (acúmulo de organismos marinhos nas lentes dos lasers).
+## Desafios de Escalar a Tecnologia e Manutenção de Brilho
 
-A Internet das Coisas Subaquática demonstra que a inteligência conectada não se limita aos nossos lares e cidades inteligentes, mas avança para os oceanos, integrando a dinâmica de nossos mares à infraestrutura de dados da civilização de 2026, garantindo proteção ambiental e uma compreensão científica sem precedentes da biosfera planetária profunda.
+As primeiras aplicações comerciais massivas estão ocorrendo em complexos de datacenters e galpões de logística refrigerada nos Estados Unidos e no Oriente Médio no final de **2026**. O maior desafio enfrentado pelos pesquisadores é garantir a manutenção do altíssimo índice de reflexão ao longo dos anos, uma vez que o acúmulo de poeira e fuligem urbana nas superfícies pintadas pode obstruir a Janela de Transparência Atmosférica e reduzir a eficiência da irradiação passiva de calor.
+
+O resfriamento radiativo de 2026 prova que podemos desenhar cidades que usam as leis da termodinâmica a seu favor, transformando o espaço exterior frio em um sumidouro térmico infinito e abrindo as portas para uma arquitetura moderna em total harmonia com a física atmosférica do nosso planeta.
 
 ---
 
-**Fonte:** International Association of Underwater Communications / Deep Sea Research Institute — Tokyo / San Diego 2026.`;
+**Fonte:** Purdue University Engineering / Materials Science Global Consortium Press Release — West Lafayette 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -183,7 +185,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
   }
 
   const data = await res.json();
-  const slug = "internet-das-coisas-subaquatica-iout-rede-de-sensores-acusticos-conecta-o-fundo-do-mar-a-nuvem";
+  const slug = "pinturas-de-resfriamento-radiativo-passivo-permitem-esfriar-predios-sol-forte";
   
   // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
   await requestGoogleIndexing(slug);
@@ -193,7 +195,7 @@ A Internet das Coisas Subaquática demonstra que a inteligência conectada não 
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Tecnologia: IoUT Subaquática...\n");
+  console.log("📰 Publicando notícia inédita de Sustentabilidade: Resfriamento Radiativo...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -207,7 +209,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de IoUT Subaquática publicada com sucesso!");
+    console.log("\n🎉 Notícia de Resfriamento Radiativo publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);

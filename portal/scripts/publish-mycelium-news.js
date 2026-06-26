@@ -85,6 +85,34 @@ async function uploadImage(localName, remotePath) {
   return publicUrl;
 }
 
+async function requestGoogleIndexing(slug) {
+  console.log("⚡ Solicitando indexação urgente no Google...");
+  const postUrl = `https://folhabyte.dev/post/${slug}`;
+  console.log(`   📤 Enviando requisição para: ${postUrl}`);
+
+  try {
+    const res = await fetch("https://folhabyte.dev/api/index-url", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+      },
+      body: JSON.stringify({
+        url: postUrl,
+        action: "URL_UPDATED",
+      }),
+    });
+
+    if (res.ok) {
+      console.log("   🚀 Sucesso! Google foi notificado do novo post.");
+    } else {
+      console.warn(`   ⚠️ Erro ao notificar o Google (HTTP ${res.status}):`, await res.text());
+    }
+  } catch (err) {
+    console.error("   ❌ Falha na conexão com a API de indexação:", err.message);
+  }
+}
+
 async function insertPost(heroUrl, detailUrl) {
   const titulo = "Internet de Micélio: Fungos Criam a Primeira Rede Sensora Agrícola Biodegradável";
   const categoria = "Biotecnologia, AgroTech";
@@ -155,6 +183,11 @@ A Internet de Micélio demonstra que as respostas para os desafios da agricultur
   }
 
   const data = await res.json();
+  const slug = "internet-de-micelio-fungos-criam-a-primeira-rede-sensora-agricola-biodegradavel";
+  
+  // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
+  await requestGoogleIndexing(slug);
+
   console.log("✅ Post inserido com sucesso! ID:", data[0].id);
   return data[0];
 }

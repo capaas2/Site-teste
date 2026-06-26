@@ -7,7 +7,7 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
 
 const images = [
-  { local: "exoplanet_spectroscopy_detail_1781805179680.png", remote: "posts/exoplanet-spectroscopy-hero.png" },
+  { local: "exoplanet_atmosphere_hero_1782412722581.png", remote: "posts/exoplanet-spectroscopy-hero.png" },
   { local: "exoplanet_spectroscopy_detail_1781805179680.png", remote: "posts/exoplanet-spectroscopy-detail.png" },
 ];
 
