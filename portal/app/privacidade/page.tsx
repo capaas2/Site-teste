@@ -59,12 +59,12 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-black italic uppercase text-slate-900 dark:text-white">Transparência Editorial e Inteligência Artificial</h2>
+          <h2 className="text-xl font-black italic uppercase text-slate-900 dark:text-white">Transparência Editorial e Assistência de Pesquisa</h2>
           <p>
-            Para garantir a velocidade e a cobertura abrangente do mundo da tecnologia, o FolhaByte utiliza fluxos de trabalho automatizados e agentes de Inteligência Artificial para auxiliar na pesquisa, estruturação e redação de conteúdos. 
+            Nossa equipe adota um modelo de jornalismo técnico humanizado e focado em profundidade. Para enriquecer as nossas análises e agilizar o levantamento de especificações de hardware, dados financeiros ou referências de bancos de dados históricos, nós utilizamos assistentes de processamento de dados e ferramentas computacionais avançadas de pesquisa.
           </p>
           <p>
-            Todas as informações técnicas e factuais passam por processos rigorosos de validação de dados antes da publicação, garantindo a qualidade e a veracidade que você merece.
+            No entanto, o processo criativo, a redação de cada parágrafo e a validação final das informações são integralmente executados de forma artesanal e manual por nossos jornalistas seniores, garantindo a autenticidade e o compromisso ético de cada publicação.
           </p>
         </section>
 

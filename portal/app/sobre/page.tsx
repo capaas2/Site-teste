@@ -42,8 +42,8 @@ export default function AboutPage() {
           Nossa <span className="text-blue-600">Missão</span>
         </h1>
         <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
-          A FolhaByte nasceu para separar o sinal do ruído. Em um mundo saturado de informações superficiais, 
-          nossa missão é decodificar as inovações tecnológicas que realmente importam — com profundidade, 
+          A FolhaByte nasceu para separar o sinal do ruído. Em um mundo saturado de informações superficiais,
+          nossa missão é decodificar as inovações tecnológicas que realmente importam — com profundidade,
           contexto e visão de mercado.
         </p>
       </div>
@@ -56,8 +56,8 @@ export default function AboutPage() {
           </div>
           <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 italic uppercase">O Propósito</h3>
           <p className="text-[14px] leading-relaxed text-slate-500 dark:text-slate-400">
-            Simplificar o complexo. Traduzimos as inovações que moldam o amanhã em conteúdo direto, 
-            técnico e com visão de mercado. Cada artigo é pensado para informar quem quer entender 
+            Simplificar o complexo. Traduzimos as inovações que moldam o amanhã em conteúdo direto,
+            técnico e com visão de mercado. Cada artigo é pensado para informar quem quer entender
             o impacto real da tecnologia na sociedade, nos negócios e no dia a dia.
           </p>
         </div>
@@ -67,8 +67,8 @@ export default function AboutPage() {
           </div>
           <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 italic uppercase">A Visão</h3>
           <p className="text-[14px] leading-relaxed text-slate-500 dark:text-slate-400">
-            Ser a referência em jornalismo tecnológico de alta performance no Brasil. 
-            Queremos inspirar profissionais, entusiastas e tomadores de decisão com análises 
+            Ser a referência em jornalismo tecnológico de alta performance no Brasil.
+            Queremos inspirar profissionais, entusiastas e tomadores de decisão com análises
             que vão além da manchete — entregando o contexto que falta na cobertura tradicional.
           </p>
         </div>
@@ -78,33 +78,33 @@ export default function AboutPage() {
       <div className="prose prose-blue dark:prose-invert max-w-none mb-20">
         <h2 className="italic font-black text-2xl uppercase tracking-tight">Quem Somos</h2>
         <p>
-          A FolhaByte é um portal independente de jornalismo tecnológico fundado em 2026, 
-          com sede em São Paulo. Reunimos uma equipe de jornalistas, engenheiros e pesquisadores 
-          que compartilham uma obsessão em comum: entender e explicar como a tecnologia está 
+          A FolhaByte é um portal independente de jornalismo tecnológico fundado em 2026,
+          com sede em São Paulo. Reunimos uma equipe de jornalistas, engenheiros e pesquisadores
+          que compartilham uma obsessão em comum: entender e explicar como a tecnologia está
           redesenhando o mundo.
         </p>
         <p>
-          Em uma internet dominada por clickbait e conteúdo superficial, escolhemos o caminho 
-          oposto. Cada matéria publicada no FolhaByte passa por um rigoroso processo de pesquisa 
-          e validação. Não nos limitamos a reproduzir press releases — nós investigamos, 
+          Em uma internet dominada por clickbait e conteúdo superficial, escolhemos o caminho
+          oposto. Cada matéria publicada no FolhaByte passa por um rigoroso processo de pesquisa
+          e validação. Não nos limitamos a reproduzir press releases — nós investigamos,
           contextualizamos e analisamos o impacto econômico, social e prático de cada inovação.
         </p>
         <p>
-          Cobrimos desde inteligência artificial e computação quântica até nanotecnologia, 
-          energia limpa e cibersegurança. Nossa cobertura é guiada por uma pergunta central: 
+          Cobrimos desde inteligência artificial e computação quântica até nanotecnologia,
+          energia limpa e cibersegurança. Nossa cobertura é guiada por uma pergunta central:
           <strong>&ldquo;O que isso significa para o leitor?&rdquo;</strong>
         </p>
-        
+
         <div className="bg-blue-600/5 dark:bg-blue-600/10 border border-blue-500/20 p-8 rounded-3xl my-10 flex items-start gap-6">
-           <ShieldCheck className="w-10 h-10 text-blue-600 flex-shrink-0 mt-1" />
-           <div>
-              <h4 className="text-lg font-black text-slate-900 dark:text-white uppercase italic m-0">Compromisso Editorial</h4>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 m-0 leading-relaxed">
-                Independência e precisão. Todos os nossos fatos são verificados e nossas opiniões são fundamentadas em dados concretos de mercado. 
-                Utilizamos ferramentas de Inteligência Artificial como apoio na pesquisa e estruturação, mas cada publicação é revisada e validada 
-                pela nossa equipe editorial.
-              </p>
-           </div>
+          <ShieldCheck className="w-10 h-10 text-blue-600 flex-shrink-0 mt-1" />
+          <div>
+            <h4 className="text-lg font-black text-slate-900 dark:text-white uppercase italic m-0">Compromisso Editorial</h4>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 m-0 leading-relaxed">
+              Independência e precisão. Todos os nossos fatos são verificados e nossas opiniões são fundamentadas em dados concretos de mercado.
+              Utilizamos ferramentas de Inteligência Artificial como apoio na pesquisa e estruturação, mas cada publicação é revisada e validada
+              pela nossa equipe editorial.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -142,26 +142,6 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Números */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { value: "2026", label: "Fundação" },
-          { value: "500+", label: "Artigos publicados" },
-          { value: "50k+", label: "Leitores mensais" },
-          { value: "24/7", label: "Cobertura" },
-        ].map((stat) => (
-          <div
-            key={stat.label}
-            className="text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800"
-          >
-            <p className="text-2xl font-black text-blue-600 italic">{stat.value}</p>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">
-              {stat.label}
-            </p>
-          </div>
-        ))}
       </div>
     </div>
   );
