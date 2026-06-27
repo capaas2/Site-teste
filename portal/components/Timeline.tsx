@@ -1,5 +1,4 @@
 import React from "react";
-import { Calendar } from "lucide-react";
 
 interface TimelineProps {
   rawContent: string;
@@ -24,13 +23,10 @@ export default function Timeline({ rawContent }: TimelineProps) {
   if (items.length === 0) return null;
 
   return (
-    <div className="my-10 p-6 sm:p-8 rounded-[2.5rem] bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 not-prose relative">
-      <div className="flex items-center gap-2.5 mb-8">
-        <div className="p-2 bg-indigo-600 rounded-xl text-white shadow-md shadow-indigo-500/10">
-          <Calendar className="w-4 h-4" />
-        </div>
-        <h4 className="text-xs font-black uppercase tracking-[0.25em] text-slate-800 dark:text-slate-200 m-0">
-          Evolução Cronológica
+    <div className="my-10 p-6 sm:p-8 rounded-xl bg-slate-50 dark:bg-slate-900/30 border border-slate-200/80 dark:border-slate-800/80 shadow-sm not-prose relative">
+      <div className="flex items-center gap-2 mb-6">
+        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-550 dark:text-slate-400">
+          Linha do Tempo / Cronologia
         </h4>
       </div>
 
@@ -38,15 +34,13 @@ export default function Timeline({ rawContent }: TimelineProps) {
         {items.map((item, index) => (
           <div key={index} className="relative group">
             {/* Timeline Dot */}
-            <span className="absolute -left-[43px] sm:-left-[51px] top-1.5 w-6 h-6 rounded-xl bg-white dark:bg-slate-950 border-2 border-indigo-500 flex items-center justify-center shadow-md shadow-indigo-500/5 group-hover:scale-110 transition-transform">
-              <span className="w-2.5 h-2.5 rounded-lg bg-indigo-500" />
-            </span>
+            <span className="absolute -left-[30px] sm:-left-[38px] top-1.5 w-3 h-3 rounded-full bg-slate-200 dark:bg-slate-850 border border-slate-350 dark:border-slate-700 flex items-center justify-center shadow-sm" />
             
-            <div className="flex flex-col gap-1 sm:gap-2">
-              <span className="text-xs font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-400">
                 {item.date}
               </span>
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-medium m-0">
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium m-0">
                 {item.description}
               </p>
             </div>

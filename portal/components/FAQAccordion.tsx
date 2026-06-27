@@ -1,5 +1,5 @@
 import React from "react";
-import { HelpCircle, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 interface FAQAccordionProps {
   rawContent: string;
@@ -37,35 +37,32 @@ export default function FAQAccordion({ rawContent }: FAQAccordionProps) {
   };
 
   return (
-    <div className="my-12 p-6 sm:p-8 rounded-[2.5rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 not-prose relative">
+    <div className="my-10 py-8 border-t border-b border-slate-200/80 dark:border-slate-800/80 not-prose">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
-      <div className="flex items-center gap-2.5 mb-6 relative z-10">
-        <div className="p-2 bg-emerald-600 rounded-xl text-white shadow-md shadow-emerald-500/10">
-          <HelpCircle className="w-4 h-4" />
-        </div>
-        <h4 className="text-xs font-black uppercase tracking-[0.25em] text-slate-800 dark:text-slate-200 m-0">
+      <div className="flex items-center gap-2 mb-6">
+        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-550 dark:text-slate-400">
           Perguntas Frequentes
         </h4>
       </div>
 
-      <div className="space-y-4 relative z-10">
+      <div className="space-y-4">
         {items.map((item, index) => (
           <details
             key={index}
-            className="group rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 overflow-hidden [&_summary::-webkit-details-marker]:hidden"
+            className="group pb-4 border-b border-slate-100 dark:border-slate-800/60 last:border-b-0 last:pb-0 overflow-hidden [&_summary::-webkit-details-marker]:hidden"
           >
-            <summary className="flex items-center justify-between p-5 cursor-pointer focus:outline-none transition-all select-none">
+            <summary className="flex items-center justify-between py-2 cursor-pointer focus:outline-none transition-all select-none group-hover:text-blue-500">
               <span className="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-100 leading-snug">
                 {item.question}
               </span>
               <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform duration-300 ml-4 flex-shrink-0" />
             </summary>
-            <div className="px-5 pb-5 pt-1 border-t border-slate-100/50 dark:border-slate-800/50">
-              <p className="text-sm text-slate-600 dark:text-slate-350 leading-relaxed m-0 font-medium">
+            <div className="pt-2">
+              <p className="text-sm text-slate-650 dark:text-slate-350 leading-relaxed m-0 font-medium">
                 {item.answer}
               </p>
             </div>
