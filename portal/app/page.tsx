@@ -19,13 +19,24 @@ export default async function HomePage() {
   };
 
   // Executa todas as consultas de banco de dados em paralelo para evitar o waterfall e reduzir o TTFB/LCP no mobile
-  const [dailyTop, latestResult, weeklyTop] = await Promise.all([
+  const [dailyTopRaw, latestResult, weeklyTopRaw] = await Promise.all([
     getTopPosts(2, 3, locale),
-    getLatestPosts(1, 6, locale),
-    getTopPosts(7, 3, locale)
+    getLatestPosts(1, 12, locale),
+    getTopPosts(7, 6, locale)
   ]);
   
-  const latestPosts = latestResult.posts;
+  // Deduplicação: remove posts que já aparecem em seções anteriores
+  const dailyTop = dailyTopRaw;
+  const usedIds = new Set(dailyTop.map(p => p.id));
+  
+  const latestPosts = latestResult.posts
+    .filter(p => !usedIds.has(p.id))
+    .slice(0, 6);
+  latestPosts.forEach(p => usedIds.add(p.id));
+  
+  const weeklyTop = weeklyTopRaw
+    .filter(p => !usedIds.has(p.id))
+    .slice(0, 3);
 
   // 4. Atalhos Rápidos (Seção Visual)
   const shortcuts = [

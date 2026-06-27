@@ -66,6 +66,56 @@ const updates = [
     // Vela de Plasma Magnético (26878741-1440-491a-a021-eda9e4254ec9) -> Linka para Jato de Plasma
     id: "26878741-1440-491a-a021-eda9e4254ec9",
     newLink: "> VEJA TAMBÉM: [Motores a Jato de Plasma Atmosférico Iniciam Testes de Voo Supersônico sem Combustível](/post/motores-a-jato-de-plasma-atmosferico-iniciam-testes-de-voo-supersonico-sem-combustivel)"
+  },
+  {
+    // Vela de Plasma Magnético (26878741-1440-491a-a021-eda9e4254ec9) -> Linka para DFD
+    id: "26878741-1440-491a-a021-eda9e4254ec9",
+    newLink: "> VEJA TAMBÉM: [Reatores Direct Fusion Drive (DFD) Iniciam Testes Práticos para Viagens a Marte em 90 dias](/post/reatores-direct-fusion-drive-dfd-iniciam-testes-praticos-para-viagens-a-marte-em-90-dias)"
+  },
+  {
+    // Jato de Plasma (b4e279f2-99e6-4f28-bc56-64c66b7f948d) -> Linka para DFD
+    id: "b4e279f2-99e6-4f28-bc56-64c66b7f948d",
+    newLink: "> VEJA TAMBÉM: [Reatores Direct Fusion Drive (DFD) Iniciam Testes Práticos para Viagens a Marte em 90 dias](/post/reatores-direct-fusion-drive-dfd-iniciam-testes-praticos-para-viagens-a-marte-em-90-dias)"
+  },
+  {
+    // Nanorrobos (6da89e29-0cd1-4e9e-bee5-165d2b67589f) -> Linka para Nanogeis
+    id: "6da89e29-0cd1-4e9e-bee5-165d2b67589f",
+    newLink: "> VEJA TAMBÉM: [Nanogéis Inteligentes Termossensíveis Revolucionam o Direcionamento de Quimioterápicos](/post/nanogeis-inteligentes-termossensiveis-revolucionam-o-direcionamento-de-quimioterapicos)"
+  },
+  {
+    // Criopreservacao de Orgaos (d2ddecd6-587a-4fba-a26a-cb289e04f124) -> Linka para Nanogeis
+    id: "d2ddecd6-587a-4fba-a26a-cb289e04f124",
+    newLink: "> VEJA TAMBÉM: [Nanogéis Inteligentes Termossensíveis Revolucionam o Direcionamento de Quimioterápicos](/post/nanogeis-inteligentes-termossensiveis-revolucionam-o-direcionamento-de-quimioterapicos)"
+  },
+  {
+    // Lentes Inteligentes (ed01340f-c0e5-425c-85a2-787062849d9e) -> Linka para Metalens
+    id: "ed01340f-c0e5-425c-85a2-787062849d9e",
+    newLink: "> VEJA TAMBÉM: [Meta-lentes Planas Iniciam Produção Comercial para Substituir Ópticas de Vidro](/post/meta-lentes-planas-iniciam-producao-comercial-para-substituir-opticas-de-vidro)"
+  },
+  {
+    // Diamante Quantico (71e2bbc7-d75e-4139-aff3-6ead030c3ffa) -> Linka para Metalens
+    id: "71e2bbc7-d75e-4139-aff3-6ead030c3ffa",
+    newLink: "> VEJA TAMBÉM: [Meta-lentes Planas Iniciam Produção Comercial para Substituir Ópticas de Vidro](/post/meta-lentes-planas-iniciam-producao-comercial-para-substituir-opticas-de-vidro)"
+  },
+  {
+    // Intel Loihi 3 (9d9672b2-79eb-461f-aadd-116161a46b93) -> Linka para Spintronics
+    id: "9d9672b2-79eb-461f-aadd-116161a46b93",
+    newLink: "> VEJA TAMBÉM: [Memórias Spintrônicas Bidimensionais Prometem Reduzir Consumo Digital em 99%](/post/memorias-spintronicas-bidimensionais-prometem-reduzir-consumo-digital-em-99)"
+  },
+  {
+    // Supercomputadores Biologicos (4e789af1-986b-4ef1-96ad-8242bcf300cd) -> Linka para Spintronics
+    id: "4e789af1-986b-4ef1-96ad-8242bcf300cd",
+    newLink: "> VEJA TAMBÉM: [Memórias Spintrônicas Bidimensionais Prometem Reduzir Consumo Digital em 99%](/post/memorias-spintronicas-bidimensionais-prometem-reduzir-consumo-digital-em-99)"
+  },
+  {
+    // Reator Polaris Microsoft (9ef1e518-7044-48f6-8a1c-e2b2bc6e4420) -> Linka para TPV
+    id: "9ef1e518-7044-48f6-8a1c-e2b2bc6e4420",
+    newLink: "> VEJA TAMBÉM: [Células Termofotovoltaicas de Recorde Iniciam Era das Baterias Térmicas](/post/celulas-termofotovoltaicas-de-recorde-iniciam-era-das-baterias-termicas)"
+  },
+  {
+    // Bateria Carro Grafeno (eba2d5f4-befb-4220-8bb6-ea986f19360a) -> Linka para TPV
+    id: "eba2d5f4-befb-4220-8bb6-ea986f19360a",
+    newLink: "> VEJA TAMBÉM: [Células Termofotovoltaicas de Recorde Iniciam Era das Baterias Térmicas](/post/celulas-termofotovoltaicas-de-recorde-iniciam-era-das-baterias-termicas)"
   }
 ];
 

@@ -202,7 +202,7 @@ export function Navbar() {
           {/* Social Icons & Theme (Desktop) */}
           <div className="flex items-center gap-4 text-slate-400">
             <div className="hidden lg:flex items-center gap-4 border-r border-slate-800 pr-4 mr-2">
-              <Link href="#" className="hover:text-white transition-colors" aria-label="RSS Feed"><Rss className="w-4 h-4" /></Link>
+              <Link href="/feed.xml" className="hover:text-white transition-colors" aria-label="RSS Feed"><Rss className="w-4 h-4" /></Link>
             </div>
               {mounted && (
               <div className="flex items-center gap-3">

@@ -29,9 +29,9 @@ export default function ContactPage() {
                <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
                   <Mail className="w-5 h-5 text-white" />
                </div>
-               <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">E-mail</h3>
+               <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">E-mail Geral</h3>
             </div>
-            <p className="text-lg font-black text-slate-900 dark:text-white italic">contato@folhabyte.com.br</p>
+            <p className="text-lg font-black text-slate-900 dark:text-white italic">contatofolhabyte@gmail.com</p>
           </div>
 
           <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -41,7 +41,7 @@ export default function ContactPage() {
                </div>
                <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Redação</h3>
             </div>
-            <p className="text-lg font-black text-slate-900 dark:text-white italic">redacao@folhabyte.com.br</p>
+            <p className="text-lg font-black text-slate-900 dark:text-white italic">contatofolhabyte@gmail.com</p>
           </div>
 
           <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -51,7 +51,8 @@ export default function ContactPage() {
                </div>
                <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Escritório</h3>
             </div>
-            <p className="text-lg font-black text-slate-900 dark:text-white italic">Av. Paulista, 1000 · SP</p>
+            <p className="text-lg font-black text-slate-900 dark:text-white italic">Rua Funchal, 418</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Vila Olímpia — São Paulo, SP</p>
           </div>
         </div>
 

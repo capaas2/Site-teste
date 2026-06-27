@@ -70,7 +70,7 @@ export async function Footer() {
             {getTranslation(locale, "footer_desc")}
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="hover:text-white transition-colors" aria-label="RSS Feed"><Rss className="w-5 h-5" /></Link>
+            <Link href="/feed.xml" className="hover:text-white transition-colors" aria-label="RSS Feed"><Rss className="w-5 h-5" /></Link>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ export async function Footer() {
           <ul className="space-y-4 text-sm text-slate-400">
             <li className="flex items-start gap-3">
               <Mail className="w-4 h-4 mt-1 text-blue-500" />
-              <span>contato@folhabyte.com.br</span>
+              <span>contatofolhabyte@gmail.com</span>
             </li>
             <li className="flex items-start gap-3">
               <MapPin className="w-4 h-4 mt-1 text-blue-500" />

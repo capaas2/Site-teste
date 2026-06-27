@@ -18,6 +18,7 @@ Neste passo, o agente **Edgar Edição** valida a estrutura e qualidade do texto
 - Não use links locais (`file:///`) ou que exijam login.
 
 ### 2. 🏗️ Arquitetura de Conteúdo (SEO Estrutural)
+- **Validação de Modelo**: Verifique se o post segue exatamente um dos 3 modelos de estruturação de artigos (Análise de Avanço, Deep Dive Técnico ou Tendência de Mercado) e se todas as tags obrigatórias estão preenchidas corretamente no Markdown.
 - **H1 Único:** Confirme que não há repetição de título no início do corpo do texto.
 - **Hierarquia Inquebrável:** O texto deve ter `# H1` → `## H2` → `### H3` sem pular níveis.
 - **Numeração em Subtítulos:** Remova qualquer `## 1. Subtítulo` — deixe apenas `## Subtítulo`.
