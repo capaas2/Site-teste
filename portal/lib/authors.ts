@@ -7,26 +7,26 @@ export interface Author {
 }
 
 const AUTHORS: Record<string, Author> = {
-  "Lucas Ferreira": {
-    name: "Lucas Ferreira",
-    role: "Editor-Chefe",
-    bio: "Jornalista de tecnologia com 12 anos de experiência. Especialista em IA, semicondutores e mercado digital.",
-    initials: "LF",
-    color: "from-blue-500 to-indigo-600",
+  "Rafael Mendes": {
+    name: "Rafael Mendes",
+    role: "Editor de Hardware & Performance",
+    bio: "Engenheiro da Computação formado pela Unicamp. Especialista em semicondutores, sistemas de alta performance e infraestrutura de hardware.",
+    initials: "RM",
+    color: "from-amber-500 to-orange-600",
   },
-  "Marina Santos": {
-    name: "Marina Santos",
-    role: "Editora de Ciência & Inovação",
-    bio: "Mestre em Engenharia Biomédica pela USP. Cobre nanotecnologia, biotecnologia e avanços científicos há 8 anos.",
-    initials: "MS",
+  "Camila Torres": {
+    name: "Camila Torres",
+    role: "Editora de Big Techs & Mercado",
+    bio: "Jornalista econômica com 10 anos de experiência cobrindo a regulação de Big Techs, movimentos macroeconômicos de mercado e geopolítica da tecnologia.",
+    initials: "CT",
     color: "from-emerald-500 to-teal-600",
   },
-  "Rafael Oliveira": {
-    name: "Rafael Oliveira",
-    role: "Editor de Hardware & Mobilidade",
-    bio: "Engenheiro da Computação formado pela Unicamp. Apaixonado por hardware, eletrificação e reviews de gadgets. Testa mais de 50 produtos por ano.",
-    initials: "RO",
-    color: "from-amber-500 to-orange-600",
+  "Bruno Alves": {
+    name: "Bruno Alves",
+    role: "Editor de IA & Software",
+    bio: "Desenvolvedor sênior e analista de tecnologia. Especialista em inteligência artificial, grandes modelos de linguagem (LLMs) e ecossistemas de desenvolvimento.",
+    initials: "BA",
+    color: "from-blue-500 to-indigo-600",
   },
   "Redação FolhaByte": {
     name: "Redação FolhaByte",

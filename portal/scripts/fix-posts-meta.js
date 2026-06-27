@@ -18,14 +18,14 @@ const postsConfig = [
   {
     // DNA Computing
     id: "1cd65a57-5899-402e-82a9-a1d5aff67d7b",
-    autor: "Marina Santos",
+    autor: "Bruno Alves",
     // Data retroativa para estar no passado em todos os fusos horários
     publicado_em: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(), 
   },
   {
     // Meta Orion
     id: "4e05a176-1584-4d05-b835-873310fa81c9",
-    autor: "Rafael Oliveira",
+    autor: "Rafael Mendes",
     // Um pouco antes para ordenar corretamente
     publicado_em: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
   }
