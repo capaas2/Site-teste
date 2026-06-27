@@ -170,8 +170,8 @@ async function insertPost(heroUrl, detailUrl) {
   const categoria = "Hardware & Performance";
   const autor = "Rafael Mendes"; // Autor correspondente a Hardware & Performance
 
-  // Data compensada: retroagida em 3 horas para Brasília
-  const publicado_em = new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString();
+  // Data de publicação atualizada para o momento real do servidor
+  const publicado_em = new Date().toISOString();
 
   const conteudo_markdown = `# Vazamentos de refrigeração líquida nos racks Blackwell GB200 da Nvidia atrasam entregas
 

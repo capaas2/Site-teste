@@ -170,8 +170,8 @@ async function insertPost(heroUrl, detailUrl) {
   const categoria = "Big Techs & Mercado";
   const autor = "Camila Torres"; // Autor correspondente a Big Techs & Mercado
 
-  // Data compensada: retroagida em 3 horas para Brasília
-  const publicado_em = new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString();
+  // Data de publicação atualizada para o momento real do servidor
+  const publicado_em = new Date().toISOString();
 
   const conteudo_markdown = `# Apple enfrenta processo coletivo de 3 bilhões de libras por taxas do iCloud
 
