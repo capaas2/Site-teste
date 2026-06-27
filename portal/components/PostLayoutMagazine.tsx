@@ -159,7 +159,17 @@ function EditorialBadge({ post, locale }: { post: Post; locale: string }) {
 
 export function buildRenderers(post: Post) {
   return {
-    'post-image': (props: { src: string; caption?: string; alt?: string }) => <PostImage {...props} />,
+    'post-image': (props: { src: string; caption?: string; alt?: string }) => {
+      // Ignora a imagem de corpo se ela for a mesma imagem de destaque (capa) do post
+      if (
+        props.src === post.imagem_url ||
+        (post.imagem_url && props.src.includes(post.imagem_url)) ||
+        (props.src && post.imagem_url && post.imagem_url.includes(props.src))
+      ) {
+        return null;
+      }
+      return <PostImage {...props} />;
+    },
     'key-points': (props: { content: string }) => <KeyPoints rawContent={props.content} />,
     'post-timeline': (props: { content: string }) => <Timeline rawContent={props.content} />,
     'faq-accordion': (props: { content: string }) => <FAQAccordion rawContent={props.content} />,

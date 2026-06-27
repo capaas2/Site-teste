@@ -18,7 +18,7 @@ async function listRecentPosts() {
     const data = await res.json();
     console.log('📰 ÚLTIMOS POSTS DO ACERVO:');
     data.forEach((p, i) => {
-      console.log(`${i + 1}. [${p.categoria}] "${p.titulo}" (ID: ${p.id})`);
+      console.log(`${i + 1}. [${p.categoria}] "${p.titulo}" (Data: ${p.publicado_em}) (ID: ${p.id})`);
     });
   } catch (err) {
     console.error('Erro:', err.message);

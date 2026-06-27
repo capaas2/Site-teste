@@ -35,6 +35,18 @@ Execute item por item e registre ✅ ou ❌:
 - O texto soa como jornalismo especializado ou como resumo de chatbot?
 - Aplique o `tone-of-voice.md`: voz ativa, ceticismo saudável, sem enchimento.
 
-### 5. Veredito
+### 5. 🏆 Auditoria E-E-A-T (Google AdSense Compliance)
+Execute item por item e registre ✅ ou ❌:
+- [ ] **Autor atribuído** — o artigo tem um dos 3 autores definidos no frontmatter (Rafael, Camila ou Bruno)? (Nota: nunca inclua no corpo do texto para não quebrar a regra de atribuição manual)
+- [ ] **Voz do autor** — o texto soa como o autor atribuído ou é genérico?
+- [ ] **Posicionamento editorial** — existe pelo menos 1 parágrafo com a opinião/análise da FolhaByte?
+- [ ] **Ângulo diferenciado** — o artigo cobre algo que os concorrentes não cobriram (validar contra Memorando do Caio)?
+- [ ] **Abertura com tensão** — a primeira frase tem conflito, contradição ou consequência não óbvia?
+- [ ] **Profundidade analítica** — o artigo vai além do relato do fato e explica implicações reais?
+
+Se qualquer item E-E-A-T for ❌ → **refugo imediato**, independente de todos os outros critérios estarem aprovados.
+
+### 6. Veredito
 - ✅ **"Aprovado sem Fakes"** → Encaminhe para a Rebeca.
 - ❌ **Refugado** → Devolva com a lista exata de violações para correção cirúrgica.
+

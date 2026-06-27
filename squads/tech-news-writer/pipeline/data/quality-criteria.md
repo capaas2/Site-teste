@@ -30,7 +30,14 @@
 - [ ] **Sem Atribuição:** Nenhuma linha "Escrito por" ou "Autor:"?
 - [ ] **Sem Emojis nos Títulos:** Nenhum emoji em H1 ou H2?
 
+## 🏆 E-E-A-T (Google AdSense Compliance)
+- [ ] **Autor Atribuído:** O artigo tem um dos 3 autores definidos no frontmatter (Rafael, Camila ou Bruno)? (Nota: nunca inclua no corpo do texto para não quebrar a regra de atribuição manual).
+- [ ] **Voz do Autor:** O texto soa como o autor atribuído ou é genérico?
+- [ ] **Posicionamento Editorial:** Existe pelo menos 1 parágrafo com a opinião/análise da FolhaByte?
+- [ ] **Ângulo Diferenciado:** O artigo cobre algo que os concorrentes não cobriram?
+
 ## 📱 SEO e Mobile
 - [ ] **Meta Keywords:** Palavra-chave principal e termos LSI integrados naturalmente?
 - [ ] **Escaneabilidade:** Texto legível em tela de celular (parágrafos não muito longos)?
 - [ ] **Categoria Válida:** Uma das: IA, Gadgets, Mercado, Cibersegurança, Ciência, Mobilidade, Sustentabilidade?
+
