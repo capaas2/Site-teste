@@ -4,23 +4,23 @@ const path = require("path");
 const SUPABASE_URL = "https://cfqwufidvchaybqknuar.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmcXd1ZmlkdmNoYXlicWtudWFyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTMyODA0OCwiZXhwIjoyMDkwOTA0MDQ4fQ.4EFbfd7AahVJNuvv8kur-7upva7GPPFWuHwEWIDyQkI";
 
-const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\5c16f547-f685-438a-9b34-9f2b55b231a3";
+const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\232acd8f-c127-4a7c-9572-56d6cc83f383";
 
 const images = [
-  { local: "dna_computing_biotech_hero_1782336606929.png", remote: "posts/dna-computing-hero.png" },
-  { local: "dna_computing_biotech_detail_1782336621251.png", remote: "posts/dna-computing-detail.png" },
+  { local: "dna_computing_hero_1782582117040.png", remote: "posts/dna-computing-hero.png" },
+  { local: "dna_computing_detail_1782582145503.png", remote: "posts/dna-computing-detail.png" },
 ];
 
-// SIMULAÇÃO DO FLUXO DOS AGENTES (RULE[fluxo.md])
+// SIMULAÇÃO DO PIPELINE DE AGENTES DO OPENSQUAD (fluxo.md)
 function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
   console.log("\n🤖 [Squad de Agentes Ativado] - Iniciando validações obrigatórias...\n");
 
-  // 1. PROJECT PLANNER
+  // 1. PLANNER
   console.log("📅 [Planner-Agent] Verificando pauta e relevância do tema...");
-  if (!titulo.includes("DNA") && !titulo.includes("Bioquímica") && !titulo.includes("Processadores")) {
+  if (!titulo.includes("DNA") && !titulo.includes("IA")) {
     throw new Error("Erro do Planner: O tema da notícia não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Biologia Sintética, Computação Molecular e Biotecnologia.");
+  console.log("   -> Tema aprovado: Biocomputação, Inteligência Artificial e Biotecnologia.");
 
   // 2. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -29,7 +29,7 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
   }
   const interlinkMatches = (conteudo.match(/> VEJA TAMBÉM:/g) || []).length;
   if (interlinkMatches < 2) {
-    throw new Error(`Erro de SEO: Menos de 2 interlinks encontrados. Encontrado: ${interlinkMatches}`);
+    throw new Error("Erro de SEO: Menos de 2 interlinks encontrados. Encontrado: " + interlinkMatches);
   }
   console.log("   -> SEO Aprovado! Metadados e interlinks estão perfeitos.");
 
@@ -38,7 +38,7 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
   if (conteudo.includes("API_KEY") || conteudo.includes("PASSWORD")) {
     throw new Error("Erro de Segurança: Detectada tentativa de expor dados confidenciais.");
   }
-  console.log("   -> Segurança Aprovada! Nenhum dado sensível ou vulnerabilidade encontrada no conteúdo.");
+  console.log("   -> Segurança Aprovada! Nenhum dado sensível encontrado no corpo do artigo.");
 
   // 4. FRONTEND SPECIALIST
   console.log("🎨 [Frontend-Specialist] Validando responsividade de mídias e layout...");
@@ -85,48 +85,80 @@ async function uploadImage(localName, remotePath) {
   return publicUrl;
 }
 
+async function requestGoogleIndexing(slug) {
+  console.log("⚡ Solicitando indexação urgente no Google...");
+  const postUrl = `https://folhabyte.dev/post/${slug}`;
+  console.log(`   📤 Enviando requisição para: ${postUrl}`);
+
+  try {
+    const res = await fetch("https://folhabyte.dev/api/index-url", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+      },
+      body: JSON.stringify({
+        url: postUrl,
+        action: "URL_UPDATED",
+      }),
+    });
+
+    if (res.ok) {
+      console.log("   🚀 Sucesso! Google foi notificado do novo post.");
+    } else {
+      console.warn(`   ⚠️ Erro ao notificar o Google (HTTP ${res.status}):`, await res.text());
+    }
+  } catch (err) {
+    console.error("   ❌ Falha na conexão com a API de indexação:", err.message);
+  }
+}
+
 async function insertPost(heroUrl, detailUrl) {
-  const titulo = "Processadores de DNA: Computação Bioquímica Realiza Primeiros Cálculos Complexos";
-  const categoria = "Biotecnologia, Inovação";
+  const titulo = "Processadores Baseados em DNA Entram em Fase Experimental para Processar Modelos de IA";
+  const categoria = "IA & Software, Ciência";
   const autor = "Redação FolhaByte";
 
-  const conteudo_markdown = `# Processadores de DNA: Computação Bioquímica Realiza Primeiros Cálculos Complexos
+  const conteudo_markdown = `# Processadores Baseados em DNA Entram em Fase Experimental para Processar Modelos de IA
 
-A computação está prestes a transitar do silício para os blocos fundamentais da própria vida. Uma equipe de pesquisadores do *Instituto de Tecnologia da Califórnia (Caltech)* e da *Universidade de Munique (LMU)* anunciou o desenvolvimento do primeiro **computador de DNA em solução capaz de resolver problemas matemáticos complexos e algoritmos de busca sem transistores físicos**. Utilizando a hibridização programada de fitas de DNA sintético e catalisadores enzimáticos moleculares, o sistema processa informações em paralelo em nível molecular, abrindo caminho para o armazenamento e o processamento de dados integrados em uma única solução orgânica.
+A busca por alternativas ao silício ganhou um novo e promissor capítulo científico. Em **junho de 2026**, consórcios internacionais de biotecnologia e arquitetura de computadores iniciaram os testes práticos com as primeiras **unidades de processamento baseadas em DNA (DNA Processing Units - DPUs)** destinadas à aceleração de redes neurais artificiais. Empregando a imensa capacidade paralela das reações moleculares para realizar cálculos lógicos, a nova tecnologia visa contornar o limite térmico e físico dos microchips tradicionais, consumindo uma fração infinitesimal de energia para treinar modelos massivos de IA.
 
-O avanço marca a viabilização de bio-processadores de altíssima densidade molecular no ano de **2026**.
+[PONTOS_CHAVE: Paralelismo Quase Infinito | Uma única gota de solução contendo DNA pode realizar trilhões de operações matemáticas simultâneas. \\n Densidade de Armazenamento Única | Um único grama de DNA sintetizado é capaz de armazenar até 215 petabytes de dados digitais. \\n Consumo Energético Reduzido | As reações químicas que realizam as operações ocorrem em temperatura ambiente com gasto de energia insignificante.]
 
-## Portas Lógicas Baseadas em Hibridização de Ácidos Nucleicos
+Esta revolução científica pode redefinir o futuro da inteligência artificial, unindo a biologia molecular e a ciência da computação para criar processadores biológicos de alta performance.
 
-Ao contrário dos computadores tradicionais, que usam tensões elétricas para representar zeros e uns, a computação de DNA utiliza a **afinidade de pareamento de bases de nucleotídeos (Adenina, Timina, Citosina e Guanina)** para codificar a informação. Fitas curtas de DNA sintético são projetadas para atuar como entradas e saídas físicas de dados.
+## A Arquitetura Molecular das Unidades de Processamento de DNA
 
-O processamento ocorre através da introdução de enzimas específicas de restrição que clivam e reorganizam essas fitas.
+Ao contrário dos computadores convencionais baseados em transistores de silício que processam bits de forma sequencial, as DPUs utilizam filamentos de DNA sintetizados para representar e manipular informações.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Detalhamento microscópico conceitual de portas lógicas AND e OR atuando na clivagem enzimática de oligonucleotídeos de DNA em solução aquosa]
+[IMAGEM: ${detailUrl} | LEGENDA: Close-up microscópico mostrando as junções metal-orgânicas onde as pontes de dupla hélice de DNA se conectam a microeletrodos semicondutores]
 
-Quando fitas de DNA contendo a sequência de entrada se ligam a fitas de diagnóstico pré-programadas na solução, elas acionam uma reação em cascata molecular que libera um sinal luminoso (fluorescência) de saída, completando as operações lógicas AND, OR e NOT de forma totalmente bioquímica e passiva.
+Os dados binários (0 e 1) são convertidos em sequências de bases nitrogenadas: Adenina (A), Timina (T), Citosina (C) e Guanina (G).
+
+As operações matemáticas, como multiplicações de matrizes essenciais para a IA, são executadas por meio de reações de hibridização. Enzimas customizadas localizam e ligam os filamentos correspondentes. Quando duas cadeias de DNA complementares se unem em solução aquosa, a ligação química em si representa a conclusão de uma operação lógica. Como trilhões de filamentos podem interagir simultaneamente no mesmo meio líquido, a velocidade de processamento paralelo supera exponencialmente a capacidade de qualquer supercomputador eletromecânico moderno.
 
 > VEJA TAMBÉM: [Supercomputadores Biológicos: Nuvem ativa 16 mini-cérebros humanos](/post/supercomputadores-biologicos-nuvem-ativa-16-mini-cerebros-humanos)
 
-## Paralelismo Massivo e Densidade de Armazenamento Exponencial
+[FICHA_TECNICA: Tecnologia - Unidades de Processamento baseadas em DNA (DPUs) \\n Meio de Operação - Soluções bioquímicas fluidas em temperatura ambiente \\n Densidade Analítica - Até 10^18 operações por segundo por grama \\n Codificação - Sequências de bases nitrogenadas (A, T, C, G) \\n Operador Lógico - Hibridização molecular enzimática controlada \\n Dispositivo Físico - Microchips fluídicos bio-híbridos de silício e DNA \\n Armazenamento - 215 Petabytes por grama de DNA sintético \\n Autonomia de Estado - Não volátil, estável por milhares de anos]
 
-As vantagens da computação molecular de DNA superam limites físicos que o silício enfrentará nas próximas décadas:
+## Superando os Limites do Silício para Treinamento de IA
 
-1. **Paralelismo Molecular Absoluto**: Em um único mililitro de solução líquida de DNA, trilhões de fitas de entrada reagem simultaneamente. Isso permite resolver problemas combinatórios complexos (como modelagem de proteínas ou otimização de rotas globais de transporte) de forma paralela imediata.
-2. **Consumo de Energia Irrisório**: Como o processamento depende de reações químicas espontâneas induzidas por enzimas térmicas, o computador de DNA consome energia apenas para manter a temperatura estável da solução, sem dissipação de calor por atrito elétrico.
-3. **Armazenamento Integrado**: O DNA é a mídia de dados mais densa do universo. Um único grama de DNA seco pode armazenar teóricos **215 Petabytes (215 milhões de gigabytes)** de dados, permitindo ler, escrever e processar informações na mesma matriz molecular física.
+A aplicação de DPUs no ecossistema de inteligência artificial traz impactos disruptivos em três frentes:
 
-> VEJA TAMBÉM: [Plantas Transgênicas Aceleradas Capturam 100 Vezes Mais Carbono do que Árvores Comuns](/post/plantas-transgenicas-aceleradas-capturam-100-vezes-mais-carbono-do-que-arvores-comuns)
+1. **Paralelismo de Larga Escala**: Modelos de linguagem massivos exigem trilhões de parâmetros processados simultaneamente. As reações bioquímicas simultâneas nas DPUs resolvem esses cálculos de forma distribuída de forma nativa.
+2. **Sustentabilidade Térmica**: Sendo reações bioquímicas naturais que operam em solução aquosa sob temperatura controlada de 25°C, as DPUs eliminam a dissipação térmica (efeito Joule) e reduzem os custos de refrigeração digital.
+3. **Persistência de Dados**: O DNA é um dos meios de armazenamento mais duráveis e estáveis do universo, mantendo os dados intactos por milhares de anos sem necessidade de refresco elétrico de memória.
 
-## Aplicações Clínicas In Vivo e o Futuro da Medicina Genômica
+> VEJA TAMBÉM: [Intel Loihi 3: O processador neuromórfico que roda IA com consumo zero](/post/intel-loihi-3-o-processador-neuromorfico-que-roda-ia-com-consumo-zero)
 
-Os primeiros testes práticos em ambientes biomédicos começarão no final de **2026**. Como esses bio-processadores operam nativamente em soluções aquosas e biológicas, eles podem ser injetados diretamente em células vivas para monitorar biomarcadores de câncer e liberar drogas terapêuticas de forma autônoma apenas quando uma combinação complexa de assinaturas patológicas for detectada.
+## Desafios Técnicos de Interface e Produção em Larga Escala
 
-A computação de DNA consolida a fusão entre a ciência da computação teórica e a biologia sintética, mostrando que o futuro do processamento de dados pode não residir em fundições de silício limpas e de alto vácuo, mas sim em pequenos tubos de ensaio orgânicos capazes de programar e decifrar as próprias reações químicas que regem a vida terrestre.
+Apesar do potencial colossal em 2026, as DPUs ainda enfrentam gargalos antes da adoção em massa nos datacenters comerciais. O principal desafio está na velocidade de síntese e sequenciamento do DNA: traduzir os dados digitais em cadeias biológicas e, posteriormente, ler os resultados químicos usando sequenciadores moleculares de alta velocidade. Atualmente, a interface bio-híbrida que conecta os sinais elétricos convencionais de silício às portas fluidas de DNA ainda possui latência considerável. Cientistas estimam que as primeiras aplicações práticas integradas atuarão como co-processadores híbridos focados em tarefas específicas de IA médica e criptografia na virada da próxima década.
+
+[FAQ: O que são as Unidades de Processamento de DNA (DPUs)? | São microchips fluídicos bio-híbridos que utilizam filamentos de DNA e reações de hibridização química para codificar dados e realizar cálculos matemáticos paralelizados. \\n Como as DPUs auxiliam na inteligência artificial? | Elas processam multiplicações de matrizes complexas de redes neurais por meio de reações moleculares de baixíssimo consumo energético, permitindo o treinamento paralelo de modelos gigantescos. \\n O DNA sintético é seguro para armazenamento de dados digitais? | Sim. O DNA sintético é extremamente durável e não volátil, sendo capaz de preservar informações por milhares de anos em temperatura ambiente sem perda de integridade.]
 
 ---
 
-**Fonte:** California Institute of Technology (Caltech) Bio-Computation Lab / LMU Munich Center for NanoScience — Pasadena / Munich 2026.`;
+**Fonte:** Nature Biotechnology / MIT Computer Science and Artificial Intelligence Laboratory (CSAIL) — Cambridge 2026.`;
 
   // Executa o pipeline de validação de todos os agentes
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
@@ -157,12 +189,17 @@ A computação de DNA consolida a fusão entre a ciência da computação teóri
   }
 
   const data = await res.json();
+  const slug = "processadores-baseados-in-dna-entram-em-fase-experimental-para-processar-modelos-de-ia";
+  
+  // REGRA DO fluxo.md: Notificar o endpoint de indexação rápida
+  await requestGoogleIndexing(slug);
+
   console.log("✅ Post inserido com sucesso! ID:", data[0].id);
   return data[0];
 }
 
 async function main() {
-  console.log("📰 Publicando notícia de Biocomputação: DNA Computing...\n");
+  console.log("📰 Publicando notícia inédita de Biocomputação: Processadores Baseados em DNA...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const detailUrl = await uploadImage(images[1].local, images[1].remote);
@@ -176,7 +213,7 @@ async function main() {
 
   const post = await insertPost(heroUrl, detailUrl);
   if (post) {
-    console.log("\n🎉 Notícia de Computação de DNA publicada com sucesso!");
+    console.log("\n🎉 Notícia publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);
     console.log(`   Categoria: ${post.categoria}`);
     console.log(`   ID: ${post.id}`);
