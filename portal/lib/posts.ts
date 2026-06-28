@@ -98,6 +98,7 @@ export async function getPostsByCategory(categorySlug: string, page = 1, pageSiz
     "mercado": "Mercado",
     "ciencia": "Ciência",
     "reviews": "Review",
+    "hardware": "Hardware",
   };
 
   const normalizedSlug = categorySlug.toLowerCase().replace(/-/g, ' ');

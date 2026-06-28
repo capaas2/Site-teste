@@ -3,7 +3,7 @@ import { HeroGrid } from "@/components/HeroGrid";
 import { FeaturedRanking } from "@/components/FeaturedRanking";
 import { AdBanner } from "@/components/AdBanner";
 import Link from "next/link";
-import { Shield, Zap, Smartphone, ChevronRight, ArrowRight, Cpu } from "lucide-react";
+import { Shield, Zap, Laptop, ChevronRight, ArrowRight, Cpu } from "lucide-react";
 import { headers } from "next/headers";
 import { getTranslation } from "@/lib/translations";
 
@@ -59,10 +59,10 @@ export default async function HomePage() {
       slug: "eletrificacao" 
     },
     { 
-      label: locale === "pt" ? "Reviews" : locale === "en" ? "Reviews" : "Reseñas", 
-      icon: Smartphone, 
+      label: locale === "pt" ? "Hardware" : locale === "en" ? "Hardware" : "Hardware", 
+      icon: Laptop, 
       color: "bg-rose-600", 
-      slug: "reviews" 
+      slug: "hardware" 
     },
   ];
 

@@ -40,6 +40,10 @@ const categoryMetadataMap: Record<string, { titlePt: string; descPt: string }> =
   "tecnologia": {
     titlePt: "Tecnologia, Processadores e Semicondutores",
     descPt: "A cobertura definitiva do ecossistema de hardware, novos processadores, semicondutores e as grandes tendências que movimentam o mercado tecnológico global."
+  },
+  "hardware": {
+    titlePt: "Hardware: Processadores, Placas de Vídeo e Gadgets",
+    descPt: "Acompanhe as últimas novidades, análises e tendências sobre computadores, processadores, placas de vídeo, dispositivos móveis e inovações em hardware."
   }
 };
 

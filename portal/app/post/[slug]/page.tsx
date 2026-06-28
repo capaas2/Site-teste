@@ -24,7 +24,7 @@ const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af47
 
 // Categories that trigger each layout
 const ANALYSIS_CATEGORIES = ["ciência", "ciencia", "biotecnologia", "nanotecnologia", "saúde", "saude", "pesquisa", "energia"];
-const QUICKNEWS_CATEGORIES = ["mercado", "lançamento", "lancamento", "gadgets", "reviews", "review", "produto", "produtos"];
+const QUICKNEWS_CATEGORIES = ["mercado", "lançamento", "lancamento", "gadgets", "reviews", "review", "hardware", "produto", "produtos"];
 
 function getLayoutType(categoria: string): "magazine" | "analysis" | "quicknews" {
   const cats = categoria.toLowerCase().split(',').map(c => c.trim());

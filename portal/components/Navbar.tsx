@@ -139,7 +139,7 @@ export function Navbar() {
                   <div className="p-4">
                     <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 px-2">{getTranslation(activeLocale, "trending_topics")}</div>
                     <div className="flex flex-wrap gap-2">
-                      {["IA", "Mercado", "Cibersegurança", "Reviews", "Eletrificação"].map((topic) => (
+                      {["IA", "Mercado", "Cibersegurança", "Hardware", "Eletrificação"].map((topic) => (
                         <Link
                           key={topic}
                           href={getLocalizedHref(`/categoria/${topic.toLowerCase()}`)}
@@ -328,7 +328,7 @@ export function Navbar() {
                     <TrendingUp className="w-3 h-3" /> {getTranslation(activeLocale, "trending_topics")}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {["IA", "Mercado", "Cibersegurança", "Reviews", "Eletrificação"].map((topic) => (
+                    {["IA", "Mercado", "Cibersegurança", "Hardware", "Eletrificação"].map((topic) => (
                       <button
                         key={topic}
                         onClick={() => {
