@@ -8,7 +8,7 @@ import { Post } from "@/types/post";
 import { ShareButtons } from "@/components/ShareButtons";
 import { AuthorBio } from "@/components/AuthorBio";
 import PostImage from "@/components/PostImage";
-import { buildRenderers, RelatedPostsSection, EditorialBadge } from "@/components/PostLayoutMagazine";
+import { buildRenderers, RelatedPostsSection } from "@/components/PostLayoutMagazine";
 import { getTranslation } from "@/lib/translations";
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80";
@@ -110,7 +110,6 @@ export function PostLayoutAnalysis({
           <RelatedPostsSection posts={relatedPosts} primaryCategory={primaryCategory} locale={locale} getLocalizedHref={getLocalizedHref} />
         )}
 
-        <EditorialBadge post={post} locale={locale} />
         <AuthorBio authorName={post.autor} />
       </div>
     </article>

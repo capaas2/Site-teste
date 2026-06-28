@@ -4,7 +4,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { Calendar, User, Tag, Clock, ShieldCheck } from "lucide-react";
+import { Calendar, User, Tag, Clock } from "lucide-react";
 import { Post } from "@/types/post";
 import { Sidebar } from "@/components/Sidebar";
 import { ShareButtons } from "@/components/ShareButtons";
@@ -106,7 +106,6 @@ export function PostLayoutMagazine({
             <RelatedPostsSection posts={relatedPosts} primaryCategory={primaryCategory} locale={locale} getLocalizedHref={getLocalizedHref} />
           )}
 
-          <EditorialBadge post={post} locale={locale} />
           <AuthorBio authorName={post.autor} />
         </div>
       </article>
@@ -139,23 +138,7 @@ function RelatedPostsSection({ posts, primaryCategory, locale, getLocalizedHref 
   );
 }
 
-function EditorialBadge({ post, locale }: { post: Post; locale: string }) {
-  return (
-    <div className="mt-12 mb-8 p-6 rounded-3xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-600 dark:text-slate-400 not-prose">
-      <div className="flex items-start gap-4">
-        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-2xl flex items-center justify-center flex-shrink-0">
-          <ShieldCheck className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-        </div>
-        <div>
-          <h4 className="text-base font-black text-slate-900 dark:text-white uppercase italic mb-1">{getTranslation(locale, "editorial_standard")}</h4>
-          <p className="leading-relaxed m-0 text-xs sm:text-sm">
-            {getTranslation(locale, "editorial_standard_desc")} <strong>{post.autor || getTranslation(locale, "our_editorial")}</strong>.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
+
 
 export function buildRenderers(post: Post) {
   return {
@@ -208,4 +191,4 @@ export function buildRenderers(post: Post) {
   };
 }
 
-export { RelatedPostsSection, EditorialBadge };
+export { RelatedPostsSection };

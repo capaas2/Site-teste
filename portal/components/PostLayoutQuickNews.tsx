@@ -8,7 +8,7 @@ import { Calendar, User, Tag, Clock, Zap } from "lucide-react";
 import { Post } from "@/types/post";
 import { ShareButtons } from "@/components/ShareButtons";
 import { AuthorBio } from "@/components/AuthorBio";
-import { buildRenderers, RelatedPostsSection, EditorialBadge } from "@/components/PostLayoutMagazine";
+import { buildRenderers, RelatedPostsSection } from "@/components/PostLayoutMagazine";
 import { slugify } from "@/lib/slugify";
 import { getTranslation } from "@/lib/translations";
 
@@ -111,7 +111,6 @@ export function PostLayoutQuickNews({
           <RelatedPostsSection posts={relatedPosts} primaryCategory={primaryCategory} locale={locale} getLocalizedHref={getLocalizedHref} />
         )}
 
-        <EditorialBadge post={post} locale={locale} />
         <AuthorBio authorName={post.autor} />
       </article>
     </div>
