@@ -118,7 +118,7 @@ Para acompanhar a tridimensionalidade das imagens projetadas, o monitor de mesa 
 2. **Hologramas Multi-Usuário**: O sistema calcula dinamicamente as diferentes linhas de visão de até **quatro pessoas simultâneas** ao redor da mesa, adaptando os reflexos de luz e sombreamento das perspectivas geométricas para cada observador de forma independente.
 3. **Ergonomia Completa**: A eliminação completa de óculos VR/AR ou headsets pesados reduz a fadiga ocular a níveis de um monitor tradicional de escritório, permitindo longas jornadas de trabalho de modelagem 3D.
 
-> VEJA TAMBÉM: [Review: Óculos Meta Orion AR Provam que a Computação Espacial Compacta é Viável](/post/review-oculos-meta-orion-ar-provam-que-a-computacao-espacial-compacta-e-viavel)
+> VEJA TAMBÉM: [A guerra silenciosa dos ecossistemas de IA: como o Model Context Protocol (MCP) desafia as Big Techs](/post/a-guerra-silenciosa-dos-ecossistemas-de-ia-como-o-model-context-protocol-mcp-desafia-as-big-techs)
 
 ## Disponibilidade e Aplicações no Varejo de Engenharia
 
