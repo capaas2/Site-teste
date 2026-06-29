@@ -7,7 +7,7 @@ import { Shield, Zap, Laptop, ChevronRight, ArrowRight, Cpu } from "lucide-react
 import { headers } from "next/headers";
 import { getTranslation } from "@/lib/translations";
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const headerList = await headers();

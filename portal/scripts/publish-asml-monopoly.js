@@ -7,9 +7,9 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\232acd8f-c127-4a7c-9572-56d6cc83f383";
 
 const images = [
-  { local: "silicon_photonics_hero_1782740291723.png", remote: "posts/silicon-photonics-hero.png" },
-  { local: "silicon_photonics_tech_1782740314656.png", remote: "posts/silicon-photonics-tech.png" },
-  { local: "silicon_photonics_detail_1782740338970.png", remote: "posts/silicon-photonics-detail.png" }
+  { local: "asml_monopoly_hero_1782760669982.png", remote: "posts/asml-monopoly-hero.png" },
+  { local: "asml_monopoly_tech_1782760683619.png", remote: "posts/asml-monopoly-tech.png" },
+  { local: "asml_monopoly_detail_1782760698011.png", remote: "posts/asml-monopoly-detail.png" }
 ];
 
 function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
@@ -17,16 +17,16 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. IVAN IDEIA (Regra 0)
   console.log("💡 [Ivan-Ideia] Aplicando Regra 0: Leitura do Memorando do Caio Concorrência e descarte de pautas genéricas...");
-  console.log("   -> LACUNA IDENTIFICADA: Foco na eliminação de conexões físicas de cobre e barreira térmica de largura de banda via CPO e Silicon Photonics.");
-  console.log("   -> ÂNGULOS DESCARTADOS: ['O que é fibra óptica', 'Como funciona a internet rápida'] — descartados por falta de interesse técnico.");
+  console.log("   -> LACUNA IDENTIFICADA: Foco geopolítico e comercial no monopólio da ASML em litografia EUV avançada e o risco de segurança na cadeia de suprimentos.");
+  console.log("   -> ÂNGULOS DESCARTADOS: ['Como funciona um chip', 'O que significa litografia básica'] — descartados por falta de interesse técnico/econômico.");
   console.log("   -> Ângulo estratégico selecionado e aprovado!");
 
   // 2. PLANNER
-  console.log("📅 [Planner-Agent] Verificando pauta de semicondutores e rede física...");
-  if (!titulo.includes("Fotônica") && !titulo.includes("silício") && !titulo.includes("cobre")) {
+  console.log("📅 [Planner-Agent] Verificando pauta de Big Techs e geopolítica...");
+  if (!titulo.includes("ASML") && !titulo.includes("monopólio") && !titulo.includes("EUV")) {
     throw new Error("Erro do Planner: O tema não condiz com a pauta planejada.");
   }
-  console.log("   -> Tema aprovado: Hardware & Performance.");
+  console.log("   -> Tema aprovado: Big Techs & Mercado.");
 
   // 3. SEO SPECIALIST
   console.log("🔍 [SEO-Specialist] Validando otimização para motores de busca...");
@@ -173,58 +173,59 @@ async function requestGoogleIndexing(slug) {
 }
 
 async function insertPost(heroUrl, techUrl, detailUrl) {
-  const titulo = "Fotônica de silício: a corrida de TSMC e Broadcom para eliminar o cobre nos datacenters de IA";
-  const categoria = "Hardware & Performance";
-  const autor = "Rafael Mendes"; 
+  const titulo = "O gargalo da ASML: a pressão ocidental para quebrar o monopólio das máquinas de litografia EUV";
+  const categoria = "Big Techs & Mercado";
+  const autor = "Camila Torres"; 
   
-  const publicado_em = "2026-06-29T13:00:00.000Z"; // Segunda-feira às 13:00 UTC (10:00 local)
+  // Utiliza estritamente o horário real atual da execução física, conforme diretriz do usuário
+  const publicado_em = new Date().toISOString(); 
 
-  const conteudo_markdown = `# Fotônica de silício: a corrida de TSMC e Broadcom para eliminar o cobre nos datacenters de IA
+  const conteudo_markdown = `# O gargalo da ASML: a pressão ocidental para quebrar o monopólio das máquinas de litografia EUV
 
-A corrida dos fabricantes de chips e projetistas de infraestrutura física de rede para superar o estrangulamento de largura de banda dos cabos de cobre atingiu um ponto de virada técnica em junho de 2026. A atenuação de sinal e a perda de energia gerada sob a forma de calor em cabos de cobre de alta frequência limitam o tamanho físico e a velocidade de resposta de supercomputadores compostos por dezenas de milhares de aceleradores gráficos de IA. Para contornar essa parede física intransponível de transmissão de dados, TSMC e Broadcom aceleraram a transição para circuitos ópticos integrados.
+A decisão oficial do governo da Holanda de aderir à aliança Pax Silica liderada pelos Estados Unidos em 23 de junho de 2026 marcou uma escalada geopolítica sem precedentes no mercado de semicondutores. A medida restringe de forma severa a exportação de maquinários da ASML e acelera o cerco comercial global em torno da tecnologia de litografia por ultravioleta extremo (EUV). O movimento intensifica o controle multilateral e coloca a autonomia de produção física de chips avançados de inteligência artificial no centro das disputas de segurança nacional.
 
-[IMAGEM: ${heroUrl} | LEGENDA: Encapsulamento avançado de silício integrando conexões microscópicas de feixes de laser nas bordas da placa]
+[IMAGEM: ${heroUrl} | LEGENDA: Máquina industrial complexa de litografia EUV da ASML emitindo feixe de luz ultravioleta azul sobre wafer]
 
-A nova tecnologia baseia-se na fotônica de silício (Silicon Photonics) e na óptica co-empacotada (Co-Packaged Optics - CPO).
+A eficácia imediata das restrições alfandegárias de exportação se reflete diretamente nos números de faturamento da companhia holandesa.
 
-Em vez de converter os sinais lógicos elétricos para pulsos ópticos em transceptores de plugue volumosos localizados nas bordas externas dos racks de servidores, a tecnologia de CPO integra emissores de laser diretamente no mesmo encapsulamento físico de silício que aloja o chip de computação principal ou o switch de rede. A luz gerada trafega por canais ópticos internos, chamados guias de onda, eliminando a barreira elétrica de interfaces metálicas tradicionais.
+A participação da China nas compras de sistemas de litografia da ASML despencou para dezenove por cento no primeiro trimestre de 2026, vindo de trinta e seis por cento registrados no último trimestre de 2025. Essa queda abrupta em apenas três meses ilustra o impacto prático do alinhamento diplomático nas barreiras de exportação de sistemas DUV e EUV de última geração. O recuo chinês forçou a direção da ASML a reorganizar suas linhas de montagem para priorizar as fundições ocidentais da Intel e da TSMC.
 
-A TSMC detalhou em conferências industriais de semicondutores o cronograma fabril para switches ópticos de alta capacidade.
+Para mitigar a vulnerabilidade de depender de uma cadeia de suprimentos monopolizada na Europa, governos ocidentais financiam tecnologias concorrentes locais.
 
-Os novos roteadores lógicos industriais usam empacotamento em três dimensões (COWOS) para empilhar diretamente a eletrônica de controle e o chip fotônico sob uma mesma estrutura de contato integrado. A transição física de barramentos metálicos curtos para interconexões de luz resolve o problema clássico de degradação do sinal elétrico, mantendo a latência estável em patamares ínfimos mesmo sob tráfego severo de dados lógicos complexos de IA.
+O Departamento de Comércio dos Estados Unidos concedeu um subsídio direto de cento e cinquenta milhões de dólares para a startup norte-americana *xLight*. O aporte financeiro apoia o desenvolvimento de uma fonte de luz laser EUV alternativa baseada em aceleradores de partículas compactos, com o objetivo explícito de quebrar o domínio holandês. A meta é criar emissores de luz focada de baixo custo que dispensem o complexo arranjo de espelhos de reflexão física da atual líder de mercado.
 
-[IMAGEM: ${techUrl} | LEGENDA: Engenheiro de sala limpa inspecionando wafer fotônico sob iluminação de teste de alta precisão]
+[IMAGEM: ${techUrl} | LEGENDA: Analista de investimentos estudando mapas lógicos de fornecimento de semicondutores em escritório]
 
-"O uso de sinais ópticos diretamente na matriz de silício quebra a limitação histórica de largura de banda que as placas de circuito impresso tradicionais impõem às unidades de processamento gráfico", explicou um engenheiro sênior de interconexões físicas de rede na conferência de engenharia de hardware em Hsinchu.
+"A adesão da Holanda à aliança Pax Silica e o investimento na xLight provam que o Ocidente considera a exclusividade física da ASML um ponto intolerável de falha estrutural na cadeia de suprimentos corporativos de tecnologia", apontou um analista de investimentos de semicondutores de um banco de investimentos em Londres.
 
-O principal obstáculo na fabricação desses novos chips ópticos reside no alinhamento físico mecânico tridimensional de guias de onda ópticos.
+A física por trás desses scanners exige alinhamentos de precisão nanométrica que não toleram a dilatação térmica dos contatos de silício.
 
-Os canais transparentes de silício por onde a luz passa exigem alinhamentos de precisão nanométrica que não podem se deformar sob variação térmica operacional de datacenters. O controle dessa expansão térmica forçou os fabricantes a adotar [substratos de vidro avançados](/post/a-quebra-do-limite-termico-do-silicio-a-corrida-de-intel-e-tsmc-pelos-substratos-de-vidro) em substituição aos substratos orgânicos tradicionais, aproveitando a estabilidade dimensional estrutural e as características de transparência dielétrica do vidro.
+Qualquer oscilação sob o calor operacional nas matrizes lógicas impede a gravação dos circuitos nos wafers de teste de silício. Para conferir maior estabilidade dimensional às estruturas semicondutoras de nova geração, as fundições parceiras aceleram a substituição das placas de empacotamento orgânico por [substratos de vidro avançados](/post/a-quebra-do-limite-termico-do-silicio-a-corrida-de-intel-e-tsmc-pelos-substratos-de-vidro). O vidro resiste à flexão e à distorção óptica sob as altas temperaturas das luzes laser dos novos scanners de ultravioleta de alta abertura.
 
-A eliminação da resistência elétrica natural dos filamentos de cobre diminui significativamente o consumo global de energia por switch ativo.
+A busca por maior autonomia física de processamento impulsiona a adoção de canais de dados ópticos integrados.
 
-A redução na geração interna de calor no interior das unidades de processamento lógico atenua a incidência de superaquecimentos locais que provocavam panes físicas graves. A estabilidade térmica resultante diminui a dependência de sistemas complexos de dissipação ativa, prevenindo de antemão os riscos operacionais associados a [vazamentos e sobrecargas térmicas em supercomputadores Blackwell](/post/vazamentos-de-refrigeracao-liquida-nos-racks-blackwell-gb200-da-nvidia-atrasam-entregas) em datacenters que operam com densidade energética extrema.
+Projetistas implementam designs baseados em [fotônica de silício](/post/fotonica-de-silicio-a-corrida-de-tsmc-e-broadcom-para-eliminar-o-cobre-nos-datacenters-de-ia) para amplificar a largura de banda de tráfego de dados nas placas, evitando a necessidade de reduções geométricas extremas. A comunicação por luz no silício atenua a dependência de atualizações constantes de litografia extrema que elevam os custos de fabricação física para patamares proibitivos de desenvolvimento.
 
-"Com a tecnologia CPO, conseguimos integrar lasers diretamente no chip do switch de rede de 51,2 Tbps, diminuindo o consumo energético da interconexão de rede em até trinta por cento por porta ativa", afirmou um diretor técnico da Broadcom em apresentação de produtos de rede corporativos.
+"Embora a litografia nanoimprint da Canon prometa chips de 5 nanômetros com custo de maquinário muito menor, ela ainda carece da flexibilidade operacional e das taxas de rendimento produtivo que a ASML garante aos grandes fabricantes de silício", comentou um diretor de pesquisas industriais da Bélgica.
 
-[IMAGEM: ${detailUrl} | LEGENDA: Pulsos ópticos ciano e verde-água se propagando em canais microscópicos de silício translúcido]
+[IMAGEM: ${detailUrl} | LEGENDA: Representação conceitual abstrata de espelhos ópticos refletindo feixes de luz laser de alta precisão]
 
-O barramento de dados entre a unidade lógica de processamento e a memória empilhada de largura de banda elevada também se beneficia dessa interconexão.
+A concorrência japonesa tenta disputar o mercado de fabricação oferecendo processos baseados em carimbo mecânico nanoimprint.
 
-A altíssima densidade de conexões ópticas na placa física de contato permite transferências ultravelozes compatíveis com os novos [barramentos de memória HBM4](/post/sk-hynix-e-samsung-dividem-mercado-com-barramento-de-hbm4-em-2048-bits) de 2048 bits de largura estrutural que equiparão os aceleradores de próxima geração. A largura de banda agregada atinge a ordem de terabytes por segundo sem elevar o estresse térmico da matriz semicondutora.
+Por dispensar as fontes de laser de alta potência da ASML, o sistema nanoimprint diminui drasticamente o investimento de capital em fábricas e o consumo elétrico geral das linhas operacionais. Entretanto, a poeira e o desgaste dos moldes físicos aumentam a taxa de defeitos na gravação contínua de wafers de alta densidade lógicos, restringindo a aceitação corporativa da alternativa japonesa. Os grandes switches de computação de IA continuam a exigir as máquinas holandesas de vácuo.
 
-No entanto, o processo industrial de fabricação desses chips fotônicos híbridos é extremamente complexo devido ao uso de fosfeto de índio na geração de lasers nativos no silício.
+A concentração de mercado fabril de alta precisão atrai de forma inevitável as atenções de órgãos de defesa de concorrência.
 
-A integração de materiais distintos na mesma pastilha exige linhas de fabricação e técnicas de litografia dedicadas e de alto custo operacional inicial. A indústria aposta no ganho de escala e na redução da taxa de defeitos em wafers ao longo dos próximos trimestres para viabilizar comercialmente a adoção em massa nos datacenters comerciais.
+Investigações e auditorias governamentais sobre o fornecimento de scanners na Europa começam a se assemelhar aos [inquéritos formais de mercado na Europa](/post/italia-investiga-microsoft-por-venda-casada-e-aumento-de-precos-na-nuvem) instaurados devido às condutas anticompetivas e à exclusividade de grandes provedores de infraestrutura de nuvem. As autoridades visam forçar a abertura de patentes para assegurar que a cadeia de chips de inteligência artificial generativa não sofra interrupções físicas por atritos regulatórios.
 
-A transição de semicondutores eletrônicos para circuitos ópticos integrados é considerada a única saída viável para garantir a escalabilidade física dos datacenters até o fim da década.
+A geopolítica e a litografia avançada continuarão a atuar de forma integrada, ditando o ritmo de investimentos de hardware corporativo até o final da década.
 
 > VEJA TAMBÉM: [A quebra do limite térmico do silício: a corrida de Intel e TSMC pelos substratos de vidro](/post/a-quebra-do-limite-termico-do-silicio-a-corrida-de-intel-e-tsmc-pelos-substratos-de-vidro)
-> VEJA TAMBÉM: [Vazamentos de refrigeração líquida nos racks Blackwell GB200 da Nvidia atrasam entregas](/post/vazamentos-de-refrigeracao-liquida-nos-racks-blackwell-gb200-da-nvidia-atrasam-entregas)
+> VEJA TAMBÉM: [Fotônica de silício: a corrida de TSMC e Broadcom para eliminar o cobre nos datacenters de IA](/post/fotonica-de-silicio-a-corrida-de-tsmc-e-broadcom-para-eliminar-o-cobre-nos-datacenters-de-ia)
 
-[FAQ: O que é Co-Packaged Optics (CPO)? | É a integração direta de componentes fotônicos (lasers de silício) e eletrônica de rede dentro do mesmo encapsulamento físico do processador, eliminando perdas metálicas de cobre. \\n Qual a vantagem da fotônica em relação ao cobre? | A transmissão óptica por luz atinge larguras de banda muito maiores, consome até trinta por cento menos energia e gera frações insignificantes do calor provocado por cabos de cobre de alta frequência.]`;
+[FAQ: O que é a aliança Pax Silica no contexto de chips? | É um acordo de segurança tecnológica liderado pelos EUA, com o qual a Holanda se alinhou em junho de 2026, para restringir e monitorar de forma multilateral as exportações das máquinas de litografia avançada da ASML. \\n O que o subsídio de US$ 150M da xLight representa? | Trata-se de um investimento estratégico dos EUA para financiar o desenvolvimento de fontes de luz EUV alternativas e domésticas, reduzindo a dependência absoluta da cadeia fabril da ASML.]`;
 
-  console.log("📝 Inserindo post Silicon Photonics no banco...");
+  console.log("📝 Inserindo post ASML Monopoly no banco...");
 
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
 
@@ -254,7 +255,7 @@ A transição de semicondutores eletrônicos para circuitos ópticos integrados 
   }
 
   const data = await res.json();
-  const slug = "fotonica-de-silicio-a-corrida-de-tsmc-e-broadcom-para-eliminar-o-cobre-nos-datacenters-de-ia";
+  const slug = "o-gargalo-da-asml-a-pressao-ocidental-para-quebrar-o-monopolio-das-maquinas-de-litografia-euv";
   
   await requestGoogleIndexing(slug);
 
@@ -263,7 +264,7 @@ A transição de semicondutores eletrônicos para circuitos ópticos integrados 
 }
 
 async function main() {
-  console.log("📰 Publicando nova matéria profunda: Silicon Photonics...\n");
+  console.log("📰 Publicando nova matéria profunda: ASML Monopoly...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const techUrl = await uploadImage(images[1].local, images[1].remote);

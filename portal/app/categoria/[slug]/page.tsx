@@ -78,7 +78,7 @@ export async function generateMetadata({
   };
 }
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function CategoriaPage({
   params,

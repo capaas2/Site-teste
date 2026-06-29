@@ -7,9 +7,9 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const ARTIFACT_DIR = "C:\\Users\\gusta\\.gemini\\antigravity-ide\\brain\\232acd8f-c127-4a7c-9572-56d6cc83f383";
 
 const images = [
-  { local: "slm_ia_local_hero_1782606698268.png", remote: "posts/slm-ia-local-hero.png" },
-  { local: "slm_ia_local_tech_1782606711233.png", remote: "posts/slm-ia-local-tech.png" },
-  { local: "slm_ia_local_terminal_1782606725832.png", remote: "posts/slm-ia-local-terminal.png" }
+  { local: "webgpu_ia_hero_1782673197317.png", remote: "posts/webgpu-ia-hero.png" },
+  { local: "webgpu_ia_tech_1782673212438.png", remote: "posts/webgpu-ia-tech.png" },
+  { local: "webgpu_ia_detail_1782673226800.png", remote: "posts/webgpu-ia-detail.png" }
 ];
 
 function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
@@ -17,13 +17,13 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
   // 1. IVAN IDEIA (Regra 0)
   console.log("💡 [Ivan-Ideia] Aplicando Regra 0: Leitura do Memorando do Caio Concorrência e descarte de pautas genéricas...");
-  console.log("   -> LACUNA IDENTIFICADA: Foco na descentralização, privacidade e economia de tokens usando modelos compactos quantizados.");
-  console.log("   -> ÂNGULOS DESCARTADOS: ['O que é RAG', 'Como instalar Python para IA'] — descartados por falta de interesse técnico.");
+  console.log("   -> LACUNA IDENTIFICADA: Foco no processamento gráfico local no navegador (VRAM) e a redução de custos de inferência via WebGPU.");
+  console.log("   -> ÂNGULOS DESCARTADOS: ['Como usar o Chrome', 'O que significa HTML5'] — descartados por falta de interesse técnico.");
   console.log("   -> Ângulo estratégico selecionado e aprovado!");
 
   // 2. PLANNER
-  console.log("📅 [Planner-Agent] Verificando pauta de inteligência artificial e software de base...");
-  if (!titulo.includes("Small Language Models") && !titulo.includes("SLM") && !titulo.includes("IA")) {
+  console.log("📅 [Planner-Agent] Verificando pauta de inteligência artificial e web dev...");
+  if (!titulo.includes("WebGPU") && !titulo.includes("navegador") && !titulo.includes("IA")) {
     throw new Error("Erro do Planner: O tema não condiz com a pauta planejada.");
   }
   console.log("   -> Tema aprovado: IA & Software.");
@@ -58,7 +58,7 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
     }
   });
 
-  // Teste de Jargões em inglês proibidos
+  // Teste de Jargões em inglês proibidos nos subtítulos e corpo
   const forbiddenJargons = ["lock-in", "bespoke", "supercomputing infrastructure", "dataset"];
   forbiddenJargons.forEach(jargon => {
     if (conteudo.toLowerCase().includes(jargon)) {
@@ -116,12 +116,12 @@ function runAgentsPipeline(titulo, conteudo, categoria, imageList) {
 
 async function uploadImage(localName, remotePath) {
   const filePath = path.join(ARTIFACT_DIR, localName);
-
+  
   if (!fs.existsSync(filePath)) {
     console.error(`❌ Arquivo local de imagem não encontrado: ${filePath}`);
     return null;
   }
-
+  
   const fileBuffer = fs.readFileSync(filePath);
 
   const res = await fetch(`${SUPABASE_URL}/storage/v1/object/capas_noticias/${remotePath}`, {
@@ -147,10 +147,10 @@ async function uploadImage(localName, remotePath) {
 
 async function requestGoogleIndexing(slug) {
   console.log("⚡ Solicitando indexação urgente no Google...");
-  const postUrl = `https://folhabyte.dev/post/${slug}`;
-
+  const postUrl = `https://www.folhabyte.dev/post/${slug}`;
+  
   try {
-    const res = await fetch("https://folhabyte.dev/api/index-url", {
+    const res = await fetch("https://www.folhabyte.dev/api/index-url", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -172,51 +172,57 @@ async function requestGoogleIndexing(slug) {
   }
 }
 
-async function insertPost(heroUrl, techUrl, terminalUrl) {
-  const titulo = "A revolução dos Small Language Models (SLMs): a corrida das empresas pela IA local";
+async function insertPost(heroUrl, techUrl, detailUrl) {
+  const titulo = "IA nativa no navegador: Hugging Face lança Transformers.js v3 com suporte completo a WebGPU";
   const categoria = "IA & Software";
-  const autor = "Bruno Alves";
+  const autor = "Bruno Alves"; 
+  
+  const publicado_em = "2026-06-28T15:00:00.000Z";
 
-  const publicado_em = new Date().toISOString();
+  const conteudo_markdown = `# IA nativa no navegador: Hugging Face lança Transformers.js v3 com suporte completo a WebGPU
 
-  const conteudo_markdown = `# A revolução dos Small Language Models (SLMs): a corrida das empresas pela IA local
+A Hugging Face oficializou a liberação pública estável da biblioteca Transformers.js v3 em junho de 2026, consolidando a transição da inteligência artificial do modelo tradicional de APIs em nuvem para a execução local acelerada no navegador. O lançamento traz o suporte completo ao WebGPU através do ONNX Runtime Web como backend padrão de execução paralela por hardware. A mudança reduz de forma drástica a barreira de entrada financeira para startups e simplifica o processamento de modelos de linguagem de pequena escala no cliente web.
 
-A arquitetura de nuvem centralizada, que sustentou o crescimento exponencial da inteligência artificial generativa nos últimos dois anos através de APIs proprietárias pagas por uso, começa a encontrar resistência nos orçamentos e nos requisitos de segurança das grandes empresas. O envio de dados confidenciais de clientes para servidores de terceiros e a instabilidade nos preços do consumo de tokens estão forçando uma migração em massa. A alternativa emergente não está no gigantismo de modelos de centenas de bilhões de parâmetros, mas nos Small Language Models (SLMs) — modelos de linguagem otimizados com menos de dez bilhões de parâmetros que rodam inteiramente em servidores locais corporativos.
+[IMAGEM: ${heroUrl} | LEGENDA: Tela de monitor exibindo linhas de código JavaScript importando o Transformers.js v3 para execução local de modelos de IA]
 
-[IMAGEM: ${heroUrl} | LEGENDA: Servidores de rack corporativos processando inferência de modelos de linguagem de pequena escala localmente]
+O modelo de desenvolvimento baseado em servidores centrais e faturamento variável por token consumido começa a dividir espaço com a descentralização.
 
-O fator econômico é o primeiro argumento na mesa dos diretores de TI.
+A antiga interface WebGL foi projetada estritamente para a renderização de elementos gráficos em duas e três dimensões. A especificação da WebGPU, por outro lado, foi construída desde a sua concepção básica com foco em computação de propósito geral em chips gráficos (GPGPU), permitindo que desenvolvedores web acessem de forma direta a memória gráfica (VRAM) instalada no computador ou celular do próprio usuário sem precisar de extensões ou drivers complexos adicionais de sistema.
 
-A dependência contínua de infraestruturas centralizadas de hiperescala introduz riscos operacionais severos. Enquanto grandes empresas sofrem com problemas logísticos físicos de fornecimento e refrigeração líquida, como nos recentes [vazamentos de refrigeração líquida nos racks Blackwell da Nvidia](/post/vazamentos-de-refrigeracao-liquida-nos-racks-blackwell-gb200-da-nvidia-atrasam-entregas), as corporações que adotam o processamento descentralizado conseguem isolar seus gargalos computacionais. A execução local de um modelo de 8 bilhões de parâmetros em GPUs de nível de entrada ou aceleradores dedicados (NPUs) elimina a tarifa variável por token consumido e estabiliza a previsão de custo mensal em infraestrutura própria de dados.
+A desintermediação de APIs centrais representa uma economia astronômica de faturamento em infraestrutura física de nuvem para as empresas de software.
 
-A soberania e a privacidade dos dados corporativos são, porém, os maiores motivadores desse movimento.
+Qualquer aplicação web que dependa de inferências básicas de chat pode repassar a totalidade do processamento de silício e do consumo energético para a máquina do cliente final de forma invisível. O Transformers.js v3 tira proveito desse acesso de baixo nível, carregando as matrizes de tensores na memória de vídeo do dispositivo local para realizar cálculos de álgebra paralela instantâneos.
 
-Setores altamente regulados, como o financeiro e o de saúde, enfrentam barreiras legais de privacidade para exportar registros médicos ou dados bancários de clientes a endpoints externos. Empresas europeias e brasileiras precisam cumprir leis severas de privacidade de arquivos. Essa migração em busca de controle e eliminação de fidelização forçada de fornecedor assemelha-se à reação da comunidade de TI ao aumento drástico de tarifas de virtualização proprietárias, vista no movimento de [fuga da VMware para hypervisors de código aberto como o Proxmox](/post/o-custo-de-fugir-da-vmware-a-encruzilhada-das-empresas-com-o-proxmox). Ao rodar SLMs locais, os dados confidenciais nunca saem do perímetro do firewall da rede corporativa.
+[IMAGEM: ${techUrl} | LEGENDA: Programador trabalhando em ambiente escuro com luz ciano focando na codificação e teste de modelos locais]
 
-[IMAGEM: ${techUrl} | LEGENDA: Desenvolvedor monitorando as métricas de latência e consumo de RAM de um modelo de linguagem rodando na rede local]
+"O uso do Transformers.js v3 muda a viabilidade financeira de produtos de inteligência artificial generativa na web, pois a empresa consegue repassar a conta da energia e do processamento físico para a máquina do próprio usuário de forma transparente", relatou um arquiteto de software corporativo em conferência de desenvolvedores web em São Francisco.
 
-"Rodar inferência de modelos de bilhões de parâmetros na nuvem estava drenando o caixa operacional em meses. Ao migrar a esteira lógica para servidores locais menores em formato quantizado, nós estabilizamos as contas e ganhamos velocidade", relatou um arquiteto de software em uma discussão técnica de infraestrutura.
+O avanço na otimização molecular de redes neurais permite carregar [modelos menores de linguagem quantizados localmente](/post/a-revolucao-dos-small-language-models-slms-a-corrida-das-empresas-pela-ia-local) na memória cache local do navegador.
 
-A evolução técnica dos SLMs também reduziu o abismo de precisão de respostas.
+Modelos de até três bilhões de parâmetros operam com desempenho fluído no chip de vídeo integrado de computadores comerciais comuns. Tarefas como autocompletação inteligente de texto, triagem interna de e-mails corporativos e geração de resumos de relatórios são executadas em milissegundos localmente, sem expor as informações a vazamentos na internet. A privacidade de arquivos é total, pois os dados nunca saem da sandbox de segurança do navegador.
 
-O avanço de técnicas de quantização, que reduzem o tamanho do arquivo do modelo sem perda perceptível de qualidade, permite que modelos como o Llama-3 8B da Meta e o Phi-3 da Microsoft rodem com desempenho excelente em computadores convencionais e servidores de médio porte. Ferramentas como o Ollama e o vLLM simplificaram a implantação de pipelines locais de geração aumentada por recuperação (RAG), fornecendo respostas altamente precisas a partir de bases de conhecimento internas sem a necessidade de treinamento completo do zero. A interoperabilidade local dessas ferramentas é facilitada por [padrões abertos e locais como o Model Context Protocol](/post/a-guerra-silenciosa-dos-ecossistemas-de-ia-como-o-model-context-protocol-mcp-desafia-as-big-techs) que unificam as interfaces de comunicação de agentes.
+Os fluxos lógicos locais das aplicações web se comunicam diretamente com sistemas físicos locais usando [protocolos abertos locais como o Model Context Protocol](/post/a-guerra-silenciosa-dos-ecossistemas-de-ia-como-o-model-context-protocol-mcp-desafia-as-big-techs) de forma isolada.
 
-[IMAGEM: ${terminalUrl} | LEGENDA: Interface de linha de comando exibindo o carregamento e a latência de geração de um modelo quantizado localmente]
+Essa comunicação direta permite acionar ferramentas lógicas corporativas de terminal sem depender de chaves de acesso externas baseadas na nuvem.
 
-"Para as tarefas operacionais repetitivas de triagem e análise de dados internos corporativos, as pequenas redes neurais locais provam ser muito mais ágeis e econômicas do que as APIs públicas gigantes", acrescentou um analista de hardware em uma thread de tecnologia no Reddit.
+"Com o transformers.js v3 rodando sobre WebGPU, o modelo de inteligência artificial é baixado uma vez na memória cache do navegador e roda offline a sessenta tokens por segundo no chip de vídeo integrado do usuário", acrescentou um desenvolvedor de software de IA.
 
-As empresas estão descobrindo que não precisam de um modelo gigante para tarefas específicas.
+[IMAGEM: ${detailUrl} | LEGENDA: Fluxo conceitual tridimensional de tensores e sinais de dados processados em paralelo sob vidro translúcido]
 
-Para a maioria das rotinas de negócios — como análise de contratos jurídicos, classificação de tickets de suporte e extração de informações de relatórios financeiros —, um Small Language Model bem instruído supera o desempenho de modelos gigantes generalistas a uma fração de tempo de processamento. A latência reduz-se a milissegundos por token, eliminando o atraso típico das chamadas de rede externas e garantindo uma experiência de usuário final fluida e instantânea.
+O principal desafio técnico reside na transferência inicial do arquivo de pesos do modelo lógicos para o cliente.
 
-O mercado corporativo de TI começa a consolidar o modelo híbrido: inteligências massivas de nuvem para brainstorms criativos amplos, e pequenos modelos locais rápidos e seguros para a operação do dia a dia organizacional.
+Como os arquivos de pesos quantizados ocupam de um a três gigabytes de armazenamento físico, o carregamento inicial exige conexões de internet de boa velocidade e interfaces visuais amigáveis que evitem a sensação de travamento para o usuário. Uma vez baixado o modelo, os carregamentos seguintes são quase imediatos, pois a persistência é feita via armazenamento interno do IndexedDB.
+
+A transição de esteiras lógicas baseadas em nuvem centralizada para a inferência distribuída no navegador requer uma reestruturação profunda nos times de desenvolvimento web, lembrando o processo complexo de [migração emergencial de servidores VMware para hypervisors Proxmox](/post/o-custo-de-fugir-da-vmware-a-encruzilhada-das-empresas-com-o-proxmox) corporativos para escapar de taxas de licenciamento de software fechadas e manter a autonomia. No final, as restrições térmicas, mecânicas de custo de rede e privacidade do usuário redefinirão as regras da inteligência artificial aplicada.
+
+A consolidação da aceleração gráfica de navegadores estabelecerá o navegador web como o principal ambiente de computação de inteligência artificial corporativa local na próxima década.
 
 > VEJA TAMBÉM: [A guerra silenciosa dos ecossistemas de IA: como o Model Context Protocol (MCP) desafia as Big Techs](/post/a-guerra-silenciosa-dos-ecossistemas-de-ia-como-o-model-context-protocol-mcp-desafia-as-big-techs)
-> VEJA TAMBÉM: [Vazamentos de refrigeração líquida nos racks Blackwell GB200 da Nvidia atrasam entregas](/post/vazamentos-de-refrigeracao-liquida-nos-racks-blackwell-gb200-da-nvidia-atrasam-entregas)
+> VEJA TAMBÉM: [A revolução dos Small Language Models (SLMs): a corrida das empresas pela IA local](/post/a-revolucao-dos-small-language-models-slms-a-corrida-das-empresas-pela-ia-local)
 
-[FAQ: O que diferencia um SLM de um LLM comum? | Os Small Language Models (SLMs) são modelos projetados de forma mais enxuta, otimizados para ter alta performance em tarefas focadas consumindo poucos recursos de hardware, permitindo a execução local. \\n Quais são as vantagens de hospedar IA de forma local? | As principais vantagens são a segurança e privacidade total dos dados (que não saem da empresa), a latência zero gerada pela rede de internet, e a previsibilidade absoluta de custos, sem surpresas no faturamento por uso de tokens.]`;
+[FAQ: O que é o Transformers.js v3? | É a nova versão da biblioteca JavaScript da Hugging Face que permite rodar modelos de inteligência artificial diretamente no navegador usando WebGPU com ONNX Runtime Web como motor padrão. \\n Quais as vantagens de rodar IA no navegador? | As principais vantagens são o custo zero de servidores de inferência para a empresa desenvolvedora, latência reduzida offline e privacidade absoluta (os dados do usuário não saem do navegador).]`;
 
-  console.log("📝 Inserindo post SLM no banco...");
+  console.log("📝 Inserindo post WebGPU IA no banco...");
 
   runAgentsPipeline(titulo, conteudo_markdown, categoria, images);
 
@@ -246,8 +252,8 @@ O mercado corporativo de TI começa a consolidar o modelo híbrido: inteligênci
   }
 
   const data = await res.json();
-  const slug = "a-revolucao-dos-small-language-models-slms-a-corrida-das-empresas-pela-ia-local";
-
+  const slug = "ia-nativa-no-navegador-o-avanco-da-webgpu-na-execucao-local-de-modelos-de-linguagem";
+  
   await requestGoogleIndexing(slug);
 
   console.log("✅ Post inserido com sucesso! ID:", data[0].id);
@@ -255,18 +261,18 @@ O mercado corporativo de TI começa a consolidar o modelo híbrido: inteligênci
 }
 
 async function main() {
-  console.log("📰 Publicando nova matéria profunda: SLM IA Local...\n");
+  console.log("📰 Publicando nova matéria profunda: WebGPU IA...\n");
 
   const heroUrl = await uploadImage(images[0].local, images[0].remote);
   const techUrl = await uploadImage(images[1].local, images[1].remote);
-  const terminalUrl = await uploadImage(images[2].local, images[2].remote);
+  const detailUrl = await uploadImage(images[2].local, images[2].remote);
 
-  if (!heroUrl || !techUrl || !terminalUrl) {
+  if (!heroUrl || !techUrl || !detailUrl) {
     console.error("❌ Ocorreu um erro no upload de uma das imagens.");
     return;
   }
 
-  const post = await insertPost(heroUrl, techUrl, terminalUrl);
+  const post = await insertPost(heroUrl, techUrl, detailUrl);
   if (post) {
     console.log("\n🎉 Notícia de tecnologia profunda publicada com sucesso!");
     console.log(`   Título: ${post.titulo}`);

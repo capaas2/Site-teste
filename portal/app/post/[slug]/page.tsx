@@ -18,7 +18,7 @@ import { PostLayoutMagazine } from "@/components/PostLayoutMagazine";
 import { PostLayoutAnalysis } from "@/components/PostLayoutAnalysis";
 import { PostLayoutQuickNews } from "@/components/PostLayoutQuickNews";
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80";
 
